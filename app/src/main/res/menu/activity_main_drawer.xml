@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_allat"
+            android:icon="@drawable/ic_allat"
+            android:title="@string/allat"/>
+        <item
+            android:id="@+id/nav_meditations"
+            android:icon="@drawable/ic_meditation"
+            android:title="@string/meditations" />
+        <item
+            android:id="@+id/nav_quotes"
+            android:icon="@drawable/ic_quote_"
+            android:title="@string/quotes" />
+        <item
+            android:id="@+id/nav_books"
+            android:icon="@drawable/ic_books"
+            android:title="@string/books" />
+        <item
+            android:id="@+id/nav_radio"
+            android:icon="@drawable/ic_radio"
+            android:title="@string/radio" />
+
+        <item
+            android:id="@+id/nav_tv"
+            android:icon="@drawable/ic_live_tv"
+            android:title="@string/allatra_tv" />
+        <item
+            android:id="@+id/nav_znai"
+            android:icon="@drawable/ic_search"
+            android:title="@string/znai" />
+        <item
+            android:id="@+id/nav_org"
+            android:icon="@drawable/ic_public_web"
+            android:title="@string/allatra_org" />
+        <item
+            android:id="@+id/nav_vesti"
+            android:icon="@drawable/ic_vesti"
+            android:title="@string/vesti" />
+        <item
+            android:id="@+id/nav_science"
+            android:icon="@drawable/ic_science"
+            android:title="@string/science" />
+        <item
+            android:id="@+id/nav_partner"
+            android:icon="@drawable/ic_partner"
+            android:title="@string/partner" />
+        <item
+            android:id="@+id/nav_craud"
+            android:icon="@drawable/ic_craud"
+            android:title="@string/craudfaunding" />
+        <item
+            android:id="@+id/nav_geo"
+            android:icon="@drawable/ic_terrain_geo"
+            android:title="@string/geo_center" />
+
+    </group>
+
+    <item android:title="@string/settings">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/notifs" />
+
+        </menu>
+    </item>
+
+    <item android:title="@string/devs">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/about_us" />
+        </menu>
+    </item>
+
+</menu>
