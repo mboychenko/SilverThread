@@ -5,6 +5,7 @@ interface BooksLoaderDetailsStorage {
     fun getBooksLoadingIds(): Map<String, Int>
     fun putBookLoadingId(url: String, id: Int)
     fun removeIdFromBookLoadings(id: Int)
+    fun cleanLoadingIds()
 
     fun requestPermissionSaveData(key: String, value: String)
     fun requestPermissionRestoreData(key: String): String?

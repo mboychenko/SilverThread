@@ -5,10 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
-import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.*
@@ -19,10 +16,10 @@ import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_BROADCAST_ACTION
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_ACTION_CANCELLED_LOADING
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_ACTION_LOADED_FILE_NAME
-import com.allat.mboychenko.silverthread.presentation.views.activities.BookReaderActivity
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IBooksFragmentView
 import io.reactivex.disposables.CompositeDisposable
 import java.io.File
+import java.lang.StringBuilder
 
 
 class BooksPresenter(
@@ -31,7 +28,7 @@ class BooksPresenter(
     private val booksHelper: BooksHelper
 ) : BasePresenter<IBooksFragmentView>() {
 
-    val subscriptions = CompositeDisposable()
+    private val subscriptions = CompositeDisposable()
 
     override fun attachView(view: IBooksFragmentView) {
         super.attachView(view)
@@ -52,7 +49,7 @@ class BooksPresenter(
         view?.updateItems(getBooksItems(filter))
     }
 
-    private fun getBooksItems(filter: BooksConstants.BooksLocale? = null): List<BookItem> { //todo check read ext storage without permission
+    private fun getBooksItems(filter: BooksConstants.BooksLocale? = null): List<BookItem> {
         if (isExternalStorageReadable()) {
             val loadings = storage.getBooksLoadingIds()
 
@@ -82,8 +79,14 @@ class BooksPresenter(
         return emptyList()
     }
 
-    private fun getBookUri(book: BooksConstants.Book): Uri =
-        Uri.parse(getPublicDownloadsStorageDir(BOOKS_FOLDER_NAME)?.path.plus(book.fileName))
+    private fun getBookUri(book: BooksConstants.Book): Uri {
+        val stringBuilder = StringBuilder()
+            .append(FILE_SCHEMA)
+            .append(getPublicDownloadsStorageDir(BOOKS_FOLDER_NAME)?.path)
+            .append(File.separatorChar)
+            .append(book.fileName)
+        return Uri.parse(stringBuilder.toString())
+    }
 
     fun loadBook(bookUrl: String, fileName: String = booksHelper.getBookByUrl(bookUrl).fileName) {
         subscriptions.add(
@@ -187,18 +190,22 @@ class BooksPresenter(
         }
 
         override fun onOpen(book: BooksConstants.Book) {
-            startActivity(
-                context,
-                Intent(context, BookReaderActivity::class.java).apply { data = getBookUri(book) },
-                Bundle.EMPTY
-            )
+            view?.openBook(getBookUri(book))
         }
     }
 
     private val booksLoadingReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val loadedFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_LOADED_FILE_NAME)
+
             val cancelledFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_CANCELLED_LOADING)
+
+            val loadingId = intent?.getIntExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_ID, -1)
+            val loadingFileName = intent?.getStringExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_FILENAME)
+
+            if (loadingId != -1 && !loadingFileName.isNullOrEmpty()) {
+               view?.loadingStarted(loadingFileName, loadingId!!)
+            }
 
             loadedFileName?.let {
                 view?.bookLoaded(it)
@@ -212,6 +219,7 @@ class BooksPresenter(
     }
 
     companion object {
+        const val FILE_SCHEMA = "file://"
         const val BOOKS_FOLDER_NAME = "AllatRa Books"
         const val REQUEST_PERMISSION_SAVED_LOAD_FILE_URL = "REQUEST_PERMISSION_SAVED_LOAD_FILE_URL"
         const val REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME = "REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME"

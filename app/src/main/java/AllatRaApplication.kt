@@ -11,8 +11,6 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import com.downloader.PRDownloaderConfig
 
-
-
 class AllatRaApplication: Application() {
 
     override fun onCreate() {
@@ -20,8 +18,7 @@ class AllatRaApplication: Application() {
 
         val downloaderConfig = PRDownloaderConfig.newBuilder()
             .setReadTimeout(30_000)
-            .setConnectTimeout(30_000)
-            .setDatabaseEnabled(true)
+            .setConnectTimeout(30_000)  // .setDatabaseEnabled(true)
             .build()
 
         PRDownloader.initialize(applicationContext, downloaderConfig)
@@ -33,13 +30,6 @@ class AllatRaApplication: Application() {
         }
 
         FileLoaderService.commandRefreshLoadings(applicationContext)
-    }
-
-
-    companion object {
-        fun get(context: Context): AllatRaApplication {
-            return context.applicationContext as AllatRaApplication
-        }
     }
 
 }

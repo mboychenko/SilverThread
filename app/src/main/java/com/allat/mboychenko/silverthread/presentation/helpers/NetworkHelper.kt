@@ -38,7 +38,7 @@ fun isNetworkAvailable(context: Context): Boolean {
 private fun hasInternetAccess(context: Context): Boolean {
     if (isNetworkAvailable(context)) {
         try {
-            val urlc = URL("http://clients3.google.com/generate_204")
+            val urlc = URL("https://clients3.google.com/generate_204")
                 .openConnection() as HttpURLConnection
             urlc.setRequestProperty("User-Agent", "Android")
             urlc.setRequestProperty("Connection", "close")

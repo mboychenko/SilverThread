@@ -3,7 +3,9 @@ package com.allat.mboychenko.silverthread.presentation.views.fragments
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.prese
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.REQUEST_PERMISSION_SAVED_LOAD_FILE_URL
+import com.allat.mboychenko.silverthread.presentation.views.activities.BookReaderActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -80,13 +83,16 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
         val bookItem = getBookItem(fileName)
         bookItem?.exist = true
         bookItem?.bookLoaded()
-        bookItem?.notifyChanged() //todo check if need call
+    }
+
+    override fun loadingStarted(fileName: String, loadingId: Int) {
+        val bookItem = getBookItem(fileName)
+        bookItem?.loadingStarted(loadingId)
     }
 
     override fun bookLoadingCancelled(fileName: String) {
         val bookItem = getBookItem(fileName)
         bookItem?.cancelLoading()
-        bookItem?.notifyChanged() //todo check if need call
     }
 
     override fun notifyBooksUpdate() {
@@ -94,8 +100,20 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     }
 
     override fun requestStoragePermission() {
-        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),        //Manifest.permission.READ_EXTERNAL_STORAGE,
-            PERMISSION_REQUEST_CODE
+        try {
+            requestPermissions(
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                PERMISSION_REQUEST_CODE
+            )
+        } catch (e: Exception) {
+            Log.e("Permission request fail", e.message)
+        }
+    }
+
+    override fun openBook(bookUri: Uri) {
+        startActivity(
+            Intent(context, BookReaderActivity::class.java).apply { data = bookUri },
+            Bundle.EMPTY
         )
     }
 
@@ -144,7 +162,7 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
 
     companion object {
         const val BOOKS_FRAGMENT_TAG = "BOOKS_FRAGMENT_TAG"
-        private const val PERMISSION_REQUEST_CODE = 0x16523
+        private const val PERMISSION_REQUEST_CODE = 986
     }
 
 }

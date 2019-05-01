@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.barteksc.pdfviewer.PDFView
-        android:id="@+id/pdfView"
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+    <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

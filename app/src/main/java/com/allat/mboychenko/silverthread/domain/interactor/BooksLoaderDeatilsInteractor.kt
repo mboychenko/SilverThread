@@ -29,6 +29,10 @@ class BooksLoaderDeatilsInteractor(val storage: Storage): BooksLoaderDetailsStor
         storage.putMap(BOOKS_DOWNLOADS_IDS_PREF_KEY, updatedEntry)
     }
 
+    override fun cleanLoadingIds() {
+        storage.remove(BOOKS_DOWNLOADS_IDS_PREF_KEY)
+    }
+
     override fun requestPermissionSaveData(key: String, value: String) {
         storage.putString(key, value)
     }
@@ -40,6 +44,6 @@ class BooksLoaderDeatilsInteractor(val storage: Storage): BooksLoaderDetailsStor
     }
 
     companion object {
-        private const val BOOKS_DOWNLOADS_IDS_PREF_KEY = "BOOKS_DOWNLOADS_IDS_PREF_KEY"
+        const val BOOKS_DOWNLOADS_IDS_PREF_KEY = "BOOKS_DOWNLOADS_IDS_PREF_KEY"
     }
 }

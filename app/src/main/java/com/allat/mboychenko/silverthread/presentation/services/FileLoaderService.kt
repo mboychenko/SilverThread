@@ -17,7 +17,6 @@ import com.downloader.Status.UNKNOWN
 import com.downloader.Error
 import org.koin.android.ext.android.inject
 
-
 class FileLoaderService : JobIntentService() {
 
     private val storage: BooksLoaderDetailsStorage by inject()
@@ -59,10 +58,6 @@ class FileLoaderService : JobIntentService() {
         }
     }
 
-    override fun onDestroy() {
-        PRDownloader.shutDown()
-    }
-
     private fun urlInProgressId(url: String): Int {
         return storage.getBooksLoadingIds()[url] ?: -1
     }
@@ -95,7 +90,7 @@ class FileLoaderService : JobIntentService() {
         val fileName = booksHelper.getBookByUrl(url).fileName
         localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
             .apply { putExtra(BOOKS_UPDATE_ACTION_CANCELLED_LOADING, fileName) })
-        PRDownloader.cleanUp(1)
+        PRDownloader.cancel(id)
     }
 
     private fun resumeLoading(id: Int) {
@@ -118,6 +113,11 @@ class FileLoaderService : JobIntentService() {
             })
 
         storage.putBookLoadingId(url, downloadId)
+        localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
+            .apply {
+                putExtra(BOOKS_UPDATE_ACTION_START_LOADING_ID, downloadId)
+                putExtra(BOOKS_UPDATE_ACTION_START_LOADING_FILENAME, fileName)
+            })
     }
 
     private fun fireUpdateBooksStatus() {
@@ -168,6 +168,8 @@ class FileLoaderService : JobIntentService() {
 
         const val BOOKS_UPDATE_ACTION_LOADED_FILE_NAME = "BOOKS_UPDATE_ACTION_LOADED_FILE_NAME"
         const val BOOKS_UPDATE_ACTION_CANCELLED_LOADING = "BOOKS_UPDATE_ACTION_CANCELLED_LOADING"
+        const val BOOKS_UPDATE_ACTION_START_LOADING_ID = "BOOKS_UPDATE_ACTION_START_LOADING_ID"
+        const val BOOKS_UPDATE_ACTION_START_LOADING_FILENAME = "BOOKS_UPDATE_ACTION_START_LOADING_FILENAME"
 
     }
 }

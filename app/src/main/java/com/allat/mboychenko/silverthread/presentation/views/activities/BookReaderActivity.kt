@@ -2,6 +2,7 @@ package com.allat.mboychenko.silverthread.presentation.views.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.Storage
 import kotlinx.android.synthetic.main.activity_reader.*
 import org.koin.android.ext.android.inject
@@ -17,11 +18,12 @@ class BookReaderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.allat.mboychenko.silverthread.R.layout.activity_reader)
+        setContentView(R.layout.activity_reader)
+
+        close.setOnClickListener { finish() }
 
         pdfView.fromUri(intent.data)
-//            .onPageChange { page, _ -> storage.putInt(BOOK_CURRENT_PAGE, page) } //check how fast it can be, add if need debounce
-            .onPageChange(onPageChangeListener) //check how fast it can be, add if need debounce
+            .onPageChange(onPageChangeListener)
             .defaultPage(storage.getInt(BOOK_CURRENT_PAGE))
             .load()
     }

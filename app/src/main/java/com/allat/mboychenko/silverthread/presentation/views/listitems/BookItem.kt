@@ -20,30 +20,36 @@ class BookItem(
     private val bookActionListener: BookActionListener
 ) : Item() {
 
+    var viewRef: View? = null
+
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        val view = viewHolder.itemView
+        viewRef = viewHolder.itemView
 
-        view.imgBackground.setImageResource(book.imageRes)
+        viewRef!!.imgBackground.setImageResource(book.imageRes)
 
-        initClickListeners(view)
+        updateLoadingState(viewRef!!, exist, loadingId)
 
-        updateLoadingState(view, exist, loadingId)
+        initClickListeners(viewRef!!)
     }
 
     private fun initClickListeners(view: View) {
         view.imgBackground.setOnClickListener {
             if (exist) {
                 bookActionListener.onOpen(book)
-            } else {
+            } else if (loadingId == -1) {
                 getLanguageSelectorDialog(view.context, view.context.getString(R.string.select_language_load)) {
+                    loadingBarState(view, true)
                     bookActionListener.onLoad((book.localeDetails[it] ?: error("NoSuchLocale")).url, book.fileName)
                 }
             }
         }
 
         view.buttonLoad.setOnClickListener {
-            getLanguageSelectorDialog(view.context, view.context.getString(R.string.select_language_load)) {
-                bookActionListener.onLoad((book.localeDetails[it] ?: error("NoSuchLocale")).url, book.fileName)
+            if (!exist && loadingId == -1) {
+                getLanguageSelectorDialog(view.context, view.context.getString(R.string.select_language_load)) {
+                    loadingBarState(view, true)
+                    bookActionListener.onLoad((book.localeDetails[it] ?: error("NoSuchLocale")).url, book.fileName)
+                }
             }
         }
 
@@ -110,21 +116,27 @@ class BookItem(
         if (active) {
             view.downloading.visibility = View.VISIBLE
             view.downloadingText.visibility = View.VISIBLE
+            view.buttonLoad.visibility = View.GONE
         } else {
             view.downloading.visibility = View.GONE
             view.downloadingText.visibility = View.GONE
         }
     }
 
+    fun loadingStarted(id: Int) {
+        loadingId = id
+        viewRef?.let { loadingBarState(it, true) }
+    }
+
     fun cancelLoading() {
         loadingId = -1
+        notifyChanged()
     }
 
     fun bookLoaded() {
         loadingId = -1
         exist = true
-//        updateLoadingState()
-        //todo check update state
+        notifyChanged()
     }
 
     override fun getLayout(): Int = R.layout.book_item_layout
