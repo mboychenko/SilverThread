@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.widget.Toast
+import androidx.core.net.toFile
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.*
@@ -143,9 +144,10 @@ class BooksPresenter(
             return
         }
 
-        val bookFile = File(getPublicDownloadsStorageDir(BOOKS_FOLDER_NAME)?.path.plus(bookItem.book.fileName))
+        val bookFile = getBookUri(bookItem.book).toFile()
 
         if (bookFile.exists() && bookFile.delete()) {
+            storage.removeLastBookPage(bookItem.book.fileName)
             view?.bookRemoved(bookItem)
         } else {
             Toast.makeText(context, "Cant delete book ${bookItem.book.fileName}", Toast.LENGTH_LONG).show()
@@ -190,7 +192,7 @@ class BooksPresenter(
         }
 
         override fun onOpen(book: BooksConstants.Book) {
-            view?.openBook(getBookUri(book))
+            view?.openBook(book.fileName, getBookUri(book))
         }
     }
 

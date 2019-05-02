@@ -3,7 +3,7 @@ package com.allat.mboychenko.silverthread.presentation.views.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.Storage
+import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
 import kotlinx.android.synthetic.main.activity_reader.*
 import org.koin.android.ext.android.inject
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
@@ -12,9 +12,9 @@ import java.util.*
 
 class BookReaderActivity : AppCompatActivity() {
 
-    private val storage: Storage by inject() //todo move to presenter
+    private val storage: BooksLoaderDetailsStorage by inject()
     private var timer = Timer()
-    private val DELAY: Long = 2000
+    private lateinit var bookName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +22,11 @@ class BookReaderActivity : AppCompatActivity() {
 
         close.setOnClickListener { finish() }
 
+        bookName = intent.getStringExtra(BOOK_NAME_ARG)
+
         pdfView.fromUri(intent.data)
             .onPageChange(onPageChangeListener)
-            .defaultPage(storage.getInt(BOOK_CURRENT_PAGE))
+            .defaultPage(storage.getLastBookPage(bookName))
             .load()
     }
 
@@ -33,13 +35,14 @@ class BookReaderActivity : AppCompatActivity() {
         timer = Timer()
         timer.schedule(object : TimerTask() {
             override fun run() {
-                storage.putInt(BOOK_CURRENT_PAGE, page)
+                storage.saveLastBookPage(bookName, page)
             }
 
-        }, DELAY)
+        }, PAGE_SAVE_DELAY)
     }
 
     companion object {
-        private const val BOOK_CURRENT_PAGE = "BOOK_CURRENT_PAGE"
+        const val BOOK_NAME_ARG = "BOOK_NAME_ARG"
+        private const val PAGE_SAVE_DELAY = 2000L
     }
 }

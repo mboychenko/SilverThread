@@ -12,5 +12,5 @@ interface IBooksFragmentView {
     fun bookLoadingCancelled(fileName: String)
     fun requestStoragePermission()
     fun shareBookLink(bookTitle: String, bookUrl: String)
-    fun openBook(bookUri: Uri)
+    fun openBook(name: String, bookUri: Uri)
 }

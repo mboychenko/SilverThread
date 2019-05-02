@@ -19,6 +19,7 @@ import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.REQUEST_PERMISSION_SAVED_LOAD_FILE_URL
 import com.allat.mboychenko.silverthread.presentation.views.activities.BookReaderActivity
+import com.allat.mboychenko.silverthread.presentation.views.activities.BookReaderActivity.Companion.BOOK_NAME_ARG
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -76,7 +77,7 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     override fun updateItems(items: List<BookItem>) = booksItemsSection.update(items)
 
     override fun bookRemoved(book: BookItem) {
-        booksItemsSection.remove(book)
+        book.deleteBook()
     }
 
     override fun bookLoaded(fileName: String) {
@@ -110,10 +111,13 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
         }
     }
 
-    override fun openBook(bookUri: Uri) {
+    override fun openBook(name: String, bookUri: Uri) {
         startActivity(
-            Intent(context, BookReaderActivity::class.java).apply { data = bookUri },
-            Bundle.EMPTY
+            Intent(context, BookReaderActivity::class.java)
+                .apply {
+                    data = bookUri
+                    putExtra(BOOK_NAME_ARG, name)
+                }
         )
     }
 
@@ -121,7 +125,7 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
         val sharingIntent = Intent(Intent.ACTION_SEND)
         sharingIntent.type = "text/plain"
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, bookTitle)
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, bookUrl)
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.link_to_load, bookTitle, bookUrl))
         startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_link, bookTitle)))
     }
 

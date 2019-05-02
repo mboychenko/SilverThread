@@ -139,6 +139,11 @@ class BookItem(
         notifyChanged()
     }
 
+    fun deleteBook() {
+        exist = false
+        notifyChanged()
+    }
+
     override fun getLayout(): Int = R.layout.book_item_layout
 
     interface BookActionListener {

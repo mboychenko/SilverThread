@@ -43,7 +43,19 @@ class BooksLoaderDeatilsInteractor(val storage: Storage): BooksLoaderDetailsStor
         storage.remove(key)
     }
 
+    override fun saveLastBookPage(name: String, page: Int) {
+        storage.putInt(String.format(BOOK_CURRENT_PAGE, name), page)
+    }
+
+    override fun getLastBookPage(name: String) =
+        storage.getInt(String.format(BOOK_CURRENT_PAGE, name))
+
+    override fun removeLastBookPage(name: String) {
+        storage.remove(String.format(BOOK_CURRENT_PAGE, name))
+    }
+
     companion object {
         const val BOOKS_DOWNLOADS_IDS_PREF_KEY = "BOOKS_DOWNLOADS_IDS_PREF_KEY"
+        const val BOOK_CURRENT_PAGE = "BOOK_CURRENT_PAGE_%s"
     }
 }
