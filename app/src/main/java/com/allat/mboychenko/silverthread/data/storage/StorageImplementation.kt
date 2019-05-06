@@ -15,6 +15,8 @@ class StorageImplementation(val context: Context) : Storage {
 
     override fun getInt(key: String) = preferences.getInt(key, 0)
 
+    override fun getIntDefault(key: String, default: Int) = preferences.getInt(key, default)
+
     override fun putInt(key: String, value: Int) {
         val editor = preferences.edit()
         editor.putInt(key, value)

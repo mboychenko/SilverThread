@@ -2,21 +2,40 @@ package com.allat.mboychenko.silverthread.presentation.presenters
 
 import android.content.Context
 import android.os.CountDownTimer
+import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper
+import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper.TimeStatus.*
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IAllatFragmentView
 import java.util.concurrent.TimeUnit
+import kotlin.properties.Delegates
 
 class AllatPresenter(private val context: Context, private val storage: AllatTimeZoneStorage) : BasePresenter<IAllatFragmentView>(){
 
-    private var timerStatus: AllatHelper.TimeStatus = AllatHelper.TimeStatus.AWAITING
+    private val allatStatusAwait : String by lazy { context.getString(R.string.time_to_group_meditation) }
+    private val allatStatusOngoing : String by lazy { context.getString(R.string.allat_started_meditation) }
+
+    private var timerStatus: AllatHelper.TimeStatus by Delegates.observable(INIT) {
+            _, old, new ->
+        if (old != new) {
+            view?.updateTimerStatus(if (new == AWAITING) allatStatusAwait else allatStatusOngoing)
+        }
+    }
 
     private var timerTask: CountDownTimer? = null
 
     override fun attachView(view: IAllatFragmentView) {
         super.attachView(view)
-        startTimer(storage.getAllatTimezone())
+        val timezone = storage.getAllatTimezone()
+        if (timezone != AllatTimeZone.NOT_INIT) {
+            view.changeTimezoneSetupVisibility(false)
+            startTimer(timezone)
+        } else {
+            view.changeTimezoneSetupVisibility(true)
+            // before 5.10.15.30.60 (spinner + checkBox), on start(checkBox), on finish(checkBox)
+//            setAllatTimeZone()
+        }
     }
 
     override fun detachView() {
@@ -52,7 +71,7 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
         val secondsLeft = TimeUnit.MILLISECONDS
             .toSeconds(millis - (TimeUnit.HOURS.toMillis(hoursLeft) + TimeUnit.MINUTES.toMillis(minsLeft)))
 
-        view?.updateTimer(hoursLeft, minsLeft, secondsLeft, timerStatus)
+        view?.updateTimer(hoursLeft, minsLeft, secondsLeft)
     }
 
 

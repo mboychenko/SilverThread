@@ -3,6 +3,7 @@ package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.pres
 interface Storage {
 
     fun getInt(key: String): Int
+    fun getIntDefault(key: String, default: Int): Int
     fun putInt(key: String, value: Int)
 
     fun getString(key: String): String?

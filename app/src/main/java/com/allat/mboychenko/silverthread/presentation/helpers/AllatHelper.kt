@@ -15,11 +15,6 @@ object AllatHelper {
         val eveningTime: Int
 
         when(allatTimeZone) {
-            AllatTimeZone.LOCAL -> {
-                timezone = TimeZone.getDefault()
-                morningTime = allatTimeZone.morningTime
-                eveningTime = allatTimeZone.eveningTime
-            }
             AllatTimeZone.KIEV -> {
                 timezone = TimeZone.getTimeZone(allatTimeZone.timeZone)
                 morningTime = allatTimeZone.morningTime
@@ -27,6 +22,11 @@ object AllatHelper {
             }
             AllatTimeZone.GMT -> {
                 timezone = TimeZone.getTimeZone(allatTimeZone.timeZone)
+                morningTime = allatTimeZone.morningTime
+                eveningTime = allatTimeZone.eveningTime
+            }
+            else -> {                                                       //local or init
+                timezone = TimeZone.getDefault()
                 morningTime = allatTimeZone.morningTime
                 eveningTime = allatTimeZone.eveningTime
             }
@@ -67,6 +67,7 @@ object AllatHelper {
 
     enum class TimeStatus {
         IN_MEDITATION,
-        AWAITING
+        AWAITING,
+        INIT
     }
 }

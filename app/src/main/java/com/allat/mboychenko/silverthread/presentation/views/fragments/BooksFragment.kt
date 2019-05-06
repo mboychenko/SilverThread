@@ -64,17 +64,23 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
             }
         }
 
-        presenter.attachView(this)
-
         return view
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onStart() {
+        super.onStart()
+        presenter.attachView(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
         presenter.detachView()
     }
 
-    override fun updateItems(items: List<BookItem>) = booksItemsSection.update(items)
+    override fun updateItems(items: List<BookItem>) {
+        booksItemsSection.update(items)
+        booksItemsSection.notifyChanged()
+    }
 
     override fun bookRemoved(book: BookItem) {
         book.deleteBook()

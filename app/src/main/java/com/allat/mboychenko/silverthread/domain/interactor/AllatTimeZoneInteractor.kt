@@ -5,8 +5,10 @@ import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.prese
 
 class AllatTimeZoneInteractor(val storage: Storage) : AllatTimeZoneStorage {
 
-    override fun getAllatTimezone(): AllatTimeZone =
-        AllatTimeZone.values()[storage.getInt(ALLAT_TIMEZONE_PREF_KEY)]
+    override fun getAllatTimezone(): AllatTimeZone {
+        val allatTimezoneInt = storage.getIntDefault(ALLAT_TIMEZONE_PREF_KEY, -1)
+        return if (allatTimezoneInt != -1)  AllatTimeZone.values()[allatTimezoneInt] else AllatTimeZone.NOT_INIT
+    }
 
     override fun putAllatTimezone(allatTimeZone: AllatTimeZone) {
         storage.putInt(ALLAT_TIMEZONE_PREF_KEY, allatTimeZone.ordinal)
