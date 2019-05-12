@@ -32,12 +32,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notificationConfigContainer"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="260dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:paddingStart="16dp"
-            android:paddingLeft="16dp"
             android:paddingEnd="12dp"
-            android:paddingRight="12dp"
             android:paddingTop="60dp"
             android:paddingBottom="8dp">
 
@@ -64,7 +62,7 @@
                 android:text="@string/notify_before_min"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/timezoneConfigTitle"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="24dp"/>
 
         <View
                 android:layout_width="16dp"
@@ -81,7 +79,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/notifyTimerText"
                 app:layout_constraintBottom_toBottomOf="@id/notifyTimerText"
-                android:paddingRight="16dp"
+                android:paddingEnd="16dp"
                 android:background="@null"/>
 
         <TextView
@@ -91,7 +89,7 @@
                 android:text="@string/ring_on_start"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/notifyTimerText"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="24dp"/>
 
 
         <Switch
@@ -109,7 +107,7 @@
                 android:text="@string/ring_on_end"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ringOnStartText"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="24dp"/>
 
 
         <Switch

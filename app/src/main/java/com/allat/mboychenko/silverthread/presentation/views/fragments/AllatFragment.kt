@@ -43,20 +43,30 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
         with(fragment.notifyTimer) {
             adapter = android.widget.ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item,
                 listOf(context.getString(R.string.none)) + notificationBeforeArray.map { it.toString() })
-            setSelection(2)
+
+            val allatNotifIn = presenter.getAllatNotifIn()
+            if (allatNotifIn != -1) {
+                notificationBeforeArray.indexOf(allatNotifIn)
+                    .takeIf { it != -1 }
+                    ?.let { setSelection(it + 1) }
+            }
+
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-
                 }
 
                 override fun onItemSelected(parent: AdapterView<*>?, fragmentview: View?, position: Int, id: Long) {
+                    val allatNotifInMinutes = presenter.getAllatNotifIn()
                     if (position == 0) {    //None
-                        // remove notifications
+                        if (allatNotifInMinutes != -1) {
+                            presenter.removeAllatNotif()
+                        }
                         switchesState(false)
                     } else {
-                        // setupNotifications before N mins
-                        // notificationBeforeArray[position - 1]
-                        switchesState(true)
+                        if (allatNotifInMinutes != notificationBeforeArray[position - 1]) {
+                            presenter.setAllatNotifIn(notificationBeforeArray[position - 1])
+                            switchesState(true)
+                        }
                     }
                 }
             }

@@ -41,6 +41,20 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
         timerTask?.cancel()
     }
 
+    fun setAllatNotifIn(mins: Int) {
+        storage.putAllatNotificationBefore(mins)
+        //todo setup notification
+    }
+
+    fun removeAllatNotif() {
+        storage.removeAllatNotification()
+        //todo cancel notifications
+    }
+
+    fun getAllatNotifIn(): Int =
+        storage.getAllatNotificationBeforeMins()
+
+
     fun setAllatTimeZone(timezone: AllatTimeZone) {
         storage.putAllatTimezone(timezone)
         view?.let {

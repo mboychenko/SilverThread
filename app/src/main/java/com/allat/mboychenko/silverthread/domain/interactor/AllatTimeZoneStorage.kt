@@ -6,5 +6,7 @@ interface AllatTimeZoneStorage {
 
     fun getAllatTimezone(): AllatTimeZone
     fun putAllatTimezone(allatTimeZone: AllatTimeZone)
-
+    fun putAllatNotificationBefore(mins: Int)
+    fun getAllatNotificationBeforeMins(): Int
+    fun removeAllatNotification()
 }
