@@ -29,7 +29,8 @@
         <Spinner android:id="@+id/languageFilter"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:prompt="@string/all"
+                 android:prompt="@string/filter_by_language"
+                 android:spinnerMode="dialog"
                  android:layout_gravity="end|center_vertical"/>
     </FrameLayout>
 

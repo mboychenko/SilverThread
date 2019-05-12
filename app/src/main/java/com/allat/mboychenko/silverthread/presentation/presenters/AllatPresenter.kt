@@ -33,8 +33,6 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
             startTimer(timezone)
         } else {
             view.changeTimezoneSetupVisibility(true)
-            // before 5.10.15.30.60 (spinner + checkBox), on start(checkBox), on finish(checkBox)
-//            setAllatTimeZone()
         }
     }
 
@@ -43,9 +41,12 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
         timerTask?.cancel()
     }
 
-    fun setAllatTimeZone(timezone: AllatTimeZone) { //todo
+    fun setAllatTimeZone(timezone: AllatTimeZone) {
         storage.putAllatTimezone(timezone)
-        startTimer(timezone)
+        view?.let {
+            it.changeTimezoneSetupVisibility(false)
+            startTimer(timezone)
+        }
     }
 
     private fun startTimer(timezone: AllatTimeZone) {
