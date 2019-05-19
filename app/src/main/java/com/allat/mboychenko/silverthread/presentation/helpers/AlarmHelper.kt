@@ -29,9 +29,13 @@ fun setAlarm(context: Context, millisRemaining: Long, intentAction: String, requ
 }
 
 fun removeAlarm(context: Context, intentAction: String, requestCode: Int) {
-    val pendingIntent = createAlarmPendingIntent(context, intentAction, requestCode)
     val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    alarmManager.cancel(pendingIntent)
+    alarmManager.cancel(context, intentAction, requestCode)
+}
+
+private fun AlarmManager.cancel(context: Context, intentAction: String, requestCode: Int) {
+    val pendingIntent = createAlarmPendingIntent(context, intentAction, requestCode)
+    this.cancel(pendingIntent)
 }
 
 private fun createAlarmPendingIntent(context: Context, intentAction: String,
@@ -75,8 +79,10 @@ fun reInitTimers(context: Context, allatTimezone: AllatTimeZone, allatRemindBefo
                  allatNotificationStart: Boolean, allatNotificationEnd: Boolean) {
     if (allatTimezone != AllatTimeZone.NOT_INIT) {
 
-        removeAlarm(context, AlarmNotificationCodes.BEFORE_UPDATE.action, AlarmNotificationCodes.BEFORE_UPDATE.ordinal)
-        removeAlarm(context, AlarmNotificationCodes.CANCEL.action, AlarmNotificationCodes.CANCEL.ordinal)
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        for (code in AlarmNotificationCodes.values()) {
+            alarmManager.cancel(context, code.action, code.ordinal)
+        }
 
         if (allatRemindBeforeMins != -1) {
             setupBeforeAlarm(context, allatRemindBeforeMins, allatTimezone)

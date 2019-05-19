@@ -50,32 +50,34 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
 
     when (notificationCode) {
         AlarmNotificationCodes.START -> {
-            title = "Напоминаниие Аллата"   //todo move to strings
-            text = "Аллат начался!"
+            title = context.getString(R.string.allat_reminder)
+            text = context.getString(R.string.allat_has_started)
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
         }
         AlarmNotificationCodes.END -> {
-            title = "Напоминаниие Аллата"
-            text = "Аллат завершился!"
+            title = context.getString(R.string.allat_reminder)
+            text = context.getString(R.string.allat_has_ended)
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
         }
         AlarmNotificationCodes.BEFORE -> {
-            title = "Напоминаниие Аллата"
-            text = "%d минут до Аллата".format(TimeUnit.MILLISECONDS.toMinutes(remindBefore)) //todo минут минуты минута
+            title = context.getString(R.string.allat_reminder)
+            val minutes = TimeUnit.MILLISECONDS.toMinutes(remindBefore).toInt()
+            text = context.resources.getQuantityString(R.plurals.mins_to_allat, minutes, minutes)
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
         }
         AlarmNotificationCodes.BEFORE_UPDATE -> {
-            title = "Напоминаниие Аллата"
-            text = "%d минут до Аллата".format(TimeUnit.MILLISECONDS.toMinutes(remindBeforeUpdate))
+            title = context.getString(R.string.allat_reminder)
+            val minutes = TimeUnit.MILLISECONDS.toMinutes(remindBeforeUpdate).toInt()
+            text = context.resources.getQuantityString(R.plurals.mins_to_allat, minutes, minutes)
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             playSound = false
         }
         AlarmNotificationCodes.QUOTE -> {
-            title = "Случайная Цитата"
+            title = context.getString(R.string.random_quote)
             text = "todo quote"
             action = NOTIFICATION_ACTION_QUOTE
             notifId = NOTIFICATION_ID_QUOTE
@@ -123,13 +125,6 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
 
     nManager.notify(notifId, nBuilder.build())
 }
-
-//FLAG_CANCEL_CURRENT
-//Если система видит, что создаваемый с таким флагом PendingIntent похож на существующий, то она отменит (удалит) существующий.
-
-//FLAG_UPDATE_CURRENT
-//Этот флаг включает поведение, обратное дефолтному. Если система видит, что создаваемый с таким флагом PendingIntent похож на существующий, то она возьмет extra-данные Intent создаваемого PendingIntent и запишет их вместо extra-данных Intent существующего PendingIntent. Проще говоря, существующий PendingIntent будет использовать Intent из создаваемого.
-
 
 fun showTimerRunning(context: Context, wakeUpTime: Long) {  //ongoing
     val stopIntent = Intent(context, TimerNotificationActionReceiver::class.java)

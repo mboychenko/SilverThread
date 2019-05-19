@@ -69,6 +69,17 @@
     <string name="ring_on_end">Ring on end:</string>
     <string name="ring_on_start">Ring on start:</string>
     <string name="notify_before_min">Notify before min.:</string>
+    <string name="allat_reminder">Напоминаниие Аллата</string>
+    <string name="allat_has_started">Аллат начался!</string>
+    <string name="allat_has_ended">Аллат завершился!</string>
+    <string name="random_quote">Случайная Цитата</string>
 
+    <plurals name="mins_to_allat">
+        <item quantity="one">%d минута до Аллата</item>
+        <item quantity="two">%d минуты до Аллата</item>
+        <item quantity="few">%d минуты до Аллата</item>
+        <item quantity="many">%d минут до Аллата</item>
+        <item quantity="other">%d минут до Аллата</item>
+    </plurals>
 
 </resources>
