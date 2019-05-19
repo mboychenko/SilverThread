@@ -40,4 +40,8 @@ val storageModule = module {
         BooksLoaderDeatilsInteractor(get()) as BooksLoaderDetailsStorage
     }
 
+    factory {
+        QuotesInteractor(get()) as QuotesStorage
+    }
+
 }

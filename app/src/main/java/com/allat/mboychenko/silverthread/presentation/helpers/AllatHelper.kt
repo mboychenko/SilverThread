@@ -6,47 +6,77 @@ import java.util.concurrent.TimeUnit
 
 object AllatHelper {
 
-    fun getTimeToAllat(allatTimeZone: AllatTimeZone): Pair<Long, TimeStatus> {
-        val timeTo: Long
-        val timeStatus: TimeStatus
+    fun getMillisToAllatStart(allatZone: AllatTimeZone, allatAfterNext: Boolean = false): Long {
 
-        val timezone: TimeZone
-        val morningTime: Int
-        val eveningTime: Int
+        val allatTimezone = getTimezone(allatZone)
+        val morningTime = allatZone.morningTime
+        val eveningTime = allatZone.eveningTime
 
-        when(allatTimeZone) {
-            AllatTimeZone.KIEV -> {
-                timezone = TimeZone.getTimeZone(allatTimeZone.timeZone)
-                morningTime = allatTimeZone.morningTime
-                eveningTime = allatTimeZone.eveningTime
-            }
-            AllatTimeZone.GMT -> {
-                timezone = TimeZone.getTimeZone(allatTimeZone.timeZone)
-                morningTime = allatTimeZone.morningTime
-                eveningTime = allatTimeZone.eveningTime
-            }
-            else -> {                                                       //local or init
-                timezone = TimeZone.getDefault()
-                morningTime = allatTimeZone.morningTime
-                eveningTime = allatTimeZone.eveningTime
-            }
+        val current = Calendar.getInstance(allatTimezone)
+        var curHour = current.get(Calendar.HOUR_OF_DAY)
+
+        if (allatAfterNext) {        //max reminder 60 min, so to reinit timer for next reminder we need offset
+            curHour += 2
         }
 
-        val current = Calendar.getInstance(timezone)
+        val nextMeditationTime= configureNextMeditationTime(current, curHour, morningTime, eveningTime, allatTimezone)
 
-        val nextMeditationTime = Calendar.getInstance(timezone)
-        nextMeditationTime.set(Calendar.MINUTE, 0)
-        nextMeditationTime.set(Calendar.SECOND, 0)
+        return nextMeditationTime.timeInMillis - current.timeInMillis
+    }
 
+    fun getMillisToAllatEnd(allatZone: AllatTimeZone): Long {
+
+        val allatTimezone = getTimezone(allatZone)
+        val morningTime = allatZone.morningTime
+        val eveningTime = allatZone.eveningTime
+
+        val current = Calendar.getInstance(allatTimezone)
         val curHour = current.get(Calendar.HOUR_OF_DAY)
 
-        if (curHour == eveningTime && current.get(Calendar.MINUTE) < 12) {
-            val currentMeditationEnd = Calendar.getInstance(timezone)
-            currentMeditationEnd.set(Calendar.MINUTE, 12)
-            timeTo = currentMeditationEnd.timeInMillis - current.timeInMillis
-            timeStatus = AllatHelper.TimeStatus.IN_MEDITATION
-            return Pair(timeTo, timeStatus)
+        if ((curHour == eveningTime || curHour == morningTime) && current.get(Calendar.MINUTE) < 12) {
+            val meditationEnd = Calendar.getInstance(allatTimezone)
+            meditationEnd.set(Calendar.MINUTE, 12)
+            meditationEnd.set(Calendar.SECOND, 0)
+            return meditationEnd.timeInMillis - current.timeInMillis
         }
+
+        val nextMeditationTime = configureNextMeditationTime(current, curHour, morningTime, eveningTime, allatTimezone)
+        nextMeditationTime.set(Calendar.MINUTE, 12)
+
+        return nextMeditationTime.timeInMillis - current.timeInMillis
+    }
+
+    fun getAllatTimeStatus(allatZone: AllatTimeZone): Pair<Long, TimeStatus> {
+
+        val allatTimezone: TimeZone = getTimezone(allatZone)
+        val morningTime = allatZone.morningTime
+        val eveningTime = allatZone.eveningTime
+
+        val current = Calendar.getInstance(allatTimezone)
+        val curHour = current.get(Calendar.HOUR_OF_DAY)
+
+        if ((curHour == eveningTime || curHour == morningTime) && current.get(Calendar.MINUTE) < 12) {
+            val meditationEnd = Calendar.getInstance(allatTimezone)
+            meditationEnd.set(Calendar.MINUTE, 12)
+            meditationEnd.set(Calendar.SECOND, 0)
+            return Pair(meditationEnd.timeInMillis - current.timeInMillis, TimeStatus.IN_MEDITATION)
+        }
+
+        val nextMeditationTime = configureNextMeditationTime(current, curHour, morningTime, eveningTime, allatTimezone)
+
+        return Pair(nextMeditationTime.timeInMillis - current.timeInMillis, TimeStatus.AWAITING)
+    }
+
+    private fun configureNextMeditationTime(
+        current: Calendar,
+        curHour: Int,
+        morningTime: Int,
+        eveningTime: Int,
+        allatTimezone: TimeZone
+    ): Calendar {
+        val nextMeditationTime = Calendar.getInstance(allatTimezone)
+        nextMeditationTime.set(Calendar.MINUTE, 0)
+        nextMeditationTime.set(Calendar.SECOND, 0)
 
         when {
             curHour < morningTime -> nextMeditationTime.set(Calendar.HOUR_OF_DAY, morningTime)
@@ -59,10 +89,20 @@ object AllatHelper {
                 nextMeditationTime.set(Calendar.SECOND, 0)
             }
         }
-        timeStatus = AllatHelper.TimeStatus.AWAITING
-        timeTo = nextMeditationTime.timeInMillis - current.timeInMillis
 
-        return Pair(timeTo, timeStatus)
+        return nextMeditationTime
+    }
+
+    private fun getTimezone(allatTimeZone: AllatTimeZone) = when(allatTimeZone) {
+        AllatTimeZone.KIEV -> {
+            TimeZone.getTimeZone(allatTimeZone.timeZone)
+        }
+        AllatTimeZone.GMT -> {
+            TimeZone.getTimeZone(allatTimeZone.timeZone)
+        }
+        else -> {                                                       //local or init
+            TimeZone.getDefault()
+        }
     }
 
     enum class TimeStatus {

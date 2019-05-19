@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
             android:name=".AllatRaApplication"
@@ -51,10 +52,27 @@
                 android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver
-                android:name=".presentation.receivers.BootReceiver"
+                android:name=".presentation.receivers.AlarmsResetReceiver"
                 android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+                android:name=".presentation.receivers.TimerExpiredReceiver"
+                android:enabled="true"
+                android:exported="false"/>
+        <receiver
+                android:name=".presentation.receivers.TimerNotificationActionReceiver"
+                android:enabled="true"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="stop"/>
+                <action android:name="pause"/>
+                <action android:name="resume"/>
+                <action android:name="start"/>
             </intent-filter>
         </receiver>
     </application>

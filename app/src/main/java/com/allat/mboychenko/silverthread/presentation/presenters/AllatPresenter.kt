@@ -2,22 +2,26 @@ package com.allat.mboychenko.silverthread.presentation.presenters
 
 import android.content.Context
 import android.os.CountDownTimer
+import android.util.Log
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper.TimeStatus.*
+import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IAllatFragmentView
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
-class AllatPresenter(private val context: Context, private val storage: AllatTimeZoneStorage) : BasePresenter<IAllatFragmentView>(){
+class AllatPresenter(private val context: Context, private val storage: AllatTimeZoneStorage) :
+    BasePresenter<IAllatFragmentView>() {
 
-    private val allatStatusAwait : String by lazy { context.getString(R.string.time_to_group_meditation) }
-    private val allatStatusOngoing : String by lazy { context.getString(R.string.allat_started_meditation) }
+    private val allatStatusAwait: String by lazy { context.getString(R.string.time_to_group_meditation) }
+    private val allatStatusOngoing: String by lazy { context.getString(R.string.allat_started_meditation) }
 
-    private var timerStatus: AllatHelper.TimeStatus by Delegates.observable(INIT) {
-            _, old, new ->
+    private var timerStatus: AllatHelper.TimeStatus by Delegates.observable(INIT) { _, old, new ->
         if (old != new) {
             view?.updateTimerStatus(if (new == AWAITING) allatStatusAwait else allatStatusOngoing)
         }
@@ -41,14 +45,15 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
         timerTask?.cancel()
     }
 
-    fun setAllatNotifIn(mins: Int) {
+    fun setAllatReminder(mins: Int) {
         storage.putAllatNotificationBefore(mins)
-        //todo setup notification
+        val timezone = storage.getAllatTimezone()
+        setupBeforeAlarm(context, mins, timezone)
     }
 
-    fun removeAllatNotif() {
+    fun removeAllatReminder() {
         storage.removeAllatNotification()
-        //todo cancel notifications
+        removeAlarm(context, AlarmNotificationCodes.BEFORE.action, AlarmNotificationCodes.BEFORE.ordinal)
     }
 
     fun getAllatNotifIn(): Int =
@@ -57,6 +62,16 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
 
     fun setAllatTimeZone(timezone: AllatTimeZone) {
         storage.putAllatTimezone(timezone)
+
+        Observable.fromCallable {
+            reInitTimers(context, timezone,
+                storage.getAllatNotificationBeforeMins(),
+                storage.getAllatNotificationStart(),
+                storage.getAllatNotificationEnd())
+        }
+        .subscribeOn(Schedulers.io())
+        .subscribe()
+
         view?.let {
             it.changeTimezoneSetupVisibility(false)
             startTimer(timezone)
@@ -66,7 +81,7 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
     private fun startTimer(timezone: AllatTimeZone) {
         timerTask?.cancel()
 
-        val (time, status) = AllatHelper.getTimeToAllat(timezone)
+        val (time, status) = AllatHelper.getAllatTimeStatus(timezone)
         timerStatus = status
 
         timerTask = object : CountDownTimer(time, 1000) {
@@ -89,5 +104,28 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
         view?.updateTimer(hoursLeft, minsLeft, secondsLeft)
     }
 
+    fun isAllatNotificationStartEnabled() = storage.getAllatNotificationStart()
+
+    fun isAllatNotificationEndEnabled() = storage.getAllatNotificationEnd()
+
+    fun startStopAlarm(alarmNotificationCodes: AlarmNotificationCodes, enable: Boolean) {
+        val timezone = storage.getAllatTimezone()
+
+        when (alarmNotificationCodes) {
+            AlarmNotificationCodes.START -> {
+                storage.allatNotificationStart(enable)
+                if (enable) setupStartAlarm(context, timezone)
+            }
+            AlarmNotificationCodes.END -> {
+                storage.allatNotificationEnd(enable)
+                if (enable) setupEndAlarm(context, timezone)
+            }
+            else -> return
+        }
+
+        if (enable.not()) {
+            removeAlarm(context, alarmNotificationCodes.action, alarmNotificationCodes.ordinal)
+        }
+    }
 
 }

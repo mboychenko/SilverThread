@@ -27,8 +27,8 @@ fun writeExStoragePermissionGranted(context: Context): Boolean {
     return true
 }
 
-fun getExternalStorageAvailableSpaceKb() =
-    Environment.getExternalStorageDirectory().freeSpace / 1024
+fun getExternalStorageAvailableSpaceBytes() =
+    Environment.getExternalStorageDirectory().freeSpace
 
 fun getPublicDownloadsStorageDir(childFolder: String): File? {
     val file = File(

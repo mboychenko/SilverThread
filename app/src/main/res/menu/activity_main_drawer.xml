@@ -62,7 +62,7 @@
         <menu>
             <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_settings"
                 android:title="@string/notifs" />
 
         </menu>
@@ -72,7 +72,7 @@
         <menu>
             <item
                 android:id="@+id/nav_about_us"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_share_black_24dp"
                 android:title="@string/about_us" />
         </menu>
     </item>

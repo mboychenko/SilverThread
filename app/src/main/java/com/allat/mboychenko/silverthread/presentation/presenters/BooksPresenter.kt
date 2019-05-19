@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import androidx.core.net.toFile
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -20,7 +19,6 @@ import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_ACTION_LOADED_FILE_NAME
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IBooksFragmentView
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -133,9 +131,9 @@ class BooksPresenter(
         }
 
         val book = booksHelper.getBookByUrl(bookUrl)
-        val bookSize = book.localeDetails.values.find { it.url == bookUrl }?.bookSize ?: 0
+        val bookSize = book.localeDetails.values.find { it.url == bookUrl }?.bookSizeBytes ?: 0
 
-        if (bookSize >= getExternalStorageAvailableSpaceKb()) {
+        if (bookSize >= getExternalStorageAvailableSpaceBytes()) {
             view?.bookLoadingCancelled(fileName)
             Toast.makeText(context, "Not enough memory", Toast.LENGTH_LONG).show()
             return

@@ -5,6 +5,20 @@ import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.prese
 
 class AllatTimeZoneInteractor(val storage: Storage) : AllatTimeZoneStorage {
 
+    override fun allatNotificationStart(enabled: Boolean) {
+        storage.putBoolean(ALLAT_START_PREF_KEY, enabled)
+    }
+
+    override fun getAllatNotificationStart(): Boolean =
+        storage.getBooleanDefaultFalse(ALLAT_START_PREF_KEY)
+
+    override fun allatNotificationEnd(enabled: Boolean) {
+        storage.putBoolean(ALLAT_END_PREF_KEY, enabled)
+    }
+
+    override fun getAllatNotificationEnd(): Boolean =
+        storage.getBooleanDefaultFalse(ALLAT_END_PREF_KEY)
+
     override fun putAllatNotificationBefore(mins: Int) {
         storage.putInt(ALLAT_NOTIFICATION_BEFORE_PREF_KEY, mins)
     }
@@ -28,5 +42,7 @@ class AllatTimeZoneInteractor(val storage: Storage) : AllatTimeZoneStorage {
     companion object {
         private const val ALLAT_NOTIFICATION_BEFORE_PREF_KEY = "ALLAT_NOTIFICATION_BEFORE_PREF_KEY"
         private const val ALLAT_TIMEZONE_PREF_KEY = "ALLAT_TIMEZONE_PREF_KEY"
+        private const val ALLAT_START_PREF_KEY = "ALLAT_START_PREF_KEY"
+        private const val ALLAT_END_PREF_KEY = "ALLAT_END_PREF_KEY"
     }
 }

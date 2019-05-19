@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
+import com.allat.mboychenko.silverthread.presentation.helpers.AlarmNotificationCodes
 import com.allat.mboychenko.silverthread.presentation.presenters.AllatPresenter
 import kotlinx.android.synthetic.main.allat_fragment.*
 import kotlinx.android.synthetic.main.allat_fragment.view.*
@@ -32,8 +33,15 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
         fragment.lockImg.setOnClickListener { lockUnlockConfig() }
         fragment.lockTitle.setOnClickListener { lockUnlockConfig() }
 
-        fragment.ringOnStart.setOnCheckedChangeListener { _, isChecked ->  } //todo alarm ring on start
-        fragment.ringOnEnd.setOnCheckedChangeListener { _, isChecked ->  } //todo alarm ring on end
+        fragment.ringOnStart.isChecked = presenter.isAllatNotificationStartEnabled()
+        fragment.ringOnEnd.isChecked = presenter.isAllatNotificationEndEnabled()
+
+        fragment.ringOnStart.setOnCheckedChangeListener { _, enabled ->
+            presenter.startStopAlarm(AlarmNotificationCodes.START, enabled)
+        }
+        fragment.ringOnEnd.setOnCheckedChangeListener { _, enabled ->
+            presenter.startStopAlarm(AlarmNotificationCodes.END, enabled)
+        }
 
         fragment.timezoneConfig.setOnClickListener {
             lockUnlockConfig(unlock = false)
@@ -59,13 +67,11 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
                     val allatNotifInMinutes = presenter.getAllatNotifIn()
                     if (position == 0) {    //None
                         if (allatNotifInMinutes != -1) {
-                            presenter.removeAllatNotif()
+                            presenter.removeAllatReminder()
                         }
-                        switchesState(false)
                     } else {
                         if (allatNotifInMinutes != notificationBeforeArray[position - 1]) {
-                            presenter.setAllatNotifIn(notificationBeforeArray[position - 1])
-                            switchesState(true)
+                            presenter.setAllatReminder(notificationBeforeArray[position - 1])
                         }
                     }
                 }
@@ -73,16 +79,6 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
         }
 
         return fragment
-    }
-
-    private fun switchesState(enable: Boolean) {
-        if (enable.not()) {
-            ringOnEnd?.isChecked = false
-            ringOnStart?.isChecked = false
-        }
-
-        ringOnStart?.isEnabled = enable
-        ringOnEnd?.isEnabled = enable
     }
 
     private fun lockUnlockConfig(unlock: Boolean? = null) {

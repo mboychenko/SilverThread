@@ -9,4 +9,8 @@ interface AllatTimeZoneStorage {
     fun putAllatNotificationBefore(mins: Int)
     fun getAllatNotificationBeforeMins(): Int
     fun removeAllatNotification()
+    fun allatNotificationStart(enabled: Boolean)
+    fun getAllatNotificationStart(): Boolean
+    fun allatNotificationEnd(enabled: Boolean)
+    fun getAllatNotificationEnd(): Boolean
 }
