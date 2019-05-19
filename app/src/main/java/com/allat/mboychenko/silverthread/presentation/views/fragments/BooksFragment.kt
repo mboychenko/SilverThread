@@ -67,8 +67,8 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         presenter.attachView(this)
     }
 

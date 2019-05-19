@@ -21,6 +21,7 @@ import com.allat.mboychenko.silverthread.presentation.views.fragments.IBooksFrag
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.lang.StringBuilder
@@ -49,7 +50,7 @@ class BooksPresenter(
     }
 
     fun updateBooks(filter: BooksConstants.BooksLocale? = null) {
-        subscriptions.add(
+        manageAddToSubscription(
             Observable.fromCallable { getBooksItems(filter) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -105,7 +106,7 @@ class BooksPresenter(
     }
 
     fun loadBook(bookUrl: String, fileName: String = booksHelper.getBookByUrl(bookUrl).fileName) {
-        subscriptions.add(
+        manageAddToSubscription(
             hasInternetAccess(context) { hasInternet ->
                 if (hasInternet) {
                     loadBookContinue(bookUrl, fileName)
@@ -139,7 +140,7 @@ class BooksPresenter(
             return
         }
 
-        subscriptions.add(
+        manageAddToSubscription(
             Observable.fromCallable { getPublicDownloadsStorageDir(BOOKS_FOLDER_NAME) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -170,7 +171,7 @@ class BooksPresenter(
             return
         }
 
-        subscriptions.add(
+        manageAddToSubscription(
             Observable.fromCallable {
                 val bookFile = getBookUri(bookItem.book).toFile()
                 bookFile.exists() && bookFile.delete()
@@ -191,6 +192,14 @@ class BooksPresenter(
                         ).show()
                     })
         )
+    }
+
+    private fun manageAddToSubscription(disposable: Disposable) {
+        if(subscriptions.isDisposed) {
+            subscriptions = CompositeDisposable()
+        }
+
+        subscriptions.add(disposable)
     }
 
     private fun requestWritePermission(loadBookUrl: String? = null, deleteFileName: String? = null) {
