@@ -14,18 +14,21 @@ class TimerExpiredReceiver : BroadcastReceiver() {
 
         val timezone = intent.getIntExtra(NOTIFICATION_TIMEZONE_EXTRAS, 3)
         val allatTimeZone = AllatTimeZone.values()[timezone]
+        val allatAction = intent.action
 
-        when (intent.action){
-            AlarmNotificationCodes.BEFORE.action ->
-                showNotificationAndReInit(context, AlarmNotificationCodes.BEFORE, allatTimeZone, intent.extras)
-            AlarmNotificationCodes.BEFORE_UPDATE.action ->
-                showNotification(context, AlarmNotificationCodes.BEFORE_UPDATE, intent.extras)
-            AlarmNotificationCodes.START.action ->
-                showNotificationAndReInit(context, AlarmNotificationCodes.START, allatTimeZone, intent.extras)
-            AlarmNotificationCodes.END.action ->
-                showNotificationAndReInit(context, AlarmNotificationCodes.END, allatTimeZone, intent.extras)
-            AlarmNotificationCodes.QUOTE.action -> TODO()
-            AlarmNotificationCodes.CANCEL.action -> hideNotification(context, intent.extras)
+        runTaskOnComputation {
+            when (allatAction) {
+                AlarmNotificationCodes.BEFORE.action ->
+                    showNotificationAndReInit(context, AlarmNotificationCodes.BEFORE, allatTimeZone, intent.extras)
+                AlarmNotificationCodes.BEFORE_UPDATE.action ->
+                    showNotification(context, AlarmNotificationCodes.BEFORE_UPDATE, intent.extras)
+                AlarmNotificationCodes.START.action ->
+                    showNotificationAndReInit(context, AlarmNotificationCodes.START, allatTimeZone, intent.extras)
+                AlarmNotificationCodes.END.action ->
+                    showNotificationAndReInit(context, AlarmNotificationCodes.END, allatTimeZone, intent.extras)
+                AlarmNotificationCodes.QUOTE.action -> TODO()
+                AlarmNotificationCodes.CANCEL.action -> hideNotification(context, intent.extras)
+            }
         }
 
     }

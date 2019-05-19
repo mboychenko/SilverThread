@@ -2,7 +2,6 @@ package com.allat.mboychenko.silverthread.presentation.presenters
 
 import android.content.Context
 import android.os.CountDownTimer
-import android.util.Log
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
@@ -10,8 +9,6 @@ import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.prese
 import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper.TimeStatus.*
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IAllatFragmentView
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
@@ -46,14 +43,18 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
     }
 
     fun setAllatReminder(mins: Int) {
-        storage.putAllatNotificationBefore(mins)
-        val timezone = storage.getAllatTimezone()
-        setupBeforeAlarm(context, mins, timezone)
+        runTaskOnComputation {
+            storage.putAllatNotificationBefore(mins)
+            val timezone = storage.getAllatTimezone()
+            setupBeforeAlarm(context, mins, timezone)
+        }
     }
 
     fun removeAllatReminder() {
-        storage.removeAllatNotification()
-        removeAlarm(context, AlarmNotificationCodes.BEFORE.action, AlarmNotificationCodes.BEFORE.ordinal)
+        runTaskOnComputation {
+            storage.removeAllatNotification()
+            removeAlarm(context, AlarmNotificationCodes.BEFORE.action, AlarmNotificationCodes.BEFORE.ordinal)
+        }
     }
 
     fun getAllatNotifIn(): Int =
@@ -61,16 +62,15 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
 
 
     fun setAllatTimeZone(timezone: AllatTimeZone) {
-        storage.putAllatTimezone(timezone)
-
-        Observable.fromCallable {
-            reInitTimers(context, timezone,
+        runTaskOnComputation {
+            storage.putAllatTimezone(timezone)
+            reInitTimers(
+                context, timezone,
                 storage.getAllatNotificationBeforeMins(),
                 storage.getAllatNotificationStart(),
-                storage.getAllatNotificationEnd())
+                storage.getAllatNotificationEnd()
+            )
         }
-        .subscribeOn(Schedulers.io())
-        .subscribe()
 
         view?.let {
             it.changeTimezoneSetupVisibility(false)
@@ -109,22 +109,24 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
     fun isAllatNotificationEndEnabled() = storage.getAllatNotificationEnd()
 
     fun startStopAlarm(alarmNotificationCodes: AlarmNotificationCodes, enable: Boolean) {
-        val timezone = storage.getAllatTimezone()
+        runTaskOnComputation {
+            val timezone = storage.getAllatTimezone()
 
-        when (alarmNotificationCodes) {
-            AlarmNotificationCodes.START -> {
-                storage.allatNotificationStart(enable)
-                if (enable) setupStartAlarm(context, timezone)
+            when (alarmNotificationCodes) {
+                AlarmNotificationCodes.START -> {
+                    storage.allatNotificationStart(enable)
+                    if (enable) setupStartAlarm(context, timezone)
+                }
+                AlarmNotificationCodes.END -> {
+                    storage.allatNotificationEnd(enable)
+                    if (enable) setupEndAlarm(context, timezone)
+                }
+                else -> Unit
             }
-            AlarmNotificationCodes.END -> {
-                storage.allatNotificationEnd(enable)
-                if (enable) setupEndAlarm(context, timezone)
-            }
-            else -> return
-        }
 
-        if (enable.not()) {
-            removeAlarm(context, alarmNotificationCodes.action, alarmNotificationCodes.ordinal)
+            if (enable.not()) {
+                removeAlarm(context, alarmNotificationCodes.action, alarmNotificationCodes.ordinal)
+            }
         }
     }
 
