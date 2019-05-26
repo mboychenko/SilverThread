@@ -50,12 +50,14 @@ class BooksPresenter(
     }
 
     fun updateBooks(filter: BooksConstants.BooksLocale? = null) {
+        view?.showLoading()
         manageAddToSubscription(
             Observable.fromCallable { getBooksItems(filter) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     view?.updateItems(it)
+                    view?.hideLoading()
                 }
         )
     }

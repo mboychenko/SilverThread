@@ -23,6 +23,7 @@ import com.allat.mboychenko.silverthread.presentation.views.activities.BookReade
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import kotlinx.android.synthetic.main.fragment_books_list.*
 import kotlinx.android.synthetic.main.fragment_books_list.view.*
 import org.koin.android.ext.android.inject
 
@@ -133,6 +134,14 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, bookTitle)
         sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.link_to_load, bookTitle, bookUrl))
         startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_link, bookTitle)))
+    }
+
+    override fun showLoading() {
+        loadingContainer.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        loadingContainer.visibility = View.GONE
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

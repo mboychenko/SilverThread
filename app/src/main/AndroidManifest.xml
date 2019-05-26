@@ -26,6 +26,12 @@
                 android:exported="false">
         </service>
         <service
+                android:name=".presentation.services.AlarmNotificationsService"
+                android:permission="android.permission.BIND_JOB_SERVICE"
+                android:enabled="true"
+                android:exported="false">
+        </service>
+        <service
                 android:name=".presentation.services.AllatRadioService"
                 android:enabled="true"
                 android:exported="false">
@@ -65,7 +71,7 @@
                 android:enabled="true"
                 android:exported="false"/>
         <receiver
-                android:name=".presentation.receivers.TimerNotificationActionReceiver"
+                android:name=".presentation.receivers.TimerRadioNotificationActionReceiver"
                 android:enabled="true"
                 android:exported="false">
             <intent-filter>

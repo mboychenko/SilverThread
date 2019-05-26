@@ -13,7 +13,7 @@ import com.allat.mboychenko.silverthread.presentation.receivers.TimerExpiredRece
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-fun setAlarm(context: Context, millisRemaining: Long, intentAction: String, requestCode: Int, extras: Bundle?) {
+fun setAlarm(context: Context, millisRemaining: Long, intentAction: String, requestCode: Int, extras: Bundle? = null) {
     val wakeUpTime = nowMillis + millisRemaining
     val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -57,7 +57,6 @@ fun setupBeforeAlarm(context: Context, minsBefore: Int, allatTimezone: AllatTime
 
     val bundle = Bundle().apply {
         putLong(NOTIFICATION_BEFORE_MILLIS_EXTRAS, millisOffset)
-        putInt(NOTIFICATION_TIMEZONE_EXTRAS, allatTimezone.ordinal)
     }
 
     setAlarm(context, millisRemaining, AlarmNotificationCodes.BEFORE.action, AlarmNotificationCodes.BEFORE.ordinal, bundle)
@@ -65,14 +64,12 @@ fun setupBeforeAlarm(context: Context, minsBefore: Int, allatTimezone: AllatTime
 
 fun setupStartAlarm(context: Context, allatTimezone: AllatTimeZone) {
     setAlarm(context, AllatHelper.getMillisToAllatStart(allatTimezone),
-        AlarmNotificationCodes.START.action, AlarmNotificationCodes.START.ordinal,
-        Bundle().apply { putInt(NOTIFICATION_TIMEZONE_EXTRAS, allatTimezone.ordinal) })
+        AlarmNotificationCodes.START.action, AlarmNotificationCodes.START.ordinal)
 }
 
 fun setupEndAlarm(context: Context, allatTimezone: AllatTimeZone) {
     setAlarm(context, AllatHelper.getMillisToAllatEnd(allatTimezone),
-        AlarmNotificationCodes.END.action, AlarmNotificationCodes.END.ordinal,
-        Bundle().apply { putInt(NOTIFICATION_TIMEZONE_EXTRAS, allatTimezone.ordinal) })
+        AlarmNotificationCodes.END.action, AlarmNotificationCodes.END.ordinal)
 }
 
 fun reInitTimers(context: Context, allatTimezone: AllatTimeZone, allatRemindBeforeMins: Int,
@@ -84,7 +81,7 @@ fun reInitTimers(context: Context, allatTimezone: AllatTimeZone, allatRemindBefo
             alarmManager.cancel(context, code.action, code.ordinal)
         }
 
-        if (allatRemindBeforeMins != -1) {
+        if (allatRemindBeforeMins > 0) {
             setupBeforeAlarm(context, allatRemindBeforeMins, allatTimezone)
         }
 
@@ -104,12 +101,13 @@ private val nowMillis: Long
 enum class AlarmNotificationCodes(val action: String) {
     BEFORE("NOTIFICATION_BEFORE"),
     BEFORE_UPDATE("BEFORE_UPDATE"),
+    CANCEL_UPDATE("CANCEL_UPDATE"),
     START("NOTIFICATION_START"),
     END("NOTIFICATION_END"),
     QUOTE("NOTIFICATION_QUOTE"),
-    CANCEL("CANCEL")
+    CANCEL("CANCEL"),
+    REINIT_TIMERS("REINIT_TIMERS")
 }
 
 const val NOTIFICATION_BEFORE_MILLIS_EXTRAS = "NOTIFICATION_BEFORE_MILLIS_EXTRAS"
 const val NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS = "NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS"
-const val NOTIFICATION_TIMEZONE_EXTRAS = "NOTIFICATION_TIMEZONE_EXTRAS"

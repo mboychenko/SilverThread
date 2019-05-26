@@ -8,3 +8,8 @@ fun runTaskOnComputation(task: () -> Unit): Disposable =
     Observable.fromCallable(task)
         .subscribeOn(Schedulers.computation())
         .subscribe()
+
+fun runTaskOnComputation(task: () -> Unit, onComplete: () -> Unit): Disposable =
+    Observable.fromCallable(task)
+        .subscribeOn(Schedulers.computation())
+        .subscribe({}, {}, onComplete)
