@@ -37,10 +37,10 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
         fragment.ringOnEnd.isChecked = presenter.isAllatNotificationEndEnabled()
 
         fragment.ringOnStart.setOnCheckedChangeListener { _, enabled ->
-            presenter.startStopAlarm(AlarmNotificationCodes.START, enabled)
+            presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_START, enabled)
         }
         fragment.ringOnEnd.setOnCheckedChangeListener { _, enabled ->
-            presenter.startStopAlarm(AlarmNotificationCodes.END, enabled)
+            presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_END, enabled)
         }
 
         fragment.timezoneConfig.setOnClickListener {

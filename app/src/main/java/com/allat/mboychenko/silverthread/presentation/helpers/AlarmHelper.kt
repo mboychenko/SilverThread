@@ -47,7 +47,7 @@ private fun createAlarmPendingIntent(context: Context, intentAction: String,
     return PendingIntent.getBroadcast(context, requestCode, intent, FLAG_CANCEL_CURRENT)
 }
 
-fun setupBeforeAlarm(context: Context, minsBefore: Int, allatTimezone: AllatTimeZone) {
+fun setupAllatBeforeAlarm(context: Context, minsBefore: Int, allatTimezone: AllatTimeZone) {
     val millisOffset = TimeUnit.MINUTES.toMillis(minsBefore.toLong())
     var millisRemaining = AllatHelper.getMillisToAllatStart(allatTimezone) - millisOffset
 
@@ -59,17 +59,17 @@ fun setupBeforeAlarm(context: Context, minsBefore: Int, allatTimezone: AllatTime
         putLong(NOTIFICATION_BEFORE_MILLIS_EXTRAS, millisOffset)
     }
 
-    setAlarm(context, millisRemaining, AlarmNotificationCodes.BEFORE.action, AlarmNotificationCodes.BEFORE.ordinal, bundle)
+    setAlarm(context, millisRemaining, AlarmNotificationCodes.ALLAT_BEFORE.action, AlarmNotificationCodes.ALLAT_BEFORE.ordinal, bundle)
 }
 
-fun setupStartAlarm(context: Context, allatTimezone: AllatTimeZone) {
+fun setupAllatStartAlarm(context: Context, allatTimezone: AllatTimeZone) {
     setAlarm(context, AllatHelper.getMillisToAllatStart(allatTimezone),
-        AlarmNotificationCodes.START.action, AlarmNotificationCodes.START.ordinal)
+        AlarmNotificationCodes.ALLAT_START.action, AlarmNotificationCodes.ALLAT_START.ordinal)
 }
 
-fun setupEndAlarm(context: Context, allatTimezone: AllatTimeZone) {
+fun setupAllatEndAlarm(context: Context, allatTimezone: AllatTimeZone) {
     setAlarm(context, AllatHelper.getMillisToAllatEnd(allatTimezone),
-        AlarmNotificationCodes.END.action, AlarmNotificationCodes.END.ordinal)
+        AlarmNotificationCodes.ALLAT_END.action, AlarmNotificationCodes.ALLAT_END.ordinal)
 }
 
 fun reInitTimers(context: Context, allatTimezone: AllatTimeZone, allatRemindBeforeMins: Int,
@@ -82,28 +82,29 @@ fun reInitTimers(context: Context, allatTimezone: AllatTimeZone, allatRemindBefo
         }
 
         if (allatRemindBeforeMins > 0) {
-            setupBeforeAlarm(context, allatRemindBeforeMins, allatTimezone)
+            setupAllatBeforeAlarm(context, allatRemindBeforeMins, allatTimezone)
         }
 
         if (allatNotificationStart) {
-            setupStartAlarm(context, allatTimezone)
+            setupAllatStartAlarm(context, allatTimezone)
         }
 
         if (allatNotificationEnd) {
-            setupEndAlarm(context, allatTimezone)
+            setupAllatEndAlarm(context, allatTimezone)
         }
     }
+    //todo quotesStorage notifications reinit
 }
 
 private val nowMillis: Long
     get() = Calendar.getInstance().timeInMillis
 
 enum class AlarmNotificationCodes(val action: String) {
-    BEFORE("NOTIFICATION_BEFORE"),
-    BEFORE_UPDATE("BEFORE_UPDATE"),
-    CANCEL_UPDATE("CANCEL_UPDATE"),
-    START("NOTIFICATION_START"),
-    END("NOTIFICATION_END"),
+    ALLAT_BEFORE("ALLAT_BEFORE"),
+    ALLAT_BEFORE_UPDATE("ALLAT_BEFORE_UPDATE"),
+    CANCEL_ALLAT_UPDATE("CANCEL_ALLAT_UPDATE"),
+    ALLAT_START("ALLAT_START_NOTIFICATION"),
+    ALLAT_END("ALLAT_END_NOTIFICATION"),
     QUOTE("NOTIFICATION_QUOTE"),
     CANCEL("CANCEL"),
     REINIT_TIMERS("REINIT_TIMERS")

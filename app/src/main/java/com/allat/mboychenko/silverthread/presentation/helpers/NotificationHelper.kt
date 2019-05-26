@@ -56,21 +56,21 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     var playSound = true
 
     when (notificationCode) {
-        AlarmNotificationCodes.START -> {
+        AlarmNotificationCodes.ALLAT_START -> {
             title = context.getString(R.string.allat_reminder)
             text = context.getString(R.string.allat_has_started)
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
         }
-        AlarmNotificationCodes.END -> {
+        AlarmNotificationCodes.ALLAT_END -> {
             title = context.getString(R.string.allat_reminder)
             text = context.getString(R.string.allat_has_ended)
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
         }
-        AlarmNotificationCodes.BEFORE -> {
+        AlarmNotificationCodes.ALLAT_BEFORE -> {
             title = context.getString(R.string.allat_reminder)
             val minutes = TimeUnit.MILLISECONDS.toMinutes(remindBefore).toInt()
             text = context.resources.getQuantityString(R.plurals.mins_to_allat, minutes, minutes)
@@ -78,7 +78,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
         }
-        AlarmNotificationCodes.BEFORE_UPDATE -> {
+        AlarmNotificationCodes.ALLAT_BEFORE_UPDATE -> {
             title = context.getString(R.string.allat_reminder)
             val minutes = TimeUnit.MILLISECONDS.toMinutes(remindBeforeUpdate).toInt()
             text = context.resources.getQuantityString(R.plurals.mins_to_allat, minutes, minutes)
@@ -106,9 +106,9 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
         .setVibrate(longArrayOf(500, 500, 500, 500))
         .priority = if (playSound) IMPORTANCE_HIGH else IMPORTANCE_LOW
 
-    if (notificationCode == AlarmNotificationCodes.BEFORE ||
-        notificationCode == AlarmNotificationCodes.BEFORE_UPDATE) {
-        nBuilder.setDeleteIntent(getRemoveBeforeUpdatesIntent(context))
+    if (notificationCode == AlarmNotificationCodes.ALLAT_BEFORE ||
+        notificationCode == AlarmNotificationCodes.ALLAT_BEFORE_UPDATE) {
+        nBuilder.setDeleteIntent(getRemoveAllatBeforeUpdatesIntent(context))
         Log.d("NotificationTimer", "timerSetDeleteIntent RemindBefore $remindBefore")
         Log.d("NotificationTimer", "timerSetDeleteIntent RemindBeforeUpdate $remindBeforeUpdate")
     }
@@ -118,8 +118,8 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     nManager.notify(notifId, notification)
 
     //cancel action
-    if (notificationCode == AlarmNotificationCodes.START ||
-        notificationCode == AlarmNotificationCodes.END) {
+    if (notificationCode == AlarmNotificationCodes.ALLAT_START ||
+        notificationCode == AlarmNotificationCodes.ALLAT_END) {
         setAlarm(context, TimeUnit.MINUTES.toMillis(11),
             AlarmNotificationCodes.CANCEL.action,
             AlarmNotificationCodes.CANCEL.ordinal,
@@ -127,15 +127,15 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     }
 
     //update & cancel action
-    if (notificationCode == AlarmNotificationCodes.BEFORE ||
-        notificationCode == AlarmNotificationCodes.BEFORE_UPDATE) {
+    if (notificationCode == AlarmNotificationCodes.ALLAT_BEFORE ||
+        notificationCode == AlarmNotificationCodes.ALLAT_BEFORE_UPDATE) {
         Log.d("NotificationTimer", "timerBeforeEnter $remindBefore : $remindBeforeUpdate")
         val oneMin = TimeUnit.MINUTES.toMillis(1)
         if (remindBeforeUpdate - oneMin > TimeUnit.MINUTES.toMillis(5)) {
             Log.d("NotificationTimer", "timerBeforeInside " + (remindBeforeUpdate - oneMin).toString())
             setAlarm(context, oneMin,
-                AlarmNotificationCodes.BEFORE_UPDATE.action,
-                AlarmNotificationCodes.BEFORE_UPDATE.ordinal,
+                AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.action,
+                AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.ordinal,
                 Bundle().apply {
                     putLong(
                         NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS,
@@ -239,14 +239,14 @@ private fun <T> getPendingIntent(context: Context, action: String, javaClass: Cl
     )
 }
 
-private fun getRemoveBeforeUpdatesIntent(context: Context): PendingIntent? {
-    val resultIntent = Intent(context, TimerExpiredReceiver::class.java)
-    resultIntent.action = AlarmNotificationCodes.CANCEL_UPDATE.action
+private fun getRemoveAllatBeforeUpdatesIntent(context: Context): PendingIntent {
+    val cancelIntent = Intent(context, TimerExpiredReceiver::class.java)
+    cancelIntent.action = AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.action
 
     return PendingIntent.getBroadcast(
         context,
-        AlarmNotificationCodes.CANCEL_UPDATE.ordinal,
-        resultIntent,
+        AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.ordinal,
+        cancelIntent,
         PendingIntent.FLAG_CANCEL_CURRENT
     )
 }

@@ -51,22 +51,21 @@ class AlarmNotificationsExecutor(val context: Context) {
                             allatStorage.getAllatNotificationStart(),
                             allatStorage.getAllatNotificationEnd()
                         )
-//                        todo quotesStorage notifications reinit
                     }
-                    AlarmNotificationCodes.BEFORE.action ->
-                        showNotificationAndReInit(context, AlarmNotificationCodes.BEFORE, bundle)
-                    AlarmNotificationCodes.BEFORE_UPDATE.action ->
-                        showNotification(context, AlarmNotificationCodes.BEFORE_UPDATE, bundle)
-                    AlarmNotificationCodes.CANCEL_UPDATE.action ->
+                    AlarmNotificationCodes.ALLAT_BEFORE.action ->
+                        showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_BEFORE, bundle)
+                    AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.action ->
+                        showNotification(context, AlarmNotificationCodes.ALLAT_BEFORE_UPDATE, bundle)
+                    AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.action ->
                         removeAlarm(
                             context,
-                            AlarmNotificationCodes.BEFORE_UPDATE.action,
-                            AlarmNotificationCodes.BEFORE_UPDATE.ordinal
+                            AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.action,
+                            AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.ordinal
                         )
-                    AlarmNotificationCodes.START.action ->
-                        showNotificationAndReInit(context, AlarmNotificationCodes.START, bundle)
-                    AlarmNotificationCodes.END.action ->
-                        showNotificationAndReInit(context, AlarmNotificationCodes.END, bundle)
+                    AlarmNotificationCodes.ALLAT_START.action ->
+                        showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_START, bundle)
+                    AlarmNotificationCodes.ALLAT_END.action ->
+                        showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_END, bundle)
                     AlarmNotificationCodes.QUOTE.action -> TODO()
                     AlarmNotificationCodes.CANCEL.action -> hideNotification(context, bundle)
                 }

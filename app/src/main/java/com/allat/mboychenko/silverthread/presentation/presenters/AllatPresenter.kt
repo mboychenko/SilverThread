@@ -46,14 +46,14 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
         runTaskOnComputation {
             storage.putAllatNotificationBefore(mins)
             val timezone = storage.getAllatTimezone()
-            setupBeforeAlarm(context, mins, timezone)
+            setupAllatBeforeAlarm(context, mins, timezone)
         }
     }
 
     fun removeAllatReminder() {
         runTaskOnComputation {
             storage.removeAllatNotification()
-            removeAlarm(context, AlarmNotificationCodes.BEFORE.action, AlarmNotificationCodes.BEFORE.ordinal)
+            removeAlarm(context, AlarmNotificationCodes.ALLAT_BEFORE.action, AlarmNotificationCodes.ALLAT_BEFORE.ordinal)
         }
     }
 
@@ -113,13 +113,13 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
             val timezone = storage.getAllatTimezone()
 
             when (alarmNotificationCodes) {
-                AlarmNotificationCodes.START -> {
+                AlarmNotificationCodes.ALLAT_START -> {
                     storage.allatNotificationStart(enable)
-                    if (enable) setupStartAlarm(context, timezone)
+                    if (enable) setupAllatStartAlarm(context, timezone)
                 }
-                AlarmNotificationCodes.END -> {
+                AlarmNotificationCodes.ALLAT_END -> {
                     storage.allatNotificationEnd(enable)
-                    if (enable) setupEndAlarm(context, timezone)
+                    if (enable) setupAllatEndAlarm(context, timezone)
                 }
                 else -> Unit
             }
