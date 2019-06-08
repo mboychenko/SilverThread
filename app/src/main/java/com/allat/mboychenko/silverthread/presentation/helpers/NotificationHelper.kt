@@ -35,7 +35,7 @@ private const val NOTIFICATION_ACTION_QUOTE = "QuoteNotification"
 
 const val NOTIFICATION_CANCEL_ID_EXTRA = "NOTIFICATION_CANCEL_ID_EXTRA"
 
-const val NOTIFICATION_ID_ALLAT = 101
+private const val NOTIFICATION_ID_ALLAT = 101
 private const val NOTIFICATION_ID_QUOTE = 102
 private const val NOTIFICATION_ID_RADIO = 103
 private const val NOTIFICATION_ID_ALLAT_BEFORE_UPDATE = 3
@@ -181,6 +181,11 @@ fun showTimerPaused(context: Context) {
 fun hideRadioNotification(context: Context) {
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     nManager.cancel(NOTIFICATION_ID_RADIO)
+}
+
+fun hideAllatNotification(context: Context) {
+    val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    nManager.cancel(NOTIFICATION_ID_ALLAT)
 }
 
 fun hideNotification(context: Context, extras: Bundle?) {

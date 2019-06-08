@@ -59,8 +59,7 @@ class UpdateBeforeTimerJob : JobIntentService() {
             }
         }
 
-        hideNotification(applicationContext,
-            Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, NOTIFICATION_ID_ALLAT) })
+        hideAllatNotification(applicationContext)
 
         LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(receiver)
 
@@ -92,8 +91,7 @@ class UpdateBeforeTimerJob : JobIntentService() {
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             stopFlag = true
-            hideNotification(applicationContext,
-                Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, NOTIFICATION_ID_ALLAT) })
+            hideAllatNotification(applicationContext)
         }
     }
 

@@ -27,7 +27,7 @@ class AlarmNotificationsExecutor(val context: Context) {
         saveLogcatToFile()
         Log.d("NotificationTimer", "taking WL")
 
-        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager        //todo check on api 19
+        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
         val wl = pm.newWakeLock(
             PowerManager.PARTIAL_WAKE_LOCK,
             "AlarmNotificationsExecutor:WakeLock")
@@ -59,8 +59,7 @@ class AlarmNotificationsExecutor(val context: Context) {
                     }
                     AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.action -> {
                         UpdateBeforeTimerJob.stopUpdateTimer(context)
-                        hideNotification(context,
-                            Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, NOTIFICATION_ID_ALLAT) })
+                        hideAllatNotification(context)
                     }
                     AlarmNotificationCodes.ALLAT_START.action ->
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_START, bundle)
