@@ -1,11 +1,10 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.storage
+package com.allat.mboychenko.silverthread.data.storage
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.util.Log
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.Storage
 import org.json.JSONObject
 
 

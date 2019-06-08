@@ -8,7 +8,7 @@ import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
+import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
 import com.allat.mboychenko.silverthread.presentation.helpers.AlarmNotificationCodes
 import com.allat.mboychenko.silverthread.presentation.presenters.AllatPresenter
 import kotlinx.android.synthetic.main.allat_fragment.*

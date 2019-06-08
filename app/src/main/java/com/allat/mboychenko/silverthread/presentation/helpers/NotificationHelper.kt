@@ -32,10 +32,12 @@ private const val CHANNEL_NAME_QUOTES = "Quotes Notifications"
 private const val NOTIFICATION_ACTION_ALLAT = "AllatNotification"
 private const val NOTIFICATION_ACTION_BEFORE_UPDATE = "AllatNotificationBeforeUpdate"
 private const val NOTIFICATION_ACTION_QUOTE = "QuoteNotification"
-private const val NOTIFICATION_CANCEL_ID_EXTRA = "NOTIFICATION_CANCEL_ID_EXTRA"
-private const val NOTIFICATION_ID_ALLAT = 0
-private const val NOTIFICATION_ID_QUOTE = 1
-private const val NOTIFICATION_ID_RADIO = 2
+
+const val NOTIFICATION_CANCEL_ID_EXTRA = "NOTIFICATION_CANCEL_ID_EXTRA"
+
+const val NOTIFICATION_ID_ALLAT = 101
+private const val NOTIFICATION_ID_QUOTE = 102
+private const val NOTIFICATION_ID_RADIO = 103
 private const val NOTIFICATION_ID_ALLAT_BEFORE_UPDATE = 3
 
 fun showNotification(context: Context, notificationCode: AlarmNotificationCodes, extras: Bundle?) {
@@ -96,7 +98,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
         }
         else -> return
     }
-    Log.d("NotificationTimer", "timerAfterInit $title, $text, $action, $notifId, $notifChannelId")
+
     //notify
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val nBuilder = getBasicNotificationBuilder(context, notifChannelId, playSound)
@@ -109,47 +111,21 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     if (notificationCode == AlarmNotificationCodes.ALLAT_BEFORE ||
         notificationCode == AlarmNotificationCodes.ALLAT_BEFORE_UPDATE) {
         nBuilder.setDeleteIntent(getRemoveAllatBeforeUpdatesIntent(context))
-        Log.d("NotificationTimer", "timerSetDeleteIntent RemindBefore $remindBefore")
-        Log.d("NotificationTimer", "timerSetDeleteIntent RemindBeforeUpdate $remindBeforeUpdate")
+        Log.d("NotificationTimer", "timerSetDeleteIntent")
+    }
+
+    //cancel action
+    if (notificationCode == AlarmNotificationCodes.ALLAT_START ||
+        notificationCode == AlarmNotificationCodes.ALLAT_END) {
+        setAlarm(context, TimeUnit.MINUTES.toMillis(25),
+            AlarmNotificationCodes.CANCEL.action,
+            AlarmNotificationCodes.CANCEL.code,
+            Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, notifId) })
     }
 
     val notification = nBuilder.build()
     nManager.createNotificationChannel(context, notification, playSound)
     nManager.notify(notifId, notification)
-
-    //cancel action
-    if (notificationCode == AlarmNotificationCodes.ALLAT_START ||
-        notificationCode == AlarmNotificationCodes.ALLAT_END) {
-        setAlarm(context, TimeUnit.MINUTES.toMillis(11),
-            AlarmNotificationCodes.CANCEL.action,
-            AlarmNotificationCodes.CANCEL.ordinal,
-            Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, notifId) })
-    }
-
-    //update & cancel action
-    if (notificationCode == AlarmNotificationCodes.ALLAT_BEFORE ||
-        notificationCode == AlarmNotificationCodes.ALLAT_BEFORE_UPDATE) {
-        Log.d("NotificationTimer", "timerBeforeEnter $remindBefore : $remindBeforeUpdate")
-        val oneMin = TimeUnit.MINUTES.toMillis(1)
-        if (remindBeforeUpdate - oneMin > TimeUnit.MINUTES.toMillis(5)) {
-            Log.d("NotificationTimer", "timerBeforeInside " + (remindBeforeUpdate - oneMin).toString())
-            setAlarm(context, oneMin,
-                AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.action,
-                AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.ordinal,
-                Bundle().apply {
-                    putLong(
-                        NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS,
-                        remindBeforeUpdate - oneMin
-                    )
-                })
-        } else {
-            Log.d("NotificationTimer", "timerBeforeCancel " + (remindBeforeUpdate - oneMin).toString())
-            setAlarm(context, oneMin,
-                AlarmNotificationCodes.CANCEL.action,
-                AlarmNotificationCodes.CANCEL.ordinal,
-                Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, notifId) })
-        }
-    }
 }
 
 fun showTimerRunning(context: Context, wakeUpTime: Long) {  //ongoing
@@ -235,7 +211,7 @@ private fun <T> getPendingIntent(context: Context, action: String, javaClass: Cl
         context,
         0,
         resultIntent,
-        PendingIntent.FLAG_UPDATE_CURRENT
+        PendingIntent.FLAG_CANCEL_CURRENT
     )
 }
 
@@ -245,7 +221,7 @@ private fun getRemoveAllatBeforeUpdatesIntent(context: Context): PendingIntent {
 
     return PendingIntent.getBroadcast(
         context,
-        AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.ordinal,
+        AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.code,
         cancelIntent,
         PendingIntent.FLAG_CANCEL_CURRENT
     )

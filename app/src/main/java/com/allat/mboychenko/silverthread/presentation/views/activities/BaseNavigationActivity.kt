@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.activities
+package com.allat.mboychenko.silverthread.presentation.views.activities
 
 import android.os.Bundle
 import android.view.MenuItem

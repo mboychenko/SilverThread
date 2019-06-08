@@ -1,12 +1,12 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.listitems
+package com.allat.mboychenko.silverthread.presentation.views.listitems
 
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.BooksConstants
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.helper.BooksHelper
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs.LanguageSelectionDialogFragment
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs.LanguageSelectionDialogFragment.Companion.LANGUAGE_SELECTOR_DIALOG_TAG
+import com.allat.mboychenko.silverthread.data.models.BooksConstants
+import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.LanguageSelectionDialogFragment
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.LanguageSelectionDialogFragment.Companion.LANGUAGE_SELECTOR_DIALOG_TAG
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.book_item_layout.view.*

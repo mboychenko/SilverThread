@@ -6,10 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PowerManager
 import android.util.Log
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.storage.StorageImplementation
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.*
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.getPublicDownloadsStorageDir
+import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
+import com.allat.mboychenko.silverthread.domain.interactor.*
+import com.allat.mboychenko.silverthread.presentation.helpers.getPublicDownloadsStorageDir
 import com.allat.mboychenko.silverthread.presentation.helpers.*
+import com.allat.mboychenko.silverthread.presentation.services.UpdateBeforeTimerJob
 import java.util.concurrent.TimeUnit
 
 class AlarmNotificationsExecutor(val context: Context) {
@@ -19,7 +20,7 @@ class AlarmNotificationsExecutor(val context: Context) {
     fun saveLogcatToFile() {
         val fileName = "/logcat_" + System.currentTimeMillis() + ".txt"
         val outputFile = getPublicDownloadsStorageDir("allat_logcat")
-        val process = Runtime.getRuntime().exec("logcat NotificationTimer:D *:S -f " + outputFile?.absolutePath + fileName)
+        Runtime.getRuntime().exec("logcat UpdateBeforeTimerJob:D NotificationTimer:D *:S -f " + outputFile?.absolutePath + fileName)
     }
 
     fun onHandleNotification(intent: Intent) {
@@ -52,16 +53,15 @@ class AlarmNotificationsExecutor(val context: Context) {
                             allatStorage.getAllatNotificationEnd()
                         )
                     }
-                    AlarmNotificationCodes.ALLAT_BEFORE.action ->
+                    AlarmNotificationCodes.ALLAT_BEFORE.action -> {
+                        UpdateBeforeTimerJob.startUpdateTimer(context)
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_BEFORE, bundle)
-                    AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.action ->
-                        showNotification(context, AlarmNotificationCodes.ALLAT_BEFORE_UPDATE, bundle)
-                    AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.action ->
-                        removeAlarm(
-                            context,
-                            AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.action,
-                            AlarmNotificationCodes.ALLAT_BEFORE_UPDATE.ordinal
-                        )
+                    }
+                    AlarmNotificationCodes.CANCEL_ALLAT_UPDATE.action -> {
+                        UpdateBeforeTimerJob.stopUpdateTimer(context)
+                        hideNotification(context,
+                            Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, NOTIFICATION_ID_ALLAT) })
+                    }
                     AlarmNotificationCodes.ALLAT_START.action ->
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_START, bundle)
                     AlarmNotificationCodes.ALLAT_END.action ->
@@ -79,10 +79,10 @@ class AlarmNotificationsExecutor(val context: Context) {
 
     private fun showNotificationAndReInit(context: Context, notificationCode: AlarmNotificationCodes, extras: Bundle?) {
         showNotification(context, notificationCode, extras)
-        setAlarm(context,                                       //reInit all timers if need in 2 hrs
-            TimeUnit.HOURS.toMillis(2),
+        setAlarm(context,                                       //reInit all timers if need in 6  hrs
+            TimeUnit.HOURS.toMillis(6),
             AlarmNotificationCodes.REINIT_TIMERS.action,
-            AlarmNotificationCodes.REINIT_TIMERS.ordinal)
+            AlarmNotificationCodes.REINIT_TIMERS.code)
     }
 
 }

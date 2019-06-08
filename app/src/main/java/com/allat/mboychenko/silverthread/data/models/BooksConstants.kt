@@ -1,8 +1,7 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models
+package com.allat.mboychenko.silverthread.data.models
 
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.BooksConstants.BooksLocale.*
-import java.io.Serializable
+import com.allat.mboychenko.silverthread.data.models.BooksConstants.BooksLocale.*
 
 object BooksConstants {
 

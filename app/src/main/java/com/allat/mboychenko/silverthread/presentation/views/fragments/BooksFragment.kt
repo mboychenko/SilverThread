@@ -13,8 +13,8 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.BooksConstants
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
+import com.allat.mboychenko.silverthread.data.models.BooksConstants
+import com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.REQUEST_PERMISSION_SAVED_LOAD_FILE_URL

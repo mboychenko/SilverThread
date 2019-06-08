@@ -8,11 +8,11 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.core.net.toFile
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.*
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.BooksConstants
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.helper.BooksHelper
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
+import com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
+import com.allat.mboychenko.silverthread.data.models.BooksConstants
+import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
+import com.allat.mboychenko.silverthread.presentation.helpers.*
+import com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_BROADCAST_ACTION
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_ACTION_CANCELLED_LOADING

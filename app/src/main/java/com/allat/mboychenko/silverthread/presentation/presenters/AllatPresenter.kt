@@ -3,10 +3,10 @@ package com.allat.mboychenko.silverthread.presentation.presenters
 import android.content.Context
 import android.os.CountDownTimer
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper.TimeStatus.*
+import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
+import com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
+import com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper
+import com.allat.mboychenko.silverthread.presentation.helpers.AllatHelper.TimeStatus.*
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IAllatFragmentView
 import java.util.concurrent.TimeUnit
@@ -53,7 +53,7 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
     fun removeAllatReminder() {
         runTaskOnComputation {
             storage.removeAllatNotification()
-            removeAlarm(context, AlarmNotificationCodes.ALLAT_BEFORE.action, AlarmNotificationCodes.ALLAT_BEFORE.ordinal)
+            removeAlarm(context, AlarmNotificationCodes.ALLAT_BEFORE.action, AlarmNotificationCodes.ALLAT_BEFORE.code)
         }
     }
 
@@ -125,7 +125,7 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
             }
 
             if (enable.not()) {
-                removeAlarm(context, alarmNotificationCodes.action, alarmNotificationCodes.ordinal)
+                removeAlarm(context, alarmNotificationCodes.action, alarmNotificationCodes.code)
             }
         }
     }

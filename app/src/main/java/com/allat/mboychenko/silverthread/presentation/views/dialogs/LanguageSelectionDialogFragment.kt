@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs
+package com.allat.mboychenko.silverthread.presentation.views.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.BooksConstants
+import com.allat.mboychenko.silverthread.data.models.BooksConstants
 import java.util.ArrayList
 
 class LanguageSelectionDialogFragment : DialogFragment() {

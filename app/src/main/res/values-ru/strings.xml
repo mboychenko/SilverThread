@@ -48,7 +48,7 @@
     <string name="click_to_unlock">Click to Unlock</string>
     <string name="click_to_lock">Click to Lock</string>
 
-    <string name="downloading">Downloading...</string>
+    <string name="downloading">Downloading…</string>
     <string name="delete_confirmation">Are you sure, delete %s</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
@@ -73,6 +73,8 @@
     <string name="allat_has_started">Аллат начался!</string>
     <string name="allat_has_ended">Аллат завершился!</string>
     <string name="random_quote">Случайная Цитата</string>
+    <string name="select_page">Go to page:</string>
+    <string name="select_page_hint">From 1 to %d</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>

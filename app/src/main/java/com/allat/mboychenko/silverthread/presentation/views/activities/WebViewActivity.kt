@@ -9,7 +9,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.activities.BaseNavigationActivity
+import com.allat.mboychenko.silverthread.presentation.views.activities.BaseNavigationActivity
 import kotlinx.android.synthetic.main.activity_web_view.*
 import kotlin.collections.ArrayList
 

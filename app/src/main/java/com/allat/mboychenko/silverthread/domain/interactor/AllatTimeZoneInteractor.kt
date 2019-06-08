@@ -1,7 +1,7 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor
+package com.allat.mboychenko.silverthread.domain.interactor
 
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.Storage
+import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
+import com.allat.mboychenko.silverthread.data.storage.Storage
 
 class AllatTimeZoneInteractor(val storage: Storage) : AllatTimeZoneStorage {
 

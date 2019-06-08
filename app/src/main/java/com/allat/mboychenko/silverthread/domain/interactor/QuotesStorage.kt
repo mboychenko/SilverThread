@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor
+package com.allat.mboychenko.silverthread.domain.interactor
 
 interface QuotesStorage {
     //favorites get add

@@ -39,7 +39,7 @@
     <string name="craudfaunding">Craudfaunding</string>
     <string name="geo_center">GeoCenter</string>
     <string name="load">Load</string>
-    <string name="downloading">Downloading...</string>
+    <string name="downloading">Downloading…</string>
     <string name="select_language_load">Chose book language:</string>
     <string name="delete_confirmation">Are you sure, delete %s</string>
     <string name="yes">Yes</string>
@@ -70,6 +70,8 @@
     <string name="allat_has_started">Аллат начался!</string>
     <string name="allat_has_ended">Аллат завершился!</string>
     <string name="random_quote">Случайная Цитата</string>
+    <string name="select_page">Go to page:</string>
+    <string name="select_page_hint">From 1 to %d</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d minute to Allat</item>

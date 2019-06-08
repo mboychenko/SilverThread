@@ -1,6 +1,6 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers
+package com.allat.mboychenko.silverthread.presentation.helpers
 
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.AllatTimeZone
+import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
 import java.util.*
 import java.util.concurrent.TimeUnit
 

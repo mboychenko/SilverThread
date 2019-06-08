@@ -1,8 +1,8 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.helper
+package com.allat.mboychenko.silverthread.domain.helper
 
 import android.content.Context
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.models.BooksConstants
+import com.allat.mboychenko.silverthread.data.models.BooksConstants
 
 class BooksHelper(val context: Context) {
 

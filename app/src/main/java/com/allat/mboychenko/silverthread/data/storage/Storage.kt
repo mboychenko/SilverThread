@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers
+package com.allat.mboychenko.silverthread.data.storage
 
 interface Storage {
 

@@ -2,8 +2,8 @@ package com.allat.mboychenko.silverthread
 
 import android.app.Application
 import android.content.Context
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.di.presentersModule
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.di.storageModule
+import com.allat.mboychenko.silverthread.presentation.di.presentersModule
+import com.allat.mboychenko.silverthread.presentation.di.storageModule
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.downloader.PRDownloader
 import org.koin.android.ext.koin.androidContext

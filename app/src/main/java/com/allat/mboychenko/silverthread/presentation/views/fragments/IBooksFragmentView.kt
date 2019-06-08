@@ -1,7 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
 import android.net.Uri
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
+import com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
 
 interface IBooksFragmentView {
     fun notifyBooksUpdate()

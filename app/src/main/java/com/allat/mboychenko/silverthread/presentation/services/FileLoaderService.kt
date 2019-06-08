@@ -5,8 +5,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.JobIntentService
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.helper.BooksHelper
+import com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
+import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
 import com.downloader.*
 import com.downloader.Status.QUEUED
 import com.downloader.Status.CANCELLED

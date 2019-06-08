@@ -1,9 +1,9 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.di
+package com.allat.mboychenko.silverthread.presentation.di
 
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.storage.StorageImplementation
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.helper.BooksHelper
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.domain.interactor.*
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.Storage
+import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
+import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
+import com.allat.mboychenko.silverthread.domain.interactor.*
+import com.allat.mboychenko.silverthread.data.storage.Storage
 import com.allat.mboychenko.silverthread.presentation.presenters.AllatPresenter
 import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter
 import org.koin.android.ext.koin.androidContext

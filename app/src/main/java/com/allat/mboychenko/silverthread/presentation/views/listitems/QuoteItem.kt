@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.listitems
+package com.allat.mboychenko.silverthread.presentation.views.listitems
 
 import com.allat.mboychenko.silverthread.R
 import com.xwray.groupie.kotlinandroidextensions.Item
