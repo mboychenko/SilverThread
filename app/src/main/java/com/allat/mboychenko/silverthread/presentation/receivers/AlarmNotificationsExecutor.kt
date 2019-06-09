@@ -37,7 +37,7 @@ class AlarmNotificationsExecutor(val context: Context) {
             {
                 val storage = StorageImplementation(context)
                 val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storage)
-                val quotesStorage: QuotesStorage = QuotesInteractor(storage)
+                val quotesStorage: QuotesDetailsStorage = QuotesInteractor(storage)
 
                 val bundle = intent.extras?.let { Bundle(it) }
 

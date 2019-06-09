@@ -34,14 +34,22 @@ class UpdateBeforeTimerJob : JobIntentService() {
         val toAllat = AllatHelper.getMillisToAllatStart(timezone)
         val allatTime = toAllat + System.currentTimeMillis()
 
+        val currentTimeCalendar = Calendar.getInstance()
+
         Log.d("UpdateBeforeTimerJob", String.format("beforeEnterIf %d %d", toAllat, tenMin))
         if (TimeUnit.MILLISECONDS.toMinutes(toAllat) <= notifyBefore && toAllat >= tenMin) {
 
-            if (TimeUnit.MILLISECONDS.toMinutes(toAllat) < notifyBefore - 1) {
-                showNotification(allatTime)
+            val toStart = 60 - currentTimeCalendar.get(Calendar.MINUTE)
+            if (toStart < notifyBefore) {                                       //todo check example 13 < 15
+                showNotification(exactMins = toStart)
                 Log.d("UpdateBeforeTimerJob", "insideImmediatltly")
-
             }
+
+//            if (TimeUnit.MILLISECONDS.toMinutes(toAllat) < notifyBefore) {
+//                showNotification(allatTime)
+//                Log.d("UpdateBeforeTimerJob", "insideImmediatltly")
+//
+//            }
 
             while (getRemainingWithSecondOffset(allatTime) >= tenMin && !stopFlag) {
                 Log.d("UpdateBeforeTimerJob", "insideLoop")
@@ -65,14 +73,14 @@ class UpdateBeforeTimerJob : JobIntentService() {
 
     }
 
-    private fun showNotification(allatTime: Long) {
+    private fun showNotification(allatTime: Long = 0, exactMins: Int = 0) {
         showNotification(
             applicationContext,
             AlarmNotificationCodes.ALLAT_BEFORE_UPDATE,
             Bundle().apply {
                 putLong(
                     NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS,
-                    getRemainingWithSecondOffset(allatTime)
+                    if (exactMins != 0) TimeUnit.MINUTES.toMillis(exactMins.toLong()) else getRemainingWithSecondOffset(allatTime)
                 )
             })
     }

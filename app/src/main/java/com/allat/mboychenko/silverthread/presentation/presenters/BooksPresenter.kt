@@ -33,11 +33,8 @@ class BooksPresenter(
     private val booksHelper: BooksHelper
 ) : BasePresenter<IBooksFragmentView>() {
 
-    private var subscriptions = CompositeDisposable()
-
     override fun attachView(view: IBooksFragmentView) {
         super.attachView(view)
-        subscriptions = CompositeDisposable()
         LocalBroadcastManager.getInstance(context)
             .registerReceiver(booksLoadingReceiver, IntentFilter(BOOKS_UPDATE_BROADCAST_ACTION))
     }
@@ -46,7 +43,6 @@ class BooksPresenter(
         super.detachView()
         LocalBroadcastManager.getInstance(context)
             .unregisterReceiver(booksLoadingReceiver)
-        subscriptions.dispose()
     }
 
     fun updateBooks(filter: BooksConstants.BooksLocale? = null) {

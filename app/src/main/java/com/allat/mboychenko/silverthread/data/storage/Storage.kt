@@ -9,6 +9,9 @@ interface Storage {
     fun getString(key: String): String?
     fun putString(key: String, value: String)
 
+    fun getStringSet(key: String): Set<String>
+    fun putStringSet(key: String, set: Set<String>)
+
     fun getBooleanDefaultFalse(key: String): Boolean
     fun putBoolean(key: String, value: Boolean)
 

@@ -74,6 +74,14 @@ class StorageImplementation(val context: Context) : Storage {
         return emptyMap()
     }
 
+    override fun getStringSet(key: String): Set<String> = preferences.getStringSet(key, emptySet()) ?: emptySet()
+
+    override fun putStringSet(key: String, set: Set<String>) {
+        val editor = preferences.edit()
+        editor.putStringSet(key, set)
+        editor.apply()
+    }
+
     override fun remove(key: String) {
         val editor = preferences.edit()
         editor.remove(key)

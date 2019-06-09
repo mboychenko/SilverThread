@@ -41,13 +41,15 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
 
     }
 
-    abstract fun webViewLink(uri: String)
+    protected abstract fun webViewLink(uri: String)
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         setFragmentByNavId(item.itemId)
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
+
+    fun getToolbar() = toolbar
 
     protected fun setFragmentByNavId(navId: Int, updateNavItem: Boolean = false) {
         when (navId) {

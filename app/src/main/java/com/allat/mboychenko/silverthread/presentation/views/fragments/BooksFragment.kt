@@ -129,11 +129,7 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     }
 
     override fun shareBookLink(bookTitle: String, bookUrl: String) {
-        val sharingIntent = Intent(Intent.ACTION_SEND)
-        sharingIntent.type = "text/plain"
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, bookTitle)
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.link_to_load, bookTitle, bookUrl))
-        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_link, bookTitle)))
+        shareText(context, getString(R.string.link_to_load, bookTitle, bookUrl), getString(R.string.share_link, bookTitle))
     }
 
     override fun showLoading() {

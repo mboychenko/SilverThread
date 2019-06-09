@@ -1,5 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.di
 
+import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
+import com.allat.mboychenko.silverthread.presentation.presenters.QuotesPresenter
 import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
 import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
 import com.allat.mboychenko.silverthread.domain.interactor.*
@@ -16,6 +18,10 @@ val presentersModule = module {
 
     factory {
         AllatPresenter(androidContext(), get())
+    }
+
+    factory {
+        QuotesPresenter(androidContext(), get())
     }
 
     factory {
@@ -41,7 +47,7 @@ val storageModule = module {
     }
 
     factory {
-        QuotesInteractor(get()) as QuotesStorage
+        QuotesInteractor(get()) as QuotesDetailsStorage
     }
 
 }

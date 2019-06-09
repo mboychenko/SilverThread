@@ -6,6 +6,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <TextView
+            android:id="@+id/noItemsToShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="28sp"
+            android:visibility="gone"
+            android:text="@string/no_items_to_show"/>
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/quotesList"
             android:name="com.allat.mboychenko.silverthread.presentation.views.fragments.QuotesFragment"
@@ -38,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="24dp"
-            android:src="@drawable/ic_lock"
+            android:src="@drawable/ic_quote"
             android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
