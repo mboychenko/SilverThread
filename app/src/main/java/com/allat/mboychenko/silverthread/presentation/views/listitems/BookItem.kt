@@ -160,7 +160,7 @@ class BookItem(
         fun onShareLinkClick(bookTitle: String, url: String)
         fun onDeleteBook(book: BookItem)
         fun onLoad(url: String, fileName: String)
-        fun onCancelLoading(downloadId: Long) //todo add button to cancel loading
+        fun onCancelLoading(downloadId: Long)
         fun onOpen(book: BooksConstants.Book)
     }
 }
