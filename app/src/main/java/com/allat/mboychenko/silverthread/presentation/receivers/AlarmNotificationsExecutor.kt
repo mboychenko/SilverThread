@@ -6,9 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PowerManager
 import android.util.Log
+import com.allat.mboychenko.silverthread.AllatRaApplication
+import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
 import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
 import com.allat.mboychenko.silverthread.domain.interactor.*
-import com.allat.mboychenko.silverthread.presentation.helpers.getPublicDownloadsStorageDir
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.services.UpdateBeforeTimerJob
 import java.util.concurrent.TimeUnit
@@ -17,14 +18,9 @@ class AlarmNotificationsExecutor(val context: Context) {
 
     var pendingResult: BroadcastReceiver.PendingResult? = null
 
-    fun saveLogcatToFile() {
-        val fileName = "/logcat_" + System.currentTimeMillis() + ".txt"
-        val outputFile = getPublicDownloadsStorageDir("allat_logcat")
-        Runtime.getRuntime().exec("logcat UpdateBeforeTimerJob:D NotificationTimer:D *:S -f " + outputFile?.absolutePath + fileName)
-    }
-
     fun onHandleNotification(intent: Intent) {
-        saveLogcatToFile()
+        (context.applicationContext as AllatRaApplication).saveLogcatToFile()
+
         Log.d("NotificationTimer", "taking WL")
 
         val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -37,7 +33,6 @@ class AlarmNotificationsExecutor(val context: Context) {
             {
                 val storage = StorageImplementation(context)
                 val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storage)
-                val quotesStorage: QuotesDetailsStorage = QuotesInteractor(storage)
 
                 val bundle = intent.extras?.let { Bundle(it) }
 
@@ -45,15 +40,13 @@ class AlarmNotificationsExecutor(val context: Context) {
 
                 when (intent.action) {
                     AlarmNotificationCodes.REINIT_TIMERS.action -> {
-                        reInitTimers(
-                            context,
-                            allatStorage.getAllatTimezone(),
-                            allatStorage.getAllatNotificationBeforeMins(),
-                            allatStorage.getAllatNotificationStart(),
-                            allatStorage.getAllatNotificationEnd()
-                        )
+                        reInit(context, allatStorage, false)
+                    }
+                    AlarmNotificationCodes.REINIT_TIMERS_ENV.action -> {
+                        reInit(context, allatStorage, true)
                     }
                     AlarmNotificationCodes.ALLAT_BEFORE.action -> {
+                        Log.d("NotificationTimer", "AlarmNotificationCodes.ALLAT_BEFORE.action")
                         UpdateBeforeTimerJob.startUpdateTimer(context)
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_BEFORE, bundle)
                     }
@@ -65,7 +58,10 @@ class AlarmNotificationsExecutor(val context: Context) {
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_START, bundle)
                     AlarmNotificationCodes.ALLAT_END.action ->
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_END, bundle)
-                    AlarmNotificationCodes.QUOTE.action -> TODO()
+                    AlarmNotificationCodes.QUOTE.action -> {
+                        setupRandomQuoteNextAlarm(context)
+                        showNotification(context, AlarmNotificationCodes.QUOTE, bundle)
+                    }
                     AlarmNotificationCodes.CANCEL.action -> hideNotification(context, bundle)
                 }
             },
@@ -76,9 +72,18 @@ class AlarmNotificationsExecutor(val context: Context) {
             })
     }
 
+    private fun reInit(context: Context, allatStorage: AllatTimeZoneStorage, reInitQuotes: Boolean) {
+        reInitTimers(context,
+            allatStorage.getAllatTimezone(),
+            allatStorage.getAllatNotificationBeforeMins(),
+            allatStorage.getAllatNotificationStart(),
+            allatStorage.getAllatNotificationEnd(),
+            reInitQuotes)
+    }
+
     private fun showNotificationAndReInit(context: Context, notificationCode: AlarmNotificationCodes, extras: Bundle?) {
         showNotification(context, notificationCode, extras)
-        setAlarm(context,                                       //reInit all timers if need in 6  hrs
+        setAlarmRemainingTime(context,                                       //reInit all timers if need in 6  hrs
             TimeUnit.HOURS.toMillis(6),
             AlarmNotificationCodes.REINIT_TIMERS.action,
             AlarmNotificationCodes.REINIT_TIMERS.code)

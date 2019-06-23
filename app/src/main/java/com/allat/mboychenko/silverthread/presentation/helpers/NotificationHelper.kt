@@ -9,7 +9,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.presentation.receivers.TimerRadioNotificationActionReceiver
+import com.allat.mboychenko.silverthread.presentation.receivers.RadioNotificationActionReceiver
 import com.allat.mboychenko.silverthread.presentation.views.activities.MainActivity
 import java.text.SimpleDateFormat
 import android.media.AudioAttributes
@@ -29,9 +29,10 @@ private const val CHANNEL_NAME_ALLAT_SILENCED = "Allat Notifications Muted"
 private const val CHANNEL_ID_QUOTES = "quotes_notif"
 private const val CHANNEL_NAME_QUOTES = "Quotes Notifications"
 
-private const val NOTIFICATION_ACTION_ALLAT = "AllatNotification"
-private const val NOTIFICATION_ACTION_BEFORE_UPDATE = "AllatNotificationBeforeUpdate"
-private const val NOTIFICATION_ACTION_QUOTE = "QuoteNotification"
+const val NOTIFICATION_ACTION_ALLAT = "AllatNotification"
+const val NOTIFICATION_ACTION_BEFORE_UPDATE = "AllatNotificationBeforeUpdate"
+const val NOTIFICATION_ACTION_QUOTE = "QuoteNotification"
+const val NOTIFICATION_ACTION_RADIO = "RadioNotification"
 
 const val NOTIFICATION_CANCEL_ID_EXTRA = "NOTIFICATION_CANCEL_ID_EXTRA"
 
@@ -44,10 +45,14 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     //setup
     var remindBefore: Long = 0
     var remindBeforeUpdate: Long = 0
+    var quote: String? = null
+    var quotePosition: Int? = null
 
     extras?.let {
         remindBefore = extras.getLong(NOTIFICATION_BEFORE_MILLIS_EXTRAS)
         remindBeforeUpdate = extras.getLong(NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS, remindBefore)
+        quote = extras.getString(NOTIFICATION_QUOTE_EXTRAS)
+        quotePosition = extras.getInt(NOTIFICATION_QUOTE_POSITION_EXTRAS)
     }
 
     val title: String
@@ -90,11 +95,15 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             playSound = false
         }
         AlarmNotificationCodes.QUOTE -> {
-            title = context.getString(R.string.random_quote)
-            text = "todo quote"
-            action = NOTIFICATION_ACTION_QUOTE
-            notifId = NOTIFICATION_ID_QUOTE
-            notifChannelId = CHANNEL_ID_QUOTES
+            if (quote?.isNotEmpty() == true) {
+                title = context.getString(R.string.random_quote)
+                text = quote!!
+                action = NOTIFICATION_ACTION_QUOTE
+                notifId = NOTIFICATION_ID_QUOTE
+                notifChannelId = CHANNEL_ID_QUOTES
+            } else {
+                return
+            }
         }
         else -> return
     }
@@ -104,9 +113,14 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     val nBuilder = getBasicNotificationBuilder(context, notifChannelId, playSound)
     nBuilder.setContentTitle(title)
         .setContentText(text)
-        .setContentIntent(getPendingIntent(context, action, MainActivity::class.java))
         .setVibrate(longArrayOf(500, 500, 500, 500))
+        .setContentIntent(getPendingIntent(context, action, extras, MainActivity::class.java))
         .priority = if (playSound) IMPORTANCE_HIGH else IMPORTANCE_LOW
+
+    if (notificationCode == AlarmNotificationCodes.QUOTE && quotePosition != null) {
+        nBuilder.setStyle(NotificationCompat.BigTextStyle().bigText(text))
+    }
+
 
     if (notificationCode == AlarmNotificationCodes.ALLAT_BEFORE ||
         notificationCode == AlarmNotificationCodes.ALLAT_BEFORE_UPDATE) {
@@ -117,7 +131,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     //cancel action
     if (notificationCode == AlarmNotificationCodes.ALLAT_START ||
         notificationCode == AlarmNotificationCodes.ALLAT_END) {
-        setAlarm(context, TimeUnit.MINUTES.toMillis(25),
+        setAlarmRemainingTime(context, TimeUnit.MINUTES.toMillis(25),
             AlarmNotificationCodes.CANCEL.action,
             AlarmNotificationCodes.CANCEL.code,
             Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, notifId) })
@@ -129,14 +143,14 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
 }
 
 fun showTimerRunning(context: Context, wakeUpTime: Long) {  //ongoing
-    val stopIntent = Intent(context, TimerRadioNotificationActionReceiver::class.java)
+    val stopIntent = Intent(context, RadioNotificationActionReceiver::class.java)
 //    stopIntent.action = NotificationConstants.ACTION_STOP
     val stopPendingIntent = PendingIntent.getBroadcast(
         context,
         0, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT
     )
 
-    val pauseIntent = Intent(context, TimerRadioNotificationActionReceiver::class.java)
+    val pauseIntent = Intent(context, RadioNotificationActionReceiver::class.java)
 //    pauseIntent.action = NotificationConstants.ACTION_PAUSE
     val pausePendingIntent = PendingIntent.getBroadcast(
         context,
@@ -159,7 +173,7 @@ fun showTimerRunning(context: Context, wakeUpTime: Long) {  //ongoing
 }
 
 fun showTimerPaused(context: Context) {
-    val resumeIntent = Intent(context, TimerRadioNotificationActionReceiver::class.java)
+    val resumeIntent = Intent(context, RadioNotificationActionReceiver::class.java)
 //    resumeIntent.action = NotificationConstants.ACTION_RESUME
     val resumePendingIntent = PendingIntent.getBroadcast(
         context,
@@ -207,10 +221,11 @@ private fun getBasicNotificationBuilder(context: Context, channelId: String, pla
     return nBuilder
 }
 
-private fun <T> getPendingIntent(context: Context, action: String, javaClass: Class<T>): PendingIntent? {
+private fun <T> getPendingIntent(context: Context, action: String, extras: Bundle? = null, javaClass: Class<T>): PendingIntent? {
     val resultIntent = Intent(context, javaClass)
     resultIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
     resultIntent.action = action
+    extras?.let { resultIntent.putExtras(it) }
 
     return PendingIntent.getActivity(
         context,

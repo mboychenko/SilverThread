@@ -1,5 +1,6 @@
 package com.allat.mboychenko.silverthread.presentation.presenters
 
+import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -16,7 +17,6 @@ import com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_BROADCAST_ACTION
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_ACTION_CANCELLED_LOADING
-import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_ACTION_LOADED_FILE_NAME
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IBooksFragmentView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,14 +35,17 @@ class BooksPresenter(
 
     override fun attachView(view: IBooksFragmentView) {
         super.attachView(view)
+        FileLoaderService.commandRefreshLoadings(context)
         LocalBroadcastManager.getInstance(context)
             .registerReceiver(booksLoadingReceiver, IntentFilter(BOOKS_UPDATE_BROADCAST_ACTION))
+        context.registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
     }
 
     override fun detachView() {
         super.detachView()
         LocalBroadcastManager.getInstance(context)
             .unregisterReceiver(booksLoadingReceiver)
+        context.unregisterReceiver(onDownloadComplete)
     }
 
     fun updateBooks(filter: BooksConstants.BooksLocale? = null) {
@@ -71,7 +74,7 @@ class BooksPresenter(
             return books.map {
 
                 val exist = getBookUri(it).toFile().exists()
-                var loadingId: Int = -1
+                var loadingId: Long = -1
                 if (exist.not()) {
                     loadings.keys
                         .find { url -> it.localeDetails.containsValue(BooksConstants.BookDetails(url)) }
@@ -117,13 +120,13 @@ class BooksPresenter(
     }
 
     private fun loadBookContinue(bookUrl: String, fileName: String) {
-        if (isExternalStorageWritable().not()) {
+        if (isExternalStorageAvailable().not()) {
             Toast.makeText(context, "Storage not available for writing", Toast.LENGTH_LONG).show()
             view?.bookLoadingCancelled(fileName)
             return
         }
 
-        if (writeExStoragePermissionGranted(context).not()) {
+        if (extStoragePermissionGranted(context).not()) {
             view?.bookLoadingCancelled(fileName)
             requestWritePermission(loadBookUrl = bookUrl)
             return
@@ -142,13 +145,14 @@ class BooksPresenter(
             Observable.fromCallable { getPublicDownloadsStorageDir(BOOKS_FOLDER_NAME) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({ file ->
-                        file?.let {
-                            FileLoaderService.commandLoadFile(context, bookUrl, it.path, book.fileName)
-                        }
-                    },
+                .subscribe({ file ->
+                    file?.let {
+                        FileLoaderService.commandLoadFile(context, bookUrl, it.path, book.fileName)
+                    }
+                },
                     {
-                        Toast.makeText(context, "Cant create folder for downloads: ${it.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Cant create folder for downloads: ${it.message}", Toast.LENGTH_LONG)
+                            .show()
                     }
                 )
         )
@@ -159,12 +163,12 @@ class BooksPresenter(
             return
         }
 
-        if (isExternalStorageWritable().not()) {
+        if (isExternalStorageAvailable().not()) {
             Toast.makeText(context, "Storage not available for writing", Toast.LENGTH_LONG).show()
             return
         }
 
-        if (writeExStoragePermissionGranted(context).not()) {
+        if (extStoragePermissionGranted(context).not()) {
             requestWritePermission(deleteFileName = bookItem.book.fileName)
             return
         }
@@ -193,7 +197,7 @@ class BooksPresenter(
     }
 
     private fun manageAddToSubscription(disposable: Disposable) {
-        if(subscriptions.isDisposed) {
+        if (subscriptions.isDisposed) {
             subscriptions = CompositeDisposable()
         }
 
@@ -232,7 +236,7 @@ class BooksPresenter(
             loadBook(url, fileName)
         }
 
-        override fun onCancelLoading(downloadId: Int) {
+        override fun onCancelLoading(downloadId: Long) {
             FileLoaderService.commandCancelLoading(context, downloadId)
         }
 
@@ -243,19 +247,15 @@ class BooksPresenter(
 
     private val booksLoadingReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            val loadedFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_LOADED_FILE_NAME)
 
             val cancelledFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_CANCELLED_LOADING)
 
-            val loadingId = intent?.getIntExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_ID, -1)
+            val loadingId = intent?.getLongExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_ID, -1)
             val loadingFileName = intent?.getStringExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_FILENAME)
 
-            if (loadingId != -1 && !loadingFileName.isNullOrEmpty()) {
-                view?.loadingStarted(loadingFileName, loadingId!!)
-            }
+            if (loadingId != null && loadingId != -1L && !loadingFileName.isNullOrEmpty()) {
+                view?.loadingStarted(loadingFileName, loadingId)
 
-            loadedFileName?.let {
-                view?.bookLoaded(it)
             }
 
             cancelledFileName?.let {
@@ -265,9 +265,46 @@ class BooksPresenter(
         }
     }
 
+    private val onDownloadComplete = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            runTaskOnComputationWithResult({
+                val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+
+                val bookDownload = storage.getBooksLoadingIds()
+                var url: String? = null
+                for (entry in bookDownload) {
+                    if (entry.value == id) {
+                        url = entry.key
+                        break
+                    }
+                }
+
+                storage.removeIdFromBookLoadings(id)
+
+                if (url != null) {
+                    val book = booksHelper.getBookByUrl(url)
+                    val bookFile = getBookUri(book).toFile()
+                    if (bookFile.exists().not()) {
+                        NO_SUCH_FILE
+                    } else {
+                        book.fileName
+                    }
+                } else {
+                    NO_SUCH_FILE
+                }
+            },
+                { fileName ->
+                    if(fileName != NO_SUCH_FILE) {
+                        view?.bookLoaded(fileName)
+                    }
+                })
+        }
+    }
+
     companion object {
         const val FILE_SCHEMA = "file://"
         const val BOOKS_FOLDER_NAME = "AllatRa Books"
+        const val NO_SUCH_FILE = "NO_SUCH_FILE"
         const val REQUEST_PERMISSION_SAVED_LOAD_FILE_URL = "REQUEST_PERMISSION_SAVED_LOAD_FILE_URL"
         const val REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME = "REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME"
     }

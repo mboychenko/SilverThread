@@ -1,35 +1,33 @@
 package com.allat.mboychenko.silverthread
 
 import android.app.Application
-import android.content.Context
 import com.allat.mboychenko.silverthread.presentation.di.presentersModule
 import com.allat.mboychenko.silverthread.presentation.di.storageModule
+import com.allat.mboychenko.silverthread.presentation.helpers.getPublicDownloadsStorageDir
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
-import com.downloader.PRDownloader
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import com.downloader.PRDownloaderConfig
 
 class AllatRaApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        val downloaderConfig = PRDownloaderConfig.newBuilder()
-            .setReadTimeout(30_000)
-            .setConnectTimeout(30_000)  // .setDatabaseEnabled(true)
-            .build()
-
-        PRDownloader.initialize(applicationContext, downloaderConfig)
-
         startKoin {
             androidLogger()
             androidContext(applicationContext)
             modules(listOf(storageModule, presentersModule))
         }
 
+        saveLogcatToFile()
+
         FileLoaderService.commandRefreshLoadings(applicationContext)
+    }
+
+    fun saveLogcatToFile() {
+        val fileName = "/logcat_" + System.currentTimeMillis() + ".txt"
+        val outputFile = getPublicDownloadsStorageDir("allat_logcat")
+        Runtime.getRuntime().exec("logcat UpdateBeforeTimerJob:D NotificationTimer:D LogQuotes:D *:S -f " + outputFile?.absolutePath + fileName)
     }
 
 }

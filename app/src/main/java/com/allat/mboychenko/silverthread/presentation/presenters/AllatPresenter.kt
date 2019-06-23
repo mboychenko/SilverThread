@@ -12,7 +12,8 @@ import com.allat.mboychenko.silverthread.presentation.views.fragments.IAllatFrag
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
-class AllatPresenter(private val context: Context, private val storage: AllatTimeZoneStorage) :
+class AllatPresenter(private val context: Context,
+                     private val storage: AllatTimeZoneStorage) :
     BasePresenter<IAllatFragmentView>() {
 
     private val allatStatusAwait: String by lazy { context.getString(R.string.time_to_group_meditation) }
@@ -68,7 +69,8 @@ class AllatPresenter(private val context: Context, private val storage: AllatTim
                 context, timezone,
                 storage.getAllatNotificationBeforeMins(),
                 storage.getAllatNotificationStart(),
-                storage.getAllatNotificationEnd()
+                storage.getAllatNotificationEnd(),
+                true
             )
         }
 

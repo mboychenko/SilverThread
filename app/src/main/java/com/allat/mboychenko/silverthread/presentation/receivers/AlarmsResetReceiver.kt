@@ -13,7 +13,7 @@ class AlarmsResetReceiver : BroadcastReceiver() {
             intent.action == Intent.ACTION_TIMEZONE_CHANGED
         ) {
             val pendingBroadcast = goAsync()
-            intent.action = AlarmNotificationCodes.REINIT_TIMERS.action
+            intent.action = AlarmNotificationCodes.REINIT_TIMERS_ENV.action
             AlarmNotificationsExecutor(context)
                 .apply { pendingResult =  pendingBroadcast }
                 .onHandleNotification(intent)

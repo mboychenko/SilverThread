@@ -10,7 +10,6 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 
 
-
 class QuoteItem(
     private val quoteText: String,
     private val actionListener: QuotesActionListener,
@@ -47,7 +46,7 @@ class QuoteItem(
             Menu.NONE,
             FAVORITE_MENU_ITEM_ID,
             1,
-            if (favorite) "Remove from Favorite" else "Add to Favorites"
+            view.context.getString(if (favorite) R.string.remove_from_fav else R.string.add_to_fav)
         )
 
         popup.setOnMenuItemClickListener { item ->

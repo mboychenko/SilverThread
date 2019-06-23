@@ -1,6 +1,10 @@
 package com.allat.mboychenko.silverthread.presentation.views.activities
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_reader.*
@@ -8,9 +12,12 @@ import org.koin.android.ext.android.inject
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import java.util.*
 import android.widget.EditText
+import android.widget.Toast
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.views.custom.InputFilterMinMax
 import com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
+import androidx.core.app.ActivityCompat
+import com.allat.mboychenko.silverthread.presentation.helpers.extStoragePermissionGranted
 
 
 class BookReaderActivity : AppCompatActivity() {
@@ -18,6 +25,7 @@ class BookReaderActivity : AppCompatActivity() {
     private val storage: BooksLoaderDetailsStorage by inject()
     private var timer = Timer()
     private lateinit var bookName: String
+    private lateinit var bookUri: Uri
     private lateinit var selectPageDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,19 +34,40 @@ class BookReaderActivity : AppCompatActivity() {
 
         close.setOnClickListener { finish() }
 
+        bookUri = intent.data!!
         bookName = intent.getStringExtra(BOOK_NAME_ARG)
-
-        pdfView.fromUri(intent.data)
-            .onPageChange(onPageChangeListener)
-            .defaultPage(storage.getLastBookPage(bookName))
-            .onLoad { pageSelectDialog() }
-            .load()
-
 
         page.setOnClickListener {
             if(::selectPageDialog.isInitialized) {
                 selectPageDialog.show()
             }
+        }
+
+        if (extStoragePermissionGranted(this).not()) {
+            requestPermissions()
+            return
+        } else {
+            loadBook()
+        }
+    }
+
+    private fun loadBook() {
+        pdfView.fromUri(bookUri)
+            .onPageChange(onPageChangeListener)
+            .defaultPage(storage.getLastBookPage(bookName))
+            .onLoad { pageSelectDialog() }
+            .load()
+    }
+
+    private fun requestPermissions() {
+        try {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE),
+                PERMISSION_REQUEST_CODE
+            )
+        } catch (e: Exception) {
+            Log.e("Permission request fail", e.message)
         }
     }
 
@@ -75,8 +104,26 @@ class BookReaderActivity : AppCompatActivity() {
         }, PAGE_SAVE_DELAY)
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            for ((position, permission) in permissions.withIndex()) {
+                val grantResult = grantResults[position]
+
+                if (permission == Manifest.permission.WRITE_EXTERNAL_STORAGE) {
+                    if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                        loadBook()
+                    } else {
+                        Toast.makeText(this, "permission not granted", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
+    }
+
     companion object {
         const val BOOK_NAME_ARG = "BOOK_NAME_ARG"
         private const val PAGE_SAVE_DELAY = 2000L
+        private const val PERMISSION_REQUEST_CODE = 765
     }
 }

@@ -46,6 +46,7 @@
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
+
             </intent-filter>
         </activity>
         <activity
@@ -71,14 +72,14 @@
                 android:enabled="true"
                 android:exported="false"/>
         <receiver
-                android:name=".presentation.receivers.TimerRadioNotificationActionReceiver"
+                android:name=".presentation.receivers.RadioNotificationActionReceiver"
                 android:enabled="true"
                 android:exported="false">
             <intent-filter>
-                <action android:name="stop"/>
-                <action android:name="pause"/>
-                <action android:name="resume"/>
-                <action android:name="start"/>
+                <action android:name="com.allat.mboychenko.silverthread.notifications.radio.stop"/>
+                <action android:name="com.allat.mboychenko.silverthread.notifications.radio.pause"/>
+                <action android:name="com.allat.mboychenko.silverthread.notifications.radio.resume"/>
+                <action android:name="com.allat.mboychenko.silverthread.notifications.radio.start"/>
             </intent-filter>
         </receiver>
     </application>

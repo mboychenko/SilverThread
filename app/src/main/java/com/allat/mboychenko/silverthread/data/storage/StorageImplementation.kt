@@ -22,6 +22,16 @@ class StorageImplementation(val context: Context) : Storage {
         editor.apply()
     }
 
+    override fun getLong(key: String): Long = preferences.getLong(key, 0)
+
+    override fun getLongDefault(key: String, default: Long): Long = preferences.getLong(key, default)
+
+    override fun putLong(key: String, value: Long) {
+        val editor = preferences.edit()
+        editor.putLong(key, value)
+        editor.apply()
+    }
+
     override fun getString(key: String) = preferences.getString(key, null)
 
     override fun putString(key: String, value: String) {

@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import java.io.File
 
 /* Checks if external storage is available for read and write */
-fun isExternalStorageWritable(): Boolean {
+fun isExternalStorageAvailable(): Boolean {
     return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
 }
 
@@ -19,7 +19,7 @@ fun isExternalStorageReadable(): Boolean {
             setOf(Environment.MEDIA_MOUNTED, Environment.MEDIA_MOUNTED_READ_ONLY)
 }
 
-fun writeExStoragePermissionGranted(context: Context): Boolean {
+fun extStoragePermissionGranted(context: Context): Boolean {
     if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED) {
         return false

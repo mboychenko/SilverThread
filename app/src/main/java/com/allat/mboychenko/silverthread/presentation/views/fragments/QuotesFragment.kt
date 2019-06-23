@@ -18,6 +18,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.content.ContextCompat
+import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog
+import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog.Companion.QUOTES_NOTIF_SETTINGS_DIALOG_TAG
 import com.allat.mboychenko.silverthread.presentation.helpers.px
 import com.allat.mboychenko.silverthread.presentation.presenters.QuotesPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -102,6 +104,20 @@ class QuotesFragment : Fragment(), IQuotesFragmentView {
         super.onResume()
         hideFabs()
         presenter.attachView(this)
+
+        if (quotesSection.itemCount == 0) {
+            presenter.getQuotes()
+        }
+
+        showIncomingFromNotificationQuote()
+    }
+
+    private fun showIncomingFromNotificationQuote() {
+        val quotePosition = arguments?.getInt(QUOTES_INCOMING_POSITION, -1)
+        if (quotePosition != null && quotePosition != -1) {
+            val quote = presenter.getQuote(quotePosition)
+            showQuote(quotePosition, quote)
+        }
     }
 
     override fun onPause() {
@@ -116,18 +132,30 @@ class QuotesFragment : Fragment(), IQuotesFragmentView {
 
     override fun removeItem(item: QuoteItem) {
         quotesSection.remove(item)
+        if (quotesSection.itemCount == 0) {
+            noItemsToShow.visibility = View.VISIBLE
+        }
     }
 
     private fun notifSettings() {
-        //todo open settings dialog fragment?
+        fragmentManager?.let {
+            QuotesNotificationSettingsDialog()
+                .show(it, QUOTES_NOTIF_SETTINGS_DIALOG_TAG)
+        }
     }
 
     private fun randomQuote() {
-        val quote = presenter.getRandomQuote()
+        val (position, quote) = presenter.getRandomQuote()
+        showQuote(position, quote)
+    }
+
+    private fun showQuote(position: Int, quote: String) {
         val builder = AlertDialog.Builder(context!!)
-        builder.setMessage(quote).setTitle(R.string.r_quote)
-            .setNegativeButton(R.string.copy) { _, _ -> copyToClipboard(context, quote) }
-            .setNeutralButton(R.string.hide) { dialog, _ -> dialog.dismiss() }
+        builder
+            .setMessage(quote)
+            .setTitle(R.string.r_quote)
+            .setNegativeButton(R.string.hide) { dialog, _ -> dialog.dismiss() }
+            .setNeutralButton(R.string.in_favorite) { _, _ -> presenter.addToFavorite(position) }
             .setPositiveButton(R.string.share) { _, _ -> shareText(context, quote, getString(R.string.share_quote)) }
         val dialog = builder.create()
         dialog.show()
@@ -200,7 +228,17 @@ class QuotesFragment : Fragment(), IQuotesFragmentView {
     }
 
     companion object {
+        fun newInstance(quotePosition: Int): QuotesFragment {
+            val dialog = QuotesFragment()
+            val args = Bundle().apply {
+                putInt(QUOTES_INCOMING_POSITION, quotePosition)
+            }
+            dialog.arguments = args
+            return dialog
+        }
+
         const val QUOTES_FRAGMENT_TAG = "QUOTES_FRAGMENT_TAG"
+        const val QUOTES_INCOMING_POSITION = "QUOTES_INCOMING_POSITION"
         const val QUOTES_SAVE_FAVORITE_STATE_KEY = "QUOTES_SAVE_FAVORITE_STATE_KEY"
     }
 }

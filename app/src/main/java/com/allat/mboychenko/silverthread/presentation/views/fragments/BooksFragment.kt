@@ -93,7 +93,7 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
         bookItem?.bookLoaded()
     }
 
-    override fun loadingStarted(fileName: String, loadingId: Int) {
+    override fun loadingStarted(fileName: String, loadingId: Long) {
         val bookItem = getBookItem(fileName)
         bookItem?.loadingStarted(loadingId)
     }
@@ -110,7 +110,8 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     override fun requestStoragePermission() {
         try {
             requestPermissions(
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE),
                 PERMISSION_REQUEST_CODE
             )
         } catch (e: Exception) {

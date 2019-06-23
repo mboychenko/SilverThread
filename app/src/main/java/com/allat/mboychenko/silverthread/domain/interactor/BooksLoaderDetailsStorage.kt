@@ -2,9 +2,9 @@ package com.allat.mboychenko.silverthread.domain.interactor
 
 interface BooksLoaderDetailsStorage {
 
-    fun getBooksLoadingIds(): Map<String, Int>
-    fun putBookLoadingId(url: String, id: Int)
-    fun removeIdFromBookLoadings(id: Int)
+    fun getBooksLoadingIds(): Map<String, Long>
+    fun putBookLoadingId(url: String, id: Long)
+    fun removeIdFromBookLoadings(id: Long)
     fun cleanLoadingIds()
 
     fun requestPermissionSaveData(key: String, value: String)

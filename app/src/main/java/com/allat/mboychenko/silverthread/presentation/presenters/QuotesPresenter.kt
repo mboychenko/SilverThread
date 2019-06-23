@@ -3,6 +3,7 @@ package com.allat.mboychenko.silverthread.presentation.presenters
 import android.content.Context
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
+import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnComputation
 import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnComputationWithResult
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IQuotesFragmentView
 import com.allat.mboychenko.silverthread.presentation.views.listitems.QuoteItem
@@ -16,11 +17,6 @@ class QuotesPresenter(
     private var quotesState: QuotesState = QuotesState.NORMAL
     private val quotes: Array<String> by lazy { context.resources.getStringArray(R.array.quotes) }
 
-    override fun attachView(view: IQuotesFragmentView) {
-        super.attachView(view)
-        getQuotes()
-    }
-
     fun getQuotesState() = quotesState
 
     fun changeQuotesState(state: QuotesState? = null) {
@@ -28,10 +24,14 @@ class QuotesPresenter(
         view?.let { getQuotes() }
     }
 
-    fun getRandomQuote(): String =
-        quotes[Random().nextInt(quotes.size)]
+    fun getQuote(position: Int) = quotes[position]
 
-    private fun getQuotes() {
+    fun getRandomQuote(): Pair<Int, String> {
+        val pos = Random().nextInt(quotes.size)
+        return Pair(pos, quotes[pos])
+    }
+
+    fun getQuotes() {
         subscriptions.add(
             runTaskOnComputationWithResult(
                 {
@@ -54,6 +54,18 @@ class QuotesPresenter(
         )
     }
 
+    fun addToFavorite(position: Int) {
+        runTaskOnComputation {
+            storage.putFavoriteQuotePosition(position)
+        }
+    }
+
+    fun removeFromFavorite(position: Int) {
+        runTaskOnComputation {
+            storage.removeFavoriteQuotePosition(position)
+        }
+    }
+
     private val quotesActionListener = object : QuoteItem.QuotesActionListener {
         override fun onShare(quote: String) {
             view?.shareText(context, quote, context.getString(R.string.share_quote))
@@ -65,12 +77,12 @@ class QuotesPresenter(
 
         override fun onFavoriteClick(quoteItem: QuoteItem) {
             if (quoteItem.favorite) {
-                storage.removeFavoriteQuotePosition(quoteItem.arrayPosition)
+                removeFromFavorite(quoteItem.arrayPosition)
                 if (quotesState == QuotesState.FAVORITE) {
                     view?.removeItem(quoteItem)
                 }
             } else {
-                storage.putFavoriteQuotePosition(quoteItem.arrayPosition)
+                addToFavorite(quoteItem.arrayPosition)
             }
         }
     }

@@ -8,7 +8,7 @@ interface IBooksFragmentView {
     fun updateItems(items: List<BookItem>)
     fun bookRemoved(book: BookItem)
     fun bookLoaded(fileName: String)
-    fun loadingStarted(fileName: String, loadingId: Int)
+    fun loadingStarted(fileName: String, loadingId: Long)
     fun bookLoadingCancelled(fileName: String)
     fun requestStoragePermission()
     fun shareBookLink(bookTitle: String, bookUrl: String)

@@ -9,6 +9,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
+import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_ACTION_QUOTE
+import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_ACTION_RADIO
+import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_QUOTE_POSITION_EXTRAS
 import com.allat.mboychenko.silverthread.presentation.views.fragments.*
 import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.AllatRaWebViewURIConstants
 import com.google.android.material.appbar.AppBarLayout
@@ -133,12 +136,31 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
     protected fun navigationItemPosUpdate() {
         supportFragmentManager.fragments.find { it.isVisible || it.isAdded }?.let {
             updateNavDrawerBy(fragmentTag = (it as IAllatRaFragments).getFragmentTag())
-        } ?: setDefaultNavigationItem()
+            return
+        }
+
+        when (intent.action) {
+            NOTIFICATION_ACTION_QUOTE -> setQuotesNavigationItem()
+            NOTIFICATION_ACTION_RADIO -> setRadioNavigationItem()
+            else -> setDefaultNavigationItem()
+        }
+
     }
 
     private fun setDefaultNavigationItem() {
         navigationView.setCheckedItem(R.id.nav_allat)
         setFragment(AllatFragment())
+    }
+
+    private fun setRadioNavigationItem() {
+        navigationView.setCheckedItem(R.id.nav_radio)
+        setFragment(RadioFragment())
+    }
+
+    private fun setQuotesNavigationItem() {
+        val position = intent.getIntExtra(NOTIFICATION_QUOTE_POSITION_EXTRAS, -1)
+        navigationView.setCheckedItem(R.id.nav_quotes)
+        setFragment(QuotesFragment.newInstance(position))
     }
 
     override fun onBackPressed() {

@@ -16,7 +16,7 @@ import com.allat.mboychenko.silverthread.R
 
 class BookItem(
     val book: BooksConstants.Book, val bookHelper: BooksHelper,
-    var exist: Boolean = false, var loadingId: Int = -1,
+    var exist: Boolean = false, var loadingId: Long = -1,
     private val bookActionListener: BookActionListener
 ) : Item() {
 
@@ -36,7 +36,7 @@ class BookItem(
         view.imgBackground.setOnClickListener {
             if (exist) {
                 bookActionListener.onOpen(book)
-            } else if (loadingId == -1) {
+            } else if (loadingId == -1L) {
                 getLanguageSelectorDialog(view.context, view.context.getString(R.string.select_language_load)) {
                     loadingBarState(view, true)
                     bookActionListener.onLoad((book.localeDetails[it] ?: error("NoSuchLocale")).url, book.fileName)
@@ -44,8 +44,14 @@ class BookItem(
             }
         }
 
+        view.cancelLoading.setOnClickListener {
+            if (loadingId != -1L) {
+                bookActionListener.onCancelLoading(loadingId)
+            }
+        }
+
         view.buttonLoad.setOnClickListener {
-            if (!exist && loadingId == -1) {
+            if (!exist && loadingId == -1L) {
                 getLanguageSelectorDialog(view.context, view.context.getString(R.string.select_language_load)) {
                     loadingBarState(view, true)
                     bookActionListener.onLoad((book.localeDetails[it] ?: error("NoSuchLocale")).url, book.fileName)
@@ -90,7 +96,7 @@ class BookItem(
             .show()
     }
 
-    private fun updateLoadingState(view: View, exist: Boolean, loadingId: Int) {
+    private fun updateLoadingState(view: View, exist: Boolean, loadingId: Long) {
         if (exist) {
             view.imgBackground.alpha = 1f
             view.buttonDelete.visibility = View.VISIBLE
@@ -104,7 +110,7 @@ class BookItem(
             view.buttonShare.visibility = View.GONE
             view.buttonLoad.visibility = View.VISIBLE
 
-            if (loadingId != -1) {
+            if (loadingId != -1L) {
                 loadingBarState(view, true)
             } else {
                 loadingBarState(view, false)
@@ -114,16 +120,20 @@ class BookItem(
 
     private fun loadingBarState(view: View, active: Boolean) {
         if (active) {
+            view.loadingClickGrabber.visibility = View.VISIBLE
             view.downloading.visibility = View.VISIBLE
             view.downloadingText.visibility = View.VISIBLE
+            view.cancelLoading.visibility = View.VISIBLE
             view.buttonLoad.visibility = View.GONE
         } else {
+            view.loadingClickGrabber.visibility = View.GONE
             view.downloading.visibility = View.GONE
             view.downloadingText.visibility = View.GONE
+            view.cancelLoading.visibility = View.GONE
         }
     }
 
-    fun loadingStarted(id: Int) {
+    fun loadingStarted(id: Long) {
         loadingId = id
         viewRef?.let { loadingBarState(it, true) }
     }
@@ -150,7 +160,7 @@ class BookItem(
         fun onShareLinkClick(bookTitle: String, url: String)
         fun onDeleteBook(book: BookItem)
         fun onLoad(url: String, fileName: String)
-        fun onCancelLoading(downloadId: Int)
+        fun onCancelLoading(downloadId: Long) //todo add button to cancel loading
         fun onOpen(book: BooksConstants.Book)
     }
 }

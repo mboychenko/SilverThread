@@ -7,15 +7,15 @@ class BooksLoaderDeatilsInteractor(val storage: Storage): BooksLoaderDetailsStor
     /**
      * todo change it to put in IO thread
      */
-    override fun getBooksLoadingIds(): Map<String, Int> {
+    override fun getBooksLoadingIds(): Map<String, Long> {
         return storage.getMap(BOOKS_DOWNLOADS_IDS_PREF_KEY)
     }
 
     /**
      * todo change it to put in IO thread
      */
-    override fun putBookLoadingId(url: String, id: Int) {
-        val booksDownloadIds = storage.getMap<String, Int>(BOOKS_DOWNLOADS_IDS_PREF_KEY).toMutableMap()
+    override fun putBookLoadingId(url: String, id: Long) {
+        val booksDownloadIds = storage.getMap<String, Long>(BOOKS_DOWNLOADS_IDS_PREF_KEY).toMutableMap()
         booksDownloadIds[url] = id
         storage.putMap(BOOKS_DOWNLOADS_IDS_PREF_KEY, booksDownloadIds)
     }
@@ -23,7 +23,7 @@ class BooksLoaderDeatilsInteractor(val storage: Storage): BooksLoaderDetailsStor
     /**
      * todo change it to put in IO thread
      */
-    override fun removeIdFromBookLoadings(id: Int) {
+    override fun removeIdFromBookLoadings(id: Long) {
         val loadings = getBooksLoadingIds()
         val updatedEntry = loadings.filter { it.value != id}
         storage.putMap(BOOKS_DOWNLOADS_IDS_PREF_KEY, updatedEntry)

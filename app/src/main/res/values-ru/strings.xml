@@ -63,7 +63,7 @@
     <string name="timezone_config_btn_gmt">Гринвич</string>
     <string name="select_allat_timezone">Выбрать часовой пояс Аллата:</string>
     <string name="change_timezone">Изменить часовой пояс:</string>
-    <string name="none">None</string>
+    <string name="none">Нет</string>
     <string name="ring_on_end">Сигнал о конце:</string>
     <string name="ring_on_start">Сигнал о начале:</string>
     <string name="notify_before_min">Напомнить за мин.:</string>
@@ -75,6 +75,18 @@
     <string name="select_page_hint">От 1 до %d</string>
     <string name="no_items_to_show">Список пуст</string>
     <string name="favorite">Избранные</string>
+    <string name="in_favorite">В Избранные</string>
+    <string name="remove_from_fav">Убрать из Избранных</string>
+    <string name="add_to_fav">Добавить в Избранные</string>
+    <string name="random_quotes">Случайные Цитаты</string>
+    <string name="random_quotes_description">Эта настройка позволит получать случайные цитаты из книг в случайное время.
+        Настроить можно лишь колличество таких цитат в день от 0 до 2. - Где 2 значит, что в одни сутки может не быть ни
+        одной цитаты, может быть одна или две. - 1 значит или ни одной или одна в сутки. - 0 отключает эти уведомления.
+        Уведомления могут появлятся с 8 часов утра локального времени устройства до 10 часов вечера, за исключением
+        выбранного времени Аллата с отступом 30 минут до и 50 после. То-есть, если ваше время Аллата локальное, 9 и 21,
+        то в промежутках 8:30 - 9:50 и 20:30 - 21:50 нотификаций не будет
+    </string>
+    <string name="num_of_quotes_per_day">Колличество цитат</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>

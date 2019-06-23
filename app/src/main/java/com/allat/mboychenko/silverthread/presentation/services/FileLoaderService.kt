@@ -1,42 +1,38 @@
 package com.allat.mboychenko.silverthread.presentation.services
 
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
-import android.util.Log
+import android.net.Uri
 import androidx.core.app.JobIntentService
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
 import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
-import com.downloader.*
-import com.downloader.Status.QUEUED
-import com.downloader.Status.CANCELLED
-import com.downloader.Status.COMPLETED
-import com.downloader.Status.PAUSED
-import com.downloader.Status.RUNNING
-import com.downloader.Status.UNKNOWN
-import com.downloader.Error
 import org.koin.android.ext.android.inject
+import java.io.File
 
 class FileLoaderService : JobIntentService() {
 
     private val storage: BooksLoaderDetailsStorage by inject()
     private val booksHelper: BooksHelper by inject()
     private lateinit var localBroadcastManager: LocalBroadcastManager
+    private val downloadManager by lazy { getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
 
     override fun onHandleWork(intent: Intent) {
         val url = intent.getStringExtra(FILE_URL_ARG)
         val fileName = intent.getStringExtra(FILE_NAME_ARG)
         val path = intent.getStringExtra(DIR_PATH_ARG)
         val action = intent.getStringExtra(ACTION_ARG)
-        val cancelId = intent.getIntExtra(DOWNLOAD_ID_ARG, -1)
+        val cancelId = intent.getLongExtra(DOWNLOAD_ID_ARG, -1)
         localBroadcastManager = LocalBroadcastManager.getInstance(applicationContext)
 
         when {
             action?.equals(ACTION_CANCEL_DOWNLOAD) == true -> {
-                if (cancelId != -1) {
-                    PRDownloader.cancel(cancelId)
-                    storage.getBooksLoadingIds().entries.find { it.value == cancelId }?.key?.let {
-                        updateLoadingStatus(it, cancelId)
+                if (cancelId != -1L) {
+                    val loadingIds = storage.getBooksLoadingIds()
+                    downloadManager.remove(cancelId)
+                    loadingIds.entries.find { it.value == cancelId }?.let {
+                        finishLoading(it.key, cancelId)
                     }
                 }
             }
@@ -48,83 +44,64 @@ class FileLoaderService : JobIntentService() {
                 }
             }
             else -> url?.let {
-                val loadingId = urlInProgressId(it)
-                if (loadingId != -1) {
-                    updateLoadingStatus(it, loadingId)
-                } else if (path.isNullOrEmpty().not() && fileName.isNullOrEmpty().not()) {
-                    loadFile(it, path!!, fileName!!)
+                val inProgress = urlInProgressId(it)
+                if (!inProgress && !path.isNullOrEmpty() && !fileName.isNullOrEmpty()) {
+                    loadFile(it, path, fileName)
                 }
             }
         }
     }
 
-    private fun urlInProgressId(url: String): Int {
-        return storage.getBooksLoadingIds()[url] ?: -1
+    private fun urlInProgressId(url: String): Boolean {
+        return storage.getBooksLoadingIds()[url] != null
     }
 
 
-    private fun updateLoadingStatus(url: String, id: Int) {
-        val status = PRDownloader.getStatus(id)
-        when (status!!) {
-            PAUSED -> resumeLoading(id)
+    private fun updateLoadingStatus(url: String, id: Long) {
+        val query = DownloadManager.Query().apply {
+            setFilterById(id)
+        }
+        val c = downloadManager.query(query)
+        if(c.moveToFirst()) {
+            when(c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS))) {
+                DownloadManager.STATUS_PAUSED,
+                DownloadManager.STATUS_PENDING,
+                DownloadManager.STATUS_RUNNING -> {
+                    //continue
+                }
 
-            COMPLETED -> bookLoaded(url, id)
-
-            CANCELLED,
-            UNKNOWN -> canceledLoading(url, id)
-
-            QUEUED,
-            RUNNING -> Log.d(TAG, "$id loading in progress")
+                DownloadManager.STATUS_SUCCESSFUL,
+                DownloadManager.STATUS_FAILED -> {
+                    finishLoading(url, id)
+                }
+            }
         }
     }
 
-    private fun bookLoaded(url: String, id: Int) {
-        storage.removeIdFromBookLoadings(id)
-        val fileName = booksHelper.getBookByUrl(url).fileName
-        localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
-            .apply { putExtra(BOOKS_UPDATE_ACTION_LOADED_FILE_NAME, fileName) })
-    }
-
-    private fun canceledLoading(url: String, id: Int) {
+    private fun finishLoading(url: String, id: Long) {
         storage.removeIdFromBookLoadings(id)
         val fileName = booksHelper.getBookByUrl(url).fileName
         localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
             .apply { putExtra(BOOKS_UPDATE_ACTION_CANCELLED_LOADING, fileName) })
-        PRDownloader.cancel(id)
-    }
-
-    private fun resumeLoading(id: Int) {
-        PRDownloader.resume(id)
     }
 
     private fun loadFile(url: String, dirPath: String, fileName: String) {
-        val downloadId = PRDownloader.download(url, dirPath, fileName)
-            .build()
-            .start(object : OnDownloadListener {
-                override fun onError(error: Error) {
-                    Log.e(TAG, "loading error")
-                    fireUpdateBooksStatus()
-                }
+        val destinationFileUri = Uri.fromFile(File(dirPath, fileName))
+        val request = DownloadManager.Request(Uri.parse(url))
+            .setTitle(fileName)
+            .setDescription("Downloading")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+            .setDestinationUri(destinationFileUri)
+            .setAllowedOverMetered(true)
 
-                override fun onDownloadComplete() {
-                    fireUpdateBooksStatus()
-                }
+        val downloadID = downloadManager.enqueue(request)
 
-            })
-
-        storage.putBookLoadingId(url, downloadId)
+        storage.putBookLoadingId(url, downloadID)
         localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
             .apply {
-                putExtra(BOOKS_UPDATE_ACTION_START_LOADING_ID, downloadId)
+                putExtra(BOOKS_UPDATE_ACTION_START_LOADING_ID, downloadID)
                 putExtra(BOOKS_UPDATE_ACTION_START_LOADING_FILENAME, fileName)
             })
-    }
-
-    private fun fireUpdateBooksStatus() {
-        val bookDownload = storage.getBooksLoadingIds()
-        for (download in bookDownload) {
-            updateLoadingStatus(download.key, download.value)
-        }
     }
 
     companion object {
@@ -137,7 +114,7 @@ class FileLoaderService : JobIntentService() {
             enqueueWork(context, FileLoaderService::class.java, JOB_ID, intent)
         }
 
-        fun commandCancelLoading(context: Context, id: Int) {
+        fun commandCancelLoading(context: Context, id: Long) {
             val intent = Intent()
             intent.putExtra(ACTION_ARG, ACTION_CANCEL_DOWNLOAD)
             intent.putExtra(DOWNLOAD_ID_ARG, id)
@@ -150,9 +127,7 @@ class FileLoaderService : JobIntentService() {
             enqueueWork(context, FileLoaderService::class.java, JOB_ID, intent)
         }
 
-        const val TAG = "LOADING_SERVICE_TAG"
         const val JOB_ID = 101
-
 
         const val FILE_URL_ARG = "FILE_URL_ARG"
         const val FILE_NAME_ARG = "FILE_NAME_ARG"
@@ -166,7 +141,6 @@ class FileLoaderService : JobIntentService() {
 
         const val BOOKS_UPDATE_BROADCAST_ACTION = "BOOKS_UPDATE_BROADCAST_ACTION"
 
-        const val BOOKS_UPDATE_ACTION_LOADED_FILE_NAME = "BOOKS_UPDATE_ACTION_LOADED_FILE_NAME"
         const val BOOKS_UPDATE_ACTION_CANCELLED_LOADING = "BOOKS_UPDATE_ACTION_CANCELLED_LOADING"
         const val BOOKS_UPDATE_ACTION_START_LOADING_ID = "BOOKS_UPDATE_ACTION_START_LOADING_ID"
         const val BOOKS_UPDATE_ACTION_START_LOADING_FILENAME = "BOOKS_UPDATE_ACTION_START_LOADING_FILENAME"

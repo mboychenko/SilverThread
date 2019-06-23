@@ -6,6 +6,10 @@ interface Storage {
     fun getIntDefault(key: String, default: Int): Int
     fun putInt(key: String, value: Int)
 
+    fun getLong(key: String): Long
+    fun getLongDefault(key: String, default: Long): Long
+    fun putLong(key: String, value: Long)
+
     fun getString(key: String): String?
     fun putString(key: String, value: String)
 

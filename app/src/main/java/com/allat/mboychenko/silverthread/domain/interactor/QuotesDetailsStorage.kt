@@ -4,7 +4,9 @@ interface QuotesDetailsStorage {
     fun getFavoriteQuotesPositions(): Set<Int>
     fun putFavoriteQuotePosition(quotePos: Int)
     fun removeFavoriteQuotePosition(quotePos: Int)
-    //TODO
-    //random notification
-    //random notification times setting
+
+    fun getRandomQuotesTimesInDay(): Int
+    fun setRandomQuotesTimesInDay(times: Int)
+    fun getQuotesWasShowedTimesInDay(): Pair<Int, Long>
+    fun setQuotesWasShowedTimesInDay(timesInDay: Pair<Int, Long>)
 }

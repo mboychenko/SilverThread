@@ -19,10 +19,13 @@ class UpdateBeforeTimerJob : JobIntentService() {
     private val storage: AllatTimeZoneStorage by inject()
 
     private var stopFlag = false
+    private var skipNotifFlag = false
 
     override fun onHandleWork(intent: Intent) {
         LocalBroadcastManager.getInstance(applicationContext)
             .registerReceiver(receiver, IntentFilter(NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS))
+
+        setInterruptIfStopped(true)
 
         val notifyBefore = storage.getAllatNotificationBeforeMins()
         val timezone = storage.getAllatTimezone()
@@ -34,71 +37,83 @@ class UpdateBeforeTimerJob : JobIntentService() {
         val toAllat = AllatHelper.getMillisToAllatStart(timezone)
         val allatTime = toAllat + System.currentTimeMillis()
 
-        val currentTimeCalendar = Calendar.getInstance()
-
-        Log.d("UpdateBeforeTimerJob", String.format("beforeEnterIf %d %d", toAllat, tenMin))
+        Log.d("UpdateBeforeTimerJob", String.format("beforeEnterIf %d %d", toAllat, allatTime))
         if (TimeUnit.MILLISECONDS.toMinutes(toAllat) <= notifyBefore && toAllat >= tenMin) {
 
-            val toStart = 60 - currentTimeCalendar.get(Calendar.MINUTE)
-            if (toStart < notifyBefore) {                                       //todo check example 13 < 15
-                showNotification(exactMins = toStart)
-                Log.d("UpdateBeforeTimerJob", "insideImmediatltly")
+            val toStart = getMinsRemaning()
+            if (toStart < notifyBefore) {
+                showNotification(toStart)
+                Log.d("UpdateBeforeTimerJob", String.format("insideImmediatltly %d", toStart))
             }
 
-//            if (TimeUnit.MILLISECONDS.toMinutes(toAllat) < notifyBefore) {
-//                showNotification(allatTime)
-//                Log.d("UpdateBeforeTimerJob", "insideImmediatltly")
-//
-//            }
 
-            while (getRemainingWithSecondOffset(allatTime) >= tenMin && !stopFlag) {
-                Log.d("UpdateBeforeTimerJob", "insideLoop")
+            while (getMinsRemaning() >= 10 && !stopFlag && !isStopped) {
+                Log.d("UpdateBeforeTimerJob", String.format("insideLoop %b", sync))
+
                 if (sync) {
+                    Log.d("UpdateBeforeTimerJob", "Going sync")
                     while (Calendar.getInstance().get(Calendar.SECOND) != 0) {
                         Thread.sleep(oneSec)
                     }
                     sync = false
                 } else {
+                    Log.d("UpdateBeforeTimerJob", "Going sleep 60sec")
                     Thread.sleep(oneMin)
                 }
 
-                showNotification(allatTime)
+                Log.d("UpdateBeforeTimerJob", String.format("showNotif from thread %s", Thread.currentThread().name))
+                if (!skipNotifFlag && isBeforeAllatStart(notifyBefore, toAllat, allatTime))
+                    showNotification(getMinsRemaning())
 
             }
         }
 
-        hideAllatNotification(applicationContext)
+        if (!skipNotifFlag && isBeforeAllatStart(notifyBefore, toAllat, allatTime)) {
+            hideAllatNotification(applicationContext)
+        }
 
         LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(receiver)
 
     }
 
-    private fun showNotification(allatTime: Long = 0, exactMins: Int = 0) {
+    private fun getMinsRemaning() = 60 - Calendar.getInstance().get(Calendar.MINUTE)
+
+    private fun isBeforeAllatStart(notifyBefore: Int, toAllat: Long, allatTime: Long) =
+                TimeUnit.MILLISECONDS.toMinutes(toAllat) <= notifyBefore && allatTime > System.currentTimeMillis()
+
+    private fun showNotification(exactMins: Int) {
         showNotification(
             applicationContext,
             AlarmNotificationCodes.ALLAT_BEFORE_UPDATE,
             Bundle().apply {
                 putLong(
                     NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS,
-                    if (exactMins != 0) TimeUnit.MINUTES.toMillis(exactMins.toLong()) else getRemainingWithSecondOffset(allatTime)
+                    TimeUnit.MINUTES.toMillis(exactMins.toLong())
                 )
             })
     }
 
-    private fun getRemainingWithSecondOffset(allatTime: Long) = allatTime - System.currentTimeMillis() + 1000
-
-    override fun onDestroy() {
-        LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(receiver)
+    override fun onStopCurrentWork(): Boolean {
+        Log.d("UpdateBeforeTimerJob", "onStopCurrentWork")
+        handleStop()
+        return true
     }
 
-    override fun onStopCurrentWork(): Boolean {
+    override fun onDestroy() {
+        Log.d("UpdateBeforeTimerJob", "Destroy")
+        handleStop()
+    }
+
+    private fun handleStop() {
+        stopFlag = true
+        skipNotifFlag = true
         LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(receiver)
-        return true
     }
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             stopFlag = true
+            skipNotifFlag = true
             hideAllatNotification(applicationContext)
         }
     }

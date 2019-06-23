@@ -1,0 +1,3 @@
+package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs
+
+interface IQuotesNotificationSettingView

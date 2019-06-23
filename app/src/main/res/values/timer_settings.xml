@@ -8,4 +8,10 @@
         <item>60</item>
     </integer-array>
 
+    <integer-array name="random_quotes_times">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.allat.mboychenko.silverthread.presentation.di
 
+import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.presenters.QuotesNotificationSettingsPresenter
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
 import com.allat.mboychenko.silverthread.presentation.presenters.QuotesPresenter
 import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
@@ -22,6 +23,10 @@ val presentersModule = module {
 
     factory {
         QuotesPresenter(androidContext(), get())
+    }
+
+    factory {
+        QuotesNotificationSettingsPresenter(androidContext(), get())
     }
 
     factory {

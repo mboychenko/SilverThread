@@ -3,7 +3,6 @@ package com.allat.mboychenko.silverthread.presentation.views.activities
 import android.content.Intent
 import android.net.Uri
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.presentation.views.activities.BaseNavigationActivity
 import com.allat.mboychenko.silverthread.presentation.views.activities.WebViewActivity.Companion.REQUEST_CODE_WEB_VIEW
 import com.allat.mboychenko.silverthread.presentation.views.activities.WebViewActivity.Companion.RESULT_CODE_SET_FRAGMENT
 import com.allat.mboychenko.silverthread.presentation.views.activities.WebViewActivity.Companion.RESULT_NAV_ID
