@@ -85,6 +85,21 @@
         то в промежутках 8:30 - 9:50 и 20:30 - 21:50 нотификаций не будет
     </string>
     <string name="num_of_quotes_per_day">Колличество цитат</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="on_air">On Air</string>
+    <string name="on_air_paused">On Air (Paused)</string>
+    <string name="radio_error">Server error</string>
+    <string name="buffering">Loading…</string>
+    <string name="no_internet">No internet, check your connectivity and try again</string>
+    <string name="mediadata_artist">AllatRa</string>
+    <string name="mediadata_album">Radio</string>
+    <string name="mediadata_title_on_air">On Air</string>
+    <string name="mediadata_title_no_connection">No Internet. Waiting</string>
+    <string name="mediadata_title_on_air_paused">On Air (Paused)</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d minute to Allat</item>

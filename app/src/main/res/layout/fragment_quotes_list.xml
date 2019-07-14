@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="24dp"
             android:src="@drawable/ic_settings"
-            android:visibility="gone"/>
+            android:visibility="invisible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/randomQuoteFab"
@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="24dp"
             android:src="@drawable/ic_quote"
-            android:visibility="gone"/>
+            android:visibility="invisible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabCenter"

@@ -179,7 +179,7 @@ class QuotesFragment : Fragment(), IQuotesFragmentView {
     private fun FloatingActionButton.animateFabHide() {
         val lp = layoutParams as ConstraintLayout.LayoutParams
         val animRadius = ValueAnimator.ofInt(80.px, 0)
-        animRadius.doOnEnd { visibility = View.GONE }
+        animRadius.doOnEnd { visibility = View.INVISIBLE }
 
         animRadius.addUpdateListener { valueAnimator ->
             val `val` = valueAnimator.animatedValue as Int

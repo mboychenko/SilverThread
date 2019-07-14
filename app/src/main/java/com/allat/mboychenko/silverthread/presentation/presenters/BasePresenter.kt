@@ -2,6 +2,7 @@ package com.allat.mboychenko.silverthread.presentation.presenters
 
 import androidx.annotation.CallSuper
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 abstract class BasePresenter<T> {
 
@@ -21,5 +22,13 @@ abstract class BasePresenter<T> {
     open fun detachView() {
         subscriptions.dispose()
         this.view = null
+    }
+
+    protected fun manageAddToSubscription(disposable: Disposable) {
+        if (subscriptions.isDisposed) {
+            subscriptions = CompositeDisposable()
+        }
+
+        subscriptions.add(disposable)
     }
 }

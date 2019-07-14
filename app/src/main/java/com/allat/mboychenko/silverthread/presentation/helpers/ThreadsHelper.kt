@@ -1,5 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.helpers
 
+import android.os.Handler
+import android.os.Looper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -20,3 +22,14 @@ fun <T> runTaskOnComputationWithResult(task: () -> T, onNext: (result: T) -> Uni
         .subscribeOn(Schedulers.computation())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { onNext(it) }
+
+fun executeOnMainThread(action: () -> Unit) {
+    Handler(Looper.getMainLooper()).post {
+        action()
+    }
+}
+fun executeOnHandlerThread(handler: Handler, action: () -> Unit) {
+    handler.post {
+        action()
+    }
+}

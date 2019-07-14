@@ -1,5 +1,6 @@
 package com.allat.mboychenko.silverthread.presentation.views.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.CallSuper
@@ -26,6 +27,20 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         super.onCreate(savedInstanceState)
         setContentView(getContentView())
         initViews()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        when (intent?.action) {
+            NOTIFICATION_ACTION_QUOTE -> {
+                setQuotesNavigationItem()
+                return
+            }
+            NOTIFICATION_ACTION_RADIO -> {
+                setRadioNavigationItem()
+                return
+            }
+        }
     }
 
     abstract fun getContentView(): Int
@@ -167,6 +182,12 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
+            if (supportFragmentManager.backStackEntryCount <= 1 && supportFragmentManager.fragments[0].tag != AllatFragment.ALLAT_FRAGMENT_TAG) {
+                setDefaultNavigationItem()
+                return
+            } else if (supportFragmentManager.backStackEntryCount <= 1 && supportFragmentManager.fragments[0].tag == AllatFragment.ALLAT_FRAGMENT_TAG) {
+                return
+            }
             super.onBackPressed()
             navigationItemPosUpdate()
         }

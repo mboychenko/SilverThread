@@ -51,6 +51,10 @@ class BookReaderActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
+
     private fun loadBook() {
         pdfView.fromUri(bookUri)
             .onPageChange(onPageChangeListener)

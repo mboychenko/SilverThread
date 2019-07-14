@@ -196,14 +196,6 @@ class BooksPresenter(
         )
     }
 
-    private fun manageAddToSubscription(disposable: Disposable) {
-        if (subscriptions.isDisposed) {
-            subscriptions = CompositeDisposable()
-        }
-
-        subscriptions.add(disposable)
-    }
-
     private fun requestWritePermission(loadBookUrl: String? = null, deleteFileName: String? = null) {
         loadBookUrl?.let {
             storage.requestPermissionSaveData(REQUEST_PERMISSION_SAVED_LOAD_FILE_URL, it)

@@ -43,9 +43,8 @@ class UpdateBeforeTimerJob : JobIntentService() {
             val toStart = getMinsRemaning()
             if (toStart < notifyBefore) {
                 showNotification(toStart)
-                Log.d("UpdateBeforeTimerJob", String.format("insideImmediatltly %d", toStart))
+                Log.d("UpdateBeforeTimerJob", String.format("insideImmediately %d", toStart))
             }
-
 
             while (getMinsRemaning() >= 10 && !stopFlag && !isStopped) {
                 Log.d("UpdateBeforeTimerJob", String.format("insideLoop %b", sync))
@@ -70,9 +69,11 @@ class UpdateBeforeTimerJob : JobIntentService() {
 
         if (!skipNotifFlag && isBeforeAllatStart(notifyBefore, toAllat, allatTime)) {
             hideAllatNotification(applicationContext)
+            Log.d("UpdateBeforeTimerJob", "Hide notification")
         }
 
         LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(receiver)
+        Log.d("UpdateBeforeTimerJob", "Good Bye")
 
     }
 
@@ -121,13 +122,15 @@ class UpdateBeforeTimerJob : JobIntentService() {
     companion object {
         fun startUpdateTimer(context: Context) {
             val intent = Intent()
-            enqueueWork(context, UpdateBeforeTimerJob::class.java, 9856, intent)
+            enqueueWork(context, UpdateBeforeTimerJob::class.java, UPDATE_BEFORE_TIMER_JOB_ID, intent)
         }
 
         fun stopUpdateTimer(context: Context) {
             LocalBroadcastManager.getInstance(context)
                 .sendBroadcast(Intent(NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS))
         }
+
+        const val UPDATE_BEFORE_TIMER_JOB_ID = 9856
     }
 
 }

@@ -34,7 +34,13 @@ class AlarmNotificationsExecutor(val context: Context) {
                 val storage = StorageImplementation(context)
                 val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storage)
 
-                val bundle = intent.extras?.let { Bundle(it) }
+                val bundle = Bundle().apply {
+                    putBoolean(ALLAT_START_ARG, allatStorage.getAllatNotificationStart())
+                    putBoolean(ALLAT_END_ARG, allatStorage.getAllatNotificationEnd())
+                    if (intent.extras != null) {
+                        putAll(intent.extras)
+                    }
+                }
 
                 Log.d("NotificationTimer", "onHandleNotification ${intent.action}")
 
