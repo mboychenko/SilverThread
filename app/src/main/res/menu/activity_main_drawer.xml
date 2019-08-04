@@ -3,67 +3,63 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_allat"
-            android:icon="@drawable/ic_allat"
-            android:title="@string/allat"/>
+                android:id="@+id/nav_allat"
+                android:icon="@drawable/ic_allat"
+                android:title="@string/allat"/>
         <item
-            android:id="@+id/nav_meditations"
-            android:icon="@drawable/ic_meditation"
-            android:title="@string/meditations" />
+                android:id="@+id/nav_practices"
+                android:icon="@drawable/ic_meditation"
+                android:title="@string/practices"/>
         <item
-            android:id="@+id/nav_quotes"
-            android:icon="@drawable/ic_quote"
-            android:title="@string/quotes" />
+                android:id="@+id/nav_quotes"
+                android:icon="@drawable/ic_quote"
+                android:title="@string/quotes"/>
         <item
-            android:id="@+id/nav_books"
-            android:icon="@drawable/ic_books"
-            android:title="@string/books" />
+                android:id="@+id/nav_books"
+                android:icon="@drawable/ic_books"
+                android:title="@string/books"/>
         <item
-            android:id="@+id/nav_radio"
-            android:icon="@drawable/ic_radio"
-            android:title="@string/radio" />
-
-        <item
-            android:id="@+id/nav_tv"
-            android:icon="@drawable/ic_live_tv"
-            android:title="@string/allatra_tv" />
-        <item
-            android:id="@+id/nav_znai"
-            android:icon="@drawable/ic_search"
-            android:title="@string/znai" />
-        <item
-            android:id="@+id/nav_org"
-            android:icon="@drawable/ic_public_web"
-            android:title="@string/allatra_org" />
-        <item
-            android:id="@+id/nav_vesti"
-            android:icon="@drawable/ic_vesti"
-            android:title="@string/vesti" />
-        <item
-            android:id="@+id/nav_science"
-            android:icon="@drawable/ic_science"
-            android:title="@string/science" />
-        <item
-            android:id="@+id/nav_partner"
-            android:icon="@drawable/ic_partner"
-            android:title="@string/partner" />
-        <item
-            android:id="@+id/nav_craud"
-            android:icon="@drawable/ic_craud"
-            android:title="@string/craudfaunding" />
-        <item
-            android:id="@+id/nav_geo"
-            android:icon="@drawable/ic_terrain_geo"
-            android:title="@string/geo_center" />
-
+                android:id="@+id/nav_radio"
+                android:icon="@drawable/ic_radio"
+                android:title="@string/radio"/>
     </group>
 
-    <item android:title="@string/devs">
+    <item android:title="@string/web">
         <menu>
-            <item
-                android:id="@+id/nav_about_us"
-                android:icon="@drawable/ic_share_black_24dp"
-                android:title="@string/about_us" />
+            <group android:checkableBehavior="single">
+                <item
+                        android:id="@+id/nav_tv"
+                        android:icon="@drawable/ic_live_tv"
+                        android:title="@string/allatra_tv"/>
+                <item
+                        android:id="@+id/nav_znai"
+                        android:icon="@drawable/ic_search"
+                        android:title="@string/znai"/>
+                <item
+                        android:id="@+id/nav_org"
+                        android:icon="@drawable/ic_public_web"
+                        android:title="@string/allatra_org"/>
+                <item
+                        android:id="@+id/nav_vesti"
+                        android:icon="@drawable/ic_vesti"
+                        android:title="@string/vesti"/>
+                <item
+                        android:id="@+id/nav_science"
+                        android:icon="@drawable/ic_science"
+                        android:title="@string/science"/>
+                <item
+                        android:id="@+id/nav_partner"
+                        android:icon="@drawable/ic_partner"
+                        android:title="@string/partner"/>
+                <item
+                        android:id="@+id/nav_craud"
+                        android:icon="@drawable/ic_craud"
+                        android:title="@string/craudfaunding"/>
+                <item
+                        android:id="@+id/nav_geo"
+                        android:icon="@drawable/ic_terrain_geo"
+                        android:title="@string/geo_center"/>
+            </group>
         </menu>
     </item>
 

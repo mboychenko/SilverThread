@@ -1,8 +1,8 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.presenters
+package com.allat.mboychenko.silverthread.presentation.presenters
 
 import android.content.Context
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs.IQuotesNotificationSettingView
+import com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.IQuotesNotificationSettingView
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.presenters.BasePresenter

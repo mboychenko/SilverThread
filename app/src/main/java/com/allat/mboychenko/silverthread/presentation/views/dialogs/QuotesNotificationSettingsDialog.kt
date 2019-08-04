@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs
+package com.allat.mboychenko.silverthread.presentation.views.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.presenters.QuotesNotificationSettingsPresenter
+import com.allat.mboychenko.silverthread.presentation.presenters.QuotesNotificationSettingsPresenter
 import kotlinx.android.synthetic.main.quotes_notification_settings_dialog.view.*
 import org.koin.android.ext.android.inject
 

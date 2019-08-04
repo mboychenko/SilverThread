@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -67,22 +68,20 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         return true
     }
 
-    fun getToolbar() = toolbar
+    fun getToolbar(): Toolbar = toolbar
 
     protected fun setFragmentByNavId(navId: Int, updateNavItem: Boolean = false) {
         when (navId) {
             R.id.nav_allat ->
                 setFragment(AllatFragment(), navId)
-            R.id.nav_meditations ->
-                setFragment(MeditationsFragment(), navId)
+            R.id.nav_practices ->
+                setFragment(PracticesFragment(), navId)
             R.id.nav_quotes ->
                 setFragment(QuotesFragment(), navId)
             R.id.nav_books ->
                 setFragment(BooksFragment(), navId)
             R.id.nav_radio ->
                 setFragment(RadioFragment(), navId)
-            R.id.nav_about_us ->
-                setFragment(AboutFragment(), navId)
             R.id.nav_tv ->
                 webViewLink(AllatRaWebViewURIConstants.URI_ALLATRA_TV)
             R.id.nav_znai ->
@@ -111,11 +110,10 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         if (fragmentTag != null) {
             navId = when (fragmentTag) {
                 AllatFragment.ALLAT_FRAGMENT_TAG -> R.id.nav_allat
-                MeditationsFragment.MEDITATION_FRAGMENT_TAG -> R.id.nav_meditations
+                PracticesFragment.MEDITATION_FRAGMENT_TAG -> R.id.nav_practices
                 RadioFragment.RADIO_FRAGMENT_TAG -> R.id.nav_radio
                 QuotesFragment.QUOTES_FRAGMENT_TAG -> R.id.nav_quotes
                 BooksFragment.BOOKS_FRAGMENT_TAG -> R.id.nav_books
-                AboutFragment.ABOUT_FRAGMENT_TAG -> R.id.nav_about_us
                 else -> R.id.nav_allat
             }
         } else if (webViewUrl != null) {
@@ -182,12 +180,22 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
-            if (supportFragmentManager.backStackEntryCount <= 1 && supportFragmentManager.fragments[0].tag != AllatFragment.ALLAT_FRAGMENT_TAG) {
-                setDefaultNavigationItem()
-                return
-            } else if (supportFragmentManager.backStackEntryCount <= 1 && supportFragmentManager.fragments[0].tag == AllatFragment.ALLAT_FRAGMENT_TAG) {
-                return
+            if (supportFragmentManager.fragments.size > 0) {
+                if (supportFragmentManager.backStackEntryCount <= 1 &&
+                    supportFragmentManager.fragments[0].tag != AllatFragment.ALLAT_FRAGMENT_TAG) {
+                    setDefaultNavigationItem()
+                    return
+                } else if (supportFragmentManager.backStackEntryCount <= 1 &&
+                    supportFragmentManager.fragments[0].tag == AllatFragment.ALLAT_FRAGMENT_TAG) {
+                    return
+                }
+
+                val meditationFragment = supportFragmentManager.findFragmentByTag(PracticesFragment.MEDITATION_FRAGMENT_TAG) as PracticesFragment?
+                if (meditationFragment?.isVisible == true && meditationFragment.showInit()) {
+                    return
+                }
             }
+
             super.onBackPressed()
             navigationItemPosUpdate()
         }

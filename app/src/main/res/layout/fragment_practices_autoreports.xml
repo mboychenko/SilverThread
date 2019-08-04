@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <View android:id="@+id/autoreports"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          app:layout_constraintVertical_chainStyle="spread"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toTopOf="@+id/meditations"
+          android:background="#304FFE"/>
+
+    <TextView
+            android:id="@+id/autoreports_category_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/practice_category_autoreport"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="@id/autoreports"
+            app:layout_constraintStart_toStartOf="@id/autoreports"
+            app:layout_constraintEnd_toEndOf="@id/autoreports"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
+
+    <ScrollView
+            android:id="@+id/autoreports_desc_container"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/autoreports_category_title"
+            app:layout_constraintStart_toStartOf="@id/autoreports"
+            app:layout_constraintEnd_toEndOf="@id/autoreports"
+            app:layout_constraintBottom_toBottomOf="@id/autoreports"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            android:padding="8dp">
+        <TextView
+                android:id="@+id/autoreports_category_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/practice_category_autoreport_description"
+                android:textColor="@android:color/white"/>
+    </ScrollView>
+
+    <TextView
+            android:id="@+id/autoreports_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/open_practices"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/autoreports"
+            app:layout_constraintBottom_toBottomOf="@id/autoreports"
+            android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/autoreports_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@id/autoreports"
+            app:layout_constraintStart_toStartOf="@id/autoreports"
+            app:layout_constraintEnd_toEndOf="@id/autoreports"
+            app:layout_constraintBottom_toBottomOf="@id/autoreports"
+            android:visibility="visible"/>
+
+
+    <View android:id="@+id/meditations"
+          android:layout_width="0dp"
+          android:layout_height="40dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/autoreports"
+          app:layout_constraintBottom_toTopOf="@id/spiritual"
+          android:background="#00B0FF"/>
+
+    <TextView
+            android:id="@+id/meditations_category_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/practice_category_meditations"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="@id/meditations"
+            app:layout_constraintEnd_toEndOf="@id/meditations"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+    <ScrollView
+            android:id="@+id/meditations_desc_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/meditations_category_title"
+            app:layout_constraintStart_toStartOf="@id/meditations"
+            app:layout_constraintEnd_toEndOf="@id/meditations"
+            app:layout_constraintBottom_toBottomOf="@id/meditations"
+            android:scrollbars="vertical"
+            android:visibility="gone">
+        <TextView
+                android:id="@+id/meditations_category_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/practice_category_meditations_description"
+                android:textColor="@android:color/white"/>
+    </ScrollView>
+
+    <TextView
+            android:id="@+id/meditations_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/open_practices"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/meditations"
+            app:layout_constraintBottom_toBottomOf="@id/meditations"
+            android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/meditations_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/meditations"
+            app:layout_constraintStart_toStartOf="@id/meditations"
+            app:layout_constraintEnd_toEndOf="@id/meditations"
+            app:layout_constraintBottom_toBottomOf="@id/meditations"
+            android:visibility="gone"/>
+
+    <View android:id="@+id/spiritual"
+          android:layout_width="0dp"
+          android:layout_height="40dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/meditations"
+          app:layout_constraintBottom_toBottomOf="parent"
+          android:background="#1DE9B6"/>
+
+    <TextView
+            android:id="@+id/spir_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/practice_category_spiritual"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:padding="8dp"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="@id/spiritual"
+            app:layout_constraintStart_toStartOf="@id/spiritual"
+            app:layout_constraintEnd_toEndOf="@id/spiritual"/>
+
+    <ScrollView
+            android:id="@+id/spirit_desc_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/spir_title"
+            app:layout_constraintStart_toStartOf="@id/spiritual"
+            app:layout_constraintEnd_toEndOf="@id/spiritual"
+            app:layout_constraintBottom_toBottomOf="@id/spiritual"
+            android:scrollbars="vertical"
+            android:visibility="gone">
+        <TextView
+                android:id="@+id/spirit_category_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/practice_category_spiritual_description"
+                android:textColor="@android:color/white"/>
+    </ScrollView>
+
+    <TextView
+            android:id="@+id/spirit_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/open_practices"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/spiritual"
+            app:layout_constraintBottom_toBottomOf="@id/spiritual"
+            android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/spiritual_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/spiritual"
+            app:layout_constraintStart_toStartOf="@id/spiritual"
+            app:layout_constraintEnd_toEndOf="@id/spiritual"
+            app:layout_constraintBottom_toBottomOf="@id/spiritual"
+            android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

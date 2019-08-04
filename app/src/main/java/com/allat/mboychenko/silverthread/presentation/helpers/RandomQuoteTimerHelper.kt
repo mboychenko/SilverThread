@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers
+package com.allat.mboychenko.silverthread.presentation.helpers
 
 import android.content.Context
 import android.os.Bundle
@@ -10,10 +10,6 @@ import com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneInteract
 import com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesInteractor
-import com.allat.mboychenko.silverthread.presentation.helpers.AlarmNotificationCodes
-import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_QUOTE_EXTRAS
-import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_QUOTE_POSITION_EXTRAS
-import com.allat.mboychenko.silverthread.presentation.helpers.setAlarmExactTime
 import java.util.*
 import java.util.concurrent.TimeUnit
 

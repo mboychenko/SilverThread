@@ -4,8 +4,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="close">Close</string>
+
     <string name="drawer_name">Silver Thread</string>
-    <string name="meditations">Meditations</string>
+    <string name="practices">Practices</string>
     <string name="allat">Allat</string>
     <string name="quotes">Quotes</string>
     <string name="r_quote">Random Quote</string>
@@ -14,6 +16,7 @@
     <string name="settings">Settings</string>
     <string name="notifs">Notifications</string>
     <string name="devs">Developers</string>
+    <string name="web">Web Resources</string>
     <string name="about_us">About us</string>
     <string name="meditations_title">Meditations</string>
     <string name="spiritual_title">Spiritual practices</string>
@@ -100,6 +103,10 @@
     <string name="mediadata_title_on_air">On Air</string>
     <string name="mediadata_title_no_connection">No Internet. Waiting</string>
     <string name="mediadata_title_on_air_paused">On Air (Paused)</string>
+    <string name="refresh">Refresh</string>
+    <string name="web_view_general_error">Some site Error or No Internet, check and try again</string>
+    <string name="web_view_net_error_desc">Network description: %s</string>
+    <string name="open_practices">Открыть</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d minute to Allat</item>

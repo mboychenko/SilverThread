@@ -11,6 +11,61 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
 
+        <com.allat.mboychenko.silverthread.presentation.views.fragments.webview.NestedWebView
+                android:id="@+id/webViewWindow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        <!--error no internet-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/error_internet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+            <View android:layout_width="0dp" android:layout_height="0dp"
+                  android:background="@android:color/white"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/no_internet_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/web_view_general_error"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/no_internet_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/web_view_net_error_desc"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/no_internet_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/refresh"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/no_internet_desc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBar"
@@ -27,22 +82,18 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.allat.mboychenko.silverthread.presentation.views.fragments.webview.NestedWebView
-                android:id="@+id/webViewWindow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-
-        <!--error no internet-->
         <LinearLayout
-                android:id="@+id/error_internet"
+                android:id="@+id/progress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"
-                android:orientation="vertical">
-
+                android:gravity="center">
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateOnly="true"/>
         </LinearLayout>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

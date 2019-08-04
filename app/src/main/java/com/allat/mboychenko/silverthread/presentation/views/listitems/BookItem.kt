@@ -20,16 +20,18 @@ class BookItem(
     private val bookActionListener: BookActionListener
 ) : Item() {
 
-    var viewRef: View? = null
+    private var viewRef: View? = null
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewRef = viewHolder.itemView
+        viewRef?.let {
+            it.imgBackground.setImageResource(book.imageRes)
 
-        viewRef!!.imgBackground.setImageResource(book.imageRes)
+            updateLoadingState(it, exist, loadingId)
 
-        updateLoadingState(viewRef!!, exist, loadingId)
+            initClickListeners(it)
+        }
 
-        initClickListeners(viewRef!!)
     }
 
     private fun initClickListeners(view: View) {

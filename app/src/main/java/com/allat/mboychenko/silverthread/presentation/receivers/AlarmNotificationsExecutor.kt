@@ -6,8 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PowerManager
 import android.util.Log
-import com.allat.mboychenko.silverthread.AllatRaApplication
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
+import com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
 import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
 import com.allat.mboychenko.silverthread.domain.interactor.*
 import com.allat.mboychenko.silverthread.presentation.helpers.*
@@ -19,7 +18,6 @@ class AlarmNotificationsExecutor(val context: Context) {
     var pendingResult: BroadcastReceiver.PendingResult? = null
 
     fun onHandleNotification(intent: Intent) {
-        (context.applicationContext as AllatRaApplication).saveLogcatToFile()
 
         Log.d("NotificationTimer", "taking WL")
 

@@ -184,7 +184,7 @@ fun getRadioNotification(context: Context, playbackState: AllatRadioService.Play
         .setContentText(description.subtitle)
         .setSubText(description.description)
         .setLargeIcon(ContextCompat.getDrawable(context, R.drawable.radio_notif_bg)?.toBitmap())
-        .setSmallIcon(R.drawable.allatra)
+        .setSmallIcon(R.drawable.allatra_small)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .setContentIntent(getActivityPendingIntent(
             context,
@@ -250,7 +250,7 @@ private fun getBasicNotificationBuilder(context: Context, channelId: String, pla
         : NotificationCompat.Builder {
     val notificationSound: Uri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring)
     val nBuilder = NotificationCompat.Builder(context, channelId)
-        .setSmallIcon(R.drawable.allatra)
+        .setSmallIcon(R.drawable.allatra_small)
         .setLights(Color.BLUE, 500, 3000)
         .setAutoCancel(true)
     if (playSound) nBuilder.setSound(notificationSound)

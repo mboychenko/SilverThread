@@ -81,6 +81,10 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
         return fragment
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     private fun lockUnlockConfig(unlock: Boolean? = null) {
         val locked = unlock ?: (configClickGrabber.visibility == View.VISIBLE)
         configClickGrabber.visibility = if (locked) View.GONE else View.VISIBLE

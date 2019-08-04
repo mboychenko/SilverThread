@@ -4,8 +4,10 @@
     <string name="navigation_drawer_open">Открыть навигацию</string>
     <string name="navigation_drawer_close">Закрыть навигацию</string>
 
+    <string name="close">Закрыть</string>
+
     <string name="drawer_name">Серебрянная Нить</string>
-    <string name="meditations">Практики</string>
+    <string name="practices">Практики</string>
     <string name="allat">Аллат</string>
     <string name="quotes">Цитаты</string>
     <string name="r_quote">Случайная Цитата</string>
@@ -14,6 +16,7 @@
     <string name="settings">Настройки</string>
     <string name="notifs">Уведомления</string>
     <string name="devs">Разработчики</string>
+    <string name="web">Сайты</string>
     <string name="about_us">О нас</string>
     <string name="meditations_title">Медитации</string>
     <string name="spiritual_title">Духовные практики</string>
@@ -102,6 +105,10 @@
     <string name="mediadata_title_on_air">On Air</string>
     <string name="mediadata_title_no_connection">No Internet. Waiting</string>
     <string name="mediadata_title_on_air_paused">On Air (Paused)</string>
+    <string name="refresh">Refresh</string>
+    <string name="web_view_general_error">Some site Error or No Internet, check and try again</string>
+    <string name="web_view_net_error_desc">Network description: %s</string>
+    <string name="open_practices">Открыть</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>

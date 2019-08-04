@@ -18,8 +18,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.content.ContextCompat
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog.Companion.QUOTES_NOTIF_SETTINGS_DIALOG_TAG
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog.Companion.QUOTES_NOTIF_SETTINGS_DIALOG_TAG
 import com.allat.mboychenko.silverthread.presentation.helpers.px
 import com.allat.mboychenko.silverthread.presentation.presenters.QuotesPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton

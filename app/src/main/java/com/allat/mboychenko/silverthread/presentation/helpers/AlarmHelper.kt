@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
 import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
 import com.allat.mboychenko.silverthread.presentation.receivers.TimerExpiredReceiver
 import java.util.*

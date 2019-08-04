@@ -20,7 +20,7 @@ import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.com.allat.mboychenko.silverthread.data.storage.cache.CacheDataSourceFactory
+import com.allat.mboychenko.silverthread.data.storage.cache.CacheDataSourceFactory
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import org.koin.android.ext.android.inject
 import com.google.android.exoplayer2.ExoPlaybackException
