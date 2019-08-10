@@ -3,8 +3,9 @@ package com.allat.mboychenko.silverthread.presentation.presenters
 import android.content.Context
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
+import com.allat.mboychenko.silverthread.presentation.helpers.ExecutorThread
+import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnBackgroundWithResult
 import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnComputation
-import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnComputationWithResult
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IQuotesFragmentView
 import com.allat.mboychenko.silverthread.presentation.views.listitems.QuoteItem
 import java.util.*
@@ -33,7 +34,8 @@ class QuotesPresenter(
 
     fun getQuotes() {
         subscriptions.add(
-            runTaskOnComputationWithResult(
+            runTaskOnBackgroundWithResult(
+                ExecutorThread.COMPUTATION,
                 {
                     val quotesItems = mutableListOf<QuoteItem>()
                     val favorites = storage.getFavoriteQuotesPositions()
@@ -68,7 +70,7 @@ class QuotesPresenter(
 
     private val quotesActionListener = object : QuoteItem.QuotesActionListener {
         override fun onShare(quote: String) {
-            view?.shareText(context, quote, context.getString(R.string.share_quote))
+            view?.shareText(quote, context.getString(R.string.share_quote))
         }
 
         override fun onCopy(quote: String) {

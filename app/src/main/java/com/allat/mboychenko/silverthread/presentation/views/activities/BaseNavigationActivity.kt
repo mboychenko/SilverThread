@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_ACTION_QUOTE
@@ -18,11 +19,14 @@ import com.allat.mboychenko.silverthread.presentation.views.fragments.*
 import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.AllatRaWebViewURIConstants
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var toolbar: Toolbar
+    private lateinit var drawer: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var appBar: AppBarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +52,11 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
 
     @CallSuper
     open fun initViews() {
+        toolbar = findViewById(R.id.toolbar)
+        drawer = findViewById(R.id.drawer)
+        navigationView = findViewById(R.id.navigationView)
+        appBar = findViewById(R.id.appBar)
+
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
@@ -57,7 +66,6 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         toggle.syncState()
 
         navigationView.setNavigationItemSelectedListener(this)
-
     }
 
     protected abstract fun webViewLink(uri: String)
@@ -69,6 +77,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
     }
 
     fun getToolbar(): Toolbar = toolbar
+
+    fun getDrawer(): DrawerLayout = drawer
 
     protected fun setFragmentByNavId(navId: Int, updateNavItem: Boolean = false) {
         when (navId) {

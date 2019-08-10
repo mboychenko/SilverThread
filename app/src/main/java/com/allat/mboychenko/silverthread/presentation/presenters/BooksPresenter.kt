@@ -20,8 +20,6 @@ import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IBooksFragmentView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.lang.StringBuilder
@@ -73,13 +71,20 @@ class BooksPresenter(
 
             return books.map {
 
-                val exist = getBookUri(it).toFile().exists()
-                var loadingId: Long = -1
-                if (exist.not()) {
-                    loadings.keys
-                        .find { url -> it.localeDetails.containsValue(BooksConstants.BookDetails(url)) }
-                        ?.let { key -> loadingId = loadings[key] ?: -1 }
-                }
+                var exist = getBookUri(it).toFile().exists()
+
+                var loadingId: Long = -1L
+                loadings.keys
+                    .find { url -> it.localeDetails.containsValue(BooksConstants.BookDetails(url)) }
+                    ?.let { key ->
+                        loadingId = try {
+                            loadings[key] ?: -1L
+                        } catch (e: ClassCastException) {   //weired case
+                            @Suppress("CAST_NEVER_SUCCEEDS")
+                            (loadings[key] as Int).toLong()
+                        }
+                        exist = false
+                    }
 
                 BookItem(
                     book = it,
@@ -259,34 +264,36 @@ class BooksPresenter(
 
     private val onDownloadComplete = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            runTaskOnComputationWithResult({
-                val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            runTaskOnBackgroundWithResult(
+                ExecutorThread.COMPUTATION,
+                {
+                    val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
-                val bookDownload = storage.getBooksLoadingIds()
-                var url: String? = null
-                for (entry in bookDownload) {
-                    if (entry.value == id) {
-                        url = entry.key
-                        break
+                    val bookDownload = storage.getBooksLoadingIds()
+                    var url: String? = null
+                    for (entry in bookDownload) {
+                        if (entry.value == id) {
+                            url = entry.key
+                            break
+                        }
                     }
-                }
 
-                storage.removeIdFromBookLoadings(id)
+                    storage.removeIdFromBookLoadings(id)
 
-                if (url != null) {
-                    val book = booksHelper.getBookByUrl(url)
-                    val bookFile = getBookUri(book).toFile()
-                    if (bookFile.exists().not()) {
-                        NO_SUCH_FILE
+                    if (url != null) {
+                        val book = booksHelper.getBookByUrl(url)
+                        val bookFile = getBookUri(book).toFile()
+                        if (bookFile.exists().not()) {
+                            NO_SUCH_FILE
+                        } else {
+                            book.fileName
+                        }
                     } else {
-                        book.fileName
+                        NO_SUCH_FILE
                     }
-                } else {
-                    NO_SUCH_FILE
-                }
-            },
+                },
                 { fileName ->
-                    if(fileName != NO_SUCH_FILE) {
+                    if (fileName != NO_SUCH_FILE) {
                         view?.bookLoaded(fileName)
                     }
                 })

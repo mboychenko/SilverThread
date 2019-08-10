@@ -17,7 +17,7 @@ val presentersModule = module {
     }
 
     factory {
-        AllatPresenter(androidContext(), get())
+        AllatPresenter(androidContext(), get(), get())
     }
 
     factory {
@@ -48,6 +48,10 @@ val storageModule = module {
 
     factory {
         get<StorageImplementation>() as Storage
+    }
+
+    factory {
+        AppSettingsStorageInteractor(get()) as AppSettingsStorage
     }
 
     factory {

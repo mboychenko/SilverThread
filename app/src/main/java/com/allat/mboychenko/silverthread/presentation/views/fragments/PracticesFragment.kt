@@ -1,5 +1,6 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -69,6 +70,8 @@ class PracticesFragment: Fragment(), IAllatRaFragments, IPracticesFragmentView {
             }
         }
     }
+
+    override fun getViewContext(): Context? = context
 
     override fun onResume() {
         super.onResume()

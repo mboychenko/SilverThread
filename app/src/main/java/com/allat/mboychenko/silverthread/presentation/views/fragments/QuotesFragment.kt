@@ -11,6 +11,7 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_quotes_list.*
 import android.animation.ValueAnimator
+import android.content.Context
 import android.view.*
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AlertDialog
@@ -43,6 +44,8 @@ class QuotesFragment : Fragment(), IQuotesFragmentView {
         }
         setHasOptionsMenu(true)
     }
+
+    override fun getViewContext(): Context? = context
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.favorites_menu_item, menu)
@@ -156,7 +159,7 @@ class QuotesFragment : Fragment(), IQuotesFragmentView {
             .setTitle(R.string.r_quote)
             .setNegativeButton(R.string.hide) { dialog, _ -> dialog.dismiss() }
             .setNeutralButton(R.string.in_favorite) { _, _ -> presenter.addToFavorite(position) }
-            .setPositiveButton(R.string.share) { _, _ -> shareText(context, quote, getString(R.string.share_quote)) }
+            .setPositiveButton(R.string.share) { _, _ -> shareText(quote, getString(R.string.share_quote)) }
         val dialog = builder.create()
         dialog.show()
     }

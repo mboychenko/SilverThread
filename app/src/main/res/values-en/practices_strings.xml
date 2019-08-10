@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--can be updated with CDATA-->
+
+    <string name="practice_category_autoreport">Autogenic trainings</string>
+    <string name="practice_category_meditations">Meditations</string>
+    <string name="practice_category_spiritual">Spiritual practices</string>
+
+    <string name="practice_category_autoreport_description">Autotrenig in itself is precisely self-awareness, a shift of
+        yours “I” from the secondary consciousness to the primary and work with the primary consciousness at the level
+        of primary consciousness. Now we call him in a certain transformed, altered form - an autogenous training,
+        thanks to Schultz, as we already said. But it works at the level of primary consciousness, therefore various
+        changes occur in the body and etc.
+    </string>
+
+    <string name="practice_category_meditations_description">Meditation is a more complicated practice. We work with the
+        help of the primary consciousness with the secondary, we study the system, practically being in the system,
+        delving deeper, only leaving it slightly, we begin to study it, but without harm to ourselves. And meditation in
+        itself, whatever it is, it just remains meditation. This is work at the level of primary consciousness.
+    </string>
+
+    <string name="practice_category_spiritual_description">Spiritual practice - "it is when the Personality going beyond
+        the limits on which consciousness can function." This is precisely what develops the Person. This is observing
+        the primary consciousness, the secondary consciousness, all their combinations, manifestations, self-awareness
+        of oneself as part of the Spiritual World. This is the perception of the Spiritual World. Well, and as the
+        ultimate goal - it is a merger with the Spiritual World or becoming part of It.
+    </string>
+
+    <string name="shultz_autoreport_title">Schultz Autogenic training</string>
+
+    <string name="shultz_autoreport">shultz_autoreport_en</string>
+
+    <string name="altered_consciousness_state_title">Altered state of consciousness</string>
+    <string name="altered_consciousness_state">altered_consciousness_state_en</string>
+
+    <string name="concetration_of_attention_title">Meditation for concentration of attention</string>
+    <string name="concetration_of_attention">concetration_of_attention_en</string>
+
+    <string name="know_yourself_title">Know yourself</string>
+    <string name="know_yourself">Not ready yet</string>
+
+    <string name="kuvshin_title">Jug</string>
+    <string name="kuvshin">kuvshin_en</string>
+
+    <string name="lotus_love_bl_title">«Lotus Flower»: Love and Gratitude</string>
+    <string name="lotus_love_bl">lotus_love_bl_en</string>
+
+    <string name="lotus_title">Lotus Flower</string>
+    <string name="lotus">lotus_en</string>
+
+    <string name="chetverik_title">Chetverik</string>
+    <string name="chetverik">chetverik_en</string>
+
+    <string name="pyramid_title">Pyramid</string>
+    <string name="pyramid">pyramid_en</string>
+
+</resources>

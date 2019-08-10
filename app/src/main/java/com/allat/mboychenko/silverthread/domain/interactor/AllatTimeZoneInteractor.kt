@@ -10,14 +10,14 @@ class AllatTimeZoneInteractor(val storage: Storage) : AllatTimeZoneStorage {
     }
 
     override fun getAllatNotificationStart(): Boolean =
-        storage.getBooleanDefaultFalse(ALLAT_START_PREF_KEY)
+        storage.getBoolean(ALLAT_START_PREF_KEY, false)
 
     override fun allatNotificationEnd(enabled: Boolean) {
         storage.putBoolean(ALLAT_END_PREF_KEY, enabled)
     }
 
     override fun getAllatNotificationEnd(): Boolean =
-        storage.getBooleanDefaultFalse(ALLAT_END_PREF_KEY)
+        storage.getBoolean(ALLAT_END_PREF_KEY, false)
 
     override fun putAllatNotificationBefore(mins: Int) {
         storage.putInt(ALLAT_NOTIFICATION_BEFORE_PREF_KEY, mins)

@@ -16,6 +16,7 @@ class BooksHelper(val context: Context) {
         BooksConstants.BIRDS_AND_STONE,
         BooksConstants.CROSSROADS,
         BooksConstants.UNI_GRAIN,
+        BooksConstants.CONSCIOUSNESS_AND_PERSONALITY,
         BooksConstants.PHYSICS,
         BooksConstants.CLIMATE
     )
@@ -31,6 +32,7 @@ class BooksHelper(val context: Context) {
             BooksConstants.BIRDS_AND_STONE -> context.getString(R.string.birds_and_stone_book_name)
             BooksConstants.CROSSROADS -> context.getString(R.string.crossroads_book_name)
             BooksConstants.UNI_GRAIN -> context.getString(R.string.uni_grain_book_name)
+            BooksConstants.CONSCIOUSNESS_AND_PERSONALITY -> context.getString(R.string.con_and_per_book_name)
             BooksConstants.PHYSICS -> context.getString(R.string.physics_book_name)
             BooksConstants.CLIMATE -> context.getString(R.string.climate_book_name)
             else -> ""

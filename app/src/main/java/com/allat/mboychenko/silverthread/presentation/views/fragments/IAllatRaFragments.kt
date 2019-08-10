@@ -8,14 +8,17 @@ import androidx.fragment.app.FragmentActivity
 import com.allat.mboychenko.silverthread.presentation.views.activities.BaseNavigationActivity
 
 interface IAllatRaFragments {
+
     fun getFragmentTag(): String
 
-    fun shareText(context: Context?, extraText: String, chooserTitle: String) {
+    fun getViewContext(): Context?
+
+    fun shareText(extraText: String, chooserTitle: String) {
         val sharingIntent = Intent(Intent.ACTION_SEND)
         sharingIntent.type = "text/plain"
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "AllatRa Content")
         sharingIntent.putExtra(Intent.EXTRA_TEXT, extraText)
-        context?.startActivity(Intent.createChooser(sharingIntent, chooserTitle))
+        getViewContext()?.startActivity(Intent.createChooser(sharingIntent, chooserTitle))
     }
 
     fun copyToClipboard(context: Context?, copy: String) {
@@ -27,5 +30,7 @@ interface IAllatRaFragments {
     }
 
     fun getToolbar(activity: FragmentActivity?) = activity?.let { (it as BaseNavigationActivity).getToolbar() }
+
+    fun getDrawer(activity: FragmentActivity?) = activity?.let { (it as BaseNavigationActivity).getDrawer() }
 }
 

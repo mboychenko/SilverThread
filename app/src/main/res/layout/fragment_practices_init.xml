@@ -53,10 +53,11 @@
             android:layout_height="wrap_content"
             android:text="@string/open_practices"
             android:paddingEnd="8dp"
+            android:paddingStart="8dp"
             android:paddingBottom="8dp"
             android:textSize="16sp"
             android:drawableEnd="@drawable/arrow_righ"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/yellow_bright"
             app:layout_constraintEnd_toEndOf="@id/autoreports"
             app:layout_constraintBottom_toBottomOf="@id/autoreports"/>
 
@@ -118,10 +119,11 @@
             android:layout_height="wrap_content"
             android:text="@string/open_practices"
             android:paddingEnd="8dp"
+            android:paddingStart="8dp"
             android:paddingBottom="8dp"
             android:textSize="16sp"
             android:drawableEnd="@drawable/arrow_righ"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/yellow_bright"
             app:layout_constraintEnd_toEndOf="@id/meditations"
             app:layout_constraintBottom_toBottomOf="@id/meditations"/>
 
@@ -182,10 +184,11 @@
             android:layout_height="wrap_content"
             android:text="@string/open_practices"
             android:paddingEnd="8dp"
+            android:paddingStart="8dp"
             android:paddingBottom="8dp"
             android:textSize="16sp"
             android:drawableEnd="@drawable/arrow_righ"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/yellow_bright"
             app:layout_constraintEnd_toEndOf="@id/spiritual"
             app:layout_constraintBottom_toBottomOf="@id/spiritual"/>
 

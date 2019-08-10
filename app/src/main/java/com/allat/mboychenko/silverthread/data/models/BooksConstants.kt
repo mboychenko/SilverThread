@@ -126,6 +126,20 @@ object BooksConstants {
         "Physics.pdf"
     )
 
+    val CONSCIOUSNESS_AND_PERSONALITY = Book(
+        mapOf(
+            RU to BookDetails("https://books.allatra.org/books/getfile/pdf/23/ru", 10298732),
+            EN to BookDetails("https://books.allatra.org/books/getfile/pdf/23/en", 2546281),
+            FR to BookDetails("https://books.allatra.org/books/getfile/pdf/23/fr", 1431323),
+            BG to BookDetails("https://books.allatra.org/books/getfile/pdf/23/bg", 2304900),
+            UZ to BookDetails("https://books.allatra.org/books/getfile/pdf/23/uz", 1263165),
+            RO to BookDetails("https://books.allatra.org/books/getfile/pdf/23/ro", 1047592),
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/23/cz", 1446538)
+        ),
+        R.drawable.con_person,
+        "Consciousness And Personality.pdf"
+    )
+
     val CLIMATE = Book(
         mapOf(
             RU to BookDetails("https://books.allatra.org/books/getfile/pdf/25/ru", 44663327),
@@ -178,6 +192,7 @@ object BooksConstants {
         KO("Korean"),
         AM("አማርኛ"),
         ES("Español"),
+        RO("Română"),
         CZ("Čeština");
 
         override fun toString(): String {
@@ -186,5 +201,5 @@ object BooksConstants {
 
     }
 
-    fun getLocales() = listOf(RU, EN, BG, IT, FR, DE, UA, UZ, PL, LV, TR, KO, AM, ES, CZ)
+    fun getLocales() = listOf(RU, EN, BG, IT, FR, DE, UA, UZ, PL, LV, TR, KO, AM, ES, CZ, RO)
 }

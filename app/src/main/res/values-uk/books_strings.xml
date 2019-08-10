@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="allatra_book_name">АллатРа</string>
+    <string name="sensei_1_book_name">Сенсей 1</string>
+    <string name="sensei_2_book_name">Сенсей 2</string>
+    <string name="sensei_3_book_name">Сенсей 3</string>
+    <string name="sensei_4_book_name">Сенсей 4</string>
+    <string name="ezoosmos_book_name">Езоосмос</string>
+    <string name="birds_and_stone_book_name">Птицi та камiнь</string>
+    <string name="crossroads_book_name">Перехрестя</string>
+    <string name="uni_grain_book_name">Єдине зерно</string>
+    <string name="con_and_per_book_name">Свідомість і особистість</string>
+    <string name="physics_book_name">Споконвічна фізика АллатРа</string>
+    <string name="climate_book_name">Звіт про клімат</string>
+</resources>

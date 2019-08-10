@@ -1,6 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -130,7 +131,7 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     }
 
     override fun shareBookLink(bookTitle: String, bookUrl: String) {
-        shareText(context, getString(R.string.link_to_load, bookTitle, bookUrl), getString(R.string.share_link, bookTitle))
+        shareText(getString(R.string.link_to_load, bookTitle, bookUrl), getString(R.string.share_link, bookTitle))
     }
 
     override fun showLoading() {
@@ -140,6 +141,8 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     override fun hideLoading() {
         loadingContainer.visibility = View.GONE
     }
+
+    override fun getViewContext(): Context? = context
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
@@ -157,7 +160,7 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
 
                     } else {
                         presenter.requestPermissionRemoveData()
-                        Toast.makeText(context, "permission not granted", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, R.string.no_permissions, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -167,10 +170,12 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     }
 
     private fun getBookItem(bookName: String): BookItem? {
-        for (i in 0..booksItemsSection.itemCount) {
-            val bookItem = booksItemsSection.getItem(i) as BookItem
-            if (bookItem.book.fileName == bookName) {
-                return bookItem
+        if (booksItemsSection.itemCount > 0) {
+            for (i in 0..booksItemsSection.itemCount) {
+                val bookItem = booksItemsSection.getItem(i) as BookItem
+                if (bookItem.book.fileName == bookName) {
+                    return bookItem
+                }
             }
         }
         return null

@@ -40,7 +40,7 @@ class StorageImplementation(val context: Context) : Storage {
         editor.apply()
     }
 
-    override fun getBooleanDefaultFalse(key: String) = preferences.getBoolean(key, false)
+    override fun getBoolean(key: String, default: Boolean) = preferences.getBoolean(key, default)
 
     override fun putBoolean(key: String, value: Boolean) {
         val editor = preferences.edit()

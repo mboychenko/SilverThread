@@ -1,6 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.views.activities
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -75,6 +76,7 @@ class BookReaderActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun pageSelectDialog() {
         val view = layoutInflater.inflate(R.layout.select_page_layout, null)
         val editText = view.findViewById<EditText>(R.id.page_number)
@@ -117,7 +119,7 @@ class BookReaderActivity : AppCompatActivity() {
                     if (grantResult == PackageManager.PERMISSION_GRANTED) {
                         loadBook()
                     } else {
-                        Toast.makeText(this, "permission not granted", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, R.string.no_permissions, Toast.LENGTH_LONG).show()
                     }
                 }
             }

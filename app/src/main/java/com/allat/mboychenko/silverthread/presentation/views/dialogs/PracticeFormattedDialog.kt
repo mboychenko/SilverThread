@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.presentation.helpers.fromHtmlCompat
+import com.allat.mboychenko.silverthread.presentation.helpers.htmlFromAssetsCompat
 
 class PracticeFormattedDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.prectice_dialog_fragment, container, false)
 
-        arguments?.getInt(DIALOG_TITLE_RES)?.let {
-            view.findViewById<TextView>(R.id.title).text = getString(it)
-        }
-        arguments?.getInt(DIALOG_TEXT_RES)?.let {
-            view.findViewById<TextView>(R.id.text).text = fromHtmlCompat(context, it)
+        arguments?.let {
+            it.getString(DIALOG_TITLE)?.let { title -> view.findViewById<TextView>(R.id.title).text = title }
+            it.getString(DIALOG_TEXT)?.let { text ->
+                view.findViewById<TextView>(R.id.text).text = htmlFromAssetsCompat(text)
+            }
         }
 
         view.findViewById<View>(R.id.close).setOnClickListener { dismiss() }
@@ -29,19 +29,20 @@ class PracticeFormattedDialog : DialogFragment() {
         super.onResume()
         dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
+
     companion object {
-        fun newInstance(titleRes: Int, textRes: Int): PracticeFormattedDialog {
+        fun newInstance(title: String, text: String): PracticeFormattedDialog {
             val dialog = PracticeFormattedDialog()
             val args = Bundle().apply {
-                putInt(DIALOG_TITLE_RES, titleRes)
-                putInt(DIALOG_TEXT_RES, textRes)
+                putString(DIALOG_TITLE, title)
+                putString(DIALOG_TEXT, text)
             }
             dialog.arguments = args
             return dialog
         }
 
-        private const val DIALOG_TITLE_RES = "DIALOG_TITLE"
-        private const val DIALOG_TEXT_RES = "DIALOG_TEXT"
+        private const val DIALOG_TITLE = "DIALOG_TITLE"
+        private const val DIALOG_TEXT = "DIALOG_TEXT"
         const val PRACTICES_DIALOG_TAG = "PRACTICES_DIALOG_TAG"
     }
 }

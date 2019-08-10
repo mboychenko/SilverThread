@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Silver Thread</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="close">Close</string>
+    <string name="drawer_name">Silver Thread</string>
+    <string name="practices">Practices</string>
+    <string name="allat">Allat</string>
+    <string name="quotes">Quotes</string>
+    <string name="r_quote">Random Quote</string>
+    <string name="books">Books</string>
+    <string name="active_signs">Active signs</string>
+    <string name="settings">Settings</string>
+    <string name="notifs">Notifications</string>
+    <string name="devs">Developers</string>
+    <string name="web">Web Resources</string>
+    <string name="about_us">About us</string>
+    <string name="meditations_title">Meditations</string>
+    <string name="spiritual_title">Spiritual practices</string>
+    <string name="share_link">Share %s download link</string>
+    <string name="share_quote">Share quote</string>
+    <string name="time_to_group_meditation">Time to Allat:</string>
+    <string name="allat_started_meditation">Allat is in process, time left:</string>
+    <string name="hide">Hide</string>
+    <string name="share">Share</string>
+    <string name="copy">Copy</string>
+    <string name="radio">Radio</string>
+    <string name="allatra_tv">AllatRa TV</string>
+    <string name="znai">Search</string>
+    <string name="allatra_org">AllatRa.Org</string>
+    <string name="vesti">Vesti</string>
+    <string name="science">AllatRa Science</string>
+    <string name="partner">Partner Agreement</string>
+    <string name="craudfaunding">Craudfaunding</string>
+    <string name="geo_center">GeoCenter</string>
+    <string name="load">Load</string>
+    <string name="downloading">Downloading…</string>
+    <string name="select_language_load">Chose book language:</string>
+    <string name="delete_confirmation">Are you sure, delete %s</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_language_share">Chose book language to share:</string>
+    <string name="filter_by_language">Filter by language:</string>
+    <string name="all">All</string>
+    <string name="link_to_load">Link to load %s\n%s</string>
+    <string name="click_to_unlock">Click to Unlock</string>
+    <string name="click_to_lock">Click to Lock</string>
+    <string name="timezone_config_description">This configuration will bind all notifications and time on Allat screen
+        to this timezone, you can change it anytime you want in configuration section of Allat screen</string>
+    <string name="timezone_config_local">Local timezone its timezone of your device.</string>
+    <string name="timezone_config_kiev">Kiev timezone has summer time automatic update etc.</string>
+    <string name="timezone_config_gmt">Greenwich doesn\'t have summer time.</string>
+    <string name="timezones_info">Timezones Info:</string>
+    <string name="timezone_config_btn_local">Local</string>
+    <string name="timezone_config_btn_kiev">Kiev</string>
+    <string name="timezone_config_btn_gmt">Greenwich</string>
+    <string name="select_allat_timezone">Select Allat timezone:</string>
+    <string name="change_timezone">Change timezone:</string>
+    <string name="none">None</string>
+    <string name="ring_on_end">Ring on end:</string>
+    <string name="ring_on_start">Ring on start:</string>
+    <string name="notify_before_min">Notify before min.:</string>
+    <string name="allat_reminder">Reminder of Allat</string>
+    <string name="allat_has_started">Allat is started!</string>
+    <string name="allat_has_ended">Allat is over!</string>
+    <string name="random_quote">Random Quote</string>
+    <string name="select_page">Go to page:</string>
+    <string name="select_page_hint">From 1 to %d</string>
+    <string name="no_items_to_show">No items to show</string>
+    <string name="favorite">Favorite</string>
+    <string name="remove_from_fav">Remove from Favorite</string>
+    <string name="add_to_fav">Add to Favorites</string>
+    <string name="in_favorite">To Favorites</string>
+    <string name="random_quotes">Random quotes</string>
+    <string name="random_quotes_description">This setting will allow you to get random quotes from books at random times.
+        You can only configure the number of such quotes per day from 0 to 2. \n- Where 2 means that in one day there can be no
+        quotes at all, maybe one or two. \n- 1 means either not one or only one per day. \n- 0 disables these notifications.
+        \nNotifications can appear from 8 a.m. local time of the device and until 10 p.m., except Allat time, from 30 minutes before and 50 after. So, if your Allat time is local, 9 and 21,
+        then in the intervals 8:30am/pm - 9:50am/pm notifications will not be shown.
+    </string>
+    <string name="num_of_quotes_per_day">Number of quotes</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="on_air">On Air</string>
+    <string name="on_air_paused">On Air (Paused)</string>
+    <string name="radio_error">Server error</string>
+    <string name="buffering">Loading…</string>
+    <string name="no_internet">No internet, check your connectivity and try again</string>
+    <string name="mediadata_artist">AllatRa</string>
+    <string name="mediadata_album">Radio</string>
+    <string name="mediadata_title_on_air">On Air</string>
+    <string name="mediadata_title_no_connection">No Internet. Waiting</string>
+    <string name="mediadata_title_on_air_paused">On Air (Paused)</string>
+    <string name="refresh">Refresh</string>
+    <string name="web_view_general_error">Some site Error or No Internet, check and try again. For some regions, some web resources available only through VPN</string>
+    <string name="web_view_net_error_desc">Error description: %s</string>
+    <string name="open_practices">Open</string>
+    <string name="no_permissions">Permission not granted</string>
+
+    <plurals name="mins_to_allat">
+        <item quantity="one">%d minute to Allat</item>
+        <item quantity="other">%d minutes to Allat</item>
+    </plurals>
+
+</resources>

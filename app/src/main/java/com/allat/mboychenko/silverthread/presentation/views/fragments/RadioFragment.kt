@@ -1,6 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ import com.allat.mboychenko.silverthread.R
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import com.allat.mboychenko.silverthread.presentation.helpers.bind
 import com.allat.mboychenko.silverthread.presentation.helpers.px
 import com.allat.mboychenko.silverthread.presentation.presenters.RadioPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,8 +31,8 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
     private lateinit var onlineStatus: AppCompatTextView
     private lateinit var stopFab: FloatingActionButton
     private lateinit var playFab: FloatingActionButton
-//    private lateinit var pauseFab: FloatingActionButton
-    private val pauseFab: FloatingActionButton by bind(R.id.pauseFab)
+    private lateinit var pauseFab: FloatingActionButton
+//    private val pauseFab: FloatingActionButton by bind(R.id.pauseFab)
 
     private var currentPlayerButtonsState = PlayerButtonsState.INIT
 
@@ -58,7 +58,7 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
             }
         }
 
-//        pauseFab = view.findViewById(R.id.pauseFab)
+        pauseFab = view.findViewById(R.id.pauseFab)
         pauseFab.setOnClickListener {
             pauseButtonState()
             presenter.pause()
@@ -75,6 +75,8 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
         onlineStatus = view.findViewById(R.id.onlineStatus)
         return view
     }
+
+    override fun getViewContext(): Context? = context
 
     override fun stopButtonState() {
         currentPlayerButtonsState = PlayerButtonsState.INIT

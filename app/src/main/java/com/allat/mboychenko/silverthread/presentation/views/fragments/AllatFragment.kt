@@ -1,11 +1,13 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
@@ -81,9 +83,7 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
         return fragment
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+    override fun getViewContext(): Context? = context
 
     private fun lockUnlockConfig(unlock: Boolean? = null) {
         val locked = unlock ?: (configClickGrabber.visibility == View.VISIBLE)
@@ -103,6 +103,10 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
 
     override fun changeTimezoneSetupVisibility(visible: Boolean) {
         timezoneContainer.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    override fun openDrawer() {
+        getDrawer(activity)?.openDrawer(GravityCompat.START)
     }
 
     override fun onResume() {

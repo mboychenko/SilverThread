@@ -1,116 +1,124 @@
-<resources>
-    <string name="app_name">Silver Thread</string>
+<resources xmlns:tools="http://schemas.android.com/tools"
+           tools:ignore="MissingTranslation">
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_name">Серебрянная Нить</string>
 
-    <string name="close">Close</string>
+    <string name="navigation_drawer_open">Открыть навигацию</string>
+    <string name="navigation_drawer_close">Закрыть навигацию</string>
 
-    <string name="drawer_name">Silver Thread</string>
-    <string name="practices">Practices</string>
-    <string name="allat">Allat</string>
-    <string name="quotes">Quotes</string>
-    <string name="r_quote">Random Quote</string>
-    <string name="books">Books</string>
-    <string name="active_signs">Active signs</string>
-    <string name="settings">Settings</string>
-    <string name="notifs">Notifications</string>
-    <string name="devs">Developers</string>
-    <string name="web">Web Resources</string>
-    <string name="about_us">About us</string>
-    <string name="meditations_title">Meditations</string>
-    <string name="spiritual_title">Spiritual practices</string>
+    <string name="close">Закрыть</string>
 
-    <string name="share_link">Share %s download link</string>
-    <string name="share_quote">Share quote</string>
+    <string name="drawer_name">Серебрянная Нить</string>
+    <string name="practices">Практики</string>
+    <string name="allat">Аллат</string>
+    <string name="quotes">Цитаты</string>
+    <string name="r_quote">Случайная Цитата</string>
+    <string name="books">Книги</string>
+    <string name="active_signs">Активные знаки</string>
+    <string name="settings">Настройки</string>
+    <string name="notifs">Уведомления</string>
+    <string name="devs">Разработчики</string>
+    <string name="web">Сайты</string>
+    <string name="about_us">О нас</string>
+    <string name="meditations_title">Медитации</string>
+    <string name="spiritual_title">Духовные практики</string>
 
+    <string name="share_link">Поделится сылкой на загрузку %s</string>
+    <string name="share_quote">Поделится цитатой</string>
 
-    <string name="time_to_group_meditation">Time to Allat:</string>
-    <string name="allat_started_meditation">Allat is in process, time left:</string>
-    <string name="hide">Hide</string>
-    <string name="share">Share</string>
-    <string name="copy">Copy</string>
+    <string name="time_to_group_meditation">Время до начала Аллата:</string>
+    <string name="allat_started_meditation">Аллат. До конца осталось:</string>
 
-    <string name="radio">Radio</string>
-    <string name="allatra_tv">AllatRa TV</string>
-    <string name="znai">Search</string>
-    <string name="allatra_org">AllatRa.Org</string>
-    <string name="vesti">Vesti</string>
-    <string name="science">AllatRa Science</string>
-    <string name="partner">Partner Agreement</string>
-    <string name="craudfaunding">Craudfaunding</string>
-    <string name="geo_center">GeoCenter</string>
-    <string name="load">Load</string>
-    <string name="downloading">Downloading…</string>
-    <string name="select_language_load">Chose book language:</string>
-    <string name="delete_confirmation">Are you sure, delete %s</string>
-    <string name="yes">Yes</string>
-    <string name="cancel">Cancel</string>
-    <string name="select_language_share">Chose book language to share:</string>
-    <string name="filter_by_language">Filter by language:</string>
-    <string name="all">All</string>
-    <string name="link_to_load">Link to load %s\n%s</string>
-    <string name="click_to_unlock">Click to Unlock</string>
-    <string name="click_to_lock">Click to Lock</string>
-    <string name="timezone_config_description">This configuration will bind all notifications and time on Allat screen
-        to this timezone, you can change it anytime you want in configuration section of this screen
-    </string>
-    <string name="timezone_config_local">Local timezone its timezone of your device.</string>
-    <string name="timezone_config_kiev">Kiev timezone has summer time automatic update etc.</string>
-    <string name="timezone_config_gmt">Greenwich doesn\'t have summer time.</string>
-    <string name="timezones_info">Timezones Info:</string>
-    <string name="timezone_config_btn_local">Local</string>
-    <string name="timezone_config_btn_kiev">Kiev</string>
-    <string name="timezone_config_btn_gmt">Greenwich</string>
-    <string name="select_allat_timezone">Select Allat timezone:</string>
-    <string name="change_timezone">Change timezone:</string>
-    <string name="none">None</string>
-    <string name="ring_on_end">Ring on end:</string>
-    <string name="ring_on_start">Ring on start:</string>
-    <string name="notify_before_min">Notify before min.:</string>
+    <string name="hide">Закрыть</string>
+    <string name="share">Поделится</string>
+    <string name="copy">Копировать</string>
+
+    <string name="radio">Радио</string>
+    <string name="allatra_tv">АллатРа ТВ</string>
+    <string name="znai">Поиск</string>
+    <string name="allatra_org">АллатРа.Org</string>
+    <string name="vesti">Вести</string>
+    <string name="science">АллатРа Наука</string>
+    <string name="partner">Партнерское соглашение</string>
+    <string name="craudfaunding">Краудфаундинг</string>
+    <string name="geo_center">ГеоЦентр</string>
+    <string name="load">Загрузить</string>
+    <string name="select_language_load">Выберите язык книги:</string>
+    <string name="select_language_share">Выберите язык книги что-бы поделится:</string>
+    <string name="filter_by_language">Фильтр по языку:</string>
+    <string name="all">Все</string>
+    <string name="link_to_load">Ссылка на загрузку %s\n%s</string>
+    <string name="click_to_unlock">Разблокировать</string>
+    <string name="click_to_lock">Заблокировать</string>
+
+    <string name="downloading">Загрузка…</string>
+    <string name="delete_confirmation">Вы уверены, удалить %s?</string>
+    <string name="yes">Да</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="timezone_config_description">От выбранной временной зоны будут зависить время Аллата, нотификациии связанные с Аллатом и случайные нотификации, вы можете изменить эту настройку в любое время на экране Аллата в зоне конфигураций</string>
+    <string name="timezone_config_local">Локальная временная зона - это временная зона вашего устройства, она настроенна вручную или автоматически в зависимости от геолокации.</string>
+    <string name="timezone_config_kiev">Киевская временная зона - это временная зона по Киеву, в ней есть летнее время и оно автоматически поддерживается\обновляется.</string>
+    <string name="timezone_config_gmt">Гринвич - это временная зона по Гринвичу, в ней нет летнего времени.</string>
+    <string name="timezones_info">Информация о часовых поясах:</string>
+    <string name="timezone_config_btn_local">Локальная</string>
+    <string name="timezone_config_btn_kiev">Киев</string>
+    <string name="timezone_config_btn_gmt">Гринвич</string>
+    <string name="select_allat_timezone">Выберите часовой пояс Аллата:</string>
+    <string name="change_timezone">Изменить часовой пояс:</string>
+    <string name="none">Нет</string>
+    <string name="ring_on_end">Сигнал о конце:</string>
+    <string name="ring_on_start">Сигнал о начале:</string>
+    <string name="notify_before_min">Напомнить за мин.:</string>
     <string name="allat_reminder">Напоминаниие Аллата</string>
     <string name="allat_has_started">Аллат начался!</string>
     <string name="allat_has_ended">Аллат завершился!</string>
     <string name="random_quote">Случайная Цитата</string>
-    <string name="select_page">Go to page:</string>
-    <string name="select_page_hint">From 1 to %d</string>
-    <string name="no_items_to_show">No items to show</string>
-    <string name="favorite">Favorite</string>
-    <string name="remove_from_fav">Remove from Favorite</string>
-    <string name="add_to_fav">Add to Favorites</string>
-    <string name="in_favorite">To Favorites</string>
+    <string name="select_page">Перейти на страницу:</string>
+    <string name="select_page_hint">От 1 до %d</string>
+    <string name="no_items_to_show">Список пуст</string>
+    <string name="favorite">Избранные</string>
+    <string name="in_favorite">В Избранные</string>
+    <string name="remove_from_fav">Убрать из Избранных</string>
+    <string name="add_to_fav">Добавить в Избранные</string>
     <string name="random_quotes">Случайные Цитаты</string>
     <string name="random_quotes_description">Эта настройка позволит получать случайные цитаты из книг в случайное время.
-        Настроить можно лишь колличество таких цитат в день от 0 до 2. - Где 2 значит, что в одни сутки может не быть ни
-        одной цитаты, может быть одна или две. - 1 значит или ни одной или одна в сутки. - 0 отключает эти уведомления.
+        Настроить можно лишь количество таких цитат в день от 0 до 2. \n - Где 2 значит, что в одни сутки может не быть ни
+        одной цитаты, может быть одна или две. \n - 1 значит ни одной или одна в сутки. \n - 0 отключает эти уведомления.
         Уведомления могут появлятся с 8 часов утра локального времени устройства до 10 часов вечера, за исключением
         выбранного времени Аллата с отступом 30 минут до и 50 после. То-есть, если ваше время Аллата локальное, 9 и 21,
-        то в промежутках 8:30 - 9:50 и 20:30 - 21:50 нотификаций не будет
+        то в промежутках 8:30 - 9:50 и 20:30 - 21:50 нотификаций не будет.
     </string>
     <string name="num_of_quotes_per_day">Колличество цитат</string>
-    <string name="play">Play</string>
-    <string name="pause">Pause</string>
-    <string name="stop">Stop</string>
-    <string name="online">Online</string>
-    <string name="offline">Offline</string>
-    <string name="on_air">On Air</string>
-    <string name="on_air_paused">On Air (Paused)</string>
-    <string name="radio_error">Server error</string>
-    <string name="buffering">Loading…</string>
-    <string name="no_internet">No internet, check your connectivity and try again</string>
-    <string name="mediadata_artist">AllatRa</string>
-    <string name="mediadata_album">Radio</string>
-    <string name="mediadata_title_on_air">On Air</string>
-    <string name="mediadata_title_no_connection">No Internet. Waiting</string>
-    <string name="mediadata_title_on_air_paused">On Air (Paused)</string>
-    <string name="refresh">Refresh</string>
-    <string name="web_view_general_error">Some site Error or No Internet, check and try again</string>
-    <string name="web_view_net_error_desc">Network description: %s</string>
+    <string name="play">Играть</string>
+    <string name="pause">Пауза</string>
+    <string name="stop">Стоп</string>
+    <string name="online">Онлайн</string>
+    <string name="offline">Оффлайн</string>
+    <string name="on_air">В Эфире</string>
+    <string name="on_air_paused">В Эфире (Пауза)</string>
+    <string name="radio_error">Ошибка Сервера</string>
+    <string name="buffering">Загрузка…</string>
+    <string name="no_internet">Нет интернета, проверьте соединение и попробуйте снова</string>
+    <string name="mediadata_artist">АллатРа</string>
+    <string name="mediadata_album">Радио</string>
+    <string name="mediadata_title_on_air">В Эфиире</string>
+    <string name="mediadata_title_no_connection">Нет Интернета. Ожидание</string>
+    <string name="mediadata_title_on_air_paused">В Эфире (Пауза)</string>
+    <string name="refresh">Обновить</string>
+    <string name="web_view_general_error">Внутренняя ошибка сайта или проблемы с соединением, проверьте соединениие ии попробуйте снова. Для определенных регионов некоторые ресурсы доступны только под VPN</string>
+    <string name="web_view_net_error_desc">Описание ошиибки: %s</string>
     <string name="open_practices">Открыть</string>
+    <string name="no_permissions">У приложения не хватает разрешений</string>
+    <string name="settings_icon">Settings icon</string>
+    <string name="lock_icon">Lock Icon</string>
 
     <plurals name="mins_to_allat">
-        <item quantity="one">%d minute to Allat</item>
-        <item quantity="other">%d minutes to Allat</item>
+        <item quantity="one">%d минута до Аллата</item>
+        <item quantity="two">%d минуты до Аллата</item>
+        <item quantity="few">%d минуты до Аллата</item>
+        <item quantity="many">%d минут до Аллата</item>
+        <item quantity="other">%d минут до Аллата</item>
     </plurals>
 
 </resources>
