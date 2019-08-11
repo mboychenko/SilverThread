@@ -33,10 +33,10 @@ class BooksPresenter(
 
     override fun attachView(view: IBooksFragmentView) {
         super.attachView(view)
-        FileLoaderService.commandRefreshLoadings(context)
         LocalBroadcastManager.getInstance(context)
             .registerReceiver(booksLoadingReceiver, IntentFilter(BOOKS_UPDATE_BROADCAST_ACTION))
         context.registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        FileLoaderService.commandRefreshLoadings(context)
     }
 
     override fun detachView() {
@@ -246,6 +246,7 @@ class BooksPresenter(
         override fun onReceive(context: Context?, intent: Intent?) {
 
             val cancelledFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_CANCELLED_LOADING)
+            val loadedFileName = intent?.getStringExtra(FileLoaderService.BOOKS_UPDATE_ACTION_LOADED)
 
             val loadingId = intent?.getLongExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_ID, -1)
             val loadingFileName = intent?.getStringExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_FILENAME)
@@ -257,6 +258,10 @@ class BooksPresenter(
 
             cancelledFileName?.let {
                 view?.bookLoadingCancelled(it)
+            }
+
+            loadedFileName?.let {
+                view?.bookLoaded(it)
             }
 
         }

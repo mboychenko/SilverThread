@@ -56,7 +56,6 @@ class StorageImplementation(val context: Context) : Storage {
         val jsonObject = JSONObject(map)
         val jsonString = jsonObject.toString()
         val editor = preferences.edit()
-        editor.remove(key).commit()
         editor.putString(key, jsonString)
         editor.commit()
     }

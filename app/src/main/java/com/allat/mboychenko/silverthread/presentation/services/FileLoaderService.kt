@@ -4,6 +4,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.core.app.JobIntentService
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
@@ -72,17 +73,22 @@ class FileLoaderService : JobIntentService() {
 
                 DownloadManager.STATUS_SUCCESSFUL,
                 DownloadManager.STATUS_FAILED -> {
-                    finishLoading(url, id)
+                    finishLoading(url, id, c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS)))
                 }
             }
         }
     }
 
-    private fun finishLoading(url: String, id: Long) {
+    private fun finishLoading(url: String, id: Long, status: Int = -1) {
         storage.removeIdFromBookLoadings(id)
         val fileName = booksHelper.getBookByUrl(url).fileName
+        val extraKeyAction = if (status == DownloadManager.STATUS_SUCCESSFUL) {
+            BOOKS_UPDATE_ACTION_LOADED
+        } else {
+            BOOKS_UPDATE_ACTION_CANCELLED_LOADING
+        }
         localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
-            .apply { putExtra(BOOKS_UPDATE_ACTION_CANCELLED_LOADING, fileName) })
+            .apply { putExtra(extraKeyAction, fileName) })
     }
 
     private fun loadFile(url: String, dirPath: String, fileName: String) {
@@ -142,6 +148,7 @@ class FileLoaderService : JobIntentService() {
         const val BOOKS_UPDATE_BROADCAST_ACTION = "BOOKS_UPDATE_BROADCAST_ACTION"
 
         const val BOOKS_UPDATE_ACTION_CANCELLED_LOADING = "BOOKS_UPDATE_ACTION_CANCELLED_LOADING"
+        const val BOOKS_UPDATE_ACTION_LOADED = "BOOKS_UPDATE_ACTION_LOADED"
         const val BOOKS_UPDATE_ACTION_START_LOADING_ID = "BOOKS_UPDATE_ACTION_START_LOADING_ID"
         const val BOOKS_UPDATE_ACTION_START_LOADING_FILENAME = "BOOKS_UPDATE_ACTION_START_LOADING_FILENAME"
 
