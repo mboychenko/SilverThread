@@ -42,7 +42,7 @@ class WebViewActivity : BaseNavigationActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        currentUrl = savedInstanceState?.getString(SAVED_CURRENT_URL, intent?.data.toString()) ?: URI_ALLATRA_TV
+        currentUrl = savedInstanceState?.getString(SAVED_CURRENT_URL, URI_ALLATRA_TV) ?: intent?.data?.toString() ?: URI_ALLATRA_TV
         savedInstanceState?.getStringArrayList(SAVED_WEB_BACKSTACK)?.let {
             webBackStackQueue.clear()
             webBackStackQueue.addAll(it)
