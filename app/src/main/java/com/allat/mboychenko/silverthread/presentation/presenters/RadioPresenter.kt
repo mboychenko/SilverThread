@@ -1,15 +1,16 @@
 package com.allat.mboychenko.silverthread.presentation.presenters
 
+import android.Manifest
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.IBinder
+import androidx.core.content.ContextCompat
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.presentation.helpers.ConnectionStateMonitor
-import com.allat.mboychenko.silverthread.presentation.helpers.InternetAvailability
-import com.allat.mboychenko.silverthread.presentation.helpers.hasInternetAccess
+import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.services.AllatRadioService
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IRadioFragmentView
 import com.allat.mboychenko.silverthread.presentation.views.fragments.RadioFragment
@@ -28,6 +29,19 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
             updateOnlineStatus(false)
         }
     })
+
+    fun onCreate() {
+        runTaskOnBackgroundWithResult(
+            ExecutorThread.IO,
+            {
+                ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
+            },
+            { result ->
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    view?.requestPhonePermission()
+                }
+            })
+    }
 
     private fun updateOnlineStatus(online: Boolean) {
         noInternet = online.not()

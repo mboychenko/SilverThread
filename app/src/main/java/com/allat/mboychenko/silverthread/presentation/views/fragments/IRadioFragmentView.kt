@@ -7,6 +7,7 @@ interface IRadioFragmentView {
     fun getCurrentPlayerButtonsState(): RadioFragment.PlayerButtonsState
     fun updateOnlineStatus(online: Boolean)
     fun updateOnAirStatus(colorId: Int, textId: Int = R.string.on_air)
+    fun requestPhonePermission()
     fun stopButtonState()
     fun pauseButtonState()
     fun playButtonState()

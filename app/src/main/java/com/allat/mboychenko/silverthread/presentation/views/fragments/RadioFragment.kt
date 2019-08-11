@@ -1,8 +1,11 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
+import android.Manifest
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +19,9 @@ import com.allat.mboychenko.silverthread.R
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.allat.mboychenko.silverthread.presentation.helpers.ExecutorThread
 import com.allat.mboychenko.silverthread.presentation.helpers.px
+import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnBackgroundWithResult
 import com.allat.mboychenko.silverthread.presentation.presenters.RadioPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.inject
@@ -38,6 +43,19 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
 
     override fun getCurrentPlayerButtonsState() = currentPlayerButtonsState
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        presenter.onCreate()
+    }
+
+    override fun requestPhonePermission() {
+        try {
+            requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), PERMISSION_REQUEST_CODE)
+        } catch (e: Exception) {
+            Log.e("Permission request fail", e.message)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +65,8 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
         playFab = view.findViewById(R.id.playFab)
         playFab.setOnClickListener {
             if (presenter.noInternet && (currentPlayerButtonsState == PlayerButtonsState.IDLE ||
-                        currentPlayerButtonsState == PlayerButtonsState.INIT)) {
+                        currentPlayerButtonsState == PlayerButtonsState.INIT)
+            ) {
                 presenter.checkOnline()
                 Snackbar.make(view, getString(R.string.no_internet), Snackbar.LENGTH_LONG)
                     .setActionTextColor(ContextCompat.getColor(context!!, android.R.color.holo_red_light))
@@ -128,11 +147,21 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
             onlineStatus.text = getString(R.string.online)
             val activeColor = ContextCompat.getColor(context!!, R.color.green)
             onlineStatus.setTextColor(activeColor)
-            onlineStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(AppCompatResources.getDrawable(context!!, R.drawable.ic_online), null, null, null)
+            onlineStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                AppCompatResources.getDrawable(
+                    context!!,
+                    R.drawable.ic_online
+                ), null, null, null
+            )
         } else {
             onlineStatus.text = getString(R.string.offline)
             onlineStatus.setTextColor(ContextCompat.getColor(context!!, R.color.red))
-            onlineStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(AppCompatResources.getDrawable(context!!, R.drawable.ic_offline), null, null, null)
+            onlineStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                AppCompatResources.getDrawable(
+                    context!!,
+                    R.drawable.ic_offline
+                ), null, null, null
+            )
         }
     }
 
@@ -175,6 +204,15 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
         presenter.detachView()
     }
 
+    fun checkPhonePermission(context: Context): Boolean {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            return false
+        }
+        return true
+    }
+
     override fun getFragmentTag(): String = RADIO_FRAGMENT_TAG
 
     enum class PlayerButtonsState {
@@ -186,6 +224,7 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
 
     companion object {
         const val RADIO_FRAGMENT_TAG = "RADIO_FRAGMENT_TAG"
+        const val PERMISSION_REQUEST_CODE = 772
     }
 
 }
