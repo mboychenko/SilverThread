@@ -1,13 +1,12 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
-import android.content.Context
-import androidx.fragment.app.Fragment
+import com.allat.mboychenko.silverthread.R
 
-class AboutFragment : Fragment(), IAllatRaFragments {
+class AboutFragment : BaseAllatRaFragment() {
 
     override fun getFragmentTag(): String = ABOUT_FRAGMENT_TAG
 
-    override fun getViewContext(): Context? = context
+    override fun toolbarTitle(): Int = R.string.about_us
 
     companion object {
         const val ABOUT_FRAGMENT_TAG = "ABOUT_FRAGMENT_TAG"

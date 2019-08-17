@@ -28,6 +28,10 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                        android:id="@+id/nav_tv_im"
+                        android:icon="@drawable/ic_live_tv"
+                        android:title="@string/allatra_tv_im"/>
+                <item
                         android:id="@+id/nav_tv"
                         android:icon="@drawable/ic_live_tv"
                         android:title="@string/allatra_tv"/>
@@ -44,6 +48,10 @@
                         android:icon="@drawable/ic_vesti"
                         android:title="@string/vesti"/>
                 <item
+                        android:id="@+id/nav_geo"
+                        android:icon="@drawable/ic_terrain_geo"
+                        android:title="@string/geo_center"/>
+                <item
                         android:id="@+id/nav_science"
                         android:icon="@drawable/ic_science"
                         android:title="@string/science"/>
@@ -55,10 +63,6 @@
                         android:id="@+id/nav_craud"
                         android:icon="@drawable/ic_craud"
                         android:title="@string/craudfaunding"/>
-                <item
-                        android:id="@+id/nav_geo"
-                        android:icon="@drawable/ic_terrain_geo"
-                        android:title="@string/geo_center"/>
             </group>
         </menu>
     </item>

@@ -1,7 +1,6 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -11,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.data.models.BooksConstants
@@ -28,12 +26,14 @@ import kotlinx.android.synthetic.main.fragment_books_list.*
 import kotlinx.android.synthetic.main.fragment_books_list.view.*
 import org.koin.android.ext.android.inject
 
-class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
+class BooksFragment : BaseAllatRaFragment(), IBooksFragmentView {
 
     private val presenter : BooksPresenter by inject()
     private val booksItemsSection = Section()
 
     override fun getFragmentTag(): String = BOOKS_FRAGMENT_TAG
+
+    override fun toolbarTitle(): Int = R.string.books
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -141,8 +141,6 @@ class BooksFragment: Fragment(), IAllatRaFragments, IBooksFragmentView {
     override fun hideLoading() {
         loadingContainer.visibility = View.GONE
     }
-
-    override fun getViewContext(): Context? = context
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == PERMISSION_REQUEST_CODE) {

@@ -30,6 +30,7 @@ class WebViewActivity : BaseNavigationActivity() {
     private lateinit var webView: NestedWebView
     private lateinit var refresh: TextView
     private lateinit var errorDesc: TextView
+    private lateinit var errorTitle: TextView
 
     private fun <E> Queue<E>.addUrl(value: E) {
         if (value == ABOUT_BLANK) {
@@ -51,6 +52,7 @@ class WebViewActivity : BaseNavigationActivity() {
 
         progressBar = findViewById(R.id.progress)
         errorView = findViewById(R.id.error_internet)
+        errorTitle = findViewById(R.id.no_internet_title)
         errorDesc = findViewById(R.id.no_internet_desc)
         webView = findViewById(R.id.webViewWindow)
         refresh = findViewById(R.id.refresh)
@@ -123,7 +125,8 @@ class WebViewActivity : BaseNavigationActivity() {
 
                 progressBar.visibility = View.GONE
                 errorView.visibility = View.VISIBLE
-                errorDesc.text = getString(R.string.web_view_net_error_desc, description ?: "")
+
+                setupError(description ?: "")
             }
 
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
@@ -133,13 +136,23 @@ class WebViewActivity : BaseNavigationActivity() {
                         return
                     }
 
-                    errorDesc.text = getString(R.string.web_view_net_error_desc, error?.description?.toString() ?: "")
+                    setupError(error?.description?.toString() ?: "")
                 }
 
                 view?.loadUrl(ABOUT_BLANK)
 
                 progressBar.visibility = View.GONE
                 errorView.visibility = View.VISIBLE
+            }
+
+            private fun setupError(desc: String) {
+                if (desc == ERR_INTERNET_DISCONNECTED) {
+                    errorTitle.text = getString(R.string.web_view_no_internet)
+                    errorDesc.text = ""
+                } else {
+                    errorTitle.text = getString(R.string.web_view_general_error)
+                    errorDesc.text =  getString(R.string.web_view_net_error_desc, desc)
+                }
             }
         }
 
@@ -233,6 +246,7 @@ class WebViewActivity : BaseNavigationActivity() {
 
         const val ABOUT_BLANK = "about:blank"
         const val ERR_NAME_NOT_RESOLVED = "net::ERR_NAME_NOT_RESOLVED"
+        const val ERR_INTERNET_DISCONNECTED = "net::ERR_INTERNET_DISCONNECTED"
         const val HTTP_SCHEME = "http://"
         const val HTTPS_SCHEME = "https://"
     }

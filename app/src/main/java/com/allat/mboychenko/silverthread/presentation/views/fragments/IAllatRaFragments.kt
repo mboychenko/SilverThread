@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import com.allat.mboychenko.silverthread.presentation.views.activities.BaseNavigationActivity
 
@@ -30,6 +31,11 @@ interface IAllatRaFragments {
     }
 
     fun getToolbar(activity: FragmentActivity?) = activity?.let { (it as BaseNavigationActivity).getToolbar() }
+
+    fun setToolbarName(activity: FragmentActivity?) = getToolbar(activity)?.setTitle(toolbarTitle())
+
+    @StringRes
+    fun toolbarTitle(): Int
 
     fun getDrawer(activity: FragmentActivity?) = activity?.let { (it as BaseNavigationActivity).getDrawer() }
 }

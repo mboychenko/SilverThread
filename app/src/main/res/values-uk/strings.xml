@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Cрібна нитка</string>
-    <string name="navigation_drawer_open">Відкріті навігацію</string>
+    <string name="app_name">АллатРа</string>
+    <string name="navigation_drawer_open">Відкрити навігацію</string>
     <string name="navigation_drawer_close">Закрити навігацію</string>
     <string name="close">Закрити</string>
-    <string name="drawer_name">Cрібна ниткаd</string>
+    <string name="drawer_name">АллатРа</string>
     <string name="practices">Практики</string>
     <string name="allat">Аллат</string>
     <string name="quotes">Цитати</string>
@@ -13,7 +13,7 @@
     <string name="active_signs">Активні знаки</string>
     <string name="settings">Налаштування</string>
     <string name="notifs">Cповіщення</string>
-    <string name="devs">Розробнікі</string>
+    <string name="devs">Розробникии</string>
     <string name="web">Веб Ресурси</string>
     <string name="about_us">Про нас</string>
     <string name="meditations_title">Медитації</string>
@@ -26,14 +26,15 @@
     <string name="share">Поділитися</string>
     <string name="copy">Копіювати</string>
     <string name="radio">Радіо</string>
+    <string name="allatra_tv_im">І.М.Данілов</string>
     <string name="allatra_tv">АллатРа ТБ</string>
     <string name="znai">Пошук</string>
     <string name="allatra_org">АллатРа.Org</string>
-    <string name="vesti">Вісті</string>
+    <string name="vesti">АллатРа Вісті</string>
     <string name="science">АллатРа Наука</string>
     <string name="partner">Партнерська угода</string>
-    <string name="craudfaunding">Краудфандинг</string>
-    <string name="geo_center">ГеоЦентр</string>
+    <string name="craudfaunding">Краудфандінг</string>
+    <string name="geo_center">АллатРа ГеоЦентр</string>
     <string name="load">Завантажити</string>
     <string name="downloading">Завантаження…</string>
     <string name="select_language_load">Оберіть мову книги:</string>
@@ -46,14 +47,14 @@
     <string name="link_to_load">Посилання на завантаження %s\n%s</string>
     <string name="click_to_unlock">Розблокувати</string>
     <string name="click_to_lock">Заблокувати</string>
-    <string name="timezone_config_description">Від обраної зони часу будуть залежати нотифікації пов\'язані з Аллатом і випадкові нотифікації, ви можете змінити цю настройку в будь-який час на екрані Аллата в зоні конфігурацій</string>
+    <string name="timezone_config_description">Від обраної зони часу будуть залежати нотифікації пов\'язані з Аллатом і випадкові нотифікації, ви можете змінити цє налаштування в будь-який час на екрані Аллата в зоні конфігурацій</string>
     <string name="timezone_config_local">Локальна часова зона - це часова зона вашого пристрою, вона налаштована вручну або автоматично в залежності від геолокації.</string>
-    <string name="timezone_config_kiev">Київська часова зона - це час по Києву, в ньому є літній час і він автоматично підтримується \ оновлюється.</string>
+    <string name="timezone_config_kiev">Київська часова зона - це час по Києву, в ньому є літній час і він автоматично підтримується / оновлюється.</string>
     <string name="timezone_config_gmt">Грінвіч - це часова зона за Гринвічем, в ній немає літнього часу.</string>
     <string name="timezones_info">Інформація про часові зоні:</string>
     <string name="timezone_config_btn_local">Локальна</string>
     <string name="timezone_config_btn_kiev">Київ</string>
-    <string name="timezone_config_btn_gmt">Грінвіч</string>
+    <string name="timezone_config_btn_gmt">Гринвіч</string>
     <string name="select_allat_timezone">Оберіть часову зону Аллата:</string>
     <string name="change_timezone">Змінити часову зону:</string>
     <string name="none">Ні</string>
@@ -62,23 +63,22 @@
     <string name="notify_before_min">Повідомити за хв.:</string>
     <string name="allat_reminder">Нагадування про Аллат</string>
     <string name="allat_has_started">Аллат почався!</string>
-    <string name="allat_has_ended">Аллат закінчівся!</string>
+    <string name="allat_has_ended">Аллат закінчився!</string>
     <string name="random_quote">Випадкова цитата</string>
     <string name="select_page">Перейти на сторінку:</string>
     <string name="select_page_hint">З 1 до %d</string>
     <string name="no_items_to_show">Список порожній</string>
     <string name="favorite">Улюблені</string>
-    <string name="remove_from_fav">Відаліті з улюблених</string>
-    <string name="add_to_fav">Додаті до улюблених</string>
+    <string name="remove_from_fav">Видалити з улюблених</string>
+    <string name="add_to_fav">Додати до улюблених</string>
     <string name="in_favorite">В Улюблені</string>
     <string name="random_quotes">Випадкова цитата</string>
     <string name="random_quotes_description">Це налаштування дозволяє отримати випадкові цитати з книг в випадковий час.
-        Настроїти можна лише кількисть цих цитат в день від 0 до 2. \n - Де 2 значить, що в одній добі може не бути ні
-        одної цитати, або може бути одна чи двері. \n - 1 значить ні однієї, чи одна на добу. \n - 0 відключає ці сповіщеня.
-        Цитати можуть з\'являтися з 8 годин ранку локального часу до 10 годин вечора, за виключенням
-        обраного часу Аллата з відступом 30 хвилин до, та 50 після. Напріклад, якщо Аллат за місцевим часом, 9 і 21,
-        то в інтервалах 8:30 - 9:50 і 20:30 - 21:50 сповіщень не буде.
-    </string>
+        Настроїти можна лише кількисть цих цитат в день від 0 до 2. \n\n– Де 2 означає, що в одній добі може бути жодної
+        цитати, або може бути одна чи дві. \n\n- 1 означає жодної, чи одна на добу. \n\n- 0 відключає ці сповіщеня.
+        \n\nЦитати можуть з\'являтися з 8 годин ранку локального часу до 10 годин вечора, за винятком обраного часу
+        Аллата з відступом 30 хвилин до, та 50 після. Наприклад, якщо Аллат за місцевим часом, 9 і 21, то в інтервалах
+        8:30 - 9:50 і 20:30 - 21:50 сповіщень не буде.</string>
     <string name="num_of_quotes_per_day">Кількість цитат</string>
     <string name="play">Play</string>
     <string name="pause">Пауза</string>
@@ -96,8 +96,9 @@
     <string name="mediadata_title_no_connection">Немає інтернету. Очікування</string>
     <string name="mediadata_title_on_air_paused">В Ефірі (Пауза)</string>
     <string name="refresh">Оновити</string>
-    <string name="web_view_general_error">Внутрішня помилка сайту або проблеми зі з\'єднанням, перевірте з\'єднання та спробуйте знову. Для певних регіонів деякі ресурси доступні тільки під VPN</string>
+    <string name="web_view_general_error">Внутрішня помилка сайту або проблеми зі з\'єднанням, спробуйте знову. Для певних регіонів деякі ресурси доступні тільки під VPN</string>
     <string name="web_view_net_error_desc">Опис помилки: %s</string>
+    <string name="web_view_no_internet">Відсутній Інтернет\n\nПеревірте з\'єднання та спробуйте знову</string>
     <string name="open_practices">Відкрити</string>
 
     <plurals name="mins_to_allat" tools:ignore="UnusedQuantity">

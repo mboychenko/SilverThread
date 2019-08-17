@@ -1,6 +1,5 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
 import com.allat.mboychenko.silverthread.presentation.helpers.AlarmNotificationCodes
@@ -17,7 +15,7 @@ import kotlinx.android.synthetic.main.allat_fragment.*
 import kotlinx.android.synthetic.main.allat_fragment.view.*
 import org.koin.android.ext.android.inject
 
-class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
+class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
 
     private val presenter: AllatPresenter by inject()
     private val notificationBeforeArray : IntArray by lazy { resources.getIntArray(R.array.notify_before_mins) }
@@ -83,7 +81,7 @@ class AllatFragment: Fragment(), IAllatRaFragments, IAllatFragmentView {
         return fragment
     }
 
-    override fun getViewContext(): Context? = context
+    override fun toolbarTitle(): Int = R.string.allat
 
     private fun lockUnlockConfig(unlock: Boolean? = null) {
         val locked = unlock ?: (configClickGrabber.visibility == View.VISIBLE)

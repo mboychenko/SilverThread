@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="allatra_book_name">AllatRa</string>    
+    <string name="sensei_1_book_name">Sensei 1</string>    
+    <string name="sensei_2_book_name">Sensei 2</string>    
+    <string name="sensei_3_book_name">Sensei 3</string>    
+    <string name="sensei_4_book_name">Sensei 4</string>    
+    <string name="ezoosmos_book_name">Ezoosmóza</string>    
+    <string name="birds_and_stone_book_name">Ptáci a kámen</string>    
+    <string name="crossroads_book_name">Křižovatka</string>    
+    <string name="uni_grain_book_name">Jediné Zrno</string>    
+    <string name="con_and_per_book_name">Vědomí a Osobnost</string>    
+    <string name="physics_book_name">Prapůvodní fyzika AllatRa</string>    
+    <string name="climate_book_name">Zpráva o klimatu</string>    
+</resources>

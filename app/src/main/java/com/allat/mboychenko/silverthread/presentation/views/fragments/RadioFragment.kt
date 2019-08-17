@@ -14,20 +14,17 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
-import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import com.allat.mboychenko.silverthread.presentation.helpers.ExecutorThread
 import com.allat.mboychenko.silverthread.presentation.helpers.px
-import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnBackgroundWithResult
 import com.allat.mboychenko.silverthread.presentation.presenters.RadioPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.inject
 
 
-class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
+class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
 
     private val presenter: RadioPresenter by inject()
 
@@ -42,6 +39,8 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
     private var currentPlayerButtonsState = PlayerButtonsState.INIT
 
     override fun getCurrentPlayerButtonsState() = currentPlayerButtonsState
+
+    override fun toolbarTitle(): Int = R.string.radio
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,8 +93,6 @@ class RadioFragment : Fragment(), IAllatRaFragments, IRadioFragmentView {
         onlineStatus = view.findViewById(R.id.onlineStatus)
         return view
     }
-
-    override fun getViewContext(): Context? = context
 
     override fun stopButtonState() {
         currentPlayerButtonsState = PlayerButtonsState.INIT

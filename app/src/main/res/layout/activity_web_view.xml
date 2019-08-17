@@ -22,7 +22,6 @@
                 android:id="@+id/error_internet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
                 android:orientation="vertical">
 
             <View android:layout_width="0dp" android:layout_height="0dp"
@@ -37,8 +36,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/web_view_general_error"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:gravity="center_horizontal"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -48,19 +48,22 @@
                     android:id="@+id/no_internet_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/web_view_net_error_desc"
                     android:textSize="18sp"
+                    android:layout_marginTop="12dp"
                     app:layout_constraintTop_toBottomOf="@id/no_internet_title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
+            <Button
                     android:id="@+id/refresh"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/refresh"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginTop="12dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="28dp"
                     app:layout_constraintTop_toBottomOf="@id/no_internet_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>

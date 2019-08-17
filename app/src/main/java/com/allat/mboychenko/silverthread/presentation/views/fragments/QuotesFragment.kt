@@ -2,7 +2,6 @@ package com.allat.mboychenko.silverthread.presentation.views.fragments
 
 import android.animation.AnimatorSet
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.views.listitems.QuoteItem
@@ -11,7 +10,6 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_quotes_list.*
 import android.animation.ValueAnimator
-import android.content.Context
 import android.view.*
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AlertDialog
@@ -27,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_quotes_list.view.*
 import org.koin.android.ext.android.inject
 
-class QuotesFragment : Fragment(), IQuotesFragmentView {
+class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
 
     private val presenter : QuotesPresenter by inject()
 
@@ -45,7 +43,7 @@ class QuotesFragment : Fragment(), IQuotesFragmentView {
         setHasOptionsMenu(true)
     }
 
-    override fun getViewContext(): Context? = context
+    override fun toolbarTitle(): Int = R.string.quotes
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.favorites_menu_item, menu)

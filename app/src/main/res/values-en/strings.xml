@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Silver Thread</string>
+    <string name="app_name">AllatRa</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="close">Close</string>
-    <string name="drawer_name">Silver Thread</string>
+    <string name="drawer_name">AllatRa</string>
     <string name="practices">Practices</string>
     <string name="allat">Allat</string>
     <string name="quotes">Quotes</string>
@@ -27,14 +27,15 @@
     <string name="share">Share</string>
     <string name="copy">Copy</string>
     <string name="radio">Radio</string>
+    <string name="allatra_tv_im">I.M.DANILOV</string>
     <string name="allatra_tv">AllatRa TV</string>
     <string name="znai">Search</string>
     <string name="allatra_org">AllatRa.Org</string>
-    <string name="vesti">Vesti</string>
+    <string name="vesti">AllatRa Vesti</string>
     <string name="science">AllatRa Science</string>
     <string name="partner">Partner Agreement</string>
     <string name="craudfaunding">Craudfaunding</string>
-    <string name="geo_center">GeoCenter</string>
+    <string name="geo_center">AllatRa GeoCenter</string>
     <string name="load">Load</string>
     <string name="downloading">Downloading…</string>
     <string name="select_language_load">Chose book language:</string>
@@ -75,9 +76,9 @@
     <string name="in_favorite">To Favorites</string>
     <string name="random_quotes">Random quotes</string>
     <string name="random_quotes_description">This setting will allow you to get random quotes from books at random times.
-        You can only configure the number of such quotes per day from 0 to 2. \n- Where 2 means that in one day there can be no
-        quotes at all, maybe one or two. \n- 1 means either not one or only one per day. \n- 0 disables these notifications.
-        \nNotifications can appear from 8 a.m. local time of the device and until 10 p.m., except Allat time, from 30 minutes before and 50 after. So, if your Allat time is local, 9 and 21,
+        You can only configure the number of such quotes per day from 0 to 2. \n\n- Where 2 means that in one day there can be no
+        quotes at all, maybe one or two. \n\n- 1 means either not one or only one per day. \n\n- 0 disables these notifications.
+        \n\nNotifications can appear from 8 a.m. local time of the device and until 10 p.m., except Allat time, from 30 minutes before and 50 after. So, if your Allat time is local, 9 and 21,
         then in the intervals 8:30am/pm - 9:50am/pm notifications will not be shown.
     </string>
     <string name="num_of_quotes_per_day">Number of quotes</string>
@@ -97,8 +98,9 @@
     <string name="mediadata_title_no_connection">No Internet. Waiting</string>
     <string name="mediadata_title_on_air_paused">On Air (Paused)</string>
     <string name="refresh">Refresh</string>
-    <string name="web_view_general_error">Some site Error or No Internet, check and try again. For some regions, some web resources available only through VPN</string>
+    <string name="web_view_general_error">Some site Error or connectivity issues, try again. For some regions, some web resources available only through VPN</string>
     <string name="web_view_net_error_desc">Error description: %s</string>
+    <string name="web_view_no_internet">No Internet\n\nCheck connectivity and try again</string>
     <string name="open_practices">Open</string>
     <string name="no_permissions">Permission not granted</string>
 

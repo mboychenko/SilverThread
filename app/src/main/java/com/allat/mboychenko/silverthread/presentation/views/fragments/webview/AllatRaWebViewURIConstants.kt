@@ -2,6 +2,7 @@ package com.allat.mboychenko.silverthread.presentation.views.fragments.webview
 
 object AllatRaWebViewURIConstants {
 
+    const val URI_ALLATRA_TV_IM = "https://allatra.tv/programs-with-im"
     const val URI_ALLATRA_TV = "https://allatra.tv"
     const val URI_ZNAI = "https://znai.allatra.tv"
     const val URI_ALLATRA_ORG = "https://allatra.org"
@@ -17,6 +18,7 @@ object AllatRaWebViewURIConstants {
         }
 
         return url.startsWith(URI_ALLATRA_TV) ||
+                url.startsWith(URI_ALLATRA_TV_IM) ||
                 url.startsWith(URI_ZNAI) ||
                 url.startsWith(URI_ALLATRA_ORG) ||
                 url.startsWith(URI_VESTI) ||

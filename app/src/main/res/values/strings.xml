@@ -1,14 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools"
            tools:ignore="MissingTranslation">
 
-    <string name="app_name">Серебряная Нить</string>
+    <string name="app_name">АллатРа</string>
 
     <string name="navigation_drawer_open">Открыть навигацию</string>
     <string name="navigation_drawer_close">Закрыть навигацию</string>
 
     <string name="close">Закрыть</string>
 
-    <string name="drawer_name">Серебряная Нить</string>
+    <string name="drawer_name">АллатРа</string>
     <string name="practices">Практики</string>
     <string name="allat">Аллат</string>
     <string name="quotes">Цитаты</string>
@@ -34,17 +34,18 @@
     <string name="copy">Копировать</string>
 
     <string name="radio">Радио</string>
+    <string name="allatra_tv_im">И.М.Данилов</string>
     <string name="allatra_tv">АллатРа ТВ</string>
     <string name="znai">Поиск</string>
     <string name="allatra_org">АллатРа.Org</string>
-    <string name="vesti">Вести</string>
+    <string name="vesti">АллатРа Вести</string>
     <string name="science">АллатРа Наука</string>
     <string name="partner">Партнерское соглашение</string>
-    <string name="craudfaunding">Краудфаундинг</string>
-    <string name="geo_center">ГеоЦентр</string>
+    <string name="craudfaunding">Краудфандинг</string>
+    <string name="geo_center">АллатРа ГеоЦентр</string>
     <string name="load">Загрузить</string>
     <string name="select_language_load">Выберите язык книги:</string>
-    <string name="select_language_share">Выберите язык книги что-бы поделится:</string>
+    <string name="select_language_share">Выберите язык книги чтобы поделиться:</string>
     <string name="filter_by_language">Фильтр по языку:</string>
     <string name="all">Все</string>
     <string name="link_to_load">Ссылка на загрузку %s\n%s</string>
@@ -58,8 +59,8 @@
 
     <string name="timezone_config_description">От выбранной временной зоны будут зависить время Аллата, нотификациии связанные с Аллатом и случайные нотификации, вы можете изменить эту настройку в любое время на экране Аллата в зоне конфигураций</string>
     <string name="timezone_config_local">Локальная временная зона - это временная зона вашего устройства, она настроенна вручную или автоматически в зависимости от геолокации.</string>
-    <string name="timezone_config_kiev">Киевская временная зона - это временная зона по Киеву, в ней есть летнее время и оно автоматически поддерживается\обновляется.</string>
-    <string name="timezone_config_gmt">Гринвич - это временная зона по Гринвичу, в ней нет летнего времени.</string>
+    <string name="timezone_config_kiev">Киевская временная зона - это временная зона по Киеву. Есть летнее время и оно автоматически поддерживается/обновляется.</string>
+    <string name="timezone_config_gmt">Гринвич - это временная зона по Гринвичу. Нет летнего времени.</string>
     <string name="timezones_info">Информация о часовых поясах:</string>
     <string name="timezone_config_btn_local">Локальная</string>
     <string name="timezone_config_btn_kiev">Киев</string>
@@ -83,9 +84,9 @@
     <string name="add_to_fav">Добавить в Избранные</string>
     <string name="random_quotes">Случайные Цитаты</string>
     <string name="random_quotes_description">Эта настройка позволит получать случайные цитаты из книг в случайное время.
-        Настроить можно лишь количество таких цитат в день от 0 до 2. \n - Где 2 значит, что в одни сутки может не быть ни
-        одной цитаты, может быть одна или две. \n - 1 значит ни одной или одна в сутки. \n - 0 отключает эти уведомления.
-        Уведомления могут появлятся с 8 часов утра локального времени устройства до 10 часов вечера, за исключением
+        Настроить можно лишь количество таких цитат в день от 0 до 2. \n\n - Где 2 значит, что в одни сутки может не быть ни
+        одной цитаты, может быть одна или две. \n\n - 1 значит ни одной или одна в сутки. \n\n - 0 отключает эти уведомления.
+        \n\nУведомления могут появлятся с 8 часов утра локального времени устройства до 10 часов вечера, за исключением
         выбранного времени Аллата с отступом 30 минут до и 50 после. То-есть, если ваше время Аллата локальное, 9 и 21,
         то в промежутках 8:30 - 9:50 и 20:30 - 21:50 нотификаций не будет.
     </string>
@@ -106,8 +107,9 @@
     <string name="mediadata_title_no_connection">Нет Интернета. Ожидание</string>
     <string name="mediadata_title_on_air_paused">В Эфире (Пауза)</string>
     <string name="refresh">Обновить</string>
-    <string name="web_view_general_error">Внутренняя ошибка сайта или проблемы с соединением, проверьте соединениие ии попробуйте снова. Для определенных регионов некоторые ресурсы доступны только под VPN</string>
-    <string name="web_view_net_error_desc">Описание ошиибки: %s</string>
+    <string name="web_view_general_error">Внутренняя ошибка сайта или проблемы с соединением. Для определенных регионов некоторые ресурсы доступны только под VPN</string>
+    <string name="web_view_net_error_desc">Описание ошибки: %s</string>
+    <string name="web_view_no_internet">Нет Интернета\n\nПроверьте соединение и попробуйте снова</string>
     <string name="open_practices">Открыть</string>
     <string name="no_permissions">У приложения не хватает разрешений</string>
     <string name="settings_icon">Settings icon</string>

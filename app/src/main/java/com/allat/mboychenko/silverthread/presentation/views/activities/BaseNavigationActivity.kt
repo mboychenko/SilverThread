@@ -92,6 +92,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 setFragment(BooksFragment(), navId)
             R.id.nav_radio ->
                 setFragment(RadioFragment(), navId)
+            R.id.nav_tv_im ->
+                webViewLink(AllatRaWebViewURIConstants.URI_ALLATRA_TV_IM)
             R.id.nav_tv ->
                 webViewLink(AllatRaWebViewURIConstants.URI_ALLATRA_TV)
             R.id.nav_znai ->
@@ -128,6 +130,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
             }
         } else if (webViewUrl != null) {
             navId = when (webViewUrl) {
+                AllatRaWebViewURIConstants.URI_ALLATRA_TV_IM -> R.id.nav_tv_im
                 AllatRaWebViewURIConstants.URI_ALLATRA_TV -> R.id.nav_tv
                 AllatRaWebViewURIConstants.URI_ZNAI -> R.id.nav_znai
                 AllatRaWebViewURIConstants.URI_ALLATRA_ORG -> R.id.nav_org

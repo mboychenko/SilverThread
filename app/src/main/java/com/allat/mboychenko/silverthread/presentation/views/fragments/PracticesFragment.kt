@@ -18,7 +18,7 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import org.koin.android.ext.android.inject
 
-class PracticesFragment: Fragment(), IAllatRaFragments, IPracticesFragmentView {
+class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
 
     private val constraintInit = ConstraintSet()
     private var root: ConstraintLayout? = null
@@ -40,6 +40,8 @@ class PracticesFragment: Fragment(), IAllatRaFragments, IPracticesFragmentView {
     ): View? {
         return inflater.inflate(R.layout.fragment_practices_init, container, false)
     }
+
+    override fun toolbarTitle(): Int = R.string.practices
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,8 +72,6 @@ class PracticesFragment: Fragment(), IAllatRaFragments, IPracticesFragmentView {
             }
         }
     }
-
-    override fun getViewContext(): Context? = context
 
     override fun onResume() {
         super.onResume()
