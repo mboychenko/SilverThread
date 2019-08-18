@@ -21,8 +21,8 @@
     <string name="spiritual_title">Spiritual practices</string>
     <string name="share_link">Share %s download link</string>
     <string name="share_quote">Share quote</string>
-    <string name="time_to_group_meditation">Time to Allat:</string>
-    <string name="allat_started_meditation">Allat is in process, time left:</string>
+    <string name="time_to_group_meditation">Time for Allat:</string>
+    <string name="allat_started_meditation">Allat is in progress, time left:</string>
     <string name="hide">Hide</string>
     <string name="share">Share</string>
     <string name="copy">Copy</string>
@@ -33,13 +33,13 @@
     <string name="allatra_org">AllatRa.Org</string>
     <string name="vesti">AllatRa Vesti</string>
     <string name="science">AllatRa Science</string>
-    <string name="partner">Partner Agreement</string>
-    <string name="craudfaunding">Craudfaunding</string>
+    <string name="partner">Partnership Agreement</string>
+    <string name="craudfaunding">Crowdfunding</string>
     <string name="geo_center">AllatRa GeoCenter</string>
     <string name="load">Load</string>
     <string name="downloading">Downloading…</string>
-    <string name="select_language_load">Chose book language:</string>
-    <string name="delete_confirmation">Are you sure, delete %s</string>
+    <string name="select_language_load">Choose book language:</string>
+    <string name="delete_confirmation">Are you sure you want to delete %s?</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
     <string name="select_language_share">Chose book language to share:</string>
@@ -50,8 +50,8 @@
     <string name="click_to_lock">Click to Lock</string>
     <string name="timezone_config_description">This configuration will bind all notifications and time on Allat screen
         to this timezone, you can change it anytime you want in configuration section of Allat screen</string>
-    <string name="timezone_config_local">Local timezone its timezone of your device.</string>
-    <string name="timezone_config_kiev">Kiev timezone has summer time automatic update etc.</string>
+    <string name="timezone_config_local">Local timezone is timezone of your device.</string>
+    <string name="timezone_config_kiev">Kiev timezone has an automatic update of summer time.</string>
     <string name="timezone_config_gmt">Greenwich doesn\'t have summer time.</string>
     <string name="timezones_info">Timezones Info:</string>
     <string name="timezone_config_btn_local">Local</string>
@@ -60,11 +60,11 @@
     <string name="select_allat_timezone">Select Allat timezone:</string>
     <string name="change_timezone">Change timezone:</string>
     <string name="none">None</string>
-    <string name="ring_on_end">Ring on end:</string>
-    <string name="ring_on_start">Ring on start:</string>
+    <string name="ring_on_end">End alarm signal:</string>
+    <string name="ring_on_start">Start alarm signal:</string>
     <string name="notify_before_min">Notify before min.:</string>
-    <string name="allat_reminder">Reminder of Allat</string>
-    <string name="allat_has_started">Allat is started!</string>
+    <string name="allat_reminder">Remind in:</string>
+    <string name="allat_has_started">Allat has started!</string>
     <string name="allat_has_ended">Allat is over!</string>
     <string name="random_quote">Random Quote</string>
     <string name="select_page">Go to page:</string>
@@ -91,16 +91,16 @@
     <string name="on_air_paused">On Air (Paused)</string>
     <string name="radio_error">Server error</string>
     <string name="buffering">Loading…</string>
-    <string name="no_internet">No internet, check your connectivity and try again</string>
+    <string name="no_internet">No internet, check your Internet connection and try again</string>
     <string name="mediadata_artist">AllatRa</string>
     <string name="mediadata_album">Radio</string>
     <string name="mediadata_title_on_air">On Air</string>
     <string name="mediadata_title_no_connection">No Internet. Waiting</string>
     <string name="mediadata_title_on_air_paused">On Air (Paused)</string>
     <string name="refresh">Refresh</string>
-    <string name="web_view_general_error">Some site Error or connectivity issues, try again. For some regions, some web resources available only through VPN</string>
+    <string name="web_view_general_error">Some site Error or loading issues, try again. For some regions, some web resources available only through VPN</string>
     <string name="web_view_net_error_desc">Error description: %s</string>
-    <string name="web_view_no_internet">No Internet\n\nCheck connectivity and try again</string>
+    <string name="web_view_no_internet">No Internet\n\nCheck Internet connection and try again</string>
     <string name="open_practices">Open</string>
     <string name="no_permissions">Permission not granted</string>
 

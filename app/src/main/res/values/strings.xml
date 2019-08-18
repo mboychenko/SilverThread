@@ -87,7 +87,7 @@
         Настроить можно лишь количество таких цитат в день от 0 до 2. \n\n - Где 2 значит, что в одни сутки может не быть ни
         одной цитаты, может быть одна или две. \n\n - 1 значит ни одной или одна в сутки. \n\n - 0 отключает эти уведомления.
         \n\nУведомления могут появлятся с 8 часов утра локального времени устройства до 10 часов вечера, за исключением
-        выбранного времени Аллата с отступом 30 минут до и 50 после. То-есть, если ваше время Аллата локальное, 9 и 21,
+        выбранного времени Аллата с отступом 30 минут до и 50 после. То-есть, если ваше время Аллата локальное 9 и 21,
         то в промежутках 8:30 - 9:50 и 20:30 - 21:50 нотификаций не будет.
     </string>
     <string name="num_of_quotes_per_day">Колличество цитат</string>
@@ -95,12 +95,12 @@
     <string name="pause">Пауза</string>
     <string name="stop">Стоп</string>
     <string name="online">Онлайн</string>
-    <string name="offline">Оффлайн</string>
+    <string name="offline">Офлайн</string>
     <string name="on_air">В Эфире</string>
     <string name="on_air_paused">В Эфире (Пауза)</string>
     <string name="radio_error">Ошибка Сервера</string>
     <string name="buffering">Загрузка…</string>
-    <string name="no_internet">Нет интернета, проверьте соединение и попробуйте снова</string>
+    <string name="no_internet">Нет Интернета, проверьте соединение и попробуйте снова</string>
     <string name="mediadata_artist">АллатРа</string>
     <string name="mediadata_album">Радио</string>
     <string name="mediadata_title_on_air">В Эфиире</string>
