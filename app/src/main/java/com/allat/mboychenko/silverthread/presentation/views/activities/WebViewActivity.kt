@@ -82,15 +82,6 @@ class WebViewActivity : BaseNavigationActivity() {
                     return false
                 }
 
-                if (redirect && url.contains(HTTP_SCHEME)) {
-                    webBackStackQueue.poll()
-                    webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
-                    return true
-                } else if (url.contains(HTTP_SCHEME)) {
-                    webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
-                    return true
-                }
-
                 val socialUri = Uri.parse(url)
                 if (SocialNetworkFactory.isSocialNetwork(socialUri)) {
                     val socialNetwork = SocialNetworkFactory.getSocialNetwork(applicationContext, socialUri)
@@ -98,6 +89,15 @@ class WebViewActivity : BaseNavigationActivity() {
                         socialNetwork.open()
                         return true
                     }
+                }
+
+                if (redirect && url.contains(HTTP_SCHEME)) {
+                    webBackStackQueue.poll()
+                    webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
+                    return true
+                } else if (url.contains(HTTP_SCHEME)) {
+                    webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
+                    return true
                 }
 
                 currentUrl = url
@@ -117,7 +117,7 @@ class WebViewActivity : BaseNavigationActivity() {
 
             override fun onReceivedError(view: WebView?, errorCode: Int, description: String?, failingUrl: String?) {
                 Log.d("onReceivedError", description)
-                if (!isAllatraResUrl(failingUrl) && description == ERR_NAME_NOT_RESOLVED) {
+                if (!isAllatraResUrl(failingUrl)) {
                     return
                 }
 
@@ -132,7 +132,7 @@ class WebViewActivity : BaseNavigationActivity() {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     Log.d("onReceivedError", error?.description.toString())
-                    if (!isAllatraResUrl(request?.url.toString()) && error?.description.toString() == ERR_NAME_NOT_RESOLVED) {
+                    if (!isAllatraResUrl(request?.url.toString())) {
                         return
                     }
 
@@ -245,7 +245,6 @@ class WebViewActivity : BaseNavigationActivity() {
         const val SAVED_WEB_BACKSTACK = "SAVED_WEB_BACKSTACK"
 
         const val ABOUT_BLANK = "about:blank"
-        const val ERR_NAME_NOT_RESOLVED = "net::ERR_NAME_NOT_RESOLVED"
         const val ERR_INTERNET_DISCONNECTED = "net::ERR_INTERNET_DISCONNECTED"
         const val HTTP_SCHEME = "http://"
         const val HTTPS_SCHEME = "https://"

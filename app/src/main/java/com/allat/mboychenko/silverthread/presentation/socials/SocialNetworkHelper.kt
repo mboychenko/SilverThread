@@ -62,10 +62,7 @@ object SocialNetworkFactory {
             return false
         }
 
-        val host =
-            getHostWithoutSchemeAndDomain(
-                uri
-            )
+        val host= getHostWithoutSchemeAndDomain(uri)
 
         return Facebook.DEEP_LINK_SCHEMA == host ||
                 Instagram.DEEP_LINK_SCHEMA == host ||

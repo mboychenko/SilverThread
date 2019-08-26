@@ -322,13 +322,17 @@ private fun NotificationManager.createNotificationChannel(
 
 @TargetApi(26)
 private fun NotificationManager.createRadioNotificationChannel() {
-    if (this.getNotificationChannel(CHANNEL_ID_RADIO) == null) {
-        this.createNotificationChannel(
-            NotificationChannel(
-                CHANNEL_ID_RADIO,
-                CHANNEL_NAME_RADIO,
-                NotificationManager.IMPORTANCE_DEFAULT //IMPORTANCE_HIGH to show expanded for few sec
+    try {
+        if (this.getNotificationChannel(CHANNEL_ID_RADIO) == null) {
+            this.createNotificationChannel(
+                NotificationChannel(
+                    CHANNEL_ID_RADIO,
+                    CHANNEL_NAME_RADIO,
+                    NotificationManager.IMPORTANCE_DEFAULT //IMPORTANCE_HIGH to show expanded for few sec
+                )
             )
-        )
+        }
+    } catch (e: NoSuchMethodError) {
+        Log.e("NotificationHelper", e.message)
     }
 }
