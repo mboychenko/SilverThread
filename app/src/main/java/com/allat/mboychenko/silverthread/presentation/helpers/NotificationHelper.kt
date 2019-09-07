@@ -291,32 +291,36 @@ private fun NotificationManager.createNotificationChannel(
     notification: Notification,
     playSound: Boolean
 ) {
-    val channelID = notification.channelId
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.getNotificationChannel(channelID) == null) {
-        val channelName = when (channelID) {
-            CHANNEL_ID_ALLAT -> CHANNEL_NAME_ALLAT
-            CHANNEL_ID_ALLAT_SILENCE -> CHANNEL_NAME_ALLAT_SILENCED
-            CHANNEL_ID_QUOTES -> CHANNEL_NAME_QUOTES
-            CHANNEL_ID_RADIO -> CHANNEL_NAME_RADIO
-            else -> "DefaultChannel"
+    try {
+        val channelID = notification.channelId
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.getNotificationChannel(channelID) == null) {
+            val channelName = when (channelID) {
+                CHANNEL_ID_ALLAT -> CHANNEL_NAME_ALLAT
+                CHANNEL_ID_ALLAT_SILENCE -> CHANNEL_NAME_ALLAT_SILENCED
+                CHANNEL_ID_QUOTES -> CHANNEL_NAME_QUOTES
+                CHANNEL_ID_RADIO -> CHANNEL_NAME_RADIO
+                else -> "DefaultChannel"
+            }
+
+            val channelImportance = if (playSound) NotificationManager.IMPORTANCE_HIGH
+            else NotificationManager.IMPORTANCE_LOW //IMPORTANCE_DEFAULT?
+            val nChannel = NotificationChannel(channelID, channelName, channelImportance)
+            nChannel.enableLights(true)
+            nChannel.lightColor = Color.BLUE
+
+            val audioAttributes = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build()
+
+            nChannel.vibrationPattern = longArrayOf(500, 500, 500, 500)
+            nChannel.setSound(
+                Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring),
+                audioAttributes
+            )
+            this.createNotificationChannel(nChannel)
         }
-
-        val channelImportance = if (playSound) NotificationManager.IMPORTANCE_HIGH
-        else NotificationManager.IMPORTANCE_LOW //IMPORTANCE_DEFAULT?
-        val nChannel = NotificationChannel(channelID, channelName, channelImportance)
-        nChannel.enableLights(true)
-        nChannel.lightColor = Color.BLUE
-
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-            .build()
-
-        nChannel.vibrationPattern = longArrayOf(500, 500, 500, 500)
-        nChannel.setSound(
-            Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring),
-            audioAttributes
-        )
-        this.createNotificationChannel(nChannel)
+    } catch (e: NoSuchMethodError) {
+        Log.e("NotificationHelper", e.message)
     }
 }
 
