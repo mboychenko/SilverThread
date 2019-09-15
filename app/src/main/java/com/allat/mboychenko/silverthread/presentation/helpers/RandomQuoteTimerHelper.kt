@@ -13,7 +13,7 @@ import com.allat.mboychenko.silverthread.domain.interactor.QuotesInteractor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-fun setupRandomQuoteNextAlarm(context: Context) {
+fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false) {
     val storageImplementation = StorageImplementation(context)
     val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storageImplementation)
     val quotesStorage: QuotesDetailsStorage = QuotesInteractor(storageImplementation)
@@ -50,15 +50,10 @@ fun setupRandomQuoteNextAlarm(context: Context) {
             }
         )
 
-        //save new time
-        val nextNotifDay = Calendar.getInstance()
-        nextNotifDay.timeInMillis = nextNotificationTime
-        val times = if (nextNotifDay.get(Calendar.DAY_OF_MONTH) != now.get(Calendar.DAY_OF_MONTH)) {
-            1
-        } else {
-            showedTimes + 1
+
+        if (fromNotification) {
+            quotesStorage.setQuotesWasShowedTimesInDay(showedTimes + 1 to Calendar.getInstance().timeInMillis)
         }
-        quotesStorage.setQuotesWasShowedTimesInDay(times to nextNotificationTime)
 
     }
 }
@@ -93,7 +88,7 @@ private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationT
         }
     }
 
-    val startLimitFromLastNotif = lastNotificationTime + TimeUnit.HOURS.toMillis(2)
+    val startLimitFromLastNotif = lastNotificationTime + TimeUnit.MINUTES.toMillis(127)
     if (startLimitFromLastNotif > startLimit && !changeToNextDay ||
         startLimitFromLastNotif > endLimit && !changeToNextDay) {
         if (startLimitFromLastNotif < endLimit) {
@@ -107,7 +102,7 @@ private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationT
         now.set(Calendar.HOUR_OF_DAY, 23)
         now.set(Calendar.MINUTE, 0)
         now.set(Calendar.SECOND, 0)
-        now.timeInMillis += TimeUnit.MINUTES.toMillis(61)       //next day
+        now.timeInMillis += TimeUnit.MINUTES.toMillis(127)      //next day
 
         allatTimeOffsets = setupAllatTimeOffsets(now, allatTimezone)
 
@@ -146,7 +141,7 @@ private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationT
     return generatedLong
 }
 
-fun setupAllatTimeOffsets(now: Calendar, allatTimezone: AllatTimeZone): AllatTimeOffsets {
+private fun setupAllatTimeOffsets(now: Calendar, allatTimezone: AllatTimeZone): AllatTimeOffsets {
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = now.timeInMillis
     calendar.set(Calendar.MINUTE, 0)
@@ -191,7 +186,9 @@ private fun getAllatTimezone(allatTimezone: AllatTimeZone) =
         allatTimezone
     }
 
-class AllatTimeOffsets(val morningTimeBeforeOffset: Long,
-                       val morningTimeAfterOffset: Long,
-                       val eveningTimeBeforeOffset: Long,
-                       val eveningTimeAfterOffset: Long)
+private class AllatTimeOffsets(
+    val morningTimeBeforeOffset: Long,
+    val morningTimeAfterOffset: Long,
+    val eveningTimeBeforeOffset: Long,
+    val eveningTimeAfterOffset: Long
+)

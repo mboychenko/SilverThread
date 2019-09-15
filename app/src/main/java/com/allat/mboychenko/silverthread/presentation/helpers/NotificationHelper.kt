@@ -2,6 +2,8 @@ package com.allat.mboychenko.silverthread.presentation.helpers
 
 import android.annotation.TargetApi
 import android.app.*
+import android.app.NotificationManager.IMPORTANCE_HIGH
+import android.app.NotificationManager.IMPORTANCE_LOW
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,13 +15,13 @@ import com.allat.mboychenko.silverthread.presentation.views.activities.MainActiv
 import android.media.AudioAttributes
 import android.os.Bundle
 import android.util.Log
-import androidx.core.app.NotificationManagerCompat.IMPORTANCE_HIGH
-import androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW
 import com.allat.mboychenko.silverthread.presentation.receivers.TimerExpiredReceiver
 import java.util.concurrent.TimeUnit
 import android.app.PendingIntent
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import androidx.core.app.NotificationCompat.PRIORITY_HIGH
+import androidx.core.app.NotificationCompat.PRIORITY_LOW
 import com.allat.mboychenko.silverthread.presentation.services.AllatRadioService
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -73,7 +75,8 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     val action: String
     val notifChannelId: String
     val notifId: Int
-    var playSound = true
+    var allatSound = false
+    var priority = PRIORITY_HIGH
 
     when (notificationCode) {
         AlarmNotificationCodes.ALLAT_START -> {
@@ -82,6 +85,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
+            allatSound = true
         }
         AlarmNotificationCodes.ALLAT_END -> {
             title = context.getString(R.string.allat_reminder)
@@ -89,6 +93,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
+            allatSound = true
         }
         AlarmNotificationCodes.ALLAT_BEFORE -> {
             title = context.getString(R.string.allat_reminder)
@@ -97,6 +102,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
+            allatSound = true
         }
         AlarmNotificationCodes.ALLAT_BEFORE_UPDATE -> {
             title = context.getString(R.string.allat_reminder)
@@ -105,7 +111,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             action = NOTIFICATION_ACTION_BEFORE_UPDATE
             notifId = NOTIFICATION_ID_ALLAT //or NOTIFICATION_ID_ALLAT_BEFORE_UPDATE
             notifChannelId = CHANNEL_ID_ALLAT_SILENCE
-            playSound = false
+            priority = PRIORITY_LOW
         }
         AlarmNotificationCodes.QUOTE -> {
             if (quote?.isNotEmpty() == true) {
@@ -123,12 +129,12 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
 
     //notify
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    val nBuilder = getBasicNotificationBuilder(context, notifChannelId, playSound)
+    val nBuilder = getBasicNotificationBuilder(context, notifChannelId, allatSound)
     nBuilder.setContentTitle(title)
         .setContentText(text)
         .setVibrate(longArrayOf(500, 500, 500, 500))
         .setContentIntent(getActivityPendingIntent(context, action, extras, javaClass = MainActivity::class.java))
-        .priority = if (playSound) IMPORTANCE_HIGH else IMPORTANCE_LOW
+        .priority = priority
 
     if (notificationCode == AlarmNotificationCodes.QUOTE && quotePosition != null) {
         nBuilder.setStyle(NotificationCompat.BigTextStyle().bigText(text))
@@ -167,7 +173,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     }
 
     val notification = nBuilder.build()
-    nManager.createNotificationChannel(context, notification, playSound)
+    nManager.createNotificationChannel(context, notification, allatSound, priority)
     nManager.notify(notifId, notification)
 }
 
@@ -246,14 +252,18 @@ fun hideNotification(context: Context, extras: Bundle?) {
     }
 }
 
-private fun getBasicNotificationBuilder(context: Context, channelId: String, playSound: Boolean)
+private fun getBasicNotificationBuilder(context: Context, channelId: String, allatSound: Boolean)
         : NotificationCompat.Builder {
-    val notificationSound: Uri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring)
     val nBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(R.drawable.allatra_small)
         .setLights(Color.BLUE, 500, 3000)
         .setAutoCancel(true)
-    if (playSound) nBuilder.setSound(notificationSound)
+
+    if (allatSound) {
+        val notificationSound: Uri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring)
+        nBuilder.setSound(notificationSound)
+    }
+
     return nBuilder
 }
 
@@ -289,7 +299,8 @@ private fun getRemoveAllatBeforeUpdatesIntent(context: Context): PendingIntent {
 private fun NotificationManager.createNotificationChannel(
     context: Context,
     notification: Notification,
-    playSound: Boolean
+    allatSound: Boolean,
+    priority: Int
 ) {
     try {
         val channelID = notification.channelId
@@ -302,21 +313,24 @@ private fun NotificationManager.createNotificationChannel(
                 else -> "DefaultChannel"
             }
 
-            val channelImportance = if (playSound) NotificationManager.IMPORTANCE_HIGH
-            else NotificationManager.IMPORTANCE_LOW //IMPORTANCE_DEFAULT?
+            val channelImportance = if (priority >= PRIORITY_HIGH) IMPORTANCE_HIGH else IMPORTANCE_LOW
             val nChannel = NotificationChannel(channelID, channelName, channelImportance)
             nChannel.enableLights(true)
             nChannel.lightColor = Color.BLUE
 
-            val audioAttributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                .build()
-
             nChannel.vibrationPattern = longArrayOf(500, 500, 500, 500)
-            nChannel.setSound(
-                Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring),
-                audioAttributes
-            )
+
+            if (allatSound) {
+                val audioAttributes = AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build()
+
+                nChannel.setSound(
+                    Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring),
+                    audioAttributes
+                )
+            }
+
             this.createNotificationChannel(nChannel)
         }
     } catch (e: NoSuchMethodError) {
