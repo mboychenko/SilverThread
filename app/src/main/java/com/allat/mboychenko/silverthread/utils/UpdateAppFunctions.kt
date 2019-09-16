@@ -22,17 +22,17 @@ fun updateVersion(context: Context) {
 }
 
 private fun updateScript(context: Context, storage: Storage) {
-    if (!storage.getBoolean(PATCH_20_APPLIED_PREF_KEY, false)) {
-        applyPatchVer20(context, storage)
-        storage.putBoolean(PATCH_20_APPLIED_PREF_KEY, true)
+    if (!storage.getBoolean(PATCH_21_APPLIED_PREF_KEY, false)) {
+        applyPatchVer21(context, storage)
+        storage.putBoolean(PATCH_21_APPLIED_PREF_KEY, true)
     }
 
-    applyPatchVer21()
+    applyPatchVer22()
 
     storage.putInt(LAST_UPDATE_VERSION_PREF, BuildConfig.VERSION_CODE)
 }
 
-private fun applyPatchVer20(context: Context, storage: Storage) {
+private fun applyPatchVer21(context: Context, storage: Storage) {
     removeAlarm(context, AlarmNotificationCodes.QUOTE.action, AlarmNotificationCodes.QUOTE.code)
     QuotesInteractor(storage).clearShowedTimesInDay()
 
@@ -48,10 +48,10 @@ private fun applyPatchVer20(context: Context, storage: Storage) {
     setupRandomQuoteNextAlarm(context, forceNextDay = true)
 }
 
-private fun applyPatchVer21() {
+private fun applyPatchVer22() {
     //future
 }
 
 private const val LAST_UPDATE_VERSION_PREF = "LAST_UPDATE_VERSION_PREF"
 
-private const val PATCH_20_APPLIED_PREF_KEY = "PATCH_20_APPLIED_PREF_KEY"
+private const val PATCH_21_APPLIED_PREF_KEY = "PATCH_21_APPLIED_PREF_KEY"

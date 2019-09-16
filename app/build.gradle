@@ -9,7 +9,7 @@ android {
         applicationId "com.allat.mboychenko.silverthread"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 20
+        versionCode 21
         versionName "3.7.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
