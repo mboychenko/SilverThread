@@ -30,14 +30,13 @@ import androidx.media.session.MediaButtonReceiver
 private const val CHANNEL_ID_ALLAT = "allat_notif"
 private const val CHANNEL_NAME_ALLAT = "Allat Notifications"
 
-private const val CHANNEL_ID_ALLAT_SILENCE = "allat_notif_silence"
 private const val CHANNEL_NAME_ALLAT_SILENCED = "Allat Notifications Muted"
-
-private const val CHANNEL_ID_QUOTES = "quotes_notif"
 private const val CHANNEL_NAME_QUOTES = "Quotes Notifications"
-
-private const val CHANNEL_ID_RADIO = "radio_notif"
 private const val CHANNEL_NAME_RADIO = "Radio Notifications"
+
+const val CHANNEL_ID_ALLAT_SILENCE = "allat_notif_silence"
+const val CHANNEL_ID_QUOTES = "quotes_notif"
+const val CHANNEL_ID_RADIO = "radio_notif"
 
 const val NOTIFICATION_ACTION_ALLAT = "AllatNotification"
 const val NOTIFICATION_ACTION_BEFORE_UPDATE = "AllatNotificationBeforeUpdate"

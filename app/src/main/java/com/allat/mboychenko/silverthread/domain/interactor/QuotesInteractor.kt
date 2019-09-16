@@ -46,6 +46,11 @@ class QuotesInteractor(val storage: Storage): QuotesDetailsStorage {
         storage.putLong(RANDOM_QUOTES_SHOWED_DAY_PREF_KEY, timesInDay.second)
     }
 
+    override fun clearShowedTimesInDay() {
+        storage.remove(RANDOM_QUOTES_SHOWED_TIMES_PREF_KEY)
+        storage.remove(RANDOM_QUOTES_SHOWED_DAY_PREF_KEY)
+    }
+
     companion object {
         private const val QUOTES_FAVORITES_PREF_KEY = "QUOTES_FAVORITES_PREF_KEY"
         private const val RANDOM_QUOTES_TIMES_PREF_KEY = "RANDOM_QUOTES_TIMES_PREF_KEY"

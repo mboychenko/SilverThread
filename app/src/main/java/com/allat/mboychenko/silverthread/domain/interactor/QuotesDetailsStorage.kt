@@ -7,6 +7,9 @@ interface QuotesDetailsStorage {
 
     fun getRandomQuotesTimesInDay(): Int
     fun setRandomQuotesTimesInDay(times: Int)
+
     fun getQuotesWasShowedTimesInDay(): Pair<Int, Long>
     fun setQuotesWasShowedTimesInDay(timesInDay: Pair<Int, Long>)
+
+    fun clearShowedTimesInDay()
 }

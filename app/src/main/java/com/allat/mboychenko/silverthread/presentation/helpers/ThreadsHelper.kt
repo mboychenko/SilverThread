@@ -33,6 +33,22 @@ fun <T> runTaskOnBackgroundWithResult(
         .subscribe { onNext(it) }
 }
 
+fun <T> runTaskOnBackground(
+    executorThread: ExecutorThread = ExecutorThread.IO,
+    task: () -> T
+): Disposable {
+    val executor = when (executorThread) {
+        ExecutorThread.COMPUTATION -> Schedulers.computation()
+        ExecutorThread.IO -> Schedulers.io()
+        else -> Schedulers.newThread()
+    }
+    return Observable.fromCallable(task)
+        .subscribeOn(executor)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe()
+}
+
+
 fun executeOnMainThread(action: () -> Unit) {
     Handler(Looper.getMainLooper()).post {
         action()

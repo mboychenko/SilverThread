@@ -13,7 +13,7 @@ import com.allat.mboychenko.silverthread.domain.interactor.QuotesInteractor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false) {
+fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false, forceNextDay: Boolean = false) {
     val storageImplementation = StorageImplementation(context)
     val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storageImplementation)
     val quotesStorage: QuotesDetailsStorage = QuotesInteractor(storageImplementation)
@@ -34,7 +34,7 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
         if (lastNotifDay.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
              nextNotificationTime = getMillisToNextQuote(allatTimezone, dayInMillis)
         } else if (lastNotifDay.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
-            nextNotificationTime = if (showedTimes < randomQuotesInDay) {
+            nextNotificationTime = if (showedTimes < randomQuotesInDay && !forceNextDay) {
                 getMillisToNextQuote(allatTimezone, dayInMillis)
             } else {
                 getMillisToNextQuote(allatTimezone, dayInMillis, true)
@@ -100,16 +100,18 @@ private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationT
 
     if (changeToNextDay || now.timeInMillis >= endLimit) {
         now.set(Calendar.HOUR_OF_DAY, 23)
-        now.set(Calendar.MINUTE, 0)
-        now.set(Calendar.SECOND, 0)
         now.timeInMillis += TimeUnit.MINUTES.toMillis(127)      //next day
 
         allatTimeOffsets = setupAllatTimeOffsets(now, allatTimezone)
 
-        now.set(Calendar.HOUR_OF_DAY, 8)                                //next day start limit
+        //next day start limit
+        now.set(Calendar.HOUR_OF_DAY, 8)
+        now.set(Calendar.MINUTE, 0)
+        now.set(Calendar.SECOND, 0)
         startLimit = now.timeInMillis
 
-        now.set(Calendar.HOUR_OF_DAY, 22)                               //next day end limit
+        //next day end limit
+        now.set(Calendar.HOUR_OF_DAY, 22)
         endLimit = now.timeInMillis
     } else {
         allatTimeOffsets = setupAllatTimeOffsets(now, allatTimezone)
