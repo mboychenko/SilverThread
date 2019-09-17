@@ -6,15 +6,15 @@
         android:orientation="vertical"
         android:padding="4dp"
         android:layout_marginTop="4dp"
-        android:layout_width="190dp"
-        android:layout_height="260dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <ImageView
             android:id="@+id/imgBackground"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="190dp"
+            android:layout_height="260dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:src="@drawable/allatra_book"
@@ -27,8 +27,8 @@
             android:layout_marginTop="18dp"
             android:layout_marginEnd="18dp"
             android:background="@drawable/ic_share_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintEnd_toEndOf="@id/imgBackground"
+            app:layout_constraintTop_toTopOf="@id/imgBackground"/>
 
     <Button
             android:id="@+id/buttonDelete"
@@ -45,10 +45,10 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="@drawable/ic_cloud_download_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintEnd_toEndOf="@id/imgBackground"
+            app:layout_constraintStart_toStartOf="@id/imgBackground"
+            app:layout_constraintBottom_toBottomOf="@id/imgBackground"
+            app:layout_constraintTop_toTopOf="@id/imgBackground"/>
 
     <View android:id="@+id/loadingClickGrabber"
           android:layout_width="match_parent"
@@ -65,10 +65,10 @@
             android:id="@+id/downloading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imgBackground"
+            app:layout_constraintStart_toStartOf="@id/imgBackground"
+            app:layout_constraintBottom_toBottomOf="@id/imgBackground"
+            app:layout_constraintTop_toTopOf="@id/imgBackground"
             tools:visibility="gone"/>
 
     <TextView
@@ -76,8 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/downloading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imgBackground"
+            app:layout_constraintStart_toStartOf="@id/imgBackground"
             android:textColor="@color/colorAccent"
             android:text="@string/downloading"
             tools:visibility="gone"/>
@@ -87,8 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/downloadingText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imgBackground"
+            app:layout_constraintStart_toStartOf="@id/imgBackground"
             android:layout_marginTop="12dp"
             android:textColor="@color/colorAccent"
             android:text="@string/cancel"

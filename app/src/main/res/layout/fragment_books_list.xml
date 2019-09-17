@@ -37,10 +37,12 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/booksList"
             android:name="com.allat.mboychenko.silverthread.presentation.views.fragments.BooksFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/filterContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layoutManager="LinearLayoutManager"
             tools:context=".presentation.views.fragments.BooksFragment"
             tools:listitem="@layout/quote_item_layout"/>
