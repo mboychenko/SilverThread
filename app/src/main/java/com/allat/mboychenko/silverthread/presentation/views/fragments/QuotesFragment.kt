@@ -155,6 +155,7 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
         builder
             .setMessage(quote)
             .setTitle(R.string.r_quote)
+            .setCancelable(false)
             .setNegativeButton(R.string.hide) { dialog, _ -> dialog.dismiss() }
             .setNeutralButton(R.string.in_favorite) { _, _ -> presenter.addToFavorite(position) }
             .setPositiveButton(R.string.share) { _, _ -> shareText(quote, getString(R.string.share_quote)) }
