@@ -26,6 +26,7 @@ import com.allat.mboychenko.silverthread.presentation.services.AllatRadioService
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.media.session.MediaButtonReceiver
+import android.media.RingtoneManager
 
 private const val CHANNEL_ID_ALLAT = "allat_notif"
 private const val CHANNEL_NAME_ALLAT = "Allat Notifications"
@@ -75,6 +76,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     val notifChannelId: String
     val notifId: Int
     var allatSound = false
+    var defaultSound = false
     var priority = PRIORITY_HIGH
 
     when (notificationCode) {
@@ -119,6 +121,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
                 action = NOTIFICATION_ACTION_QUOTE
                 notifId = NOTIFICATION_ID_QUOTE
                 notifChannelId = CHANNEL_ID_QUOTES
+                defaultSound = true
             } else {
                 return
             }
@@ -128,7 +131,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
 
     //notify
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    val nBuilder = getBasicNotificationBuilder(context, notifChannelId, allatSound)
+    val nBuilder = getBasicNotificationBuilder(context, notifChannelId, allatSound, defaultSound)
     nBuilder.setContentTitle(title)
         .setContentText(text)
         .setVibrate(longArrayOf(500, 500, 500, 500))
@@ -251,7 +254,7 @@ fun hideNotification(context: Context, extras: Bundle?) {
     }
 }
 
-private fun getBasicNotificationBuilder(context: Context, channelId: String, allatSound: Boolean)
+private fun getBasicNotificationBuilder(context: Context, channelId: String, allatSound: Boolean, defaultSound: Boolean)
         : NotificationCompat.Builder {
     val nBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(R.drawable.allatra_small)
@@ -259,8 +262,11 @@ private fun getBasicNotificationBuilder(context: Context, channelId: String, all
         .setAutoCancel(true)
 
     if (allatSound) {
-        val notificationSound: Uri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring)
-        nBuilder.setSound(notificationSound)
+        val notificationSoundUri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring)
+        nBuilder.setSound(notificationSoundUri)
+    } else if (defaultSound) {
+        val notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        nBuilder.setSound(notificationSoundUri)
     }
 
     return nBuilder

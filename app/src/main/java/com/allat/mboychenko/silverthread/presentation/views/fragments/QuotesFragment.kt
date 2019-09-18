@@ -113,8 +113,8 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
         showIncomingFromNotificationQuote()
     }
 
-    private fun showIncomingFromNotificationQuote() {
-        val quotePosition = arguments?.getInt(QUOTES_INCOMING_POSITION, -1)
+    fun showIncomingFromNotificationQuote(position: Int? = null) {
+        val quotePosition = position ?: arguments?.getInt(QUOTES_INCOMING_POSITION, -1)
         if (quotePosition != null && quotePosition != -1) {
             val quote = presenter.getQuote(quotePosition)
             showQuote(quotePosition, quote)

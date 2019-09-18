@@ -38,7 +38,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         super.onNewIntent(intent)
         when (intent?.action) {
             NOTIFICATION_ACTION_QUOTE -> {
-                setQuotesNavigationItem()
+                setQuotesNavigationItem(intent)
                 return
             }
             NOTIFICATION_ACTION_RADIO -> {
@@ -161,12 +161,14 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
 
     protected fun navigationItemPosUpdate() {
         supportFragmentManager.fragments.find { it.isVisible || it.isAdded }?.let {
-            updateNavDrawerBy(fragmentTag = (it as IAllatRaFragments).getFragmentTag())
+            if (it is IAllatRaFragments) {
+                updateNavDrawerBy(fragmentTag = (it as IAllatRaFragments).getFragmentTag())
+            }
             return
         }
 
         when (intent.action) {
-            NOTIFICATION_ACTION_QUOTE -> setQuotesNavigationItem()
+            NOTIFICATION_ACTION_QUOTE -> setQuotesNavigationItem(intent)
             NOTIFICATION_ACTION_RADIO -> setRadioNavigationItem()
             else -> setDefaultNavigationItem()
         }
@@ -183,10 +185,18 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         setFragment(RadioFragment())
     }
 
-    private fun setQuotesNavigationItem() {
-        val position = intent.getIntExtra(NOTIFICATION_QUOTE_POSITION_EXTRAS, -1)
-        navigationView.setCheckedItem(R.id.nav_quotes)
-        setFragment(QuotesFragment.newInstance(position))
+    private fun setQuotesNavigationItem(intent: Intent?) {
+        intent?.let {
+            val position = it.getIntExtra(NOTIFICATION_QUOTE_POSITION_EXTRAS, -1)
+            navigationView.setCheckedItem(R.id.nav_quotes)
+
+            if (supportFragmentManager.findFragmentByTag(QuotesFragment.QUOTES_FRAGMENT_TAG)?.isVisible == true) {
+                (supportFragmentManager.findFragmentByTag(QuotesFragment.QUOTES_FRAGMENT_TAG) as QuotesFragment)
+                    .showIncomingFromNotificationQuote(position)
+            } else {
+                setFragment(QuotesFragment.newInstance(position))
+            }
+        }
     }
 
     override fun onBackPressed() {

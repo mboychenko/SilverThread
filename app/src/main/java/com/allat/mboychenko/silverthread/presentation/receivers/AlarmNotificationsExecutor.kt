@@ -70,7 +70,12 @@ class AlarmNotificationsExecutor(val context: Context) {
                 }
             },
             {
-                wl.release()
+                try {
+                    wl.release()
+                } catch (e: Throwable) {
+                    //catch known issue for specific Android versions, nothing to do
+                }
+
                 pendingResult?.finish()
                 Log.d("NotificationTimer", "Release WL")
             })
