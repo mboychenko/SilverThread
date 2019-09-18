@@ -8,7 +8,7 @@ object AllatHelper {
 
     fun getMillisToAllatStart(allatZone: AllatTimeZone, allatAfterNext: Boolean = false): Long {
 
-        val allatTimezone = getTimezone(allatZone)
+        val allatTimezone = allatZone.getCalendarTimezone()
         val morningTime = allatZone.morningTime
         val eveningTime = allatZone.eveningTime
 
@@ -26,7 +26,7 @@ object AllatHelper {
 
     fun getMillisToAllatEnd(allatZone: AllatTimeZone): Long {
 
-        val allatTimezone = getTimezone(allatZone)
+        val allatTimezone = allatZone.getCalendarTimezone()
         val morningTime = allatZone.morningTime
         val eveningTime = allatZone.eveningTime
 
@@ -48,7 +48,7 @@ object AllatHelper {
 
     fun getAllatTimeStatus(allatZone: AllatTimeZone): Pair<Long, TimeStatus> {
 
-        val allatTimezone: TimeZone = getTimezone(allatZone)
+        val allatTimezone: TimeZone = allatZone.getCalendarTimezone()
         val morningTime = allatZone.morningTime
         val eveningTime = allatZone.eveningTime
 
@@ -91,18 +91,6 @@ object AllatHelper {
         }
 
         return nextMeditationTime
-    }
-
-    private fun getTimezone(allatTimeZone: AllatTimeZone) = when(allatTimeZone) {
-        AllatTimeZone.KIEV -> {
-            TimeZone.getTimeZone(allatTimeZone.timeZone)
-        }
-        AllatTimeZone.GMT -> {
-            TimeZone.getTimeZone(allatTimeZone.timeZone)
-        }
-        else -> {                                                       //local or init
-            TimeZone.getDefault()
-        }
     }
 
     enum class TimeStatus {

@@ -144,7 +144,8 @@ private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationT
 }
 
 private fun setupAllatTimeOffsets(now: Calendar, allatTimezone: AllatTimeZone): AllatTimeOffsets {
-    val calendar = Calendar.getInstance()
+    val calendar = Calendar.getInstance(allatTimezone.getCalendarTimezone())
+
     calendar.timeInMillis = now.timeInMillis
     calendar.set(Calendar.MINUTE, 0)
     calendar.set(Calendar.SECOND, 0)
