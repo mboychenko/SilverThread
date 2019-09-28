@@ -15,7 +15,7 @@ fun updateVersion(context: Context) {
         val storage: Storage = StorageImplementation(context)
         val lastUpdatedVersion = storage.getIntDefault(LAST_UPDATE_VERSION_PREF, 0)
 
-        if (lastUpdatedVersion != BuildConfig.VERSION_CODE) {
+        if (lastUpdatedVersion < BuildConfig.VERSION_CODE) {
             updateScript(context, storage)
         }
     }

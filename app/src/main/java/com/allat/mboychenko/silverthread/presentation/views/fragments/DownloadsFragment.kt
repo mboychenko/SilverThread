@@ -63,6 +63,9 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
 
     override fun filesList(files: List<LoadedFileItem>) {
         filesSection.update(files)
+        if (filesSection.groupCount > 0) {
+            noFiles.visibility = View.GONE
+        }
     }
 
     override fun noFilesInDirectory() {
@@ -71,6 +74,9 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
 
     override fun removeLoadedItem(item: LoadedFileItem) {
         filesSection.remove(item)
+        if (filesSection.groupCount == 0) {
+            noFilesInDirectory()
+        }
     }
 
     companion object {

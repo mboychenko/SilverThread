@@ -1,6 +1,10 @@
 package com.allat.mboychenko.silverthread.presentation.presenters
 
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IDownloadsFragmentView
 import android.widget.Toast
 import com.allat.mboychenko.silverthread.R
@@ -12,10 +16,16 @@ class DownloadsPresenter(val context: Context) : BasePresenter<IDownloadsFragmen
 
     override fun attachView(view: IDownloadsFragmentView) {
         super.attachView(view)
-        getFilesList()
+        context.registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        checkFilesList()
     }
 
-    private fun getFilesList() {
+    override fun detachView() {
+        super.detachView()
+        context.unregisterReceiver(onDownloadComplete)
+    }
+
+    private fun checkFilesList() {
         if (isExternalStorageReadable()) {
             manageAddToSubscription(
                 runTaskOnBackgroundWithResult(ExecutorThread.IO,
@@ -44,6 +54,12 @@ class DownloadsPresenter(val context: Context) : BasePresenter<IDownloadsFragmen
             )
         } else {
             Toast.makeText(context, R.string.cant_access_storage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private val onDownloadComplete = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            checkFilesList()
         }
     }
 
