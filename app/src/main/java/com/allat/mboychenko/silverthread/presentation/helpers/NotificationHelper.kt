@@ -36,8 +36,8 @@ private const val CHANNEL_NAME_QUOTES = "Quotes Notifications"
 private const val CHANNEL_NAME_RADIO = "Radio Notifications"
 
 const val CHANNEL_ID_ALLAT_SILENCE = "allat_notif_silence"
-const val CHANNEL_ID_QUOTES = "quotes_notif"
 const val CHANNEL_ID_RADIO = "radio_notif"
+const val CHANNEL_ID_QUOTES = "quotes_notif_def_sound"
 
 const val NOTIFICATION_ACTION_ALLAT = "AllatNotification"
 const val NOTIFICATION_ACTION_BEFORE_UPDATE = "AllatNotificationBeforeUpdate"
@@ -128,6 +128,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
         }
         else -> return
     }
+    Log.d("NotificationHelper", "showNotification $title $action $notifId $notifChannelId $defaultSound $allatSound ")
 
     //notify
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -144,9 +145,9 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
 
 
     if (notificationCode == AlarmNotificationCodes.ALLAT_BEFORE ||
-        notificationCode == AlarmNotificationCodes.ALLAT_BEFORE_UPDATE) {
+        notificationCode == AlarmNotificationCodes.ALLAT_BEFORE_UPDATE
+    ) {
         nBuilder.setDeleteIntent(getRemoveAllatBeforeUpdatesIntent(context))
-        Log.d("NotificationTimer", "timerSetDeleteIntent")
     }
 
     //backup if Job was killed and not yet come back
@@ -177,9 +178,15 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     val notification = nBuilder.build()
     nManager.createNotificationChannel(context, notification, allatSound, priority)
     nManager.notify(notifId, notification)
+
+    Log.d("NotificationHelper", "showNotification notified ")
 }
 
-fun getRadioNotification(context: Context, playbackState: AllatRadioService.PlaybackStatus, mediaSession: MediaSessionCompat): Notification {
+fun getRadioNotification(
+    context: Context,
+    playbackState: AllatRadioService.PlaybackStatus,
+    mediaSession: MediaSessionCompat
+): Notification {
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     nManager.createRadioNotificationChannel()
 
@@ -194,39 +201,47 @@ fun getRadioNotification(context: Context, playbackState: AllatRadioService.Play
         .setLargeIcon(ContextCompat.getDrawable(context, R.drawable.radio_notif_bg)?.toBitmap())
         .setSmallIcon(R.drawable.allatra_small)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-        .setContentIntent(getActivityPendingIntent(
-            context,
-            NOTIFICATION_ACTION_RADIO,
-            javaClass = MainActivity::class.java
-        ))
+        .setContentIntent(
+            getActivityPendingIntent(
+                context,
+                NOTIFICATION_ACTION_RADIO,
+                javaClass = MainActivity::class.java
+            )
+        )
         .setDeleteIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_STOP))
 
     if (playbackState == AllatRadioService.PlaybackStatus.PLAYING ||
-        playbackState == AllatRadioService.PlaybackStatus.BUFFERING) {
+        playbackState == AllatRadioService.PlaybackStatus.BUFFERING
+    ) {
         builder.addAction(
-                R.drawable.ic_pause,
-                context.getString(R.string.pause),
-                MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_PLAY_PAUSE)
+            R.drawable.ic_pause,
+            context.getString(R.string.pause),
+            MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_PLAY_PAUSE)
         )
     } else {
         builder.addAction(
-                R.drawable.ic_play,
-                context.getString(R.string.play),
-                MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_PLAY_PAUSE)
+            R.drawable.ic_play,
+            context.getString(R.string.play),
+            MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_PLAY_PAUSE)
         )
     }
 
     builder.addAction(
-            R.drawable.ic_stop,
-            context.getString(R.string.stop),
-            MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_STOP)
+        R.drawable.ic_stop,
+        context.getString(R.string.stop),
+        MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_STOP)
     )
 
     builder.setStyle(
         androidx.media.app.NotificationCompat.MediaStyle()
             .setShowActionsInCompactView(0, 1)
             .setShowCancelButton(true)
-            .setCancelButtonIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(context, PlaybackStateCompat.ACTION_STOP))
+            .setCancelButtonIntent(
+                MediaButtonReceiver.buildMediaButtonPendingIntent(
+                    context,
+                    PlaybackStateCompat.ACTION_STOP
+                )
+            )
             .setMediaSession(mediaSession.sessionToken)
     )
     builder.priority = NotificationCompat.PRIORITY_DEFAULT //PRIORITY_HIGH
@@ -272,9 +287,11 @@ private fun getBasicNotificationBuilder(context: Context, channelId: String, all
     return nBuilder
 }
 
-fun <T> getActivityPendingIntent(context: Context, action: String, extras: Bundle? = null,
-                                 flag: Int = PendingIntent.FLAG_CANCEL_CURRENT,
-                                 javaClass: Class<T>): PendingIntent? {
+fun <T> getActivityPendingIntent(
+    context: Context, action: String, extras: Bundle? = null,
+    flag: Int = PendingIntent.FLAG_CANCEL_CURRENT,
+    javaClass: Class<T>
+): PendingIntent? {
     val resultIntent = Intent(context, javaClass)
     resultIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
     resultIntent.action = action
@@ -307,9 +324,9 @@ private fun NotificationManager.createNotificationChannel(
     allatSound: Boolean,
     priority: Int
 ) {
-    try {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val channelID = notification.channelId
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.getNotificationChannel(channelID) == null) {
+        if (this.getNotificationChannel(channelID) == null) {
             val channelName = when (channelID) {
                 CHANNEL_ID_ALLAT -> CHANNEL_NAME_ALLAT
                 CHANNEL_ID_ALLAT_SILENCE -> CHANNEL_NAME_ALLAT_SILENCED
@@ -338,14 +355,12 @@ private fun NotificationManager.createNotificationChannel(
 
             this.createNotificationChannel(nChannel)
         }
-    } catch (e: NoSuchMethodError) {
-        Log.e("NotificationHelper", e.message)
     }
 }
 
 @TargetApi(26)
 private fun NotificationManager.createRadioNotificationChannel() {
-    try {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         if (this.getNotificationChannel(CHANNEL_ID_RADIO) == null) {
             this.createNotificationChannel(
                 NotificationChannel(
@@ -355,7 +370,5 @@ private fun NotificationManager.createRadioNotificationChannel() {
                 )
             )
         }
-    } catch (e: NoSuchMethodError) {
-        Log.e("NotificationHelper", e.message)
     }
 }

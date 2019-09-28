@@ -13,7 +13,11 @@ import org.koin.dsl.module
 
 val presentersModule = module {
     factory {
-        BooksPresenter(androidContext(), get(), get())
+        BooksPresenter(androidContext(), get(), get(), get())
+    }
+
+    factory {
+        DownloadsPresenter(androidContext())
     }
 
     factory {
@@ -60,6 +64,10 @@ val storageModule = module {
 
     factory {
         BooksLoaderDeatilsInteractor(get()) as BooksLoaderDetailsStorage
+    }
+
+    factory {
+        FileLoaderDetailsInteractor(get()) as FileLoadingDetailsStorage
     }
 
     factory {

@@ -52,10 +52,21 @@
     <string name="click_to_unlock">Разблокировать</string>
     <string name="click_to_lock">Заблокировать</string>
 
+    <string name="downloads">Загрузки</string>
+    <string name="download">Загрузка</string>
     <string name="downloading">Загрузка…</string>
     <string name="delete_confirmation">Вы уверены, удалить %s?</string>
     <string name="yes">Да</string>
     <string name="cancel">Отмена</string>
+
+    <string name="cant_delete_book">Не могу удалить %s</string>
+    <string name="cant_delete_book_error">Не могу удалить %s, %s</string>
+    <string name="storage_not_available_writing">Хранилище недоступно для записи</string>
+    <string name="cant_create_folder_for_downloads">Не получается создать папку для загрузок: %s</string>
+    <string name="internet_not_available">Нет Интернета</string>
+    <string name="cant_access_storage">Нет доступа к хранилищу</string>
+    <string name="not_enough_memory">Недостаточно памяти</string>
+    <string name="save_web_loading">Скачать файл %s?\nВы сможете найти его в секции приложения "Загрузки"</string>
 
     <string name="timezone_config_description">От выбранной временной зоны будут зависить время Аллата, нотификациии связанные с Аллатом и случайные нотификации, вы можете изменить эту настройку в любое время на экране Аллата в зоне конфигураций</string>
     <string name="timezone_config_local">Локальная временная зона - это временная зона вашего устройства, она настроенна вручную или автоматически в зависимости от геолокации.</string>
@@ -114,6 +125,8 @@
     <string name="no_permissions">У приложения не хватает разрешений</string>
     <string name="settings_icon">Settings icon</string>
     <string name="lock_icon">Lock Icon</string>
+    <string name="no_saved_files">Нет сохраненных файлов</string>
+    <string name="deleted">Удалено</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>

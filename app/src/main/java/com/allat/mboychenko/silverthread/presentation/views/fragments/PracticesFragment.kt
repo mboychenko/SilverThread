@@ -1,6 +1,5 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import com.allat.mboychenko.silverthread.R
@@ -93,6 +91,7 @@ class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
             false
         }
     }
+
     private val autoreportsOnClickListener = View.OnClickListener {
         if (viewState != PracticesViewState.AUTOREPORTS) {
             TransitionManager.beginDelayedTransition(root as ViewGroup)
@@ -100,6 +99,7 @@ class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
             viewState = PracticesViewState.AUTOREPORTS
         }
     }
+
     private val meditationsOnClickListener = View.OnClickListener {
         if (viewState != PracticesViewState.MEDITATIONS) {
             TransitionManager.beginDelayedTransition(root as ViewGroup)
@@ -107,6 +107,7 @@ class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
             viewState = PracticesViewState.MEDITATIONS
         }
     }
+
     private val spiritualOnClickListener = View.OnClickListener {
         if (viewState != PracticesViewState.SPIRITUAL) {
             TransitionManager.beginDelayedTransition(root as ViewGroup)
@@ -114,6 +115,7 @@ class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
             viewState = PracticesViewState.SPIRITUAL
         }
     }
+
     private fun addAnimationOperations() {
         root = view?.findViewById(R.id.root)
 

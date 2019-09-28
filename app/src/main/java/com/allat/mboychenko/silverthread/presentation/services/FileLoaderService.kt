@@ -6,14 +6,21 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.app.JobIntentService
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
+import com.allat.mboychenko.silverthread.R
+import com.allat.mboychenko.silverthread.data.models.BooksConstants
 import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
+import com.allat.mboychenko.silverthread.domain.interactor.FileLoadingDetailsStorage
+import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.BOOKS_UPDATE_ACTION_CANCELLED_LOADING
+import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.BOOKS_UPDATE_ACTION_LOADED
+import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.BOOKS_UPDATE_ACTION_START_LOADING_FILENAME
+import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.BOOKS_UPDATE_ACTION_START_LOADING_ID
+import com.allat.mboychenko.silverthread.presentation.presenters.BooksPresenter.Companion.BOOKS_UPDATE_BROADCAST_ACTION
 import org.koin.android.ext.android.inject
 import java.io.File
 
 class FileLoaderService : JobIntentService() {
 
-    private val storage: BooksLoaderDetailsStorage by inject()
+    private val filesLoadingDetailsStorage: FileLoadingDetailsStorage by inject()
     private val booksHelper: BooksHelper by inject()
     private lateinit var localBroadcastManager: LocalBroadcastManager
     private val downloadManager by lazy { getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
@@ -24,12 +31,13 @@ class FileLoaderService : JobIntentService() {
         val path = intent.getStringExtra(DIR_PATH_ARG)
         val action = intent.getStringExtra(ACTION_ARG)
         val cancelId = intent.getLongExtra(DOWNLOAD_ID_ARG, -1)
+        val webDownload = intent.getBooleanExtra(WEB_DOWNLOAD_ARG, false)
         localBroadcastManager = LocalBroadcastManager.getInstance(applicationContext)
 
         when {
             action?.equals(ACTION_CANCEL_DOWNLOAD) == true -> {
                 if (cancelId != -1L) {
-                    val loadingIds = storage.getBooksLoadingIds()
+                    val loadingIds = filesLoadingDetailsStorage.getLoadingIds()
                     downloadManager.remove(cancelId)
                     loadingIds.entries.find { it.value == cancelId }?.let {
                         finishLoading(it.key, cancelId)
@@ -37,23 +45,32 @@ class FileLoaderService : JobIntentService() {
                 }
             }
             action?.equals(ACTION_REFRESH_STATE) == true -> {
-                val loadingIds = storage.getBooksLoadingIds()
+                val loadingIds = filesLoadingDetailsStorage.getLoadingIds()
 
                 for (entry in loadingIds) {
                     updateLoadingStatus(entry.key, entry.value)
                 }
             }
             else -> url?.let {
-                val inProgress = urlInProgressId(it)
+                var inProgress = urlInProgressId(it)
+
+                if (inProgress && webDownload) {
+                    val loadingId = (filesLoadingDetailsStorage.getLoadingIds()[it] as Int?)?.toLong()
+                    loadingId?.let {
+                        updateLoadingStatus(url, loadingId)
+                        inProgress = urlInProgressId(url)
+                    }
+                }
+
                 if (!inProgress && !path.isNullOrEmpty() && !fileName.isNullOrEmpty()) {
-                    loadFile(it, path, fileName)
+                    loadFile(it, path, fileName, webDownload)
                 }
             }
         }
     }
 
     private fun urlInProgressId(url: String): Boolean {
-        return storage.getBooksLoadingIds()[url] != null
+        return filesLoadingDetailsStorage.getLoadingIds()[url] != null
     }
 
 
@@ -62,8 +79,8 @@ class FileLoaderService : JobIntentService() {
             setFilterById(id)
         }
         val c = downloadManager.query(query)
-        if(c.moveToFirst()) {
-            when(c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS))) {
+        if (c.moveToFirst()) {
+            when (c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS))) {
                 DownloadManager.STATUS_PAUSED,
                 DownloadManager.STATUS_PENDING,
                 DownloadManager.STATUS_RUNNING -> {
@@ -75,33 +92,50 @@ class FileLoaderService : JobIntentService() {
                     finishLoading(url, id, c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS)))
                 }
             }
+        } else {
+            finishLoading(url, id)
         }
     }
 
     private fun finishLoading(url: String, id: Long, status: Int = -1) {
-        storage.removeIdFromBookLoadings(id)
-        val fileName = booksHelper.getBookByUrl(url).fileName
-        val extraKeyAction = if (status == DownloadManager.STATUS_SUCCESSFUL) {
-            BOOKS_UPDATE_ACTION_LOADED
-        } else {
-            BOOKS_UPDATE_ACTION_CANCELLED_LOADING
-        }
-        localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
-            .apply { putExtra(extraKeyAction, fileName) })
+        filesLoadingDetailsStorage.removeIdFromLoadings(id)
+        notifyBooksObserverIfNeed(url, status)
     }
 
-    private fun loadFile(url: String, dirPath: String, fileName: String) {
+    private fun notifyBooksObserverIfNeed(url: String, status: Int) {
+        val book = booksHelper.getBookByUrl(url)
+        if (book != BooksConstants.EMPTY) {
+            val fileName = book.fileName
+            val extraKeyAction = if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                BOOKS_UPDATE_ACTION_LOADED
+            } else {
+                BOOKS_UPDATE_ACTION_CANCELLED_LOADING
+            }
+
+            localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
+                .apply { putExtra(extraKeyAction, fileName) })
+        }
+    }
+
+    private fun loadFile(url: String, dirPath: String, fileName: String, webDownload: Boolean = false) {
         val destinationFileUri = Uri.fromFile(File(dirPath, fileName))
+        val notificationVisibility =
+            if (!webDownload) DownloadManager.Request.VISIBILITY_VISIBLE else DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+
         val request = DownloadManager.Request(Uri.parse(url))
             .setTitle(fileName)
-            .setDescription("Downloading")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+            .setDescription(applicationContext.getString(R.string.downloading))
+            .setNotificationVisibility(notificationVisibility)
             .setDestinationUri(destinationFileUri)
             .setAllowedOverMetered(true)
 
+        if (webDownload) {
+            request.allowScanningByMediaScanner()
+        }
+
         val downloadID = downloadManager.enqueue(request)
 
-        storage.putBookLoadingId(url, downloadID)
+        filesLoadingDetailsStorage.putLoadingId(url, downloadID)
         localBroadcastManager.sendBroadcast(Intent(BOOKS_UPDATE_BROADCAST_ACTION)
             .apply {
                 putExtra(BOOKS_UPDATE_ACTION_START_LOADING_ID, downloadID)
@@ -110,12 +144,13 @@ class FileLoaderService : JobIntentService() {
     }
 
     companion object {
-        fun commandLoadFile(context: Context, url: String, dirPath: String, fileName: String) {
+        fun commandLoadFile(context: Context, url: String, dirPath: String, fileName: String, webDownload: Boolean = false) {
             val intent = Intent()
             intent.putExtra(ACTION_ARG, ACTION_LOAD)
             intent.putExtra(FILE_URL_ARG, url)
             intent.putExtra(FILE_NAME_ARG, fileName)
             intent.putExtra(DIR_PATH_ARG, dirPath)
+            intent.putExtra(WEB_DOWNLOAD_ARG, webDownload)
             enqueueWork(context, FileLoaderService::class.java, JOB_ID, intent)
         }
 
@@ -132,24 +167,18 @@ class FileLoaderService : JobIntentService() {
             enqueueWork(context, FileLoaderService::class.java, JOB_ID, intent)
         }
 
-        const val JOB_ID = 101
+        private const val JOB_ID = 73644
 
         const val FILE_URL_ARG = "FILE_URL_ARG"
         const val FILE_NAME_ARG = "FILE_NAME_ARG"
         const val DIR_PATH_ARG = "DIR_PATH_ARG"
+        const val WEB_DOWNLOAD_ARG = "WEB_DOWNLOAD_ARG"
         const val DOWNLOAD_ID_ARG = "DOWNLOAD_ID_ARGUMENT"
 
         const val ACTION_ARG = "ACTION_ARG"
         const val ACTION_LOAD = "ACTION_LOAD"
         const val ACTION_CANCEL_DOWNLOAD = "ACTION_CANCEL_DOWNLOAD"
         const val ACTION_REFRESH_STATE = "ACTION_REFRESH_STATE"
-
-        const val BOOKS_UPDATE_BROADCAST_ACTION = "BOOKS_UPDATE_BROADCAST_ACTION"
-
-        const val BOOKS_UPDATE_ACTION_CANCELLED_LOADING = "BOOKS_UPDATE_ACTION_CANCELLED_LOADING"
-        const val BOOKS_UPDATE_ACTION_LOADED = "BOOKS_UPDATE_ACTION_LOADED"
-        const val BOOKS_UPDATE_ACTION_START_LOADING_ID = "BOOKS_UPDATE_ACTION_START_LOADING_ID"
-        const val BOOKS_UPDATE_ACTION_START_LOADING_FILENAME = "BOOKS_UPDATE_ACTION_START_LOADING_FILENAME"
 
     }
 }

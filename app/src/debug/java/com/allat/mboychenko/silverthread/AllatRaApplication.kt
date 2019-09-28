@@ -32,7 +32,7 @@ class AllatRaApplication: Application() {
     private fun saveLogcatToFile() {
         val fileName = "/logcat_" + System.currentTimeMillis() + ".txt"
         val outputFile = getPublicDownloadsStorageDir("allat_logcat")
-        Runtime.getRuntime().exec("logcat UpdateBeforeTimerJob:D NotificationTimer:D LogQuotes:D *:S -f " + outputFile?.absolutePath + fileName)
+        Runtime.getRuntime().exec("logcat NotificationHelper:D AlarmManager:D LogQuotes:D *:S -f " + outputFile?.absolutePath + fileName)
     }
 
 }

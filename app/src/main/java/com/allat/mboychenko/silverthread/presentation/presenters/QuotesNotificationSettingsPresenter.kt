@@ -5,7 +5,6 @@ import com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNe
 import com.allat.mboychenko.silverthread.presentation.views.dialogs.IQuotesNotificationSettingView
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
 import com.allat.mboychenko.silverthread.presentation.helpers.*
-import com.allat.mboychenko.silverthread.presentation.presenters.BasePresenter
 
 class QuotesNotificationSettingsPresenter(private val context: Context,
                                           private val quotesStorage: QuotesDetailsStorage) : BasePresenter<IQuotesNotificationSettingView>() {

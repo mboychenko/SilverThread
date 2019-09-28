@@ -109,4 +109,17 @@
         <item quantity="other">%d minutes to Allat</item>
     </plurals>
 
+    <string name="downloads">Downloads</string>
+    <string name="download">Download</string>
+    <string name="cant_delete_book">Can\'t delete book %s</string>
+    <string name="cant_delete_book_error">Can\'t delete book %s, %s</string>
+    <string name="storage_not_available_writing">Storage not available for writing</string>
+    <string name="cant_create_folder_for_downloads">Can\'t create folder for downloads: %s</string>
+    <string name="internet_not_available">Internet not available</string>
+    <string name="cant_access_storage">Can\'t access storage</string>
+    <string name="not_enough_memory">Not enough memory</string>
+    <string name="save_web_loading">Do you want to download %s?\nYou can find file in navigation "Downloads" section</string>
+    <string name="no_saved_files">No saved files</string>
+    <string name="deleted">Deleted</string>
+
 </resources>

@@ -22,6 +22,10 @@
                 android:id="@+id/nav_radio"
                 android:icon="@drawable/ic_radio"
                 android:title="@string/radio"/>
+        <item
+                android:id="@+id/nav_downloads"
+                android:icon="@drawable/ic_file_downloads"
+                android:title="@string/downloads"/>
     </group>
 
     <item android:title="@string/web">

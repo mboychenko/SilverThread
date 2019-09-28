@@ -9,14 +9,14 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.core.net.toFile
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.domain.interactor.BooksLoaderDetailsStorage
 import com.allat.mboychenko.silverthread.data.models.BooksConstants
 import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
+import com.allat.mboychenko.silverthread.domain.interactor.FileLoadingDetailsStorage
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.views.listitems.BookItem
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
-import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_BROADCAST_ACTION
-import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.BOOKS_UPDATE_ACTION_CANCELLED_LOADING
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IBooksFragmentView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,6 +28,7 @@ import java.lang.StringBuilder
 class BooksPresenter(
     private val context: Context,
     private val storage: BooksLoaderDetailsStorage,
+    private val loadingDetailsStorage: FileLoadingDetailsStorage,
     private val booksHelper: BooksHelper
 ) : BasePresenter<IBooksFragmentView>() {
 
@@ -61,7 +62,7 @@ class BooksPresenter(
 
     private fun getBooksItems(filter: BooksConstants.BooksLocale? = null): List<BookItem> {
         if (isExternalStorageReadable()) {
-            val loadings = storage.getBooksLoadingIds()
+            val loadings = loadingDetailsStorage.getLoadingIds()
 
             var books = booksHelper.getAllBooks()
 
@@ -96,7 +97,7 @@ class BooksPresenter(
 
             }
         } else {
-            Toast.makeText(context, "Cant access to storage", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.cant_access_storage, Toast.LENGTH_LONG).show()
         }
 
         return emptyList()
@@ -117,7 +118,7 @@ class BooksPresenter(
                 if (hasInternet) {
                     loadBookContinue(bookUrl, fileName)
                 } else {
-                    Toast.makeText(context, "Internet not available", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, R.string.internet_not_available, Toast.LENGTH_LONG).show()
                     view?.bookLoadingCancelled(fileName)
                 }
             }
@@ -126,7 +127,7 @@ class BooksPresenter(
 
     private fun loadBookContinue(bookUrl: String, fileName: String) {
         if (isExternalStorageAvailable().not()) {
-            Toast.makeText(context, "Storage not available for writing", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.storage_not_available_writing, Toast.LENGTH_LONG).show()
             view?.bookLoadingCancelled(fileName)
             return
         }
@@ -142,7 +143,7 @@ class BooksPresenter(
 
         if (bookSize >= getExternalStorageAvailableSpaceBytes()) {
             view?.bookLoadingCancelled(fileName)
-            Toast.makeText(context, "Not enough memory", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.not_enough_memory, Toast.LENGTH_LONG).show()
             return
         }
 
@@ -156,7 +157,7 @@ class BooksPresenter(
                     }
                 },
                     {
-                        Toast.makeText(context, "Cant create folder for downloads: ${it.message}", Toast.LENGTH_LONG)
+                        Toast.makeText(context, context.getString(R.string.cant_create_folder_for_downloads, it.message), Toast.LENGTH_LONG)
                             .show()
                     }
                 )
@@ -169,7 +170,7 @@ class BooksPresenter(
         }
 
         if (isExternalStorageAvailable().not()) {
-            Toast.makeText(context, "Storage not available for writing", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.storage_not_available_writing, Toast.LENGTH_LONG).show()
             return
         }
 
@@ -190,12 +191,12 @@ class BooksPresenter(
                         storage.removeLastBookPage(bookItem.book.fileName)
                         view?.bookRemoved(bookItem)
                     } else {
-                        Toast.makeText(context, "Cant delete book ${bookItem.book.fileName}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, context.getString(R.string.cant_delete_book, bookItem.book.fileName), Toast.LENGTH_LONG).show()
                     }
                 },
                     {
                         Toast.makeText(
-                            context, "Cant delete book ${bookItem.book.fileName}, ${it.message}", Toast.LENGTH_LONG
+                            context, context.getString(R.string.cant_delete_book_error, bookItem.book.fileName, it.message), Toast.LENGTH_LONG
                         ).show()
                     })
         )
@@ -246,10 +247,10 @@ class BooksPresenter(
         override fun onReceive(context: Context?, intent: Intent?) {
 
             val cancelledFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_CANCELLED_LOADING)
-            val loadedFileName = intent?.getStringExtra(FileLoaderService.BOOKS_UPDATE_ACTION_LOADED)
+            val loadedFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_LOADED)
 
-            val loadingId = intent?.getLongExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_ID, -1)
-            val loadingFileName = intent?.getStringExtra(FileLoaderService.BOOKS_UPDATE_ACTION_START_LOADING_FILENAME)
+            val loadingId = intent?.getLongExtra(BOOKS_UPDATE_ACTION_START_LOADING_ID, -1)
+            val loadingFileName = intent?.getStringExtra(BOOKS_UPDATE_ACTION_START_LOADING_FILENAME)
 
             if (loadingId != null && loadingId != -1L && !loadingFileName.isNullOrEmpty()) {
                 view?.loadingStarted(loadingFileName, loadingId)
@@ -274,24 +275,30 @@ class BooksPresenter(
                 {
                     val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
-                    val bookDownload = storage.getBooksLoadingIds()
+                    val downloads = loadingDetailsStorage.getLoadingIds()
                     var url: String? = null
-                    for (entry in bookDownload) {
+                    for (entry in downloads) {
                         if (entry.value == id) {
                             url = entry.key
                             break
                         }
                     }
 
-                    storage.removeIdFromBookLoadings(id)
+                    loadingDetailsStorage.removeIdFromLoadings(id)
 
                     if (url != null) {
                         val book = booksHelper.getBookByUrl(url)
-                        val bookFile = getBookUri(book).toFile()
-                        if (bookFile.exists().not()) {
-                            NO_SUCH_FILE
+
+                        val bookFile = if (book != BooksConstants.EMPTY) {
+                            getBookUri(book).toFile()
                         } else {
+                            null
+                        }
+
+                        if (bookFile?.exists() == true) {
                             book.fileName
+                        } else {
+                            NO_SUCH_FILE
                         }
                     } else {
                         NO_SUCH_FILE
@@ -311,6 +318,12 @@ class BooksPresenter(
         const val NO_SUCH_FILE = "NO_SUCH_FILE"
         const val REQUEST_PERMISSION_SAVED_LOAD_FILE_URL = "REQUEST_PERMISSION_SAVED_LOAD_FILE_URL"
         const val REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME = "REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME"
+
+        const val BOOKS_UPDATE_BROADCAST_ACTION = "BOOKS_UPDATE_BROADCAST_ACTION"
+        const val BOOKS_UPDATE_ACTION_CANCELLED_LOADING = "BOOKS_UPDATE_ACTION_CANCELLED_LOADING"
+        const val BOOKS_UPDATE_ACTION_LOADED = "BOOKS_UPDATE_ACTION_LOADED"
+        const val BOOKS_UPDATE_ACTION_START_LOADING_ID = "BOOKS_UPDATE_ACTION_START_LOADING_ID"
+        const val BOOKS_UPDATE_ACTION_START_LOADING_FILENAME = "BOOKS_UPDATE_ACTION_START_LOADING_FILENAME"
     }
 
 }

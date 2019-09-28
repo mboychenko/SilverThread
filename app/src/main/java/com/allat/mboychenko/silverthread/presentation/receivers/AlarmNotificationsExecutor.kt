@@ -19,7 +19,7 @@ class AlarmNotificationsExecutor(val context: Context) {
 
     fun onHandleNotification(intent: Intent) {
 
-        Log.d("NotificationTimer", "taking WL")
+        Log.d("AlarmNotificationsExec", "taking WL")
 
         val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
         val wl = pm.newWakeLock(
@@ -40,7 +40,7 @@ class AlarmNotificationsExecutor(val context: Context) {
                     }
                 }
 
-                Log.d("NotificationTimer", "onHandleNotification ${intent.action}")
+                Log.d("AlarmNotificationsExec", "onHandleNotification ${intent.action}")
 
                 when (intent.action) {
                     AlarmNotificationCodes.REINIT_TIMERS.action -> {
@@ -50,7 +50,6 @@ class AlarmNotificationsExecutor(val context: Context) {
                         reInit(context, allatStorage, true)
                     }
                     AlarmNotificationCodes.ALLAT_BEFORE.action -> {
-                        Log.d("NotificationTimer", "AlarmNotificationCodes.ALLAT_BEFORE.action")
                         UpdateBeforeTimerJob.startUpdateTimer(context)
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_BEFORE, bundle)
                     }
@@ -77,7 +76,7 @@ class AlarmNotificationsExecutor(val context: Context) {
                 }
 
                 pendingResult?.finish()
-                Log.d("NotificationTimer", "Release WL")
+                Log.d("AlarmNotificationsExec", "Release WL")
             })
     }
 

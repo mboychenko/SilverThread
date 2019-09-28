@@ -12,6 +12,8 @@ object AllatRaWebViewURIConstants {
     const val URI_CRAUD = "https://allatra.in/"
     const val URI_GEO = "https://geocenter.info/"
 
+    const val ALLATRA_FILE_SERVER_HOST = "files.allatra.tv"
+
     fun isAllatraResUrl(url: String?): Boolean {
         if (url == null) {
             return false

@@ -13,7 +13,7 @@ import com.allat.mboychenko.silverthread.domain.interactor.QuotesInteractor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false, forceNextDay: Boolean = false) {
+fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false) {
     val storageImplementation = StorageImplementation(context)
     val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storageImplementation)
     val quotesStorage: QuotesDetailsStorage = QuotesInteractor(storageImplementation)
@@ -34,7 +34,7 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
         if (lastNotifDay.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
              nextNotificationTime = getMillisToNextQuote(allatTimezone, dayInMillis)
         } else if (lastNotifDay.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
-            nextNotificationTime = if (showedTimes < randomQuotesInDay && !forceNextDay) {
+            nextNotificationTime = if (showedTimes < randomQuotesInDay) {
                 getMillisToNextQuote(allatTimezone, dayInMillis)
             } else {
                 getMillisToNextQuote(allatTimezone, dayInMillis, true)

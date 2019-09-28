@@ -12,6 +12,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.book_item_layout.view.*
 import androidx.fragment.app.FragmentActivity
 import com.allat.mboychenko.silverthread.R
+import com.allat.mboychenko.silverthread.presentation.helpers.getConfirmationDialog
 
 
 class BookItem(
@@ -86,16 +87,6 @@ class BookItem(
 
         })
         dialog.show((context as FragmentActivity).supportFragmentManager, LANGUAGE_SELECTOR_DIALOG_TAG)
-    }
-
-    private fun getConfirmationDialog(context: Context, title: String, action: () -> Unit) {
-        AlertDialog.Builder(context)
-            .setTitle(context.getString(R.string.delete_confirmation, title))
-            .setPositiveButton(context.getString(R.string.yes)) { _, _ ->
-                action()
-            }
-            .setNegativeButton(context.getString(R.string.cancel)) { dialog, _ -> dialog.dismiss() }
-            .show()
     }
 
     private fun updateLoadingState(view: View, exist: Boolean, loadingId: Long) {

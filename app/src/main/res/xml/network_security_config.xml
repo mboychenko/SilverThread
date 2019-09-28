@@ -4,5 +4,6 @@
     <domain includeSubdomains="true">94.23.36.117</domain>
     <domain includeSubdomains="true">germany.topradio.cz</domain>
     <domain includeSubdomains="true">eu6.fastcast4u.com</domain>
+    <domain includeSubdomains="true">files.allatra.tv</domain>
 </domain-config>
 </network-security-config>

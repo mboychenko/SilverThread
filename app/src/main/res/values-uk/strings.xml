@@ -108,4 +108,18 @@
         <item quantity="many">%d хвилин до Аллата</item>
         <item quantity="other">%d хвилин до Аллата</item>
     </plurals>
+
+    <string name="downloads">Завантаження</string>
+    <string name="download">Завантаження</string>
+    <string name="cant_delete_book">Не можливо видалити книгу %s</string>
+    <string name="cant_delete_book_error">Не можливо видалити книгу %s, %s</string>
+    <string name="storage_not_available_writing">Пам\'ять недоступна для запису</string>
+    <string name="cant_create_folder_for_downloads">Не можливо створити папку для завантажень: %s</string>
+    <string name="internet_not_available">Немає Інтернету</string>
+    <string name="cant_access_storage">Пам\'ять для зберігання недоступна</string>
+    <string name="not_enough_memory">Недостатньо пам\'яті</string>
+    <string name="save_web_loading">Завантажити %s?\nВи зможете знайти файл у роздiлi "Завантаження"</string>
+    <string name="no_saved_files">Немає завантажених файлiв</string>
+    <string name="deleted">Видалено</string>
+
 </resources>

@@ -92,6 +92,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 setFragment(BooksFragment(), navId)
             R.id.nav_radio ->
                 setFragment(RadioFragment(), navId)
+            R.id.nav_downloads ->
+                setFragment(DownloadsFragment(), navId)
             R.id.nav_tv_im ->
                 webViewLink(AllatRaWebViewURIConstants.URI_ALLATRA_TV_IM)
             R.id.nav_tv ->
@@ -126,6 +128,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 RadioFragment.RADIO_FRAGMENT_TAG -> R.id.nav_radio
                 QuotesFragment.QUOTES_FRAGMENT_TAG -> R.id.nav_quotes
                 BooksFragment.BOOKS_FRAGMENT_TAG -> R.id.nav_books
+                DownloadsFragment.DOWNLOADS_FRAGMENT_TAG -> R.id.nav_downloads
                 else -> R.id.nav_allat
             }
         } else if (webViewUrl != null) {

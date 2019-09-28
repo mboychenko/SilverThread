@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 
 fun setAlarmRemainingTime(context: Context, millisRemaining: Long, intentAction: String, requestCode: Int, extras: Bundle? = null) {
     val wakeUpTime = nowMillis + millisRemaining
-    Log.d("NotificationTimer", "setAlarmRemainingTime nowMillis $nowMillis, millisRemaining $millisRemaining, requestCode $requestCode")
+    Log.d("AlarmManager", "setAlarmRemainingTime nowMillis $nowMillis, millisRemaining $millisRemaining, requestCode $requestCode")
     setAlarm(context, wakeUpTime, intentAction, requestCode, extras)
 }
 
@@ -25,7 +25,7 @@ fun setAlarmExactTime(context: Context, wakeUpTime: Long, intentAction: String, 
 
 private fun setAlarm(context: Context, wakeUpTime: Long, intentAction: String, requestCode: Int, extras: Bundle? = null) {
 
-    Log.d("NotificationTimer", "setAlarmRemainingTime wakeUpTime $wakeUpTime")
+    Log.d("AlarmManager", "setAlarmRemainingTime wakeUpTime $wakeUpTime")
 
     val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -49,6 +49,7 @@ fun removeAlarm(context: Context, intentAction: String, requestCode: Int) {
 private fun AlarmManager.cancel(context: Context, intentAction: String, requestCode: Int) {
     val pendingIntent = createAlarmPendingIntent(context, intentAction, requestCode)
     this.cancel(pendingIntent)
+    Log.d("AlarmManager", "AlarmManager.cancel")
 }
 
 private fun createAlarmPendingIntent(context: Context, intentAction: String,
