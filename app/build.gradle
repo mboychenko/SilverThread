@@ -9,7 +9,7 @@ android {
         applicationId "com.allat.mboychenko.silverthread"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 29
+        versionCode 30
         versionName "3.9.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -41,7 +41,13 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    //1.1.0 doesn't work inflated custom webView on android 5.0-5.0.1,
+    //if make configured context it break webView video fullscreen mode
+    //https://stackoverflow.com/questions/41025200/android-view-inflateexception-error-inflating-class-android-webkit-webview/41721789#41721789
+    //noinspection GradleDependency
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+
     implementation 'androidx.core:core-ktx:1.2.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 

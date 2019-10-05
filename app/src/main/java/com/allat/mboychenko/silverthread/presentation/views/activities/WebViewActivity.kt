@@ -44,6 +44,7 @@ class WebViewActivity : BaseNavigationActivity() {
     private lateinit var refresh: TextView
     private lateinit var errorDesc: TextView
     private lateinit var errorTitle: TextView
+    private val webChromeClient: MyChrome by lazy { MyChrome() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,7 @@ class WebViewActivity : BaseNavigationActivity() {
 
         setupWebViewCookies(webView)
 
-        webView.webChromeClient = MyChrome()
+        webView.webChromeClient = webChromeClient
         webView.webViewClient = object :
             WebViewClient() {
 
@@ -326,10 +327,10 @@ class WebViewActivity : BaseNavigationActivity() {
     }
 
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
-            super.onBackPressed()
+        when {
+            webChromeClient.mCustomView != null -> webChromeClient.onHideCustomView()
+            webView.canGoBack() -> webView.goBack()
+            else -> super.onBackPressed()
         }
     }
 
@@ -347,7 +348,7 @@ class WebViewActivity : BaseNavigationActivity() {
 
     private inner class MyChrome : WebChromeClient() {
 
-        private var mCustomView: View? = null
+        internal var mCustomView: View? = null
         private var mCustomViewCallback: CustomViewCallback? = null
         private var mOriginalOrientation: Int = 0
         private var mOriginalSystemUiVisibility: Int = 0
