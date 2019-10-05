@@ -37,6 +37,7 @@
         <activity
                 android:name=".presentation.views.activities.WebViewActivity"
                 android:launchMode="singleTask"
+                android:configChanges="orientation|screenSize"
                 android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity

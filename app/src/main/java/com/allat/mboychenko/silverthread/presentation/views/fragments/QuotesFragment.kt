@@ -150,6 +150,9 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
         showQuote(position, quote)
     }
 
+    /**
+     * https://stackoverflow.com/questions/27580306/dismissed-dialog-fragment-reappears-again-when-app-is-resumed
+     */
     private fun showQuote(position: Int, quote: String) {
         val builder = AlertDialog.Builder(context!!)
         builder

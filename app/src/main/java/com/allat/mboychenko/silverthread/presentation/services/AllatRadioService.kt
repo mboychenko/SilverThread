@@ -103,6 +103,8 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             else -> MediaButtonReceiver.handleIntent(mediaSession, intent)
         }
 
+        refreshNotificationAndForegroundStatus()
+
         return START_STICKY
     }
 
@@ -184,6 +186,9 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
         connectionStateMonitor = ConnectionStateMonitor(applicationContext, handler, this)
         connectionStateMonitor!!.enable()
         registerReceiver(becomingNoisyReceiver, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY))
+
+        refreshNotificationAndForegroundStatus()
+
     }
 
     private var noInternet: Boolean = false
@@ -219,7 +224,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             status = PlaybackStatus.PAUSED
             refreshNotificationAndForegroundStatus()
             pause()
+        } else {
+            refreshNotificationAndForegroundStatus()
         }
+
 
         radioActionsCallback?.onPlayerStatusChanged(status)
     }
@@ -357,8 +365,8 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     private fun releaseDependencies() {
         abandonAudioFocus()
 
-        player.removeListener(this)
         player.stop()
+        player.removeListener(this)
         player.release()
 
         status = PlaybackStatus.STOPPED

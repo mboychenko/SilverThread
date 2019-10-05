@@ -1,6 +1,7 @@
 package com.allat.mboychenko.silverthread
 
 import android.app.Application
+import androidx.multidex.MultiDex
 import com.allat.mboychenko.silverthread.presentation.di.exoPlayerStorageModule
 import com.allat.mboychenko.silverthread.presentation.di.presentersModule
 import com.allat.mboychenko.silverthread.presentation.di.storageModule
@@ -15,6 +16,8 @@ class AllatRaApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MultiDex.install(this)
+
         startKoin {
             androidLogger()
             androidContext(applicationContext)

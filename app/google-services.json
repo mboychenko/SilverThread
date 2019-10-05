@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1070344967122",
+    "firebase_url": "https://allatra.firebaseio.com",
+    "project_id": "allatra",
+    "storage_bucket": "allatra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070344967122:android:a48fbdb7a0feabc2e36e0b",
+        "android_client_info": {
+          "package_name": "com.allat.mboychenko.silverthread"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070344967122-36nuvom9kjhv57pk8qt0ks1no5bgugr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7MjdfGBhyrStWrPiIzsuwmfTr49qUQHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070344967122-36nuvom9kjhv57pk8qt0ks1no5bgugr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,11 +9,14 @@ import com.allat.mboychenko.silverthread.presentation.di.presentersModule
 import com.allat.mboychenko.silverthread.presentation.di.storageModule
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.allat.mboychenko.silverthread.utils.updateVersion
+import androidx.multidex.MultiDex
 
 class AllatRaApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MultiDex.install(this)
+
         startKoin {
             androidLogger()
             androidContext(applicationContext)

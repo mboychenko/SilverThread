@@ -6,13 +6,16 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.webkit.*
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -31,13 +34,10 @@ import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.Ne
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.*
-import kotlin.collections.ArrayList
 
 class WebViewActivity : BaseNavigationActivity() {
 
     private var currentUrl = ""
-    private var webBackStackQueue = Collections.asLifoQueue(LinkedList<String>())
     private lateinit var progressBar: View
     private lateinit var errorView: View
     private lateinit var webView: NestedWebView
@@ -45,24 +45,8 @@ class WebViewActivity : BaseNavigationActivity() {
     private lateinit var errorDesc: TextView
     private lateinit var errorTitle: TextView
 
-    private fun <E> Queue<E>.addUrl(value: E) {
-        if (value == ABOUT_BLANK) {
-            return
-        }
-        this.remove(value)
-        this.add(value)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        currentUrl = savedInstanceState?.getString(SAVED_CURRENT_URL, URI_ALLATRA_TV) ?: intent?.data?.toString()
-                ?: URI_ALLATRA_TV
-        savedInstanceState?.getStringArrayList(SAVED_WEB_BACKSTACK)?.let {
-            webBackStackQueue.clear()
-            webBackStackQueue.addAll(it)
-        }
-
 
         progressBar = findViewById(R.id.progress)
         errorView = findViewById(R.id.error_internet)
@@ -74,10 +58,15 @@ class WebViewActivity : BaseNavigationActivity() {
 
         setupWebViewCookies(webView)
 
+        webView.webChromeClient = MyChrome()
         webView.webViewClient = object :
             WebViewClient() {
 
-            override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
+            override fun onReceivedSslError(
+                view: WebView?,
+                handler: SslErrorHandler?,
+                error: SslError?
+            ) {
                 handler?.proceed()
             }
 
@@ -86,19 +75,27 @@ class WebViewActivity : BaseNavigationActivity() {
             }
 
             @TargetApi(Build.VERSION_CODES.N)
-            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean {
                 val url = request?.url?.toString()
                 return overrideUrlLoading(view, url, request?.isRedirect == true)
             }
 
-            private fun overrideUrlLoading(view: WebView?, url: String?, redirect: Boolean = false): Boolean {
+            private fun overrideUrlLoading(
+                view: WebView?,
+                url: String?,
+                redirect: Boolean = false
+            ): Boolean {
                 if (view == null || url.isNullOrEmpty()) {
                     return false
                 }
 
                 val uri = Uri.parse(url)
                 if (SocialNetworkFactory.isSocialNetwork(uri)) {
-                    val socialNetwork = SocialNetworkFactory.getSocialNetwork(applicationContext, uri)
+                    val socialNetwork =
+                        SocialNetworkFactory.getSocialNetwork(applicationContext, uri)
                     if (socialNetwork != null && socialNetwork.canOpen()) {
                         socialNetwork.open()
                         return true
@@ -110,7 +107,6 @@ class WebViewActivity : BaseNavigationActivity() {
                 }
 
                 if (redirect && url.contains(HTTP_SCHEME)) {
-                    webBackStackQueue.poll()
                     webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
                     return true
                 } else if (url.contains(HTTP_SCHEME)) {
@@ -124,7 +120,6 @@ class WebViewActivity : BaseNavigationActivity() {
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                url?.let { webBackStackQueue.addUrl(it) }
                 progressBar.visibility = View.VISIBLE
             }
 
@@ -133,7 +128,12 @@ class WebViewActivity : BaseNavigationActivity() {
                 progressBar.visibility = View.GONE
             }
 
-            override fun onReceivedError(view: WebView?, errorCode: Int, description: String?, failingUrl: String?) {
+            override fun onReceivedError(
+                view: WebView?,
+                errorCode: Int,
+                description: String?,
+                failingUrl: String?
+            ) {
                 Log.d("onReceivedError", description)
                 if (!isAllatraResUrl(failingUrl)) {
                     return
@@ -147,7 +147,11 @@ class WebViewActivity : BaseNavigationActivity() {
                 setupError(description ?: "")
             }
 
-            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?
+            ) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     Log.d("onReceivedError", error?.description.toString())
                     if (!isAllatraResUrl(request?.url.toString())) {
@@ -203,8 +207,15 @@ class WebViewActivity : BaseNavigationActivity() {
             }
         }
 
+        currentUrl = savedInstanceState?.getString(SAVED_CURRENT_URL, URI_ALLATRA_TV)
+            ?: intent?.data?.toString() ?: URI_ALLATRA_TV
+
         progressBar.visibility = View.VISIBLE
-        webView.loadUrl(currentUrl)
+        if (savedInstanceState != null) {
+            webView.restoreState(savedInstanceState)
+        } else {
+            webView.loadUrl(currentUrl)
+        }
 
     }
 
@@ -215,7 +226,12 @@ class WebViewActivity : BaseNavigationActivity() {
         }
     }
 
-    private fun downloadDialog(url: String, userAgent: String, contentDisposition: String, mimetype: String) {
+    private fun downloadDialog(
+        url: String,
+        userAgent: String,
+        contentDisposition: String,
+        mimetype: String
+    ) {
         val filename = URLUtil.guessFileName(url, contentDisposition, mimetype)
         val builder = AlertDialog.Builder(this)
         builder.setTitle(R.string.download)
@@ -227,7 +243,13 @@ class WebViewActivity : BaseNavigationActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ file ->
                     file?.let {
-                        FileLoaderService.commandLoadFile(applicationContext, url, it.path, filename, true)
+                        FileLoaderService.commandLoadFile(
+                            applicationContext,
+                            url,
+                            it.path,
+                            filename,
+                            true
+                        )
                     }
                 },
                     {
@@ -280,29 +302,27 @@ class WebViewActivity : BaseNavigationActivity() {
     }
 
     override fun webViewLink(uri: String) {
-        if (currentUrl == uri) {
+        if (webView.url == uri) {
             return
         }
 
         progressBar.visibility = View.VISIBLE
         currentUrl = uri
-        webView.loadUrl(currentUrl)
+        webView.loadUrl(uri)
     }
 
     override fun onBackPressed() {
-        webBackStackQueue.poll()
-        webBackStackQueue.poll()?.let {
-            webViewLink(it)
-            return
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
         }
-
-        super.onBackPressed()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+        webView.saveState(outState)
         outState.putString(SAVED_CURRENT_URL, currentUrl)
-        outState.putStringArrayList(SAVED_WEB_BACKSTACK, webBackStackQueue.toMutableList() as ArrayList<String>)
+        super.onSaveInstanceState(outState)
     }
 
     override fun setFragment(fragment: Fragment, navId: Int) {
@@ -311,12 +331,67 @@ class WebViewActivity : BaseNavigationActivity() {
         finish()
     }
 
+    private inner class MyChrome : WebChromeClient() {
+
+        private var mCustomView: View? = null
+        private var mCustomViewCallback: CustomViewCallback? = null
+        private var mOriginalOrientation: Int = 0
+        private var mOriginalSystemUiVisibility: Int = 0
+
+        override fun getDefaultVideoPoster(): Bitmap? =
+            if (mCustomView == null) {
+                null
+            } else {
+                BitmapFactory.decodeResource(resources, 2130837573)
+            }
+
+        override fun onHideCustomView() {
+
+            val decorView = window.decorView
+            if (decorView is FrameLayout) {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                decorView.removeView(mCustomView)
+            }
+            mCustomView = null
+            decorView.systemUiVisibility = mOriginalSystemUiVisibility
+            requestedOrientation = mOriginalOrientation
+            mCustomViewCallback?.onCustomViewHidden()
+            mCustomViewCallback = null
+        }
+
+        override fun onShowCustomView(
+            paramView: View,
+            paramCustomViewCallback: CustomViewCallback
+        ) {
+            if (mCustomView != null) {
+                onHideCustomView()
+                return
+            }
+
+            val decorView = window.decorView
+            mCustomView = paramView
+            mOriginalSystemUiVisibility = decorView.systemUiVisibility
+            mOriginalOrientation = requestedOrientation
+            mCustomViewCallback = paramCustomViewCallback
+            if (decorView is FrameLayout) {
+                getAppBar().setExpanded(false)
+                window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                decorView.addView(
+                    mCustomView,
+                    FrameLayout.LayoutParams(-1, -1)
+                )
+            }
+
+
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        }
+    }
+
     companion object {
         const val REQUEST_CODE_WEB_VIEW = 12
         const val RESULT_CODE_SET_FRAGMENT = 713
         const val RESULT_NAV_ID = "RESULT_NAV_ID"
         const val SAVED_CURRENT_URL = "SAVED_CURRENT_URL"
-        const val SAVED_WEB_BACKSTACK = "SAVED_WEB_BACKSTACK"
 
         const val ABOUT_BLANK = "about:blank"
         const val ERR_INTERNET_DISCONNECTED = "net::ERR_INTERNET_DISCONNECTED"

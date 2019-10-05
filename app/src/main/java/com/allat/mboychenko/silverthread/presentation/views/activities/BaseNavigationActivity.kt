@@ -78,6 +78,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
 
     fun getToolbar(): Toolbar = toolbar
 
+    fun getAppBar(): AppBarLayout = appBar
+
     fun getDrawer(): DrawerLayout = drawer
 
     protected fun setFragmentByNavId(navId: Int, updateNavItem: Boolean = false) {
@@ -191,13 +193,17 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
     private fun setQuotesNavigationItem(intent: Intent?) {
         intent?.let {
             val position = it.getIntExtra(NOTIFICATION_QUOTE_POSITION_EXTRAS, -1)
-            navigationView.setCheckedItem(R.id.nav_quotes)
+            if (position != -1) {
+                it.removeExtra(NOTIFICATION_QUOTE_POSITION_EXTRAS)
 
-            if (supportFragmentManager.findFragmentByTag(QuotesFragment.QUOTES_FRAGMENT_TAG)?.isVisible == true) {
-                (supportFragmentManager.findFragmentByTag(QuotesFragment.QUOTES_FRAGMENT_TAG) as QuotesFragment)
-                    .showIncomingFromNotificationQuote(position)
-            } else {
-                setFragment(QuotesFragment.newInstance(position))
+                navigationView.setCheckedItem(R.id.nav_quotes)
+
+                if (supportFragmentManager.findFragmentByTag(QuotesFragment.QUOTES_FRAGMENT_TAG)?.isVisible == true) {
+                    (supportFragmentManager.findFragmentByTag(QuotesFragment.QUOTES_FRAGMENT_TAG) as QuotesFragment)
+                        .showIncomingFromNotificationQuote(position)
+                } else {
+                    setFragment(QuotesFragment.newInstance(position))
+                }
             }
         }
     }
