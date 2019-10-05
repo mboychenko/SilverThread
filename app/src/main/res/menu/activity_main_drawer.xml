@@ -48,6 +48,10 @@
                         android:icon="@drawable/ic_public_web"
                         android:title="@string/allatra_org"/>
                 <item
+                        android:id="@+id/nav_unites"
+                        android:icon="@drawable/ic_unites"
+                        android:title="@string/allatra_unites"/>
+                <item
                         android:id="@+id/nav_vesti"
                         android:icon="@drawable/ic_vesti"
                         android:title="@string/vesti"/>

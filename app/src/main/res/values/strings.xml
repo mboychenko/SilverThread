@@ -38,6 +38,7 @@
     <string name="allatra_tv">АллатРа ТВ</string>
     <string name="znai">Поиск</string>
     <string name="allatra_org">АллатРа.Org</string>
+    <string name="allatra_unites">#AllatraUnites</string>
     <string name="vesti">АллатРа Вести</string>
     <string name="science">АллатРа Наука</string>
     <string name="partner">Партнерское соглашение</string>
@@ -127,7 +128,7 @@
     <string name="lock_icon">Lock Icon</string>
     <string name="no_saved_files">Нет сохраненных файлов</string>
     <string name="deleted">Удалено</string>
-    <string name="no_downloads_description">Скачать видео\аудио можно из разделов меню "И.М.Данилов" и "АллатРа ТВ", под видео обычно есть кнопки "Скачать" для разных форматов видео\аудио версии передачи.\n\nПосле завершения загрузки, вы сможете увидеть эти файлы тут для открытия или удаления.\n\nСостояние загрузки можно увидеть в нотификациях потянув строку статус бара.</string>
+    <string name="no_downloads_description">Скачать видео/аудио можно из разделов меню "И.М.Данилов" и "АллатРа ТВ", под видео обычно есть кнопки "Скачать" для разных форматов видео/аудио версии передачи.\n\nПосле завершения загрузки, вы сможете увидеть эти файлы тут для открытия или удаления.\n\nСостояние загрузки можно увидеть в нотификациях потянув строку статус бара.</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>

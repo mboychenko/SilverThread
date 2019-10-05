@@ -6,6 +6,8 @@ object AllatRaWebViewURIConstants {
     const val URI_ALLATRA_TV = "https://allatra.tv"
     const val URI_ZNAI = "https://znai.allatra.tv"
     const val URI_ALLATRA_ORG = "https://allatra.org"
+    const val URI_ALLATRA_ORG_UNI_GRAIN = "https://edinoezerno.allatra.org"
+    const val URI_ALLATRAUNITES = "https://allatraunites.com"
     const val URI_VESTI = "https://allatravesti.com"
     const val URI_SCIENCE = "https://allatra-science.org"
     const val URI_PARTNER = "https://allatra-partner.org"
@@ -23,6 +25,8 @@ object AllatRaWebViewURIConstants {
                 url.startsWith(URI_ALLATRA_TV_IM) ||
                 url.startsWith(URI_ZNAI) ||
                 url.startsWith(URI_ALLATRA_ORG) ||
+                url.startsWith(URI_ALLATRA_ORG_UNI_GRAIN) ||
+                url.startsWith(URI_ALLATRAUNITES) ||
                 url.startsWith(URI_VESTI) ||
                 url.startsWith(URI_SCIENCE) ||
                 url.startsWith(URI_PARTNER) ||

@@ -104,6 +104,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 webViewLink(AllatRaWebViewURIConstants.URI_ZNAI)
             R.id.nav_org ->
                 webViewLink(AllatRaWebViewURIConstants.URI_ALLATRA_ORG)
+            R.id.nav_unites ->
+                webViewLink(AllatRaWebViewURIConstants.URI_ALLATRAUNITES)
             R.id.nav_vesti ->
                 webViewLink(AllatRaWebViewURIConstants.URI_VESTI)
             R.id.nav_science ->
@@ -134,16 +136,18 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 else -> R.id.nav_allat
             }
         } else if (webViewUrl != null) {
-            navId = when (webViewUrl) {
-                AllatRaWebViewURIConstants.URI_ALLATRA_TV_IM -> R.id.nav_tv_im
-                AllatRaWebViewURIConstants.URI_ALLATRA_TV -> R.id.nav_tv
-                AllatRaWebViewURIConstants.URI_ZNAI -> R.id.nav_znai
-                AllatRaWebViewURIConstants.URI_ALLATRA_ORG -> R.id.nav_org
-                AllatRaWebViewURIConstants.URI_VESTI -> R.id.nav_vesti
-                AllatRaWebViewURIConstants.URI_SCIENCE -> R.id.nav_science
-                AllatRaWebViewURIConstants.URI_PARTNER -> R.id.nav_partner
-                AllatRaWebViewURIConstants.URI_CRAUD -> R.id.nav_craud
-                AllatRaWebViewURIConstants.URI_GEO -> R.id.nav_geo
+            navId = when {
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_ALLATRA_TV_IM) -> R.id.nav_tv_im
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_ALLATRA_TV) -> R.id.nav_tv
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_ZNAI) -> R.id.nav_znai
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_ALLATRA_ORG) ||
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_ALLATRA_ORG_UNI_GRAIN)-> R.id.nav_org
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_ALLATRAUNITES) -> R.id.nav_unites
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_VESTI) -> R.id.nav_vesti
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_SCIENCE) -> R.id.nav_science
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_PARTNER) -> R.id.nav_partner
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_CRAUD) -> R.id.nav_craud
+                webViewUrl.startsWith(AllatRaWebViewURIConstants.URI_GEO) -> R.id.nav_geo
                 else -> R.id.nav_tv
             }
         }

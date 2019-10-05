@@ -102,16 +102,28 @@ class WebViewActivity : BaseNavigationActivity() {
                     }
                 }
 
-                if (uri.host == ALLATRA_FILE_SERVER_HOST) {
-                    return false
-                }
+                when {
+                    url.startsWith(MAILTO) -> {
+                        startActivity(Intent(Intent.ACTION_SENDTO, uri))
+                        return true
+                    }
 
-                if (redirect && url.contains(HTTP_SCHEME)) {
-                    webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
-                    return true
-                } else if (url.contains(HTTP_SCHEME)) {
-                    webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
-                    return true
+                    url.startsWith(TEL) -> {
+                        startActivity(Intent(Intent.ACTION_DIAL, uri))
+                        return true
+                    }
+
+                    uri.host == ALLATRA_FILE_SERVER_HOST -> return false
+
+                    redirect && url.contains(HTTP_SCHEME) -> {
+                        webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
+                        return true
+                    }
+
+                    url.contains(HTTP_SCHEME) -> {
+                        webView.loadUrl(url.replace(HTTP_SCHEME, HTTPS_SCHEME))
+                        return true
+                    }
                 }
 
                 currentUrl = url
@@ -121,6 +133,9 @@ class WebViewActivity : BaseNavigationActivity() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 progressBar.visibility = View.VISIBLE
+                if (isAllatraResUrl(url)) {
+                    updateNavDrawerBy(webViewUrl = url)
+                }
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
@@ -289,7 +304,6 @@ class WebViewActivity : BaseNavigationActivity() {
     override fun onResume() {
         super.onResume()
         webView.onResume()
-        updateNavDrawerBy(webViewUrl = currentUrl)
     }
 
     override fun onPause() {
@@ -394,6 +408,8 @@ class WebViewActivity : BaseNavigationActivity() {
         const val SAVED_CURRENT_URL = "SAVED_CURRENT_URL"
 
         const val ABOUT_BLANK = "about:blank"
+        const val MAILTO = "mailto:"
+        const val TEL = "tel:"
         const val ERR_INTERNET_DISCONNECTED = "net::ERR_INTERNET_DISCONNECTED"
         const val HTTP_SCHEME = "http://"
         const val HTTPS_SCHEME = "https://"

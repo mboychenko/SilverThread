@@ -9,7 +9,7 @@ android {
         applicationId "com.allat.mboychenko.silverthread"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 27
+        versionCode 29
         versionName "3.9.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
