@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.helpers.bind
@@ -18,8 +18,8 @@ import org.koin.android.ext.android.inject
 class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
 
     private val downloadsList: RecyclerView by bind(R.id.downloadsList)
+    private val noItemsGroup: Group by bind(R.id.noItemsGroup)
     private lateinit var groupAdapter: GroupAdapter<ViewHolder>
-    private val noFiles: TextView by bind(R.id.noFiles)
 
     private val filesSection = Section()
 
@@ -51,9 +51,8 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
 
     override fun onResume() {
         super.onResume()
-        noFiles.visibility = View.GONE
+        noFilesDescriptionVisibility(false)
         presenter.attachView(this)
-
     }
 
     override fun onPause() {
@@ -63,20 +62,22 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
 
     override fun filesList(files: List<LoadedFileItem>) {
         filesSection.update(files)
-        if (filesSection.groupCount > 0) {
-            noFiles.visibility = View.GONE
-        }
+        noFilesDescriptionVisibility(filesSection.groupCount == 0)
     }
 
-    override fun noFilesInDirectory() {
-        noFiles.visibility = View.VISIBLE
+    override fun noFilesDescriptionVisibility(visible: Boolean) {
+        if (visible) {
+            noItemsGroup.visibility = View.VISIBLE
+            downloadsList.visibility = View.GONE
+        } else {
+            noItemsGroup.visibility = View.GONE
+            downloadsList.visibility = View.VISIBLE
+        }
     }
 
     override fun removeLoadedItem(item: LoadedFileItem) {
         filesSection.remove(item)
-        if (filesSection.groupCount == 0) {
-            noFilesInDirectory()
-        }
+        noFilesDescriptionVisibility(filesSection.groupCount == 0)
     }
 
     companion object {

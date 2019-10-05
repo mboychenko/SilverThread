@@ -1,14 +1,16 @@
 package com.allat.mboychenko.silverthread.presentation.presenters
 
-import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IDownloadsFragmentView
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.helpers.*
+import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
+import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.DOWNLOADING_EXT
 import com.allat.mboychenko.silverthread.presentation.views.listitems.LoadedFileItem
 
 
@@ -16,13 +18,16 @@ class DownloadsPresenter(val context: Context) : BasePresenter<IDownloadsFragmen
 
     override fun attachView(view: IDownloadsFragmentView) {
         super.attachView(view)
-        context.registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        LocalBroadcastManager.getInstance(context).registerReceiver(
+            onDownloadComplete,
+            IntentFilter(FileLoaderService.FILES_STATUS_UPDATED_BROADCAST_ACTION)
+        )
         checkFilesList()
     }
 
     override fun detachView() {
         super.detachView()
-        context.unregisterReceiver(onDownloadComplete)
+        LocalBroadcastManager.getInstance(context).unregisterReceiver(onDownloadComplete)
     }
 
     private fun checkFilesList() {
@@ -32,11 +37,12 @@ class DownloadsPresenter(val context: Context) : BasePresenter<IDownloadsFragmen
                     {
                         val directory = getPublicDownloadsStorageDir(WEB_DOWNLOADS_FOLDER_NAME)
                         val files = directory?.listFiles().orEmpty().asList()
-                        files.filter { !it.isDirectory }
+                        files.filter { !it.isDirectory && !it.path.endsWith(DOWNLOADING_EXT) }
                     },
                     {
+                        FileLoaderService.commandRefreshLoadings(context.applicationContext)
                         if (it.isEmpty()) {
-                            view?.noFilesInDirectory()
+                            view?.noFilesDescriptionVisibility(true)
                         } else {
                             view?.filesList(
                                 it.map { file ->

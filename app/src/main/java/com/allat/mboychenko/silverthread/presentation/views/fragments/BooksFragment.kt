@@ -52,14 +52,16 @@ class BooksFragment : BaseAllatRaFragment(), IBooksFragmentView {
             adapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item,
                 listOf(context.getString(R.string.all)) + BooksConstants.getLocales().map { it.language })
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                var init: Boolean = true
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
 
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    if (position == 0) {    //All
-                        presenter.updateBooks()
-                    } else {
-                        presenter.updateBooks(BooksConstants.getLocales()
+                    when {
+                        init -> init = false
+                        position == 0 -> presenter.updateBooks() //all
+                        else -> presenter.updateBooks(BooksConstants.getLocales()
                             .find { it.language == adapter.getItem(position) })
                     }
                 }

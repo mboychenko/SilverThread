@@ -85,6 +85,13 @@
                 android:enabled="true"
                 android:exported="false"/>
 
+
+        <receiver android:name=".presentation.receivers.FileLoadedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
+
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="com.allat.mboychenko.silverthread"

@@ -68,5 +68,6 @@ fun getMimeType(uri: Uri, context: Context): String? {
 }
 
 const val WEB_DOWNLOADS_FOLDER_NAME = "AllatRa Downloads"
+const val BOOKS_FOLDER_NAME = "AllatRa Books"
 const val FILE_PROVIDER_AUTHORITIES = "com.allat.mboychenko.silverthread"
 const val LOG_TAG = "TAG_FILE_HELPER"
