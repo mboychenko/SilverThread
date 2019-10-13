@@ -32,6 +32,11 @@ private fun updateScript(context: Context, storage: Storage) {
         storage.putBoolean(PATCH_25_APPLIED_PREF_KEY, true)
     }
 
+    if (!storage.getBoolean(PATCH_31_APPLIED_PREF_KEY, false)) {
+        applyPatchVer31(context)
+        storage.putBoolean(PATCH_31_APPLIED_PREF_KEY, true)
+    }
+
     storage.putInt(LAST_UPDATE_VERSION_PREF, BuildConfig.VERSION_CODE)
 }
 
@@ -56,7 +61,12 @@ private fun applyPatchVer25(context: Context, storage: Storage) {
     setupRandomQuoteNextAlarm(context)
 }
 
+private fun applyPatchVer31(context: Context) {
+    setupRandomQuoteNextAlarm(context)
+}
+
 private const val LAST_UPDATE_VERSION_PREF = "LAST_UPDATE_VERSION_PREF"
 
 private const val PATCH_24_APPLIED_PREF_KEY = "PATCH_24_APPLIED_PREF_KEY"
 private const val PATCH_25_APPLIED_PREF_KEY = "PATCH_25_APPLIED_PREF_KEY"
+private const val PATCH_31_APPLIED_PREF_KEY = "PATCH_31_APPLIED_PREF_KEY"

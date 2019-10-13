@@ -62,8 +62,8 @@ class AlarmNotificationsExecutor(val context: Context) {
                     AlarmNotificationCodes.ALLAT_END.action ->
                         showNotificationAndReInit(context, AlarmNotificationCodes.ALLAT_END, bundle)
                     AlarmNotificationCodes.QUOTE.action -> {
-                        setupRandomQuoteNextAlarm(context, true)
                         showNotification(context, AlarmNotificationCodes.QUOTE, bundle)
+                        setupRandomQuoteNextAlarm(context, true)
                     }
                     AlarmNotificationCodes.CANCEL.action -> hideNotification(context, bundle)
                 }

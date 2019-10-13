@@ -71,7 +71,6 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
                     .setActionTextColor(ContextCompat.getColor(context!!, android.R.color.holo_red_light))
                     .show()
             } else {
-                playButtonState()
                 presenter.play()
             }
         }
@@ -199,15 +198,6 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
     override fun onPause() {
         super.onPause()
         presenter.detachView()
-    }
-
-    fun checkPhonePermission(context: Context): Boolean {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            return false
-        }
-        return true
     }
 
     override fun getFragmentTag(): String = RADIO_FRAGMENT_TAG

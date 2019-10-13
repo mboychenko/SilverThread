@@ -94,16 +94,12 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
-            ACTION_START_FOR_BIND -> {
-            }
             ACTION_RESUME -> resume()
             ACTION_PLAY -> transportControls.play()
             ACTION_PAUSE -> transportControls.pause()
             ACTION_STOP -> transportControls.stop()
             else -> MediaButtonReceiver.handleIntent(mediaSession, intent)
         }
-
-        refreshNotificationAndForegroundStatus()
 
         return START_STICKY
     }
@@ -186,8 +182,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
         connectionStateMonitor = ConnectionStateMonitor(applicationContext, handler, this)
         connectionStateMonitor!!.enable()
         registerReceiver(becomingNoisyReceiver, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY))
-
-        refreshNotificationAndForegroundStatus()
 
     }
 
@@ -535,7 +529,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     }
 
     companion object {
-        const val ACTION_START_FOR_BIND = "com.allat.mboychenko.silverthread.notifications.radio.start"
         const val ACTION_PLAY = "com.allat.mboychenko.silverthread.notifications.radio.play"
         const val ACTION_PAUSE = "com.allat.mboychenko.silverthread.notifications.radio.pause"
         const val ACTION_RESUME = "com.allat.mboychenko.silverthread.notifications.radio.resume"

@@ -50,7 +50,7 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
 
     override fun attachView(view: IRadioFragmentView) {
         super.attachView(view)
-        connectToRadioService()
+        bindToRadioService()
         checkOnline()
     }
 
@@ -76,7 +76,7 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
                 radioService = (it as AllatRadioService.LocalBinder).getService()
                 radioActionsCallback?.let { callback ->
                     radioService!!.setCallback(callback)
-                    callback.onPlayerStatusChanged(radioService!!.getStatus())      //initial status
+                    callback.onPlayerStatusChanged(radioService!!.getStatus())      //real status
                 }
 
             }
@@ -88,19 +88,19 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
         }
     }
 
-    private fun connectToRadioService(serviceAction: String = AllatRadioService.ACTION_START_FOR_BIND) {
-        createRadioActionsCallback()
+    private fun connectToRadioService(serviceAction: String) {
         startRadioServiceWithBundle(serviceAction)
         bindToRadioService()
     }
 
     private fun startRadioServiceWithBundle(act: String) {
-        context.startService(
+        ContextCompat.startForegroundService(context,
             Intent(context, AllatRadioService::class.java)
                 .apply { action = act })
     }
 
     private fun bindToRadioService() {
+        createRadioActionsCallback()
         context.bindService(Intent(context, AllatRadioService::class.java), serviceConnection, 0)
     }
 
