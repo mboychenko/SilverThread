@@ -109,6 +109,30 @@
         <item quantity="other">%d хвилин до Аллата</item>
     </plurals>
 
+    <plurals name="days_to"  tools:ignore="UnusedQuantity">
+        <item quantity="one">%d День</item>
+        <item quantity="two">%d Дня</item>
+        <item quantity="few">%d Дня</item>
+        <item quantity="many">%d Дней</item>
+        <item quantity="other">%d Дней</item>
+    </plurals>
+
+    <plurals name="hours_to"  tools:ignore="UnusedQuantity">
+        <item quantity="one">%d Година</item>
+        <item quantity="two">%d Години</item>
+        <item quantity="few">%d Години</item>
+        <item quantity="many">%d Годин</item>
+        <item quantity="other">%d Годин</item>
+    </plurals>
+
+    <plurals name="minutes_to"  tools:ignore="UnusedQuantity">
+        <item quantity="one">%d Хвилина</item>
+        <item quantity="two">%d Хвилини</item>
+        <item quantity="few">%d Хвилини</item>
+        <item quantity="many">%d Хвилин</item>
+        <item quantity="other">%d Хвилин</item>
+    </plurals>
+
     <string name="downloads">Завантаження</string>
     <string name="download">Завантаження</string>
     <string name="cant_delete_book">Не можливо видалити книгу %s</string>
@@ -123,5 +147,8 @@
     <string name="deleted">Видалено</string>
     <string name="no_downloads_description">Завантажити відео/аудіо можна з розділів меню "І.М.Данілов" і "АллатРа ТВ", під відео зазвичай є кнопки "Завантажити" для різних форматів відео/аудіо версії передачі.\n\nПісля завершення завантаження, ви зможете побачити ці файли тут для відкриття або видалення.\n\nСтан завантаження можна побачити в нотифікаціях потягнувши рядок статус бару.</string>
     <string name="unknown_format">Неможливо відкрити файл. Невідомий формат</string>
+    <string name="sound_level_maximum">Максимальна гучність:</string>
+    <string name="to_verdict">Час до вердикту (GMT +0):</string>
+    <string name="verdict_in_exec">У виконанні (GMT +0):</string>
 
 </resources>

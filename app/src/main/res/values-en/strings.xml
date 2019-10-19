@@ -109,6 +109,21 @@
         <item quantity="other">%d minutes to Allat</item>
     </plurals>
 
+    <plurals name="days_to">
+        <item quantity="one">%d Day</item>
+        <item quantity="other">%d Days</item>
+    </plurals>
+
+    <plurals name="hours_to">
+        <item quantity="one">%d Hour</item>
+        <item quantity="other">%d Hours</item>
+    </plurals>
+
+    <plurals name="minutes_to">
+        <item quantity="one">%d Minute</item>
+        <item quantity="other">%d Minutes</item>
+    </plurals>
+
     <string name="downloads">Downloads</string>
     <string name="download">Download</string>
     <string name="cant_delete_book">Can\'t delete book %s</string>
@@ -123,5 +138,8 @@
     <string name="deleted">Deleted</string>
     <string name="no_downloads_description">You can download video/audio from the sections of the menu “I.M. Danilov” and “AllatRa TV”, under videos there are usually “Download” buttons for different formats of the video/audio.\n\nAfter the download is completed, the files will be available here to open or delete.\n\nYou can find status of loading in notifications, expanding status bar.</string>
     <string name="unknown_format">Can\'t open file. Unknown file format</string>
+    <string name="sound_level_maximum">Sound level - Maximum:</string>
+    <string name="to_verdict">Time to verdict (GMT +0):</string>
+    <string name="verdict_in_exec">In execution (GMT +0):</string>
 
 </resources>

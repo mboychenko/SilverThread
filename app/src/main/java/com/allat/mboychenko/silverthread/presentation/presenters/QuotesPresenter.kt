@@ -41,9 +41,10 @@ class QuotesPresenter(
                     val favorites = storage.getFavoriteQuotesPositions()
 
                     if (quotesState == QuotesState.FAVORITE) {
-                        quotes.forEachIndexed { index, s ->
-                            if (favorites.contains(index))
-                                quotesItems.add(QuoteItem(s, quotesActionListener, index, true))
+                        favorites.forEach {
+                            if (it in quotes.indices) {
+                                quotesItems.add(QuoteItem(quotes[it], quotesActionListener, it, true))
+                            }
                         }
                     } else {
                         quotesItems.addAll(quotes.mapIndexed { index, s ->

@@ -59,7 +59,7 @@ val storageModule = module {
     }
 
     factory {
-        AllatTimeZoneInteractor(get()) as AllatTimeZoneStorage
+        AllatNotificationsInteractor(get<StorageImplementation>()) as AllatNotificationsSettingsStorage
     }
 
     factory {
@@ -71,7 +71,7 @@ val storageModule = module {
     }
 
     factory {
-        QuotesInteractor(get()) as QuotesDetailsStorage
+        QuotesInteractor(get<StorageImplementation>()) as QuotesDetailsStorage
     }
 
 }

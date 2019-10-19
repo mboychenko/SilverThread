@@ -103,7 +103,6 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
 
     override fun onResume() {
         super.onResume()
-        hideFabs()
         presenter.attachView(this)
 
         if (quotesSection.itemCount == 0) {
@@ -123,6 +122,7 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
 
     override fun onPause() {
         super.onPause()
+        hideFabs()
         presenter.detachView()
     }
 
@@ -171,9 +171,9 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
         hideFabs()
     }
 
-    private fun hideFabs() {
-        notifSettingsFab.animateFabHide()
-        randomQuoteFab.animateFabHide()
+    private fun hideFabs(forceHide: Boolean = false) {
+        notifSettingsFab.animateFabHide(forceHide)
+        randomQuoteFab.animateFabHide(forceHide)
     }
 
     private fun showFabs() {
@@ -181,50 +181,60 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
         randomQuoteFab.animateFabOpen(340f)
     }
 
-    private fun FloatingActionButton.animateFabHide() {
+    private fun FloatingActionButton.animateFabHide(force: Boolean = false) {
         val lp = layoutParams as ConstraintLayout.LayoutParams
-        val animRadius = ValueAnimator.ofInt(80.px, 0)
-        animRadius.doOnEnd { visibility = View.INVISIBLE }
 
-        animRadius.addUpdateListener { valueAnimator ->
-            val `val` = valueAnimator.animatedValue as Int
-            lp.circleRadius = `val`
-            layoutParams = lp
+        if (lp.circleRadius != 0) {
+            if (force) {
+                lp.circleRadius = 0
+                layoutParams = lp
+                visibility = View.INVISIBLE
+                return
+            }
+
+            val animRadius = ValueAnimator.ofInt(80.px, 0)
+            animRadius.doOnEnd { visibility = View.INVISIBLE }
+
+            animRadius.addUpdateListener { valueAnimator ->
+                val `val` = valueAnimator.animatedValue as Int
+                lp.circleRadius = `val`
+                layoutParams = lp
+            }
+
+            animRadius.duration = 200
+            animRadius.interpolator = LinearInterpolator()
+            animRadius.start()
         }
-
-        animRadius.duration = 200
-        animRadius.interpolator = LinearInterpolator()
-        animRadius.start()
     }
 
     private fun FloatingActionButton.animateFabOpen(angle: Float) {
         val lp = layoutParams as ConstraintLayout.LayoutParams
 
-        val animRadius = ValueAnimator.ofInt(0, 80.px)
-        val animAngle = ValueAnimator.ofFloat(200f, angle)
-        animRadius.doOnStart { visibility = View.VISIBLE }
+        if (lp.circleRadius == 0) {
+            val animRadius = ValueAnimator.ofInt(0, 80.px)
+            val animAngle = ValueAnimator.ofFloat(200f, angle)
+            animRadius.doOnStart { visibility = View.VISIBLE }
 
-        animRadius.addUpdateListener { valueAnimator ->
-            val `val` = valueAnimator.animatedValue as Int
-            lp.circleRadius = `val`
-            layoutParams = lp
-        }
-
-        animAngle.addUpdateListener { valueAnimator ->
-            val `val` = valueAnimator.animatedValue as Float
-            lp.circleAngle = `val`
-            layoutParams = lp
-        }
-
-        AnimatorSet()
-            .apply {
-                playTogether(animRadius, animAngle)
-                duration = 500
-                interpolator = LinearInterpolator()
-                start()
+            animRadius.addUpdateListener { valueAnimator ->
+                val `val` = valueAnimator.animatedValue as Int
+                lp.circleRadius = `val`
+                layoutParams = lp
             }
 
+            animAngle.addUpdateListener { valueAnimator ->
+                val `val` = valueAnimator.animatedValue as Float
+                lp.circleAngle = `val`
+                layoutParams = lp
+            }
 
+            AnimatorSet()
+                .apply {
+                    playTogether(animRadius, animAngle)
+                    duration = 500
+                    interpolator = LinearInterpolator()
+                    start()
+                }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

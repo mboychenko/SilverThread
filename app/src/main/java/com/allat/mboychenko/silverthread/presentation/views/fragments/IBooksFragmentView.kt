@@ -13,6 +13,4 @@ interface IBooksFragmentView {
     fun requestStoragePermission()
     fun shareBookLink(bookTitle: String, bookUrl: String)
     fun openBook(name: String, bookUri: Uri)
-    fun showLoading()
-    fun hideLoading()
 }

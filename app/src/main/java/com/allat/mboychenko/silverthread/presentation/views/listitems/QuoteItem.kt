@@ -75,6 +75,22 @@ class QuoteItem(
         notifyChanged()
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as QuoteItem
+
+        if (arrayPosition != other.arrayPosition) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return arrayPosition.hashCode()
+    }
+
+
     interface QuotesActionListener {
         fun onShare(quote: String)
         fun onCopy(quote: String)

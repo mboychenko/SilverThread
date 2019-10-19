@@ -157,7 +157,7 @@ object BooksConstants {
 
     val EMPTY = Book()
 
-    class Book(val localeDetails: Map<BooksLocale, BookDetails> = emptyMap(),
+    data class Book(val localeDetails: Map<BooksLocale, BookDetails> = emptyMap(),
                val imageRes: Int = 0, val fileName: String = "")
 
     class BookDetails(val url: String = "", val bookSizeBytes : Long = 0) {

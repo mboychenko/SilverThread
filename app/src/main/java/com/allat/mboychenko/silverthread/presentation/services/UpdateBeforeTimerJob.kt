@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.app.JobIntentService
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
+import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsSettingsStorage
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import org.koin.android.ext.android.inject
 import java.util.*
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 class UpdateBeforeTimerJob : JobIntentService() {
 
-    private val storage: AllatTimeZoneStorage by inject()
+    private val storage: AllatNotificationsSettingsStorage by inject()
 
     private var stopFlag = false
     private var skipNotifFlag = false

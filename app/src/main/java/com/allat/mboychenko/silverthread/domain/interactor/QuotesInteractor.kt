@@ -1,9 +1,13 @@
 package com.allat.mboychenko.silverthread.domain.interactor
 
+import android.content.Context
 import com.allat.mboychenko.silverthread.data.storage.Storage
+import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
 import java.util.*
 
-class QuotesInteractor(val storage: Storage): QuotesDetailsStorage {
+class QuotesInteractor(private val storage: Storage): QuotesDetailsStorage {
+
+    constructor(context: Context) : this(StorageImplementation(context))
 
     override fun getFavoriteQuotesPositions(): Set<Int> {
         val set = storage.getStringSet(QUOTES_FAVORITES_PREF_KEY)

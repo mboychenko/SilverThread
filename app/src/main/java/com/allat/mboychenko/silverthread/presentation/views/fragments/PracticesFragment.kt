@@ -132,13 +132,9 @@ class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
     }
 
     override fun onPracticesByCategoryReady(practices: List<PracticeItem>) {
-        for (practice in practices) {
-            when (practice.type) {
-                PracticeItem.PracticesType.AUTOREPORTS -> autoreportsSection.add(practice)
-                PracticeItem.PracticesType.MEDITATIONS -> meditationsSection.add(practice)
-                PracticeItem.PracticesType.SPIRITUAL -> spiritualSection.add(practice)
-            }
-        }
+        autoreportsSection.addAll( practices.filter { it.type == PracticeItem.PracticesType.AUTOREPORTS } )
+        meditationsSection.addAll( practices.filter { it.type == PracticeItem.PracticesType.MEDITATIONS } )
+        spiritualSection.addAll( practices.filter { it.type == PracticeItem.PracticesType.SPIRITUAL } )
     }
 
     override fun hasPractices(): Boolean =

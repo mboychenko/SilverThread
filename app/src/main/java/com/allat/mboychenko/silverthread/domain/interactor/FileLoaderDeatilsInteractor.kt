@@ -2,7 +2,7 @@ package com.allat.mboychenko.silverthread.domain.interactor
 
 import com.allat.mboychenko.silverthread.data.storage.Storage
 
-class FileLoaderDetailsInteractor(val storage: Storage) : FileLoadingDetailsStorage {
+class FileLoaderDetailsInteractor(private val storage: Storage) : FileLoadingDetailsStorage {
 
     override fun getLoadingIds(): Map<String, Long> {
         return storage.getMap(DOWNLOADS_IDS_PREF_KEY)

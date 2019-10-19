@@ -130,6 +130,9 @@
     <string name="deleted">Удалено</string>
     <string name="no_downloads_description">Скачать видео/аудио можно из разделов меню "И.М.Данилов" и "АллатРа ТВ", под видео обычно есть кнопки "Скачать" для разных форматов видео/аудио версии передачи.\n\nПосле завершения загрузки, вы сможете увидеть эти файлы тут для открытия или удаления.\n\nСостояние загрузки можно увидеть в нотификациях потянув строку статус бара.</string>
     <string name="unknown_format">Невозможно открыть файл. Неизвестный формат</string>
+    <string name="sound_level_maximum">Максимальная громкость:</string>
+    <string name="to_verdict">Время до вердикта (GMT +0):</string>
+    <string name="verdict_in_exec">В исполнении (GMT +0):</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>
@@ -137,6 +140,30 @@
         <item quantity="few">%d минуты до Аллата</item>
         <item quantity="many">%d минут до Аллата</item>
         <item quantity="other">%d минут до Аллата</item>
+    </plurals>
+
+    <plurals name="days_to">
+        <item quantity="one">%d День</item>
+        <item quantity="two">%d Дня</item>
+        <item quantity="few">%d Дня</item>
+        <item quantity="many">%d Дней</item>
+        <item quantity="other">%d Дней</item>
+    </plurals>
+
+    <plurals name="hours_to">
+        <item quantity="one">%d Час</item>
+        <item quantity="two">%d Часа</item>
+        <item quantity="few">%d Часа</item>
+        <item quantity="many">%d Часов</item>
+        <item quantity="other">%d Часа</item>
+    </plurals>
+
+    <plurals name="minutes_to">
+        <item quantity="one">%d Минута</item>
+        <item quantity="two">%d Минуты</item>
+        <item quantity="few">%d Минуты</item>
+        <item quantity="many">%d Минут</item>
+        <item quantity="other">%d Минут</item>
     </plurals>
 
 </resources>

@@ -5,18 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
-import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
-import com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneInteractor
-import com.allat.mboychenko.silverthread.domain.interactor.AllatTimeZoneStorage
+import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsInteractor
+import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsSettingsStorage
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesInteractor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false) {
-    val storageImplementation = StorageImplementation(context)
-    val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storageImplementation)
-    val quotesStorage: QuotesDetailsStorage = QuotesInteractor(storageImplementation)
+    val allatStorage: AllatNotificationsSettingsStorage = AllatNotificationsInteractor(context)
+    val quotesStorage: QuotesDetailsStorage = QuotesInteractor(context)
 
     val randomQuotesInDay = quotesStorage.getRandomQuotesTimesInDay()
     if (randomQuotesInDay != 0) {

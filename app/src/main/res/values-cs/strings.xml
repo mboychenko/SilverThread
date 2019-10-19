@@ -114,10 +114,31 @@
     <string name="deleted">Deleted</string>
     <string name="no_downloads_description">You can download video/audio from the sections of the menu “I.M. Danilov” and “AllatRa TV”, under videos there are usually “Download” buttons for different formats of the video/audio.\n\nAfter the download is completed, the files will be available here to open or delete.\n\nYou can find status of loading in notifications, expanding status bar.</string>
     <string name="unknown_format">Can\'t open file. Unknown file format</string>
+    <string name="sound_level_maximum">Úroveň zvuku - Maximální:</string>
+    <string name="to_verdict">Čas do verdiktu (GMT +0):</string>
+    <string name="verdict_in_exec">In execution (GMT +0):</string>
 
     <plurals name="mins_to_allat">
             <item quantity="one">%d minuta do Allatu</item>        
             <item quantity="few">%d minuty do Allatu</item>        
         <item quantity="other">%d minut do Allatu</item>
+    </plurals>
+
+    <plurals name="days_to">
+        <item quantity="one">%d Den</item>
+        <item quantity="few">%d Dny</item>
+        <item quantity="other">%d Dní</item>
+    </plurals>
+
+    <plurals name="hours_to">
+        <item quantity="one">%d Hodina</item>
+        <item quantity="few">%d Hodiny</item>
+        <item quantity="other">%d Hodin</item>
+    </plurals>
+
+    <plurals name="minutes_to">
+        <item quantity="one">%d Minuta</item>
+        <item quantity="few">%d Minuty</item>
+        <item quantity="other">%d Minut</item>
     </plurals>
 </resources>

@@ -14,7 +14,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/clockTextView"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            tools:text="@string/allat_has_started"/>
 
     <TextView
             android:id="@+id/clockTextView"
@@ -26,13 +27,47 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.33"
+            app:layout_constraintVertical_bias="0.2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+            android:id="@+id/verdictTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/big_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clockTextView"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/to_verdict"/>
+
+    <TextView
+            android:id="@+id/verdictClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/big_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/verdictTitle"
+            tools:text="12 Days 12 Hours 12 Minutes"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+            android:id="@+id/verdictSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/middle_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/verdictClock"
+            tools:text="21.12.2024 9:00"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notificationConfigContainer"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="280dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
@@ -120,6 +155,23 @@
                 app:layout_constraintTop_toTopOf="@id/ringOnEndText"
                 app:layout_constraintBottom_toBottomOf="@id/ringOnEndText"/>
 
+        <TextView
+                android:id="@+id/ringLevelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sound_level_maximum"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ringOnEndText"
+                android:layout_marginTop="24dp"/>
+
+        <Switch
+                android:id="@+id/ringLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ringLevelText"
+                app:layout_constraintBottom_toBottomOf="@id/ringLevelText"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View android:id="@+id/configClickGrabber"
@@ -159,7 +211,7 @@
             android:id="@+id/timezoneContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="timezoneContainerBg, timezone"/>
+            app:constraint_referenced_ids="timezoneContainerBg,timezone"/>
 
     <View android:id="@+id/timezoneContainerBg"
           android:layout_width="0dp"

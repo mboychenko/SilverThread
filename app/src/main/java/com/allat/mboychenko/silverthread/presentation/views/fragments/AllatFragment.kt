@@ -18,7 +18,7 @@ import org.koin.android.ext.android.inject
 class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
 
     private val presenter: AllatPresenter by inject()
-    private val notificationBeforeArray : IntArray by lazy { resources.getIntArray(R.array.notify_before_mins) }
+    private val notificationMinutesBeforeArray : IntArray by lazy { resources.getIntArray(R.array.notify_before_mins) }
 
     override fun getFragmentTag(): String = ALLAT_FRAGMENT_TAG
 
@@ -33,14 +33,14 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
         fragment.lockImg.setOnClickListener { lockUnlockConfig() }
         fragment.lockTitle.setOnClickListener { lockUnlockConfig() }
 
-        fragment.ringOnStart.isChecked = presenter.isAllatNotificationStartEnabled()
-        fragment.ringOnEnd.isChecked = presenter.isAllatNotificationEndEnabled()
-
         fragment.ringOnStart.setOnCheckedChangeListener { _, enabled ->
             presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_START, enabled)
         }
         fragment.ringOnEnd.setOnCheckedChangeListener { _, enabled ->
             presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_END, enabled)
+        }
+        fragment.ringLevel.setOnCheckedChangeListener { _, loud ->
+            presenter.setRingLevel(loud)
         }
 
         fragment.timezoneConfig.setOnClickListener {
@@ -50,32 +50,7 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
 
         with(fragment.notifyTimer) {
             adapter = android.widget.ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item,
-                listOf(context.getString(R.string.none)) + notificationBeforeArray.map { it.toString() })
-
-            val allatNotifIn = presenter.getAllatNotifIn()
-            if (allatNotifIn != -1) {
-                notificationBeforeArray.indexOf(allatNotifIn)
-                    .takeIf { it != -1 }
-                    ?.let { setSelection(it + 1) }
-            }
-
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
-                override fun onItemSelected(parent: AdapterView<*>?, fragmentview: View?, position: Int, id: Long) {
-                    val allatNotifInMinutes = presenter.getAllatNotifIn()
-                    if (position == 0) {    //None
-                        if (allatNotifInMinutes != -1) {
-                            presenter.removeAllatReminder()
-                        }
-                    } else {
-                        if (allatNotifInMinutes != notificationBeforeArray[position - 1]) {
-                            presenter.setAllatReminder(notificationBeforeArray[position - 1])
-                        }
-                    }
-                }
-            }
+                listOf(context.getString(R.string.none)) + notificationMinutesBeforeArray.map { it.toString() })
         }
 
         return fragment
@@ -91,8 +66,25 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
             if (locked) R.drawable.ic_lock_open else R.drawable.ic_lock))
     }
 
-    override fun updateTimer(h: Long, m: Long, s: Long) {
+    override fun updateAllatTimer(h: Long, m: Long, s: Long) {
         clockTextView.text = String.format("%02d:%02d:%02d", h, m, s)
+    }
+
+    override fun updateVerdictTimer(days: Int, hoursLeft: Int, minsLeft: Int) {
+        verdictClock.text = String.format(
+            "%s %s %s",
+            resources.getQuantityString(R.plurals.days_to, days, days),
+            resources.getQuantityString(R.plurals.hours_to, hoursLeft, hoursLeft),
+            resources.getQuantityString(R.plurals.minutes_to, minsLeft, minsLeft)
+        )
+    }
+
+    override fun updateVerdictTitle(title: String) {
+        verdictTitle.text = title
+    }
+
+    override fun updateVerdictSubtitle(subtitle: String) {
+        verdictSubtitle.text = subtitle
     }
 
     override fun updateTimerStatus(allatStatusTitle: String) {
@@ -107,11 +99,42 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
         getDrawer(activity)?.openDrawer(GravityCompat.START)
     }
 
+    override fun ringOnStartEnabled(enabled: Boolean) {
+        ringOnStart.isChecked = enabled
+    }
+
+    override fun ringOnEndEnabled(enabled: Boolean) {
+        ringOnEnd.isChecked = enabled
+    }
+
+    override fun setAllatSoundLoud(loud: Boolean) {
+        ringLevel.isChecked = loud
+    }
+
+    override fun allatNotifIn(minutes: Int) {
+        if (minutes != -1) {
+            notificationMinutesBeforeArray.indexOf(minutes)
+                .takeIf { it != -1 }
+                ?.let { notifyTimer.setSelection(it + 1) }
+        }
+
+        notifyTimer.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, fragmentview: View?, position: Int, id: Long) {
+                presenter.allatNotifInSelected(position)
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         lockUnlockConfig(unlock = false)
         presenter.attachView(this)
+
     }
+
     override fun onPause() {
         super.onPause()
         presenter.detachView()

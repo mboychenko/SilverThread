@@ -36,7 +36,27 @@ class PracticeItem(
             .show((context as FragmentActivity).supportFragmentManager, PRACTICES_DIALOG_TAG)
     }
 
+
+
     private fun getDrawable(context: Context, res: Int) = ContextCompat.getDrawable(context, res)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as PracticeItem
+
+        if (title != other.title) return false
+        if (type != other.type) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = title.hashCode()
+        result = 31 * result + type.hashCode()
+        return result
+    }
 
     enum class PracticesType {
         AUTOREPORTS,

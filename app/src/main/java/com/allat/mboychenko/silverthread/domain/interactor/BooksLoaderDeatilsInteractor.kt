@@ -2,7 +2,7 @@ package com.allat.mboychenko.silverthread.domain.interactor
 
 import com.allat.mboychenko.silverthread.data.storage.Storage
 
-class BooksLoaderDeatilsInteractor(val storage: Storage): BooksLoaderDetailsStorage {
+class BooksLoaderDeatilsInteractor(private val storage: Storage): BooksLoaderDetailsStorage {
 
     override fun requestPermissionSaveData(key: String, value: String) {
         storage.putString(key, value)

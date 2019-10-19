@@ -27,8 +27,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.media.session.MediaButtonReceiver
 import android.media.RingtoneManager
+import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsInteractor
 
 private const val CHANNEL_ID_ALLAT = "allat_notif"
+private const val CHANNEL_ID_ALLAT_ITERABLE = "allat_notif-"
 private const val CHANNEL_NAME_ALLAT = "Allat Notifications"
 
 private const val CHANNEL_NAME_ALLAT_SILENCED = "Allat Notifications Muted"
@@ -52,6 +54,9 @@ const val NOTIFICATION_ID_ALLAT = 101
 const val NOTIFICATION_ID_QUOTE = 102
 const val NOTIFICATION_ID_RADIO = 103
 
+private val allatRingNormalUri = Uri.parse("android.resource://com.allat.mboychenko.silverthread/" + R.raw.allat_ring_normal)
+private val allatRingLoudUri = Uri.parse("android.resource://com.allat.mboychenko.silverthread/" + R.raw.allat_ring_louder)
+
 fun showNotification(context: Context, notificationCode: AlarmNotificationCodes, extras: Bundle?) {
     //setup
     var remindBefore: Long = 0
@@ -73,10 +78,8 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     val title: String
     val text: String
     val action: String
-    val notifChannelId: String
+    var notifChannelId: String
     val notifId: Int
-    var allatSound = false
-    var defaultSound = false
     var priority = PRIORITY_HIGH
 
     when (notificationCode) {
@@ -86,7 +89,6 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
-            allatSound = true
         }
         AlarmNotificationCodes.ALLAT_END -> {
             title = context.getString(R.string.allat_reminder)
@@ -94,7 +96,6 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
-            allatSound = true
         }
         AlarmNotificationCodes.ALLAT_BEFORE -> {
             title = context.getString(R.string.allat_reminder)
@@ -103,7 +104,6 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
             action = NOTIFICATION_ACTION_ALLAT
             notifId = NOTIFICATION_ID_ALLAT
             notifChannelId = CHANNEL_ID_ALLAT
-            allatSound = true
         }
         AlarmNotificationCodes.ALLAT_BEFORE_UPDATE -> {
             title = context.getString(R.string.allat_reminder)
@@ -121,18 +121,21 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
                 action = NOTIFICATION_ACTION_QUOTE
                 notifId = NOTIFICATION_ID_QUOTE
                 notifChannelId = CHANNEL_ID_QUOTES
-                defaultSound = true
             } else {
                 return
             }
         }
         else -> return
     }
-    Log.d("NotificationHelper", "showNotification $title $action $notifId $notifChannelId $defaultSound $allatSound ")
 
     //notify
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    val nBuilder = getBasicNotificationBuilder(context, notifChannelId, allatSound, defaultSound)
+
+    if (notifChannelId == CHANNEL_ID_ALLAT) {
+        nManager.checkNotificationChannelNeedUpdate(context)?.let { notifChannelId = it }
+    }
+
+    val nBuilder = getBasicNotificationBuilder(context, notifChannelId, notificationCode)
     nBuilder.setContentTitle(title)
         .setContentText(text)
         .setVibrate(longArrayOf(500, 500, 500, 500))
@@ -176,7 +179,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     }
 
     val notification = nBuilder.build()
-    nManager.createNotificationChannel(context, notification, allatSound, priority)
+    nManager.createNotificationChannel(context, notification, notificationCode, priority)
     nManager.notify(notifId, notification)
 
     Log.d("NotificationHelper", "showNotification notified ")
@@ -269,15 +272,30 @@ fun hideNotification(context: Context, extras: Bundle?) {
     }
 }
 
-private fun getBasicNotificationBuilder(context: Context, channelId: String, allatSound: Boolean, defaultSound: Boolean)
-        : NotificationCompat.Builder {
+private fun getBasicNotificationBuilder(
+    context: Context,
+    channelId: String,
+    notificationCode: AlarmNotificationCodes
+): NotificationCompat.Builder {
     val nBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(R.drawable.allatra_small)
         .setLights(Color.BLUE, 500, 3000)
         .setAutoCancel(true)
 
+    var allatSound = false
+    var defaultSound = false
+    if (notificationCode == AlarmNotificationCodes.ALLAT_START ||
+        notificationCode == AlarmNotificationCodes.ALLAT_END ||
+        notificationCode == AlarmNotificationCodes.ALLAT_BEFORE) {
+        allatSound = true
+    } else if (notificationCode == AlarmNotificationCodes.QUOTE) {
+        defaultSound = true
+    }
+
     if (allatSound) {
-        val notificationSoundUri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring)
+        val allatSettingsStorage = AllatNotificationsInteractor(context)
+        val loud = allatSettingsStorage.allatSoundLoud()
+        val notificationSoundUri = if (loud) allatRingLoudUri else allatRingNormalUri
         nBuilder.setSound(notificationSoundUri)
     } else if (defaultSound) {
         val notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
@@ -318,10 +336,40 @@ private fun getRemoveAllatBeforeUpdatesIntent(context: Context): PendingIntent {
 }
 
 @TargetApi(26)
+private fun NotificationManager.checkNotificationChannelNeedUpdate(
+    context: Context
+): String? {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channels = this.notificationChannels
+        val channel = channels.find { it.id == CHANNEL_ID_ALLAT || it.id.startsWith(CHANNEL_ID_ALLAT_ITERABLE) }
+
+        if (channel != null) {
+            val allatSettingsStorage = AllatNotificationsInteractor(context)
+            val loud = allatSettingsStorage.allatSoundLoud()
+            if ((loud && channel.sound == allatRingNormalUri) || (!loud && channel.sound == allatRingLoudUri)) {
+                deleteNotificationChannel(channel.id)
+
+                return if (channel.id == CHANNEL_ID_ALLAT) {
+                    String.format("%s%d", CHANNEL_ID_ALLAT_ITERABLE, 1)
+                } else {
+                    String.format(
+                        "%s%d",
+                        CHANNEL_ID_ALLAT_ITERABLE,
+                        channel.id.substringAfter('-').toInt().inc()
+                    )
+                }
+            }
+            return channel.id
+        }
+    }
+    return null
+}
+
+@TargetApi(26)
 private fun NotificationManager.createNotificationChannel(
     context: Context,
     notification: Notification,
-    allatSound: Boolean,
+    notificationCode: AlarmNotificationCodes,
     priority: Int
 ) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -342,13 +390,19 @@ private fun NotificationManager.createNotificationChannel(
 
             nChannel.vibrationPattern = longArrayOf(500, 500, 500, 500)
 
-            if (allatSound) {
+            if (notificationCode == AlarmNotificationCodes.ALLAT_START ||
+                notificationCode == AlarmNotificationCodes.ALLAT_END ||
+                notificationCode == AlarmNotificationCodes.ALLAT_BEFORE) {
+
                 val audioAttributes = AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                     .build()
 
+                val allatSettingsStorage = AllatNotificationsInteractor(context)
+                val loud = allatSettingsStorage.allatSoundLoud()
+
                 nChannel.setSound(
-                    Uri.parse("android.resource://" + context.packageName + "/" + R.raw.ring),
+                    if (loud) allatRingLoudUri else allatRingNormalUri,
                     audioAttributes
                 )
             }

@@ -149,6 +149,22 @@ class BookItem(
 
     override fun getLayout(): Int = R.layout.book_item_layout
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as BookItem
+
+        if (book != other.book) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return book.hashCode()
+    }
+
+
     interface BookActionListener {
         fun onShareLinkClick(bookTitle: String, url: String)
         fun onDeleteBook(book: BookItem)

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.PowerManager
 import android.util.Log
 import com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
-import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
 import com.allat.mboychenko.silverthread.domain.interactor.*
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.services.UpdateBeforeTimerJob
@@ -29,8 +28,7 @@ class AlarmNotificationsExecutor(val context: Context) {
 
         runTaskOnComputation(
             {
-                val storage = StorageImplementation(context)
-                val allatStorage: AllatTimeZoneStorage = AllatTimeZoneInteractor(storage)
+                val allatStorage: AllatNotificationsSettingsStorage = AllatNotificationsInteractor(context)
 
                 val bundle = Bundle().apply {
                     putBoolean(ALLAT_START_ARG, allatStorage.getAllatNotificationStart())
@@ -80,7 +78,7 @@ class AlarmNotificationsExecutor(val context: Context) {
             })
     }
 
-    private fun reInit(context: Context, allatStorage: AllatTimeZoneStorage, reInitQuotes: Boolean) {
+    private fun reInit(context: Context, allatStorage: AllatNotificationsSettingsStorage, reInitQuotes: Boolean) {
         reInitTimers(context,
             allatStorage.getAllatTimezone(),
             allatStorage.getAllatNotificationBeforeMins(),

@@ -66,7 +66,29 @@ class LoadedFileItem(
 
     }
 
+
+
     override fun getLayout() = R.layout.saved_file_item_layout
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LoadedFileItem
+
+        if (name != other.name) return false
+        if (size != other.size) return false
+        if (filePath != other.filePath) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + size.hashCode()
+        result = 31 * result + filePath.hashCode()
+        return result
+    }
 
 
 }

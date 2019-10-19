@@ -83,7 +83,6 @@ class BooksFragment : BaseAllatRaFragment(), IBooksFragmentView {
 
     override fun updateItems(items: List<BookItem>) {
         booksItemsSection.update(items)
-        booksItemsSection.notifyChanged()
     }
 
     override fun bookRemoved(book: BookItem) {
@@ -134,14 +133,6 @@ class BooksFragment : BaseAllatRaFragment(), IBooksFragmentView {
 
     override fun shareBookLink(bookTitle: String, bookUrl: String) {
         shareText(getString(R.string.link_to_load, bookTitle, bookUrl), getString(R.string.share_link, bookTitle))
-    }
-
-    override fun showLoading() {
-        loadingContainer.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading() {
-        loadingContainer.visibility = View.GONE
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
