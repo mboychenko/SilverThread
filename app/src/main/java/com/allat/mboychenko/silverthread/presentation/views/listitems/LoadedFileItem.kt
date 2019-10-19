@@ -1,5 +1,6 @@
 package com.allat.mboychenko.silverthread.presentation.views.listitems
 
+import android.content.ActivityNotFoundException
 import android.widget.TextView
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -53,7 +54,12 @@ class LoadedFileItem(
                 intent.setDataAndType(uri, type)
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(intent)
+
+                try {
+                    context.startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(context, R.string.unknown_format, Toast.LENGTH_LONG).show()
+                }
             }
         }
 

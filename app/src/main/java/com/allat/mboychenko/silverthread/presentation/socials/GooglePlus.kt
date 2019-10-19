@@ -23,7 +23,7 @@ class GooglePlus(val context: Context, val intent: Intent, val path: String) :
     }
 
     companion object {
-        const val SCHEMA = "plus.google"
+        const val HOST = "plus.google"
         const val GPLUS_BASE_URL = "https://plus.google.com"
     }
 }

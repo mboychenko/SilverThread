@@ -40,6 +40,10 @@
                         android:icon="@drawable/ic_live_tv"
                         android:title="@string/allatra_tv"/>
                 <item
+                        android:id="@+id/nav_znai"
+                        android:icon="@drawable/ic_search"
+                        android:title="@string/znai"/>
+                <item
                         android:id="@+id/nav_org"
                         android:icon="@drawable/ic_public_web"
                         android:title="@string/allatra_org"/>

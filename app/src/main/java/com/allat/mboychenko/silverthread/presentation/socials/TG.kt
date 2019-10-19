@@ -30,9 +30,9 @@ class TG(val context: Context, val intent: Intent, val path: String) :
                         return
                     }
                 }
-                intent.data = Uri.parse( TG_BASE_URL + path.substringAfter("="))
             } catch (e: Exception) {
-                intent.data = Uri.parse( TG_BASE_URL + path.substringAfter("="))
+            } finally {
+                intent.data = Uri.parse(String.format("%s/%s", TG_BASE_URL, path.substringAfter("=")))
             }
         } else {
             intent.data = Uri.parse(TG_BASE_URL + path)
@@ -42,9 +42,9 @@ class TG(val context: Context, val intent: Intent, val path: String) :
     companion object {
 
         const val TG_PACKAGE_NAME = "org.telegram.messenger"
-        const val DEEP_LINK_SCHEMA = "tg:resolve"
-        const val SCHEMA = "t"
-        const val SCHEMA_ALT = "tg"
+        const val DEEP_LINK_SCHEMA = "tg"
+        const val HOST = "t"
+        const val HOST_ALT = "tg"
 
         private const val TG_BASE_URL = "https://t.me"
     }

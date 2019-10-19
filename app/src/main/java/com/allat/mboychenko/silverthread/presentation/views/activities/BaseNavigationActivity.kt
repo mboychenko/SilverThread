@@ -2,6 +2,7 @@ package com.allat.mboychenko.silverthread.presentation.views.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -161,9 +162,12 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
             return
         }
 
+//        supportFragmentManager.popBackStack(fragmentTag, POP_BACK_STACK_INCLUSIVE)
+
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragmentContainer, fragment, fragmentTag)
+//            .addToBackStack(fragmentTag)
             .addToBackStack(null)
             .commit()
     }
@@ -217,25 +221,34 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
             drawer.closeDrawer(GravityCompat.START)
         } else {
             if (supportFragmentManager.fragments.size > 0) {
-                if (supportFragmentManager.backStackEntryCount <= 1 &&
-                    supportFragmentManager.fragments[0].tag != AllatFragment.ALLAT_FRAGMENT_TAG) {
-                    setDefaultNavigationItem()
-                    return
-                } else if (supportFragmentManager.backStackEntryCount <= 1 &&
-                    supportFragmentManager.fragments[0].tag == AllatFragment.ALLAT_FRAGMENT_TAG) {
+
+                val meditationFragment =
+                    supportFragmentManager.findFragmentByTag(PracticesFragment.MEDITATION_FRAGMENT_TAG) as PracticesFragment?
+                if (meditationFragment?.isVisible == true && meditationFragment.showInit()) {
                     return
                 }
 
-                val meditationFragment = supportFragmentManager.findFragmentByTag(PracticesFragment.MEDITATION_FRAGMENT_TAG) as PracticesFragment?
-                if (meditationFragment?.isVisible == true && meditationFragment.showInit()) {
+                if (supportFragmentManager.backStackEntryCount <= 1 &&
+                    supportFragmentManager.fragments[0].tag == AllatFragment.ALLAT_FRAGMENT_TAG) {
+                    return
+                } else if (supportFragmentManager.backStackEntryCount <= 1 &&
+                    supportFragmentManager.fragments[0].tag != AllatFragment.ALLAT_FRAGMENT_TAG) {
+                    supportFragmentManager.popBackStack()
+                    updateNavItemInHandlerQueue()
+                    return
+                } else {
+                    supportFragmentManager.popBackStack()
+                    updateNavItemInHandlerQueue()
                     return
                 }
             }
 
             super.onBackPressed()
-            navigationItemPosUpdate()
+            updateNavItemInHandlerQueue()
         }
     }
+
+    private fun updateNavItemInHandlerQueue() = Handler().post { navigationItemPosUpdate() }
 
     protected fun turnOffToolbarScrolling() {
         val toolbarLayoutParams = toolbar.layoutParams as AppBarLayout.LayoutParams

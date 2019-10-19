@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.presentation.helpers.bind
 import com.allat.mboychenko.silverthread.presentation.presenters.DownloadsPresenter
 import com.allat.mboychenko.silverthread.presentation.views.listitems.LoadedFileItem
 import com.xwray.groupie.GroupAdapter
@@ -17,8 +16,8 @@ import org.koin.android.ext.android.inject
 
 class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
 
-    private val downloadsList: RecyclerView by bind(R.id.downloadsList)
-    private val noItemsGroup: Group by bind(R.id.noItemsGroup)
+    private lateinit var downloadsList: RecyclerView
+    private lateinit var noItemsGroup: Group
     private lateinit var groupAdapter: GroupAdapter<ViewHolder>
 
     private val filesSection = Section()
@@ -33,7 +32,10 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_downloads, container, false)
+        val view = inflater.inflate(R.layout.fragment_downloads, container, false)
+        downloadsList = view.findViewById(R.id.downloadsList)
+        noItemsGroup = view.findViewById(R.id.noItemsGroup)
+        return view
     }
 
 

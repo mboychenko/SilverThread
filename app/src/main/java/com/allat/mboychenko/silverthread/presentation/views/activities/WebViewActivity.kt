@@ -33,6 +33,7 @@ import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.Al
 import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.NestedWebView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class WebViewActivity : BaseNavigationActivity() {
@@ -45,6 +46,8 @@ class WebViewActivity : BaseNavigationActivity() {
     private lateinit var errorDesc: TextView
     private lateinit var errorTitle: TextView
     private val webChromeClient: MyChrome by lazy { MyChrome() }
+
+    private var internetAccessDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +63,7 @@ class WebViewActivity : BaseNavigationActivity() {
         setupWebViewCookies(webView)
 
         webView.webChromeClient = webChromeClient
+
         webView.webViewClient = object :
             WebViewClient() {
 
@@ -188,9 +192,18 @@ class WebViewActivity : BaseNavigationActivity() {
                     errorTitle.text = getString(R.string.web_view_no_internet)
                     errorDesc.text = ""
                 } else {
-                    errorTitle.text = getString(R.string.web_view_general_error)
-                    errorDesc.text = getString(R.string.web_view_net_error_desc, desc)
+                    internetAccessDisposable =
+                        hasInternetAccess(applicationContext) { internetAvailable ->
+                            if (!internetAvailable) {
+                                errorTitle.text = getString(R.string.web_view_no_internet)
+                                errorDesc.text = ""
+                            } else {
+                                errorTitle.text = getString(R.string.web_view_general_error)
+                                errorDesc.text = getString(R.string.web_view_net_error_desc, desc)
+                            }
+                        }
                 }
+
             }
         }
 
@@ -310,6 +323,7 @@ class WebViewActivity : BaseNavigationActivity() {
     override fun onPause() {
         super.onPause()
         webView.onPause()
+        internetAccessDisposable?.takeIf { !it.isDisposed }?.dispose()
     }
 
     override fun getContentView(): Int {
@@ -321,15 +335,34 @@ class WebViewActivity : BaseNavigationActivity() {
             return
         }
 
+        errorView.visibility = View.GONE
         progressBar.visibility = View.VISIBLE
         currentUrl = uri
         webView.loadUrl(uri)
     }
 
     override fun onBackPressed() {
+        val history = webView.copyBackForwardList()
+        var index = -1
+        var url: String? = null
+
         when {
             webChromeClient.mCustomView != null -> webChromeClient.onHideCustomView()
-            webView.canGoBack() -> webView.goBack()
+            webView.canGoBackOrForward(index) -> {
+                while (webView.canGoBackOrForward(index)) {
+                    val prevItemUrl = history.getItemAtIndex(history.currentIndex + index).url
+                    if (prevItemUrl != ABOUT_BLANK && prevItemUrl != history.currentItem?.url) {
+                        webView.goBackOrForward(index)
+                        url = history.getItemAtIndex(-index).url
+                        break
+                    }
+                    index--
+                }
+                if (url == null) {
+                    super.onBackPressed()
+                }
+            }
+
             else -> super.onBackPressed()
         }
     }

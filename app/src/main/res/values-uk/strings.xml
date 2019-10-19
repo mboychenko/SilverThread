@@ -13,7 +13,7 @@
     <string name="active_signs">Активні знаки</string>
     <string name="settings">Налаштування</string>
     <string name="notifs">Cповіщення</string>
-    <string name="devs">Розробникии</string>
+    <string name="devs">Розробники</string>
     <string name="web">Веб Ресурси</string>
     <string name="about_us">Про нас</string>
     <string name="meditations_title">Медитації</string>
@@ -122,5 +122,6 @@
     <string name="no_saved_files">Немає завантажених файлiв</string>
     <string name="deleted">Видалено</string>
     <string name="no_downloads_description">Завантажити відео/аудіо можна з розділів меню "І.М.Данілов" і "АллатРа ТВ", під відео зазвичай є кнопки "Завантажити" для різних форматів відео/аудіо версії передачі.\n\nПісля завершення завантаження, ви зможете побачити ці файли тут для відкриття або видалення.\n\nСтан завантаження можна побачити в нотифікаціях потягнувши рядок статус бару.</string>
+    <string name="unknown_format">Неможливо відкрити файл. Невідомий формат</string>
 
 </resources>

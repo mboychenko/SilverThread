@@ -17,4 +17,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="WebViewRefreshButton" parent="Widget.AppCompat.Button">
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
 </resources>

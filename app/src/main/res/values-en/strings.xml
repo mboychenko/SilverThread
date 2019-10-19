@@ -122,5 +122,6 @@
     <string name="no_saved_files">No saved files</string>
     <string name="deleted">Deleted</string>
     <string name="no_downloads_description">You can download video/audio from the sections of the menu “I.M. Danilov” and “AllatRa TV”, under videos there are usually “Download” buttons for different formats of the video/audio.\n\nAfter the download is completed, the files will be available here to open or delete.\n\nYou can find status of loading in notifications, expanding status bar.</string>
+    <string name="unknown_format">Can\'t open file. Unknown file format</string>
 
 </resources>

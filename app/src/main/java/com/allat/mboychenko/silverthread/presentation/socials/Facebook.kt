@@ -35,7 +35,7 @@ class Facebook(val context: Context, val intent: Intent, val path: String) :
 
     companion object {
 
-        const val DEEP_LINK_SCHEMA = "facebook"
+        const val HOST = "facebook"
 
         private const val FACEBOOK_PACKAGE_NAME = "com.facebook.katana"
         private const val FACEBOOK_BASE_URL = "https://www.facebook.com"

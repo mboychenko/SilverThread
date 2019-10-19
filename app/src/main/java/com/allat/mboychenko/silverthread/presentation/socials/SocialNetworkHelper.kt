@@ -21,37 +21,40 @@ object SocialNetworkFactory {
     }
 
     fun getSocialNetwork(context: Context, uri: Uri): SocialNetwork? {
-        getHostWithoutSchemeAndDomain(uri)
-        val host =
-            getHostWithoutSchemeAndDomain(
-                uri
-            )
-        val path = uri.path ?: ""
+        val host = getHostWithoutSchemeAndDomain(uri)
+        var path = uri.path ?: ""
 
-        if (uri.toString().startsWith(TG.DEEP_LINK_SCHEMA)) {
+        uri.query?.let {
+            if (path.isNotEmpty()) {
+                path = String.format("%s?%s", path, it)
+            }
+        }
+
+        if (uri.scheme == TG.DEEP_LINK_SCHEMA) {
             return TG(context,
                 externalIntent, uri.toString())
         }
 
         return when (host) {
-            Facebook.DEEP_LINK_SCHEMA -> Facebook(context,
+            Facebook.HOST -> Facebook(context,
                 externalIntent, path)
-            Instagram.DEEP_LINK_SCHEMA -> Instagram(context,
+            Instagram.HOST -> Instagram(context,
                 externalIntent, path)
-            Twitter.DEEP_LINK_SCHEMA -> Twitter(context,
+            Twitter.HOST -> Twitter(context,
                 externalIntent, path)
-            Youtube.DEEP_LINK_SCHEMA -> Youtube(context,
+            Youtube.HOST_ALT,
+            Youtube.HOST -> Youtube(context,
+                externalIntent, host, path)
+            VK.HOST_ALT,
+            VK.HOST -> VK(context,
                 externalIntent, path)
-            VK.DEEP_LINK_SCHEMA_ALT,
-            VK.DEEP_LINK_SCHEMA -> VK(context,
+            OK.HOST,
+            OK.HOST_ALT -> OK(context,
                 externalIntent, path)
-            OK.DEEP_LINK_SCHEMA,
-            OK.DEEP_LINK_SCHEMA_ALT -> OK(context,
+            TG.HOST_ALT,
+            TG.HOST -> TG(context,
                 externalIntent, path)
-            TG.SCHEMA_ALT,
-            TG.SCHEMA -> TG(context,
-                externalIntent, path)
-            GooglePlus.SCHEMA -> GooglePlus(context,
+            GooglePlus.HOST -> GooglePlus(context,
                 externalIntent, path)
             else -> null
         }
@@ -64,18 +67,19 @@ object SocialNetworkFactory {
 
         val host= getHostWithoutSchemeAndDomain(uri)
 
-        return Facebook.DEEP_LINK_SCHEMA == host ||
-                Instagram.DEEP_LINK_SCHEMA == host ||
-                Youtube.DEEP_LINK_SCHEMA == host ||
-                Twitter.DEEP_LINK_SCHEMA == host ||
-                VK.DEEP_LINK_SCHEMA == host ||
-                VK.DEEP_LINK_SCHEMA_ALT == host ||
-                OK.DEEP_LINK_SCHEMA == host ||
-                OK.DEEP_LINK_SCHEMA_ALT == host ||
-                TG.SCHEMA == host ||
-                TG.SCHEMA_ALT == host ||
-                GooglePlus.SCHEMA == host ||
-                uri.toString().startsWith(TG.DEEP_LINK_SCHEMA)
+        return Facebook.HOST == host ||
+                Instagram.HOST == host ||
+                Youtube.HOST == host ||
+                Youtube.HOST_ALT == host ||
+                Twitter.HOST == host ||
+                VK.HOST == host ||
+                VK.HOST_ALT == host ||
+                OK.HOST == host ||
+                OK.HOST_ALT == host ||
+                TG.HOST == host ||
+                TG.HOST_ALT == host ||
+                GooglePlus.HOST == host ||
+                uri.scheme == TG.DEEP_LINK_SCHEMA
     }
 
     private const val URL_PREFIX_REGEX = "^(http://www\\.|https://www\\.|http://|https://|www.)"

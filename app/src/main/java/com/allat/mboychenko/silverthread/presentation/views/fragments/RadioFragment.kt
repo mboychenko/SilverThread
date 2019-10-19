@@ -34,7 +34,6 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
     private lateinit var stopFab: FloatingActionButton
     private lateinit var playFab: FloatingActionButton
     private lateinit var pauseFab: FloatingActionButton
-//    private val pauseFab: FloatingActionButton by bind(R.id.pauseFab)
 
     private var currentPlayerButtonsState = PlayerButtonsState.INIT
 

@@ -22,7 +22,7 @@ class Twitter(val context: Context, val intent: Intent, val path: String) :
     }
 
     companion object {
-        const val DEEP_LINK_SCHEMA = "twitter"
+        const val HOST = "twitter"
         private const val TWITTER_BASE_HTTP_URL = "https://twitter.com"
     }
 

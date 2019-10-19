@@ -69,7 +69,7 @@
     <string name="not_enough_memory">Недостаточно памяти</string>
     <string name="save_web_loading">Скачать файл %s?\nВы сможете найти его в секции приложения "Загрузки"</string>
 
-    <string name="timezone_config_description">От выбранной временной зоны будут зависить время Аллата, нотификациии связанные с Аллатом и случайные нотификации, вы можете изменить эту настройку в любое время на экране Аллата в зоне конфигураций</string>
+    <string name="timezone_config_description">От выбранной временной зоны будут зависить время Аллата, нотификации связанные с Аллатом и случайные нотификации, вы можете изменить эту настройку в любое время на экране Аллата в зоне конфигураций</string>
     <string name="timezone_config_local">Локальная временная зона - это временная зона вашего устройства, она настроенна вручную или автоматически в зависимости от геолокации.</string>
     <string name="timezone_config_kiev">Киевская временная зона - это временная зона по Киеву. Есть летнее время и оно автоматически поддерживается/обновляется.</string>
     <string name="timezone_config_gmt">Гринвич - это временная зона по Гринвичу. Нет летнего времени.</string>
@@ -83,7 +83,7 @@
     <string name="ring_on_end">Сигнал о конце:</string>
     <string name="ring_on_start">Сигнал о начале:</string>
     <string name="notify_before_min">Напомнить за мин.:</string>
-    <string name="allat_reminder">Напоминаниие Аллата</string>
+    <string name="allat_reminder">Напоминание Аллата</string>
     <string name="allat_has_started">Аллат начался!</string>
     <string name="allat_has_ended">Аллат завершился!</string>
     <string name="random_quote">Случайная Цитата</string>
@@ -115,7 +115,7 @@
     <string name="no_internet">Нет Интернета, проверьте соединение и попробуйте снова</string>
     <string name="mediadata_artist">АллатРа</string>
     <string name="mediadata_album">Радио</string>
-    <string name="mediadata_title_on_air">В Эфиире</string>
+    <string name="mediadata_title_on_air">В Эфире</string>
     <string name="mediadata_title_no_connection">Нет Интернета. Ожидание</string>
     <string name="mediadata_title_on_air_paused">В Эфире (Пауза)</string>
     <string name="refresh">Обновить</string>
@@ -129,6 +129,7 @@
     <string name="no_saved_files">Нет сохраненных файлов</string>
     <string name="deleted">Удалено</string>
     <string name="no_downloads_description">Скачать видео/аудио можно из разделов меню "И.М.Данилов" и "АллатРа ТВ", под видео обычно есть кнопки "Скачать" для разных форматов видео/аудио версии передачи.\n\nПосле завершения загрузки, вы сможете увидеть эти файлы тут для открытия или удаления.\n\nСостояние загрузки можно увидеть в нотификациях потянув строку статус бара.</string>
+    <string name="unknown_format">Невозможно открыть файл. Неизвестный формат</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>

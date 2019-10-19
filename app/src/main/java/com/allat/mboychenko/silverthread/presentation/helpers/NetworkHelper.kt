@@ -103,10 +103,7 @@ class ConnectionStateMonitor(
                                     }
                                 } else {
                                     val activeNetworkInfo = connectivityManager.activeNetworkInfo
-                                    if (activeNetworkInfo != null && activeNetworkInfo.isConnected && hasInternetAccess(
-                                            context
-                                        )
-                                    ) {
+                                    if (activeNetworkInfo != null && activeNetworkInfo.isConnected && hasInternetAccess(context)) {
                                         hasInternet = true
                                         executeOnHandlerThread(callerThread) { callback.internetAvailable() }
                                     }

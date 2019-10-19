@@ -4,6 +4,8 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import android.app.Application
+import android.content.Context
+import io.reactivex.plugins.RxJavaPlugins
 import com.allat.mboychenko.silverthread.presentation.di.exoPlayerStorageModule
 import com.allat.mboychenko.silverthread.presentation.di.presentersModule
 import com.allat.mboychenko.silverthread.presentation.di.storageModule
@@ -15,7 +17,9 @@ class AllatRaApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        MultiDex.install(this)
+
+        //here is no useful info, just prevent UndeliverableException crash
+        RxJavaPlugins.setErrorHandler {}
 
         startKoin {
             androidLogger()
@@ -26,6 +30,11 @@ class AllatRaApplication: Application() {
         FileLoaderService.commandRefreshLoadings(applicationContext)
 
         updateVersion(this)
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
 }

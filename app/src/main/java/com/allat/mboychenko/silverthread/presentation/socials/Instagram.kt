@@ -22,7 +22,7 @@ class Instagram(val context: Context, val intent: Intent, val path: String) :
     }
 
     companion object {
-        const val DEEP_LINK_SCHEMA = "instagram"
+        const val HOST = "instagram"
         private const val INSTAGRAM_BASE_URL = "https://instagram.com"
     }
 

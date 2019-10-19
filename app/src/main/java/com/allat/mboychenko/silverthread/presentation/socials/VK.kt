@@ -24,8 +24,8 @@ class VK(val context: Context, val intent: Intent, val path: String) :
 
     companion object {
 
-        const val DEEP_LINK_SCHEMA = "vk"
-        const val DEEP_LINK_SCHEMA_ALT = "vkontakte"
+        const val HOST = "vk"
+        const val HOST_ALT = "vkontakte"
 
         private const val VK_BASE_URL = "https://vk.com"
     }

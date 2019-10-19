@@ -23,8 +23,8 @@ class OK(val context: Context, val intent: Intent, val path: String) :
     }
 
     companion object {
-        const val DEEP_LINK_SCHEMA = "odnoklassniki"
-        const val DEEP_LINK_SCHEMA_ALT = "ok"
+        const val HOST = "odnoklassniki"
+        const val HOST_ALT = "ok"
 
         private const val OK_BASE_URL = "https://ok.ru"
     }
