@@ -1,13 +1,15 @@
 package com.allat.mboychenko.silverthread.presentation.views.listitems
 
 import android.view.Menu
-import com.allat.mboychenko.silverthread.R
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.quote_item_layout.view.*
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
+import android.text.SpannableString
+import com.allat.mboychenko.silverthread.R
+import com.allat.mboychenko.silverthread.presentation.helpers.alignRight
 
 
 class QuoteItem(
@@ -32,7 +34,11 @@ class QuoteItem(
             }
 
 
-            quote.text = quoteText
+            val styledResultText = SpannableString(quoteText)
+            quoteText.indexOf("\n").takeIf { it > -1 }
+                ?.let { styledResultText.alignRight(it, quoteText.length) }
+
+            quote.text = styledResultText
             buttonMore.setOnClickListener { onPopupMenuClick(it) }
         }
     }

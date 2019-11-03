@@ -117,7 +117,7 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
         AlarmNotificationCodes.QUOTE -> {
             if (quote?.isNotEmpty() == true) {
                 title = context.getString(R.string.random_quote)
-                text = quote!!
+                text = quote!!.substringBefore("\n")
                 action = NOTIFICATION_ACTION_QUOTE
                 notifId = NOTIFICATION_ID_QUOTE
                 notifChannelId = CHANNEL_ID_QUOTES

@@ -10,6 +10,7 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_quotes_list.*
 import android.animation.ValueAnimator
+import android.text.SpannableString
 import android.view.*
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AlertDialog
@@ -17,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.content.ContextCompat
+import com.allat.mboychenko.silverthread.presentation.helpers.alignRight
 import com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog
 import com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog.Companion.QUOTES_NOTIF_SETTINGS_DIALOG_TAG
 import com.allat.mboychenko.silverthread.presentation.helpers.px
@@ -155,8 +157,11 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
      */
     private fun showQuote(position: Int, quote: String) {
         val builder = AlertDialog.Builder(context!!)
+        val styledResultText = SpannableString(quote)
+        quote.indexOf("\n").takeIf { it > -1 }
+            ?.let { styledResultText.alignRight(it, quote.length) }
         builder
-            .setMessage(quote)
+            .setMessage(styledResultText)
             .setTitle(R.string.r_quote)
             .setCancelable(false)
             .setNegativeButton(R.string.hide) { dialog, _ -> dialog.dismiss() }

@@ -1,9 +1,11 @@
 package com.allat.mboychenko.silverthread.presentation.helpers
 
 import android.content.res.Resources
+import android.text.Layout
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.style.AlignmentSpan
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.core.text.HtmlCompat
@@ -11,7 +13,7 @@ import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.fragment.app.Fragment
 
 fun <T : View> Fragment.bind(@IdRes res: Int) =
-    lazy { this.view!!.findViewById<T>(res) } //todo refactoring for fragments; replace from access from onCreateView to onViewCreated
+    lazy { this.view!!.findViewById<T>(res) }
 
 val Int.dp: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
@@ -36,4 +38,13 @@ private fun revertSpanned(stext: Spanned): Spannable {
         }
     }
     return ret
+}
+
+fun SpannableString.alignRight(start: Int, end: Int) {
+    setSpan(
+        AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
 }

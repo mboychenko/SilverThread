@@ -131,7 +131,7 @@
     <string name="no_downloads_description">Скачать видео/аудио можно из разделов меню "И.М.Данилов" и "АллатРа ТВ", под видео обычно есть кнопки "Скачать" для разных форматов видео/аудио версии передачи.\n\nПосле завершения загрузки, вы сможете увидеть эти файлы тут для открытия или удаления.\n\nСостояние загрузки можно увидеть в нотификациях потянув строку статус бара.</string>
     <string name="unknown_format">Невозможно открыть файл. Неизвестный формат</string>
     <string name="sound_level_maximum">Максимальная громкость:</string>
-    <string name="to_verdict">Время до вердикта (GMT +0):</string>
+    <string name="to_verdict">Обратный отсчёт (GMT +0):</string>
     <string name="verdict_in_exec">В исполнении (GMT +0):</string>
 
     <plurals name="mins_to_allat">

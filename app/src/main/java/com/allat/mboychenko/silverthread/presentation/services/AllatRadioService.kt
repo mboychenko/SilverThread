@@ -93,15 +93,20 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     lateinit var audioManager: AudioManager
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when (intent?.action) {
-            ACTION_RESUME -> resume()
-            ACTION_PLAY -> transportControls.play()
-            ACTION_PAUSE -> transportControls.pause()
-            ACTION_STOP -> transportControls.stop()
-            else -> MediaButtonReceiver.handleIntent(mediaSession, intent)
+        if (intent != null) {
+            startForeground(NOTIFICATION_ID_RADIO, getRadioNotification(applicationContext, status, mediaSession))
+            when (intent.action) {
+                ACTION_RESUME -> resume()
+                ACTION_PLAY -> transportControls.play()
+                ACTION_PAUSE -> transportControls.pause()
+                ACTION_STOP -> transportControls.stop()
+                else -> MediaButtonReceiver.handleIntent(mediaSession, intent)
+            }
+        } else if (status == PlaybackStatus.INIT) {
+            transportControls.play()
         }
 
-        return START_STICKY
+        return START_REDELIVER_INTENT
     }
 
     private fun requestAudioFocus(): Boolean {
@@ -141,8 +146,12 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     override fun onCreate() {
         super.onCreate()
         currentStreamUri = allatRadioStreaminUri
-
         handler = Handler()
+        initRadio()
+    }
+
+    private fun initRadio() {
+        status = PlaybackStatus.INIT
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         mediaSession = MediaSessionCompat(this, javaClass.simpleName)
@@ -182,7 +191,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
         connectionStateMonitor = ConnectionStateMonitor(applicationContext, handler, this)
         connectionStateMonitor!!.enable()
         registerReceiver(becomingNoisyReceiver, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY))
-
     }
 
     private var noInternet: Boolean = false
@@ -328,6 +336,9 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             )
 
         } else {
+            if (status == PlaybackStatus.STOPPED) {
+                initRadio()
+            }
             play()
         }
     }
@@ -357,31 +368,34 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     }
 
     private fun releaseDependencies() {
-        abandonAudioFocus()
-
-        player.stop()
-        player.removeListener(this)
-        player.release()
-
-        status = PlaybackStatus.STOPPED
-        radioActionsCallback?.onPlayerStatusChanged(status)
-        removeCallback()
-
-        mediaSession.setPlaybackState(
-            stateBuilder.setState(
-                PlaybackStateCompat.STATE_STOPPED,
-                PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 1f
-            ).build()
-        )
-        mediaSession.isActive = false
-        mediaSession.release()
-
-        if (::telephonyManager.isInitialized)
-            telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
-
         try {
             unregisterReceiver(becomingNoisyReceiver)
             connectionStateMonitor?.disable()
+
+            abandonAudioFocus()
+
+            mediaSession.setPlaybackState(
+                stateBuilder.setState(
+                    PlaybackStateCompat.STATE_STOPPED,
+                    PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 1f
+                ).build()
+            )
+            mediaSession.isActive = false
+            mediaSession.release()
+
+            player.stop()
+            player.release()
+            player.removeListener(this)
+
+            status = PlaybackStatus.STOPPED
+            radioActionsCallback?.onPlayerStatusChanged(status)
+
+
+
+            if (::telephonyManager.isInitialized)
+                telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
+
+
         } catch (e: IllegalArgumentException) {
             //if already was unregistered with stop and try again onDestroy
         }
@@ -399,6 +413,8 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     override fun onDestroy() {
         releaseDependencies()
+        hideNotification(applicationContext,
+            Bundle().apply { putInt(NOTIFICATION_CANCEL_ID_EXTRA, NOTIFICATION_ID_RADIO) })
         Log.d("onPlayerStatusChanged", "Destroyed")
         super.onDestroy()
     }
@@ -474,7 +490,13 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                         KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
                             if (status == PlaybackStatus.PLAYING) {
                                 transportControls.pause()
-                            } else if (status == PlaybackStatus.IDLE || status == PlaybackStatus.PAUSED) {
+                            } else if (status == PlaybackStatus.INIT || status == PlaybackStatus.IDLE || status == PlaybackStatus.PAUSED) {
+                                transportControls.play()
+                            }
+                        }
+                        KeyEvent.KEYCODE_MEDIA_NEXT,
+                        KeyEvent.KEYCODE_MEDIA_PREVIOUS -> {
+                            if (status == PlaybackStatus.INIT) {
                                 transportControls.play()
                             }
                         }
@@ -482,8 +504,11 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                         KeyEvent.KEYCODE_MEDIA_PAUSE -> transportControls.pause()
                         KeyEvent.KEYCODE_MEDIA_STOP -> transportControls.stop()
                     }
-                } else {
+                } else if (keyEvent.action == KeyEvent.ACTION_DOWN) {
                     Log.d("AllatRadioService", "Unsupported media button!")
+                    if (status == PlaybackStatus.INIT) {
+                        transportControls.play()
+                    }
                 }
             } else {
                 Log.d("AllatRadioService", "Unknown intent: " + mediaButtonEvent?.action)
