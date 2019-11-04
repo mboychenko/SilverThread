@@ -64,16 +64,7 @@ class WebViewActivity : BaseNavigationActivity() {
 
         webView.webChromeClient = webChromeClient
 
-        webView.webViewClient = object :
-            WebViewClient() {
-
-            override fun onReceivedSslError(
-                view: WebView?,
-                handler: SslErrorHandler?,
-                error: SslError?
-            ) {
-                handler?.proceed()
-            }
+        webView.webViewClient = object : WebViewClient() {
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 return overrideUrlLoading(view, url)
