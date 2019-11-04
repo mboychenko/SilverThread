@@ -5,5 +5,7 @@ import com.allat.mboychenko.silverthread.presentation.views.listitems.LoadedFile
 interface IDownloadsFragmentView {
     fun filesList(files: List<LoadedFileItem>)
     fun noFilesDescriptionVisibility(visible: Boolean = true)
+    fun showNoPermissions()
     fun removeLoadedItem(item: LoadedFileItem)
+    fun requestStoragePermission()
 }

@@ -133,6 +133,7 @@
     <string name="sound_level_maximum">Максимальная громкость:</string>
     <string name="to_verdict">Обратный отсчёт (GMT +0):</string>
     <string name="verdict_in_exec">В исполнении (GMT +0):</string>
+    <string name="no_permissions_to_get_files">Нет разрешения для доступа к файлам</string>
 
     <plurals name="mins_to_allat">
         <item quantity="one">%d минута до Аллата</item>

@@ -5,9 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IDownloadsFragmentView
-import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService.Companion.DOWNLOADING_EXT
@@ -25,13 +23,19 @@ class DownloadsPresenter(val context: Context) : BasePresenter<IDownloadsFragmen
         checkFilesList()
     }
 
+    fun checkPermission() {
+        if (isExternalStorageAvailable().not() || extStoragePermissionGranted(context).not()) {
+            view?.requestStoragePermission()
+        }
+    }
+
     override fun detachView() {
         super.detachView()
         LocalBroadcastManager.getInstance(context).unregisterReceiver(onDownloadComplete)
     }
 
-    private fun checkFilesList() {
-        if (isExternalStorageReadable()) {
+    fun checkFilesList() {
+        if (isExternalStorageAvailable() && extStoragePermissionGranted(context)) {
             manageAddToSubscription(
                 runTaskOnBackgroundWithResult(ExecutorThread.IO,
                     {
@@ -59,7 +63,7 @@ class DownloadsPresenter(val context: Context) : BasePresenter<IDownloadsFragmen
                 )
             )
         } else {
-            Toast.makeText(context, R.string.cant_access_storage, Toast.LENGTH_LONG).show()
+            view?.showNoPermissions()
         }
     }
 

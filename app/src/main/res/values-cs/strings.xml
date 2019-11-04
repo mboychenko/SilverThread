@@ -117,6 +117,7 @@
     <string name="sound_level_maximum">Úroveň zvuku - Maximální:</string>
     <string name="to_verdict">Countdown (GMT +0):</string>
     <string name="verdict_in_exec">In execution (GMT +0):</string>
+    <string name="no_permissions_to_get_files">No permissions to get files</string>
 
     <plurals name="mins_to_allat">
             <item quantity="one">%d minuta do Allatu</item>        
