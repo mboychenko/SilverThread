@@ -106,6 +106,8 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
 
     private fun unbindRadioService() {
         context.unbindService(serviceConnection)
+        connectionStateMonitor.enable()
+        radioService = null
     }
 
     private fun createRadioActionsCallback() {

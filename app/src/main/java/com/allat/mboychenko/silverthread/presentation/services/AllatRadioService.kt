@@ -14,6 +14,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import android.media.AudioManager
+import android.net.wifi.WifiManager
 import android.os.*
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
@@ -91,15 +92,16 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     }
 
     lateinit var audioManager: AudioManager
+    private lateinit var wifiLock: WifiManager.WifiLock
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        startForeground(NOTIFICATION_ID_RADIO, getRadioNotification(applicationContext, status, mediaSession))
         if (intent != null) {
-            startForeground(NOTIFICATION_ID_RADIO, getRadioNotification(applicationContext, status, mediaSession))
             when (intent.action) {
                 ACTION_RESUME -> resume()
                 ACTION_PLAY -> transportControls.play()
                 ACTION_PAUSE -> transportControls.pause()
-                ACTION_STOP -> transportControls.stop()
+                ACTION_STOP -> stop()
                 else -> MediaButtonReceiver.handleIntent(mediaSession, intent)
             }
         } else if (status == PlaybackStatus.INIT) {
@@ -153,6 +155,8 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     private fun initRadio() {
         status = PlaybackStatus.INIT
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        wifiLock = (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createWifiLock(WifiManager.WIFI_MODE_FULL, "allatRadioLock")
 
         mediaSession = MediaSessionCompat(this, javaClass.simpleName)
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS or MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS)
@@ -294,6 +298,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             showNoInternetWarning()
         }
 
+        if (!wifiLock.isHeld) {
+            wifiLock.acquire()
+        }
+
         currentStreamUri = streamUrl
 
         if (requestAudioFocus()) {
@@ -371,6 +379,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
         try {
             unregisterReceiver(becomingNoisyReceiver)
             connectionStateMonitor?.disable()
+
+            if (wifiLock.isHeld) {
+                wifiLock.release()
+            }
 
             abandonAudioFocus()
 
@@ -487,6 +499,8 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                 if (keyEvent.action == KeyEvent.ACTION_DOWN && isSupportedMediaKey(keyEvent.keyCode)) {
                     when (keyEvent.keyCode) {
                         KeyEvent.KEYCODE_HEADSETHOOK,
+                        KeyEvent.KEYCODE_MEDIA_PLAY,
+                        KeyEvent.KEYCODE_MEDIA_PAUSE,
                         KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
                             if (status == PlaybackStatus.PLAYING) {
                                 transportControls.pause()
@@ -500,9 +514,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                                 transportControls.play()
                             }
                         }
-                        KeyEvent.KEYCODE_MEDIA_PLAY -> transportControls.play()
-                        KeyEvent.KEYCODE_MEDIA_PAUSE -> transportControls.pause()
-                        KeyEvent.KEYCODE_MEDIA_STOP -> transportControls.stop()
+                        KeyEvent.KEYCODE_MEDIA_STOP -> stop()
                     }
                 } else if (keyEvent.action == KeyEvent.ACTION_DOWN) {
                     Log.d("AllatRadioService", "Unsupported media button!")
