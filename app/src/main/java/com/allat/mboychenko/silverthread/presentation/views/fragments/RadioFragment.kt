@@ -92,6 +92,13 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
         return view
     }
 
+    private fun initButtonsState() {
+        currentPlayerButtonsState = PlayerButtonsState.INIT
+        playFab.visibility = View.VISIBLE
+        pauseFab.visibility = View.INVISIBLE
+        stopFab.visibility = View.INVISIBLE
+    }
+
     override fun stopButtonState() {
         currentPlayerButtonsState = PlayerButtonsState.INIT
         stopFab.animateFabShowHide(false)
@@ -102,6 +109,7 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
     override fun pauseButtonState() {
         currentPlayerButtonsState = PlayerButtonsState.PAUSED
         playFab.visibility = View.VISIBLE
+        stopFab.visibility = View.VISIBLE
         pauseFab.visibility = View.INVISIBLE
     }
 
@@ -123,9 +131,10 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         showProgress()
+        initButtonsState()
         presenter.attachView(this)
     }
 
@@ -194,8 +203,8 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
         animRadius.start()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         presenter.detachView()
     }
 
