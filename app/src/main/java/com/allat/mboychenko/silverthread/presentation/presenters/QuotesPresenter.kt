@@ -33,7 +33,7 @@ class QuotesPresenter(
     }
 
     fun getQuotes() {
-        subscriptions.add(
+        manageAddToSubscription(
             runTaskOnBackgroundWithResult(
                 ExecutorThread.COMPUTATION,
                 {
@@ -54,6 +54,19 @@ class QuotesPresenter(
                     quotesItems
                 },
                 { view?.quotesReady(it) })
+        )
+    }
+
+    fun isQuoteInFav(position: Int, resultConsumer: (result: Boolean) -> Unit) {
+        manageAddToSubscription(
+            runTaskOnBackgroundWithResult(
+                ExecutorThread.IO,
+                {
+                    val favSet = storage.getFavoriteQuotesPositions()
+                    favSet.contains(position)
+                },
+                resultConsumer
+            )
         )
     }
 

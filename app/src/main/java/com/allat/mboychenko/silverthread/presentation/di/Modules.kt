@@ -9,6 +9,7 @@ import com.allat.mboychenko.silverthread.domain.interactor.*
 import com.allat.mboychenko.silverthread.data.storage.Storage
 import com.allat.mboychenko.silverthread.presentation.presenters.*
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val presentersModule = module {
@@ -24,8 +25,12 @@ val presentersModule = module {
         AllatPresenter(androidContext(), get(), get())
     }
 
-    factory {
-        QuotesPresenter(androidContext(), get())
+//    factory {
+//        QuotesPresenter(androidContext(), get())
+//    }
+
+    scope(named(QUOTES_FRAGMENT_SCOPE_NAME)) {
+        scoped { QuotesPresenter(androidContext(), get()) }
     }
 
     factory {
@@ -38,6 +43,10 @@ val presentersModule = module {
 
     factory {
         RadioPresenter(androidContext())
+    }
+
+    factory {
+        ChetverikPresenter(androidContext(), get())
     }
 
     factory {
@@ -74,6 +83,10 @@ val storageModule = module {
         QuotesInteractor(get<StorageImplementation>()) as QuotesDetailsStorage
     }
 
+    factory {
+        ChetverikStorageInteractor(get<StorageImplementation>()) as ChetverikStorage
+    }
+
 }
 
 val exoPlayerStorageModule = module {
@@ -81,3 +94,5 @@ val exoPlayerStorageModule = module {
     single { provideExoPlayerCache(androidContext()) }
 
 }
+
+const val QUOTES_FRAGMENT_SCOPE_NAME = "QUOTES_FRAGMENT_SCOPE"

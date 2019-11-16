@@ -1,6 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
 import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -58,14 +59,14 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
         Handler().post { presenter.checkPermission() }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         noFilesDescriptionVisibility(false)
         presenter.attachView(this)
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         presenter.detachView()
     }
 
@@ -93,6 +94,19 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
     override fun removeLoadedItem(item: LoadedFileItem) {
         filesSection.remove(item)
         noFilesDescriptionVisibility(filesSection.groupCount == 0)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            for ((position, permission) in permissions.withIndex()) {
+                val grantResult = grantResults[position]
+                if (permission == Manifest.permission.WRITE_EXTERNAL_STORAGE) {
+                    if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                        Handler().post { presenter.checkFilesList() }
+                    }
+                }
+            }
+        }
     }
 
     override fun requestStoragePermission() {

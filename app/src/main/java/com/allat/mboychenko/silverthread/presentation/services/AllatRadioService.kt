@@ -250,7 +250,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                         .putString(MediaMetadataCompat.METADATA_KEY_TITLE, getString(R.string.buffering))
                         .build()
                 )
-                showNotification(
+                updateNotification(
                     applicationContext,
                     NOTIFICATION_ID_RADIO,
                     getRadioNotification(applicationContext, status, mediaSession)
@@ -276,7 +276,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                         .putString(MediaMetadataCompat.METADATA_KEY_TITLE, title)
                         .build()
                 )
-                showNotification(
+                updateNotification(
                     applicationContext,
                     NOTIFICATION_ID_RADIO,
                     getRadioNotification(applicationContext, status, mediaSession)

@@ -33,16 +33,6 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
         fragment.lockImg.setOnClickListener { lockUnlockConfig() }
         fragment.lockTitle.setOnClickListener { lockUnlockConfig() }
 
-        fragment.ringOnStart.setOnCheckedChangeListener { _, enabled ->
-            presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_START, enabled)
-        }
-        fragment.ringOnEnd.setOnCheckedChangeListener { _, enabled ->
-            presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_END, enabled)
-        }
-        fragment.ringLevel.setOnCheckedChangeListener { _, loud ->
-            presenter.setRingLevel(loud)
-        }
-
         fragment.timezoneConfig.setOnClickListener {
             lockUnlockConfig(unlock = false)
             changeTimezoneSetupVisibility(true)
@@ -111,6 +101,18 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
         ringLevel.isChecked = loud
     }
 
+    override fun initAlarmsCheckboxListeners() {
+        ringOnStart.setOnCheckedChangeListener { _, enabled ->
+            presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_START, enabled)
+        }
+        ringOnEnd.setOnCheckedChangeListener { _, enabled ->
+            presenter.startStopAlarm(AlarmNotificationCodes.ALLAT_END, enabled)
+        }
+        ringLevel.setOnCheckedChangeListener { _, loud ->
+            presenter.setRingLevel(loud)
+        }
+    }
+
     override fun allatNotifIn(minutes: Int) {
         if (minutes != -1) {
             notificationMinutesBeforeArray.indexOf(minutes)
@@ -128,15 +130,15 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         lockUnlockConfig(unlock = false)
         presenter.attachView(this)
 
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         presenter.detachView()
     }
 

@@ -71,13 +71,13 @@ class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         presenter.attachView(this)
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         presenter.detachView()
     }
 

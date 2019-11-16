@@ -2,8 +2,10 @@ package com.allat.mboychenko.silverthread.presentation.views.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
+import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_ACTION_CHETVERIK
 import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_ACTION_QUOTE
 import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_ACTION_RADIO
 import com.allat.mboychenko.silverthread.presentation.helpers.NOTIFICATION_QUOTE_POSITION_EXTRAS
@@ -44,6 +47,10 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
             }
             NOTIFICATION_ACTION_RADIO -> {
                 setRadioNavigationItem()
+                return
+            }
+            NOTIFICATION_ACTION_CHETVERIK -> {
+                setChetverikNavigationItem()
                 return
             }
         }
@@ -89,6 +96,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 setFragment(AllatFragment(), navId)
             R.id.nav_practices ->
                 setFragment(PracticesFragment(), navId)
+            R.id.nav_chetverik ->
+                setFragment(ChetverikFragment(), navId)
             R.id.nav_quotes ->
                 setFragment(QuotesFragment(), navId)
             R.id.nav_books ->
@@ -131,6 +140,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 AllatFragment.ALLAT_FRAGMENT_TAG -> R.id.nav_allat
                 PracticesFragment.MEDITATION_FRAGMENT_TAG -> R.id.nav_practices
                 RadioFragment.RADIO_FRAGMENT_TAG -> R.id.nav_radio
+                ChetverikFragment.CHETVERIK_FRAGMENT_TAG -> R.id.nav_chetverik
                 QuotesFragment.QUOTES_FRAGMENT_TAG -> R.id.nav_quotes
                 BooksFragment.BOOKS_FRAGMENT_TAG -> R.id.nav_books
                 DownloadsFragment.DOWNLOADS_FRAGMENT_TAG -> R.id.nav_downloads
@@ -183,6 +193,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         when (intent.action) {
             NOTIFICATION_ACTION_QUOTE -> setQuotesNavigationItem(intent)
             NOTIFICATION_ACTION_RADIO -> setRadioNavigationItem()
+            NOTIFICATION_ACTION_CHETVERIK -> setChetverikNavigationItem()
             else -> setDefaultNavigationItem()
         }
 
@@ -196,6 +207,11 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
     private fun setRadioNavigationItem() {
         navigationView.setCheckedItem(R.id.nav_radio)
         setFragment(RadioFragment())
+    }
+
+    private fun setChetverikNavigationItem() {
+        navigationView.setCheckedItem(R.id.nav_chetverik)
+        setFragment(ChetverikFragment())
     }
 
     private fun setQuotesNavigationItem(intent: Intent?) {
@@ -216,6 +232,16 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         }
     }
 
+    private var exitConfirmation = false
+    private val exitCountDown = object: CountDownTimer(1500, 500) {
+        override fun onTick(millisUntilFinished: Long) {
+        }
+
+        override fun onFinish() {
+            exitConfirmation = false
+        }
+    }
+
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
@@ -230,6 +256,15 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
 
                 if (supportFragmentManager.backStackEntryCount <= 1 &&
                     supportFragmentManager.fragments[0].tag == AllatFragment.ALLAT_FRAGMENT_TAG) {
+
+                    if (!exitConfirmation) {
+                        exitCountDown.start()
+                        exitConfirmation = true
+                        Toast.makeText(this, getString(R.string.press_double_to_exit), Toast.LENGTH_SHORT).show()
+                    } else {
+                        finish()
+                    }
+
                     return
                 } else if (supportFragmentManager.backStackEntryCount <= 1 &&
                     supportFragmentManager.fragments[0].tag != AllatFragment.ALLAT_FRAGMENT_TAG) {

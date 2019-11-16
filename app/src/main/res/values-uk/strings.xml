@@ -149,5 +149,20 @@
     <string name="to_verdict">Зворотній відлік (GMT +0):</string>
     <string name="verdict_in_exec">У виконанні (GMT +0):</string>
     <string name="no_permissions_to_get_files">Не надано повноважень для доступу до файлів</string>
+    <string name="chetverik_short_title">Четверик</string>
+    <string name="minutes">Хвилини</string>
+    <string name="seconds">Секунди</string>
+    <string name="chetverik_stage">Працюємо з\n%s</string>
+    <string name="chetverik_stage_start">Підготовка</string>
+    <string name="chetverik_stage_right">Права Істота</string>
+    <string name="chetverik_stage_left">Ліва Істота</string>
+    <string name="chetverik_stage_back">Задня Істота</string>
+    <string name="chetverik_stage_front">Передня Істота</string>
+    <string name="chetverik_end">Практика закінчена</string>
+    <string name="chetverik_desk">Цей таймер зі звуковими сигналами для роботи з істотами у практиці "Четверик", також можна обрати затримку перед початком роботы з першою (правою) істотою. Сигнали початку роботи з кожною істотою однакові, сигнал завершення практики іншого тону. Робота з кожною істотою розрахована на 1 Аллат. Отже тривалість практики 4 Аллата + обранний час підготовки. Таймер можно зупинити вручну або він сам зупиинится після закінчення.\n\nПеред початком практики ви можете обрати час підготовки який вам потрібен для переходу у зміненний стан свідомості перед початком роботи з першою (правою) істотою.</string>
+    <string name="description">Інформація</string>
+    <string name="prepearing_time">Час для підготовки</string>
+    <string name="info">Інфо</string>
+    <string name="press_double_to_exit">Натисніть двічі щоб вийти</string>
 
 </resources>

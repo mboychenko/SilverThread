@@ -142,5 +142,22 @@
     <string name="to_verdict">Countdown (GMT +0):</string>
     <string name="verdict_in_exec">In execution (GMT +0):</string>
     <string name="no_permissions_to_get_files">No permissions to get files</string>
+    <string name="chetverik_short_title">Chetverik</string>
+
+    <string name="minutes">Minutes</string>
+    <string name="seconds">Seconds</string>
+    <string name="chetverik_stage">Working with\n%s</string>
+    <string name="chetverik_stage_start">Preparing</string>
+    <string name="chetverik_stage_right">Right Essence</string>
+    <string name="chetverik_stage_left">Left Essence</string>
+    <string name="chetverik_stage_back">Back Essence</string>
+    <string name="chetverik_stage_front">Front Essence</string>
+    <string name="chetverik_end">Practice completed</string>
+    <string name="chetverik_desk">This is a timer with sound signals for working with essences according to the practice of “Chetverik”, it is possible to choose a delay before start working with the first (right) essence. The signals for starting work with each essences are the same, the signal for ending practice is different. Work with each essences is designed for 1 Allat. Total duration of practice 4 Allat + selected delay time. The timer can be manually stopped or it can stop and return to its original state after the end.\n\nBefore you start practicing, you can choose delay that you need to enter the altered state of consciousness before working with the first (right) essence.</string>
+
+    <string name="description">Description</string>
+    <string name="prepearing_time">Time to prepare</string>
+    <string name="info">Info</string>
+    <string name="press_double_to_exit">Press double to exit</string>
 
 </resources>

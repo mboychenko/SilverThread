@@ -145,6 +145,7 @@ class AllatPresenter(
                         ringOnStartEnabled(startEnabled)
                         ringOnEndEnabled(endEnabled)
                         setAllatSoundLoud(loud)
+                        initAlarmsCheckboxListeners()
                     }
                 }
             }

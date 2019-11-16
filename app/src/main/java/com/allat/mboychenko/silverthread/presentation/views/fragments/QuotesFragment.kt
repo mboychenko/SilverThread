@@ -10,30 +10,37 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_quotes_list.*
 import android.animation.ValueAnimator
-import android.text.SpannableString
 import android.view.*
 import android.view.animation.LinearInterpolator
-import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.content.ContextCompat
-import com.allat.mboychenko.silverthread.presentation.helpers.alignRight
+import com.allat.mboychenko.silverthread.presentation.di.QUOTES_FRAGMENT_SCOPE_NAME
 import com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog
 import com.allat.mboychenko.silverthread.presentation.views.dialogs.QuotesNotificationSettingsDialog.Companion.QUOTES_NOTIF_SETTINGS_DIALOG_TAG
 import com.allat.mboychenko.silverthread.presentation.helpers.px
 import com.allat.mboychenko.silverthread.presentation.presenters.QuotesPresenter
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.RandomQuoteDialog
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.RandomQuoteDialog.Companion.RANDOM_QUOTE_DIALOG_TAG
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_quotes_list.view.*
-import org.koin.android.ext.android.inject
+import org.koin.android.ext.android.getKoin
+import org.koin.core.qualifier.named
 
 class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
-
-    private val presenter : QuotesPresenter by inject()
 
     override fun getFragmentTag(): String = QUOTES_FRAGMENT_TAG
 
     private val quotesSection = Section()
+
+    private val quotesFragmentSession = getKoin().getOrCreateScope(QUOTES_FRAGMENT_DI_SCOPE_SESSION, named(QUOTES_FRAGMENT_SCOPE_NAME))
+    private val presenter: QuotesPresenter by quotesFragmentSession.inject()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        quotesFragmentSession.close()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,8 +110,8 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         presenter.attachView(this)
 
         if (quotesSection.itemCount == 0) {
@@ -125,6 +132,10 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
     override fun onPause() {
         super.onPause()
         hideFabs()
+    }
+
+    override fun onStop() {
+        super.onStop()
         presenter.detachView()
     }
 
@@ -156,19 +167,10 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
      * https://stackoverflow.com/questions/27580306/dismissed-dialog-fragment-reappears-again-when-app-is-resumed
      */
     private fun showQuote(position: Int, quote: String) {
-        val builder = AlertDialog.Builder(context!!)
-        val styledResultText = SpannableString(quote)
-        quote.indexOf("\n").takeIf { it > -1 }
-            ?.let { styledResultText.alignRight(it, quote.length) }
-        builder
-            .setMessage(styledResultText)
-            .setTitle(R.string.r_quote)
-            .setCancelable(false)
-            .setNegativeButton(R.string.hide) { dialog, _ -> dialog.dismiss() }
-            .setNeutralButton(R.string.in_favorite) { _, _ -> presenter.addToFavorite(position) }
-            .setPositiveButton(R.string.share) { _, _ -> shareText(quote, getString(R.string.share_quote)) }
-        val dialog = builder.create()
-        dialog.show()
+        fragmentManager?.let {
+            val qDialog = RandomQuoteDialog.newInstance(quote, position)
+            qDialog.show(it, RANDOM_QUOTE_DIALOG_TAG)
+        }
     }
 
     private fun fabActionAndHide(action: () -> Unit) {
@@ -260,5 +262,6 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
         const val QUOTES_FRAGMENT_TAG = "QUOTES_FRAGMENT_TAG"
         const val QUOTES_INCOMING_POSITION = "QUOTES_INCOMING_POSITION"
         const val QUOTES_SAVE_FAVORITE_STATE_KEY = "QUOTES_SAVE_FAVORITE_STATE_KEY"
+        const val QUOTES_FRAGMENT_DI_SCOPE_SESSION = "quotesFragmentSession"
     }
 }
