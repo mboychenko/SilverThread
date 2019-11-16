@@ -64,6 +64,11 @@
             </intent-filter>
         </service>
 
+        <service
+                android:name=".presentation.services.ChetverikService"
+                android:enabled="true"
+                android:exported="false"/>
+
         <receiver android:name="androidx.media.session.MediaButtonReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />

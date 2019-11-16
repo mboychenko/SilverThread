@@ -7,6 +7,7 @@ interface IAllatFragmentView {
     fun openDrawer()
     fun ringOnStartEnabled(enabled: Boolean)
     fun ringOnEndEnabled(enabled: Boolean)
+    fun initAlarmsCheckboxListeners()
     fun setAllatSoundLoud(loud: Boolean)
     fun allatNotifIn(minutes: Int)
     fun updateVerdictTimer(days: Int, hoursLeft: Int, minsLeft: Int)

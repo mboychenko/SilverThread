@@ -28,6 +28,8 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.media.session.MediaButtonReceiver
 import android.media.RingtoneManager
 import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsInteractor
+import com.allat.mboychenko.silverthread.presentation.models.ChetverikStage
+import com.allat.mboychenko.silverthread.presentation.services.ChetverikService
 
 private const val CHANNEL_ID_ALLAT = "allat_notif"
 private const val CHANNEL_ID_ALLAT_ITERABLE = "allat_notif-"
@@ -36,15 +38,18 @@ private const val CHANNEL_NAME_ALLAT = "Allat Notifications"
 private const val CHANNEL_NAME_ALLAT_SILENCED = "Allat Notifications Muted"
 private const val CHANNEL_NAME_QUOTES = "Quotes Notifications"
 private const val CHANNEL_NAME_RADIO = "Radio Notifications"
+private const val CHANNEL_NAME_CHETVERIK = "Chetverik Notifications"
 
 const val CHANNEL_ID_ALLAT_SILENCE = "allat_notif_silence"
 const val CHANNEL_ID_RADIO = "radio_notif"
+const val CHANNEL_ID_CHETVERIK = "chetverik_notif"
 const val CHANNEL_ID_QUOTES = "quotes_notif_def_sound"
 
 const val NOTIFICATION_ACTION_ALLAT = "AllatNotification"
 const val NOTIFICATION_ACTION_BEFORE_UPDATE = "AllatNotificationBeforeUpdate"
 const val NOTIFICATION_ACTION_QUOTE = "QuoteNotification"
 const val NOTIFICATION_ACTION_RADIO = "RadioNotification"
+const val NOTIFICATION_ACTION_CHETVERIK = "ChetverikNotification"
 
 const val NOTIFICATION_CANCEL_ID_EXTRA = "NOTIFICATION_CANCEL_ID_EXTRA"
 const val ALLAT_START_ARG = "ALLAT_START_ARG"
@@ -53,6 +58,7 @@ const val ALLAT_END_ARG = "ALLAT_END_ARG"
 const val NOTIFICATION_ID_ALLAT = 101
 const val NOTIFICATION_ID_QUOTE = 102
 const val NOTIFICATION_ID_RADIO = 103
+const val NOTIFICATION_ID_CHETVERIK = 104
 
 private val allatRingNormalUri = Uri.parse("android.resource://com.allat.mboychenko.silverthread/" + R.raw.allat_ring_normal)
 private val allatRingLoudUri = Uri.parse("android.resource://com.allat.mboychenko.silverthread/" + R.raw.allat_ring_louder)
@@ -182,7 +188,38 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     nManager.createNotificationChannel(context, notification, notificationCode, priority)
     nManager.notify(notifId, notification)
 
-    Log.d("NotificationHelper", "showNotification notified ")
+    Log.d("NotificationHelper", "updateNotification notified ")
+}
+
+fun getChetverikNotification(
+    context: Context,
+    stage: ChetverikStage
+): Notification {
+    val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        nManager.createChetverikNotificationChannel()
+
+    val builder = NotificationCompat.Builder(context, NOTIFICATION_ACTION_RADIO)
+        .setContentTitle(context.getString(R.string.chetverik_short_title))
+        .setContentText(stage.getChetverikStageDesc(context))
+        .setSubText(context.getString(R.string.practices))
+        .setSmallIcon(R.drawable.allatra_small)
+        .setLargeIcon(ContextCompat.getDrawable(context, R.drawable.chetverik_img)?.toBitmap())
+        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+        .setContentIntent(
+            getActivityPendingIntent(
+                context,
+                NOTIFICATION_ACTION_CHETVERIK,
+                javaClass = MainActivity::class.java
+            )
+        )
+        .setStyle(androidx.media.app.NotificationCompat.MediaStyle())
+
+    builder.priority = NotificationCompat.PRIORITY_DEFAULT
+    builder.setChannelId(CHANNEL_ID_CHETVERIK)
+    builder.setOnlyAlertOnce(true)
+    builder.setShowWhen(false)
+
+    return builder.build()
 }
 
 fun getRadioNotification(
@@ -238,7 +275,6 @@ fun getRadioNotification(
     builder.setStyle(
         androidx.media.app.NotificationCompat.MediaStyle()
             .setShowActionsInCompactView(0, 1)
-            .setShowCancelButton(true)
             .setCancelButtonIntent(
                 MediaButtonReceiver.buildMediaButtonPendingIntent(
                     context,
@@ -254,7 +290,7 @@ fun getRadioNotification(
     return builder.build()
 }
 
-fun showNotification(context: Context, id: Int, notification: Notification) {
+fun updateNotification(context: Context, id: Int, notification: Notification) {
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     nManager.notify(id, notification)
 }
@@ -421,6 +457,20 @@ private fun NotificationManager.createRadioNotificationChannel() {
                     CHANNEL_ID_RADIO,
                     CHANNEL_NAME_RADIO,
                     NotificationManager.IMPORTANCE_DEFAULT //IMPORTANCE_HIGH to show expanded for few sec
+                )
+            )
+        }
+    }
+}
+@TargetApi(26)
+private fun NotificationManager.createChetverikNotificationChannel() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (this.getNotificationChannel(CHANNEL_ID_CHETVERIK) == null) {
+            this.createNotificationChannel(
+                NotificationChannel(
+                    CHANNEL_ID_CHETVERIK,
+                    CHANNEL_NAME_CHETVERIK,
+                    NotificationManager.IMPORTANCE_LOW //IMPORTANCE_HIGH to show expanded for few sec
                 )
             )
         }

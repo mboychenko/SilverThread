@@ -6,8 +6,8 @@ import android.os.Build
 import com.allat.mboychenko.silverthread.BuildConfig
 import com.allat.mboychenko.silverthread.data.storage.Storage
 import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
+import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsInteractor
 import com.allat.mboychenko.silverthread.domain.interactor.FileLoaderDetailsInteractor
-import com.allat.mboychenko.silverthread.domain.interactor.QuotesInteractor
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 
 fun updateVersion(context: Context) {
@@ -22,26 +22,21 @@ fun updateVersion(context: Context) {
 }
 
 private fun updateScript(context: Context, storage: Storage) {
-    if (!storage.getBoolean(PATCH_24_APPLIED_PREF_KEY, false)) {
-        applyPatchVer24(storage)
-        storage.putBoolean(PATCH_24_APPLIED_PREF_KEY, true)
-    }
 
     if (!storage.getBoolean(PATCH_25_APPLIED_PREF_KEY, false)) {
         applyPatchVer25(context, storage)
         storage.putBoolean(PATCH_25_APPLIED_PREF_KEY, true)
     }
 
-    if (!storage.getBoolean(PATCH_31_APPLIED_PREF_KEY, false)) {
-        applyPatchVer31(context)
-        storage.putBoolean(PATCH_31_APPLIED_PREF_KEY, true)
-    }
+    val allatStorage = AllatNotificationsInteractor(storage)
+    reInitTimers(context,
+        allatStorage.getAllatTimezone(),
+        allatStorage.getAllatNotificationBeforeMins(),
+        allatStorage.getAllatNotificationStart(),
+        allatStorage.getAllatNotificationEnd(),
+        true)
 
     storage.putInt(LAST_UPDATE_VERSION_PREF, BuildConfig.VERSION_CODE)
-}
-
-private fun applyPatchVer24(storage: Storage) {
-    QuotesInteractor(storage).clearShowedTimesInDay()
 }
 
 private fun applyPatchVer25(context: Context, storage: Storage) {
@@ -58,15 +53,9 @@ private fun applyPatchVer25(context: Context, storage: Storage) {
         val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         nManager.deleteNotificationChannel("quotes_notif")
     }
-    setupRandomQuoteNextAlarm(context)
 }
 
-private fun applyPatchVer31(context: Context) {
-    setupRandomQuoteNextAlarm(context)
-}
 
 private const val LAST_UPDATE_VERSION_PREF = "LAST_UPDATE_VERSION_PREF"
 
-private const val PATCH_24_APPLIED_PREF_KEY = "PATCH_24_APPLIED_PREF_KEY"
 private const val PATCH_25_APPLIED_PREF_KEY = "PATCH_25_APPLIED_PREF_KEY"
-private const val PATCH_31_APPLIED_PREF_KEY = "PATCH_31_APPLIED_PREF_KEY"

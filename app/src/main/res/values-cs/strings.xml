@@ -118,6 +118,7 @@
     <string name="to_verdict">Countdown (GMT +0):</string>
     <string name="verdict_in_exec">In execution (GMT +0):</string>
     <string name="no_permissions_to_get_files">No permissions to get files</string>
+    <string name="chetverik_short_title">Chetverik</string>
 
     <plurals name="mins_to_allat">
             <item quantity="one">%d minuta do Allatu</item>        
@@ -142,4 +143,19 @@
         <item quantity="few">%d Minuty</item>
         <item quantity="other">%d Minut</item>
     </plurals>
+
+    <string name="minutes">Minuty</string>
+    <string name="seconds">Sekundy</string>
+    <string name="chetverik_stage">Pracujeme s\n%s</string>
+    <string name="chetverik_stage_start">Příprava</string>
+    <string name="chetverik_stage_right">Pravou bytostí</string>
+    <string name="chetverik_stage_left">Levou bytostí</string>
+    <string name="chetverik_stage_back">Zadní bytostí</string>
+    <string name="chetverik_stage_front">Přední bytosí</string>
+    <string name="chetverik_end">Konec praktiky</string>
+    <string name="chetverik_desk">Toto je časovač se zvukovým oznámením pro práci s bytostmi podle praktiky “Četverik”, je možné nastavit prodlevu před oznámením začátku práce s první(pravou) bytostí. Oznámení začátku práce s každou bytosti jsou stejná, oznámení konce praktiky se liší. Předpokladané trvání práce s každou bytosti je 1 Allat. V celku praktika trvá 4 Allaty + zvolený čas přípravy. Časovač je možné zastavit ručně, nebo se zastaví sám a přejde v původní stav po konci.\n\nPřed začátkem praktiky si můžete vybrat délku prodlevy pro přechod do zmněneného stavu vědomi před práci s první(pravou) bytosti.</string>
+    <string name="description">Popis</string>
+    <string name="prepearing_time">Čas pro přípravu</string>
+    <string name="info">Info</string>
+    <string name="press_double_to_exit">Press double to exit</string>
 </resources>

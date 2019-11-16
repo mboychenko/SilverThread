@@ -24,6 +24,10 @@ abstract class BasePresenter<T> {
         this.view = null
     }
 
+    fun dispose() {
+        subscriptions.dispose()
+    }
+
     protected fun manageAddToSubscription(disposable: Disposable) {
         if (subscriptions.isDisposed) {
             subscriptions = CompositeDisposable()

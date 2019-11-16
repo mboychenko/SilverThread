@@ -2,7 +2,7 @@ package com.allat.mboychenko.silverthread.presentation.helpers
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_CANCEL_CURRENT
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -58,7 +58,7 @@ private fun createAlarmPendingIntent(context: Context, intentAction: String,
     intent.action = intentAction
     extras?.let { intent.putExtras(it) }
 
-    return PendingIntent.getBroadcast(context, requestCode, intent, FLAG_CANCEL_CURRENT)
+    return PendingIntent.getBroadcast(context, requestCode, intent, FLAG_UPDATE_CURRENT)
 }
 
 fun setupAllatBeforeAlarm(context: Context, minsBefore: Int, allatTimezone: AllatTimeZone) {
