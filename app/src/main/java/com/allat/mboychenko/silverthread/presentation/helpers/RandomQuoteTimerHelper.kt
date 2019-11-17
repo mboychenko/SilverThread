@@ -11,6 +11,7 @@ import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesInteractor
 import java.util.*
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
 fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false) {
     val allatStorage: AllatNotificationsSettingsStorage = AllatNotificationsInteractor(context)
@@ -27,15 +28,16 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
         lastNotifDay.timeInMillis = dayInMillis
 
         var nextNotificationTime: Long = 0
+        val quoteRecursionCounter = AtomicInteger(0)
 
         val now = Calendar.getInstance()
         if (lastNotifDay.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
-             nextNotificationTime = getMillisToNextQuote(allatTimezone, dayInMillis)
+             nextNotificationTime = getMillisToNextQuote(allatTimezone, dayInMillis, recursionCounter = quoteRecursionCounter)
         } else if (lastNotifDay.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
             nextNotificationTime = if (showedTimes < randomQuotesInDay) {
-                getMillisToNextQuote(allatTimezone, dayInMillis)
+                getMillisToNextQuote(allatTimezone, dayInMillis, recursionCounter = quoteRecursionCounter)
             } else {
-                getMillisToNextQuote(allatTimezone, dayInMillis, true)
+                getMillisToNextQuote(allatTimezone, dayInMillis, true, quoteRecursionCounter)
             }
         }
 
@@ -56,7 +58,7 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
     }
 }
 
-private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationTime: Long, nextDay: Boolean = false): Long {
+private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationTime: Long, nextDay: Boolean = false, recursionCounter: AtomicInteger): Long {
     val now = Calendar.getInstance()
     var changeToNextDay = nextDay
     val allatTimeOffsets: AllatTimeOffsets
@@ -121,12 +123,11 @@ private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationT
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var generatedLong: Long
-    var counter = 0
     do {
-        counter++
-        if (counter > 12) {
-            Log.d("LogQuotes", "counter more than 12")
-            return getMillisToNextQuote(allatTimezone, lastNotificationTime, true)
+        if (recursionCounter.incrementAndGet() > 7) {
+            Log.d("LogQuotes", "counter more than 7")
+            recursionCounter.set(0)
+            return getMillisToNextQuote(allatTimezone, lastNotificationTime, true, recursionCounter)
         }
         generatedLong = startLimit + (Math.random() * (endLimit - startLimit)).toLong()
         Log.d("LogQuotes", "generatedTime $generatedLong")
@@ -136,7 +137,7 @@ private fun getMillisToNextQuote(allatTimezone: AllatTimeZone, lastNotificationT
             allatTimeOffsets.eveningTimeBeforeOffset,
             allatTimeOffsets.eveningTimeAfterOffset))
 
-    Log.d("LogQuotes", "counter $counter")
+    Log.d("LogQuotes", "counter ${recursionCounter.get()}")
     Log.d("LogQuotes", "time $generatedLong")
     return generatedLong
 }
