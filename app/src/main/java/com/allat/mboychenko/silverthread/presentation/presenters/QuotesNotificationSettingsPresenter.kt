@@ -16,11 +16,11 @@ class QuotesNotificationSettingsPresenter(private val context: Context,
         runTaskOnComputation {
             quotesStorage.setRandomQuotesTimesInDay(times)
             if (times == 0) {
-                removeAlarm(context, AlarmNotificationCodes.QUOTE.action, AlarmNotificationCodes.QUOTE.code)
                 quotesStorage.clearShowedTimesInDay()
                 quotesStorage.removeNextQuoteTime()
+                removeAlarm(context, AlarmNotificationCodes.QUOTE.action, AlarmNotificationCodes.QUOTE.code)
             } else {
-                setupRandomQuoteNextAlarm(context)
+                setupRandomQuoteNextAlarm(context, quotesInDay = times)
             }
         }
     }

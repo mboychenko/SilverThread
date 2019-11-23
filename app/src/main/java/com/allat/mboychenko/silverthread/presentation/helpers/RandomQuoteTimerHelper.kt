@@ -13,11 +13,11 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false) {
+fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = false, quotesInDay: Int? = null) {
     val allatStorage: AllatNotificationsSettingsStorage = AllatNotificationsInteractor(context)
     val quotesStorage: QuotesDetailsStorage = QuotesInteractor(context)
 
-    val randomQuotesInDay = quotesStorage.getRandomQuotesTimesInDay()
+    val randomQuotesInDay = quotesInDay ?: quotesStorage.getRandomQuotesTimesInDay()
     if (randomQuotesInDay != 0) {
 
         val allatTimezone = getAllatTimezone(allatStorage.getAllatTimezone())
