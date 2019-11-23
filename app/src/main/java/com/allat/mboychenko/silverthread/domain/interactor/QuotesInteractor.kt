@@ -35,6 +35,16 @@ class QuotesInteractor(private val storage: Storage): QuotesDetailsStorage {
     override fun getRandomQuotesTimesInDay(): Int =
         storage.getIntDefault(RANDOM_QUOTES_TIMES_PREF_KEY, 0)
 
+    override fun saveNextQuoteTime(nextTime: Long) {
+        storage.putLong(R_QUOTE_SHCEDULED_NEXT_TIME_PREF_KEY, nextTime)
+    }
+
+    override fun getNextQuoteTime() = storage.getLong(R_QUOTE_SHCEDULED_NEXT_TIME_PREF_KEY)
+
+    override fun removeNextQuoteTime() {
+        storage.remove(R_QUOTE_SHCEDULED_NEXT_TIME_PREF_KEY)
+    }
+
     override fun setRandomQuotesTimesInDay(times: Int) {
         storage.putInt(RANDOM_QUOTES_TIMES_PREF_KEY, times)
     }
@@ -60,6 +70,7 @@ class QuotesInteractor(private val storage: Storage): QuotesDetailsStorage {
         private const val RANDOM_QUOTES_TIMES_PREF_KEY = "RANDOM_QUOTES_TIMES_PREF_KEY"
         private const val RANDOM_QUOTES_SHOWED_TIMES_PREF_KEY = "RANDOM_QUOTES_SHOWED_TIMES_PREF_KEY"
         private const val RANDOM_QUOTES_SHOWED_DAY_PREF_KEY = "RANDOM_QUOTES_SHOWED_DAY_PREF_KEY"
+        private const val R_QUOTE_SHCEDULED_NEXT_TIME_PREF_KEY = "R_QUOTE_SHCEDULED_NEXT_TIME_PREF_KEY"
     }
 
 

@@ -22,7 +22,11 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
 
         val allatTimezone = getAllatTimezone(allatStorage.getAllatTimezone())
 
-        val (showedTimes, dayInMillis) = quotesStorage.getQuotesWasShowedTimesInDay()
+        var (showedTimes, dayInMillis) = quotesStorage.getQuotesWasShowedTimesInDay()
+
+        if (fromNotification) {
+            quotesStorage.setQuotesWasShowedTimesInDay(++showedTimes to Calendar.getInstance().timeInMillis)
+        }
 
         val lastNotifDay = Calendar.getInstance()
         lastNotifDay.timeInMillis = dayInMillis
@@ -32,7 +36,7 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
 
         val now = Calendar.getInstance()
         if (lastNotifDay.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
-             nextNotificationTime = getMillisToNextQuote(allatTimezone, dayInMillis, recursionCounter = quoteRecursionCounter)
+            nextNotificationTime = getMillisToNextQuote(allatTimezone, dayInMillis, recursionCounter = quoteRecursionCounter)
         } else if (lastNotifDay.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
             nextNotificationTime = if (showedTimes < randomQuotesInDay) {
                 getMillisToNextQuote(allatTimezone, dayInMillis, recursionCounter = quoteRecursionCounter)
@@ -41,6 +45,7 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
             }
         }
 
+        quotesStorage.saveNextQuoteTime(nextNotificationTime)
         val (position, quote) = getRandomQuote(context)
         setAlarmExactTime(context, nextNotificationTime,
             AlarmNotificationCodes.QUOTE.action, AlarmNotificationCodes.QUOTE.code,
@@ -49,12 +54,6 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
                 putString(NOTIFICATION_QUOTE_EXTRAS, quote)
             }
         )
-
-
-        if (fromNotification) {
-            quotesStorage.setQuotesWasShowedTimesInDay(showedTimes + 1 to Calendar.getInstance().timeInMillis)
-        }
-
     }
 }
 
@@ -178,7 +177,7 @@ private fun timeInAvailableRange(
 private fun getRandomQuote(context: Context): Pair<Int, String> {
     val quotes = context.resources.getStringArray(R.array.quotes)
     val position = Random().nextInt(quotes.size)
-   return Pair(position, quotes[position])
+    return Pair(position, quotes[position])
 }
 
 private fun getAllatTimezone(allatTimezone: AllatTimeZone) =

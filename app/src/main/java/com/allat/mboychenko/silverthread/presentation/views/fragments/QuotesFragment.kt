@@ -152,10 +152,8 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
     }
 
     private fun notifSettings() {
-        fragmentManager?.let {
-            QuotesNotificationSettingsDialog()
-                .show(it, QUOTES_NOTIF_SETTINGS_DIALOG_TAG)
-        }
+        QuotesNotificationSettingsDialog()
+            .show(parentFragmentManager, QUOTES_NOTIF_SETTINGS_DIALOG_TAG)
     }
 
     private fun randomQuote() {
@@ -167,10 +165,8 @@ class QuotesFragment : BaseAllatRaFragment(), IQuotesFragmentView {
      * https://stackoverflow.com/questions/27580306/dismissed-dialog-fragment-reappears-again-when-app-is-resumed
      */
     private fun showQuote(position: Int, quote: String) {
-        fragmentManager?.let {
-            val qDialog = RandomQuoteDialog.newInstance(quote, position)
-            qDialog.show(it, RANDOM_QUOTE_DIALOG_TAG)
-        }
+        val qDialog = RandomQuoteDialog.newInstance(quote, position)
+        qDialog.show(parentFragmentManager, RANDOM_QUOTE_DIALOG_TAG)
     }
 
     private fun fabActionAndHide(action: () -> Unit) {

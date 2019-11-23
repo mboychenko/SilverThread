@@ -11,5 +11,9 @@ interface QuotesDetailsStorage {
     fun getQuotesWasShowedTimesInDay(): Pair<Int, Long>
     fun setQuotesWasShowedTimesInDay(timesInDay: Pair<Int, Long>)
 
+    fun saveNextQuoteTime(nextTime: Long)
+    fun getNextQuoteTime(): Long
+    fun removeNextQuoteTime()
+
     fun clearShowedTimesInDay()
 }

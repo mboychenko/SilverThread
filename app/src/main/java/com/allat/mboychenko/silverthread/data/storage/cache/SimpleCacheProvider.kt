@@ -9,6 +9,6 @@ import java.io.File
 
 fun provideExoPlayerCache(context: Context): SimpleCache {
     return SimpleCache(File(context.cacheDir, "media"),
-        LeastRecentlyUsedCacheEvictor(CacheDataSink.DEFAULT_FRAGMENT_SIZE * 10),
+        LeastRecentlyUsedCacheEvictor(CacheDataSink.DEFAULT_FRAGMENT_SIZE * 2),
         ExoDatabaseProvider(context))
 }

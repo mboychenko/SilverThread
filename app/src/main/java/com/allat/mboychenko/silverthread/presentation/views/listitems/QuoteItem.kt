@@ -3,11 +3,16 @@ package com.allat.mboychenko.silverthread.presentation.views.listitems
 import android.view.Menu
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.quote_item_layout.view.*
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import android.text.SpannableString
+import android.view.Gravity
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.view.menu.MenuPopupHelper
+import androidx.cardview.widget.CardView
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.helpers.alignRight
 
@@ -19,31 +24,40 @@ class QuoteItem(
     var favorite: Boolean
 ) : Item() {
 
+    private var menuPopupHelper: MenuPopupHelper? = null
+
     override fun getLayout(): Int = R.layout.quote_item_layout
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         with(viewHolder.itemView) {
 
-            if (favorite) {
-                card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
-            } else {
-                val array = context.theme.obtainStyledAttributes(
-                    intArrayOf(android.R.attr.colorBackground)
-                )
-                card.setCardBackgroundColor(array.getColor(0, 0xFF00FF))
+            findViewById<CardView>(R.id.card).apply {
+                if (favorite) {
+                    setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
+                } else {
+                    val array = context.theme.obtainStyledAttributes(
+                        intArrayOf(android.R.attr.colorBackground)
+                    )
+                    setCardBackgroundColor(array.getColor(0, 0xFF00FF))
+                }
             }
-
 
             val styledResultText = SpannableString(quoteText)
             quoteText.indexOf("\n").takeIf { it > -1 }
                 ?.let { styledResultText.alignRight(it, quoteText.length) }
 
-            quote.text = styledResultText
-            buttonMore.setOnClickListener { onPopupMenuClick(it) }
+            findViewById<TextView>(R.id.quote).text = styledResultText
+
+            findViewById<ImageView>(R.id.buttonMore).apply {
+                initPopup(this)
+            }
+
+            setOnClickListener { menuPopupHelper?.show() }
         }
     }
 
-    private fun onPopupMenuClick(view: View) {
+
+    private fun initPopup(view: View) {
         val popup = PopupMenu(view.context, view)
         val inflater = popup.menuInflater
         inflater.inflate(R.menu.quote_popup_menu, popup.menu)
@@ -72,7 +86,9 @@ class QuoteItem(
                 else -> false
             }
         }
-        popup.show()
+
+        menuPopupHelper = MenuPopupHelper(view.context, popup.menu as MenuBuilder, view)
+        menuPopupHelper!!.gravity = Gravity.END
     }
 
     private fun onFavoriteClick() {
