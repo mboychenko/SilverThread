@@ -63,11 +63,15 @@ abstract class BaseApplication : Application() {
         val now = Calendar.getInstance()
         val nowHour = now.get(Calendar.HOUR_OF_DAY)
         val whenStartHour = if (nowHour in 5..16) 17 else 5
+        val nextDay = whenStartHour == 5 && nowHour !in 0..4
 
         val fireIn = Calendar.getInstance()
         fireIn.set(Calendar.HOUR_OF_DAY, whenStartHour)
         fireIn.set(Calendar.MINUTE, 30)
         fireIn.set(Calendar.SECOND, 0)
+        if (nextDay) {
+            fireIn.add(Calendar.DAY_OF_MONTH, 1)
+        }
 
         timersUpdateBuilder.setInitialDelay(fireIn.timeInMillis - now.timeInMillis, TimeUnit.MILLISECONDS)
 
