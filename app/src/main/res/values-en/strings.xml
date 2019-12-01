@@ -155,5 +155,6 @@
     <string name="press_double_to_exit">Press double to exit</string>
     <string name="qty">Num of</string>
     <string name="allats">Allats</string>
+    <string name="practice_timer">Practice timer</string>
 
 </resources>

@@ -161,5 +161,7 @@
     <string name="qty">Кількість</string>
     <string name="allats">Аллатів</string>
     <string name="timer">Таймер</string>
+    <string name="practice_timer">Таймер Практики</string>
+
 
 </resources>

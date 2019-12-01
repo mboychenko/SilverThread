@@ -199,7 +199,7 @@ fun getPracticeNotification(
         nManager.createPracriceNotificationChannel()
 
     val builder = NotificationCompat.Builder(context, NOTIFICATION_ACTION_RADIO)
-        .setContentTitle(context.getString(R.string.chetverik_short_title))
+        .setContentTitle(context.getString(R.string.practice_timer))
         .setContentText(stage.getStageDesc(context, allat))
         .setSubText(context.getString(R.string.practices))
         .setSmallIcon(R.drawable.allatra_small)

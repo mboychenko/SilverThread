@@ -100,7 +100,7 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
 
     override fun getFragmentTag() = PRACTICE_FRAGMENT_TAG
 
-    override fun toolbarTitle() = R.string.chetverik_short_title
+    override fun toolbarTitle() = R.string.practice_timer
 
     override fun stageChanged(stage: PracticeStage, curAllat: Int) {
         when(stage) {

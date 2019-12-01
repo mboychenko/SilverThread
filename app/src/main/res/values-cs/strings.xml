@@ -145,6 +145,7 @@
     </plurals>
 
     <string name="timer">Timer</string>
+    <string name="practice_timer">Practice timer</string>
     <string name="minutes">Minuty</string>
     <string name="seconds">Sekundy</string>
     <string name="practice_stage_start">Příprava</string>
