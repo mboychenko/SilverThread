@@ -160,5 +160,6 @@
     <string name="press_double_to_exit">Натисніть двічі щоб вийти</string>
     <string name="qty">Кількість</string>
     <string name="allats">Аллатів</string>
+    <string name="timer">Таймер</string>
 
 </resources>

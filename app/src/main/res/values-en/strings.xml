@@ -148,7 +148,7 @@
     <string name="seconds">Seconds</string>
     <string name="practice_stage_start">Preparing</string>
     <string name="practice_desk">This is a timer with sound signals for working in practices, it is possible to choose a delay before start working. The signals for each Allat are the same, the signal for ending practice is different. For example, total duration of Chetverik practice 4 Allat + selected delay time. The timer can be manually stopped or it can stop and return to its original state after the end.\n\nBefore you start practicing, you can choose delay that you need to enter the altered state of consciousness.</string>
-
+    <string name="timer">Timer</string>
     <string name="description">Description</string>
     <string name="prepearing_time">Time to prepare</string>
     <string name="info">Info</string>
