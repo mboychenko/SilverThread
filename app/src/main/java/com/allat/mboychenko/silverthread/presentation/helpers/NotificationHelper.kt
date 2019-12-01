@@ -28,8 +28,7 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.media.session.MediaButtonReceiver
 import android.media.RingtoneManager
 import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsInteractor
-import com.allat.mboychenko.silverthread.presentation.models.ChetverikStage
-import com.allat.mboychenko.silverthread.presentation.services.ChetverikService
+import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 
 private const val CHANNEL_ID_ALLAT = "allat_notif"
 private const val CHANNEL_ID_ALLAT_ITERABLE = "allat_notif-"
@@ -191,16 +190,17 @@ fun showNotification(context: Context, notificationCode: AlarmNotificationCodes,
     Log.d("NotificationHelper", "updateNotification notified ")
 }
 
-fun getChetverikNotification(
+fun getPracticeNotification(
     context: Context,
-    stage: ChetverikStage
+    stage: PracticeStage,
+    allat: Int = 1
 ): Notification {
     val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nManager.createChetverikNotificationChannel()
+        nManager.createPracriceNotificationChannel()
 
     val builder = NotificationCompat.Builder(context, NOTIFICATION_ACTION_RADIO)
         .setContentTitle(context.getString(R.string.chetverik_short_title))
-        .setContentText(stage.getChetverikStageDesc(context))
+        .setContentText(stage.getStageDesc(context, allat))
         .setSubText(context.getString(R.string.practices))
         .setSmallIcon(R.drawable.allatra_small)
         .setLargeIcon(ContextCompat.getDrawable(context, R.drawable.chetverik_img)?.toBitmap())
@@ -463,14 +463,14 @@ private fun NotificationManager.createRadioNotificationChannel() {
     }
 }
 @TargetApi(26)
-private fun NotificationManager.createChetverikNotificationChannel() {
+private fun NotificationManager.createPracriceNotificationChannel() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         if (this.getNotificationChannel(CHANNEL_ID_CHETVERIK) == null) {
             this.createNotificationChannel(
                 NotificationChannel(
                     CHANNEL_ID_CHETVERIK,
                     CHANNEL_NAME_CHETVERIK,
-                    NotificationManager.IMPORTANCE_LOW //IMPORTANCE_HIGH to show expanded for few sec
+                    IMPORTANCE_LOW //IMPORTANCE_HIGH to show expanded for few sec
                 )
             )
         }

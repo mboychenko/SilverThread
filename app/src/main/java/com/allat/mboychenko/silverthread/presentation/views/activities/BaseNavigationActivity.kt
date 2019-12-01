@@ -50,7 +50,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 return
             }
             NOTIFICATION_ACTION_CHETVERIK -> {
-                setChetverikNavigationItem()
+                setPracticeTimerNavigationItem()
                 return
             }
         }
@@ -96,8 +96,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 setFragment(AllatFragment(), navId)
             R.id.nav_practices ->
                 setFragment(PracticesFragment(), navId)
-            R.id.nav_chetverik ->
-                setFragment(ChetverikFragment(), navId)
+            R.id.nav_practice_timer ->
+                setFragment(PracticeTimerFragment(), navId)
             R.id.nav_quotes ->
                 setFragment(QuotesFragment(), navId)
             R.id.nav_books ->
@@ -140,7 +140,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 AllatFragment.ALLAT_FRAGMENT_TAG -> R.id.nav_allat
                 PracticesFragment.MEDITATION_FRAGMENT_TAG -> R.id.nav_practices
                 RadioFragment.RADIO_FRAGMENT_TAG -> R.id.nav_radio
-                ChetverikFragment.CHETVERIK_FRAGMENT_TAG -> R.id.nav_chetverik
+                PracticeTimerFragment.PRACTICE_FRAGMENT_TAG -> R.id.nav_practice_timer
                 QuotesFragment.QUOTES_FRAGMENT_TAG -> R.id.nav_quotes
                 BooksFragment.BOOKS_FRAGMENT_TAG -> R.id.nav_books
                 DownloadsFragment.DOWNLOADS_FRAGMENT_TAG -> R.id.nav_downloads
@@ -193,7 +193,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         when (intent.action) {
             NOTIFICATION_ACTION_QUOTE -> setQuotesNavigationItem(intent)
             NOTIFICATION_ACTION_RADIO -> setRadioNavigationItem()
-            NOTIFICATION_ACTION_CHETVERIK -> setChetverikNavigationItem()
+            NOTIFICATION_ACTION_CHETVERIK -> setPracticeTimerNavigationItem()
             else -> setDefaultNavigationItem()
         }
 
@@ -209,9 +209,9 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         setFragment(RadioFragment())
     }
 
-    private fun setChetverikNavigationItem() {
-        navigationView.setCheckedItem(R.id.nav_chetverik)
-        setFragment(ChetverikFragment())
+    private fun setPracticeTimerNavigationItem() {
+        navigationView.setCheckedItem(R.id.nav_practice_timer)
+        setFragment(PracticeTimerFragment())
     }
 
     private fun setQuotesNavigationItem(intent: Intent?) {
@@ -269,6 +269,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 } else if (supportFragmentManager.backStackEntryCount <= 1 &&
                     supportFragmentManager.fragments[0].tag != AllatFragment.ALLAT_FRAGMENT_TAG) {
                     supportFragmentManager.popBackStack()
+                    setFragment(AllatFragment())
                     updateNavItemInHandlerQueue()
                     return
                 } else {

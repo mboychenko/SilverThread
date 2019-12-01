@@ -14,9 +14,29 @@
             android:gravity="center"
             android:paddingBottom="16dp"
             app:layout_constraintBottom_toTopOf="@id/minutes"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/minutes"
+            app:layout_constraintEnd_toEndOf="@id/seconds"/>
 
+    <TextView
+        android:id="@+id/allats_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/qty"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/allats"
+        app:layout_constraintStart_toStartOf="@id/allats"
+        app:layout_constraintEnd_toEndOf="@id/allats"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/allats"
+        app:layout_constraintBottom_toBottomOf="@id/allats"
+        app:layout_constraintStart_toEndOf="@id/seconds"
+        app:layout_constraintEnd_toStartOf="@id/allats"
+        android:background="@android:color/darker_gray"/>
     <NumberPicker
             android:id="@+id/minutes"
             android:layout_width="wrap_content"
@@ -35,8 +55,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/allats"
             app:layout_constraintStart_toEndOf="@id/minutes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <NumberPicker
+            android:id="@+id/allats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/seconds"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -57,6 +87,15 @@
             app:layout_constraintEnd_toEndOf="@id/seconds"
             app:layout_constraintStart_toStartOf="@id/seconds"
             app:layout_constraintTop_toBottomOf="@id/seconds" />
+
+    <TextView
+        android:id="@+id/allats_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/allats"
+        app:layout_constraintEnd_toEndOf="@id/allats"
+        app:layout_constraintStart_toStartOf="@id/allats"
+        app:layout_constraintTop_toBottomOf="@id/allats" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_fab"
@@ -106,7 +145,7 @@
             android:id="@+id/setupRemainingGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc" />
+            app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

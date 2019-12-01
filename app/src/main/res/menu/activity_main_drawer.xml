@@ -11,9 +11,9 @@
                 android:icon="@drawable/ic_meditation"
                 android:title="@string/practices"/>
         <item
-                android:id="@+id/nav_chetverik"
+                android:id="@+id/nav_practice_timer"
                 android:icon="@drawable/ic_chetverik_24dp"
-                android:title="@string/chetverik_short_title"/>
+                android:title="@string/timer"/>
         <item
                 android:id="@+id/nav_quotes"
                 android:icon="@drawable/ic_quote"

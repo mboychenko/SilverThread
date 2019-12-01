@@ -58,14 +58,15 @@
 
         <service
                 android:name=".presentation.services.AllatRadioService"
-                android:enabled="true">
+                android:enabled="true"
+                android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </service>
 
         <service
-                android:name=".presentation.services.ChetverikService"
+                android:name=".presentation.services.PracticeService"
                 android:enabled="true"
                 android:exported="false"/>
 

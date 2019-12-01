@@ -7,16 +7,17 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.Group
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.presentation.models.ChetverikStage
-import com.allat.mboychenko.silverthread.presentation.presenters.ChetverikPresenter
+import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
+import com.allat.mboychenko.silverthread.presentation.presenters.PracticeTimerPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.inject
 
-class ChetverikFragment : BaseAllatRaFragment(), IChetverikFragmentView {
+class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView {
 
-    private val presenter: ChetverikPresenter by inject()
+    private val presenter: PracticeTimerPresenter by inject()
 
     private lateinit var actionFab: FloatingActionButton
+    private lateinit var allatPicker: NumberPicker
     private lateinit var minutesPicker: NumberPicker
     private lateinit var secondsPicker: NumberPicker
     private lateinit var stageName: TextView
@@ -31,7 +32,7 @@ class ChetverikFragment : BaseAllatRaFragment(), IChetverikFragmentView {
 
         descDialog =  AlertDialog.Builder(context!!)
             .setTitle(R.string.description)
-            .setMessage(R.string.chetverik_desk)
+            .setMessage(R.string.practice_desk)
             .setCancelable(true)
             .setNegativeButton(R.string.hide) { dialog, _ -> dialog.dismiss()}
             .create()
@@ -41,16 +42,20 @@ class ChetverikFragment : BaseAllatRaFragment(), IChetverikFragmentView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.chetverik_fragment, container, false)
+        val view = inflater.inflate(R.layout.practice_timer_fragment, container, false)
 
         view.apply {
             actionFab = findViewById(R.id.action_fab)
             minutesPicker = findViewById(R.id.minutes)
             secondsPicker = findViewById(R.id.seconds)
+            allatPicker = findViewById(R.id.allats)
             stageName = findViewById(R.id.stage)
             stageRemaning = findViewById(R.id.stageRemaining)
             activeStageGroup = findViewById(R.id.activeStageGroup)
             setupRemainingGroup = findViewById(R.id.setupRemainingGroup)
+
+            allatPicker.minValue = 1
+            allatPicker.maxValue = 12
 
             minutesPicker.minValue = 0
             minutesPicker.maxValue = 24
@@ -69,7 +74,7 @@ class ChetverikFragment : BaseAllatRaFragment(), IChetverikFragmentView {
     override fun onStart() {
         super.onStart()
         actionFab.setImageResource(R.drawable.ic_play)
-        stageChanged(ChetverikStage.INIT)
+        initStage()
         presenter.attachView(this)
     }
 
@@ -93,25 +98,30 @@ class ChetverikFragment : BaseAllatRaFragment(), IChetverikFragmentView {
         }
     }
 
-    override fun getFragmentTag() = CHETVERIK_FRAGMENT_TAG
+    override fun getFragmentTag() = PRACTICE_FRAGMENT_TAG
 
     override fun toolbarTitle() = R.string.chetverik_short_title
 
-    override fun stageChanged(stage: ChetverikStage) {
+    override fun stageChanged(stage: PracticeStage, curAllat: Int) {
         when(stage) {
-            ChetverikStage.INIT -> {
-                actionFab.setImageResource(R.drawable.ic_play)
-                activeStageGroup.visibility = View.GONE
-                setupRemainingGroup.visibility = View.VISIBLE
-                stageRemaning.text = ""
-            }
-            else -> {
-                activeStageGroup.visibility = View.VISIBLE
-                setupRemainingGroup.visibility = View.GONE
-                context?.let { stageName.text = stage.getChetverikStageDesc(it) }
-                actionFab.setImageResource(R.drawable.ic_stop)
-            }
+            PracticeStage.INIT -> initStage()
+            PracticeStage.START -> activeStage(stage.getStageDesc(context!!))
+            PracticeStage.ALLAT -> activeStage(stage.getStageDesc(context!!, curAllat))
         }
+    }
+
+    private fun initStage() {
+        actionFab.setImageResource(R.drawable.ic_play)
+        activeStageGroup.visibility = View.GONE
+        setupRemainingGroup.visibility = View.VISIBLE
+        stageRemaning.text = ""
+    }
+
+    private fun activeStage(value: String) {
+        activeStageGroup.visibility = View.VISIBLE
+        setupRemainingGroup.visibility = View.GONE
+        stageName.text = value
+        actionFab.setImageResource(R.drawable.ic_stop)
     }
 
     override fun getOffset(): Int {
@@ -119,6 +129,8 @@ class ChetverikFragment : BaseAllatRaFragment(), IChetverikFragmentView {
         val sec = secondsPicker.value
         return sec + mins * 60
     }
+
+    override fun getAllatsNum() = allatPicker.value
 
     override fun setMinsViewOffset(min: Int) {
         minutesPicker.value = min
@@ -133,7 +145,7 @@ class ChetverikFragment : BaseAllatRaFragment(), IChetverikFragmentView {
     }
 
     companion object {
-        const val CHETVERIK_FRAGMENT_TAG = "CHETVERIK_FRAGMENT_TAG"
+        const val PRACTICE_FRAGMENT_TAG = "PRACTICE_FRAGMENT_TAG"
     }
 
 }

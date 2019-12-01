@@ -6,9 +6,7 @@ import android.content.Intent
 import android.media.AudioManager
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import android.os.*
-import com.allat.mboychenko.silverthread.domain.interactor.ChetverikStorage
-import com.allat.mboychenko.silverthread.presentation.models.ChetverikStage
-import org.koin.android.ext.android.inject
+import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 import java.util.*
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
@@ -18,36 +16,30 @@ import com.allat.mboychenko.silverthread.R
 
 
 
-class ChetverikService : Service() {
-
-    private val chetverikStorage: ChetverikStorage by inject()
+class PracticeService : Service() {
 
     private lateinit var  mediaPlayer: MediaPlayer
     private lateinit var mAudioManager: AudioManager
     private var originalVolume: Int = 0
 
     private val iBinder = LocalBinder()
-    private var chetverikStagesViewCallback: ChetverikActionsCallback? = null
-    private var stagesQueue = ArrayDeque<ChetverikStage>(
-        mutableListOf(
-            ChetverikStage.START,
-            ChetverikStage.RIGHT,
-            ChetverikStage.LEFT,
-            ChetverikStage.BACK,
-            ChetverikStage.FRONT
-        )
-    )
+    private var stagesViewCallback: PracticeActionsCallback? = null
 
-    private var stage by Delegates.observable(ChetverikStage.INIT) { _: KProperty<*>, _: ChetverikStage, new: ChetverikStage ->
+    private var allatArray = ArrayDeque<Int>()
+
+    private var currentAllat: Int = 1
+
+    private var stage: PracticeStage by Delegates.observable(PracticeStage.INIT) { _: KProperty<*>, old: PracticeStage, new: PracticeStage ->
             updateNotification(
                 applicationContext,
                 NOTIFICATION_ID_CHETVERIK,
-                getChetverikNotification(
+                getPracticeNotification(
                     applicationContext,
-                    new
+                    new,
+                    currentAllat
                 )
             )
-            chetverikStagesViewCallback?.onStageChanged(new)
+            stagesViewCallback?.onStageChanged(new, currentAllat)
     }
 
     var currentLeftMillis: Long = 0
@@ -76,21 +68,14 @@ class ChetverikService : Service() {
     private val allatIntervalTimer: CountDownTimer = object : CountDownTimer(ONE_ALLAT_MILLIS, 1000) {
         override fun onFinish() {
             try {
-                stage = stagesQueue.pop()
-                chetverikStagesViewCallback?.timeLeft(ONE_ALLAT_MILLIS)
+                currentAllat = allatArray.pop()
+                stage = PracticeStage.ALLAT
+                stagesViewCallback?.timeLeft(ONE_ALLAT_MILLIS)
                 currentLeftMillis = ONE_ALLAT_MILLIS
-                playSound(R.raw.chetverik_stage)
+                playSound(R.raw.practice_stage)
             } catch (ex: NoSuchElementException) {
-                updateNotification(
-                    applicationContext,
-                    NOTIFICATION_ID_CHETVERIK,
-                    getChetverikNotification(
-                        applicationContext,
-                        ChetverikStage.END
-                    )
-                )
-                playSound(R.raw.chetverik_end)
-                stopChetverik()
+                playSound(R.raw.practice_end)
+                stopTimer()
                 return
             }
             start()
@@ -98,7 +83,7 @@ class ChetverikService : Service() {
 
         override fun onTick(millis: Long) {
             currentLeftMillis = millis
-            chetverikStagesViewCallback?.timeLeft(millis)
+            stagesViewCallback?.timeLeft(millis)
         }
     }
 
@@ -114,78 +99,93 @@ class ChetverikService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null) {
             if (intent.action == ACTION_START) {
-                stage = stagesQueue.pop()
-                val startOffset = chetverikStorage.getStartOffsetSeconds()
+                stage = PracticeStage.START
+                val startOffset = intent.extras?.getInt(EXTRAS_OFFSET_KEY,0) ?: 0
+                val allats = intent.extras?.getInt(EXTRAS_ALLATS_NUM_KEY,1) ?: 1
+
+                for (n in 1..allats) {
+                    allatArray.addLast(n)
+                }
+
                 if (startOffset > 0) {
                     val delayInMillis = startOffset.toLong() * 1000
                     startIntervalTimer = object : CountDownTimer(delayInMillis, 1000) {
                         override fun onFinish() {
-                            stage = stagesQueue.pop()
-                            chetverikStagesViewCallback?.timeLeft(ONE_ALLAT_MILLIS)
+                            currentAllat = allatArray.pop()
+                            stage = PracticeStage.ALLAT
+                            stagesViewCallback?.timeLeft(ONE_ALLAT_MILLIS)
                             currentLeftMillis = ONE_ALLAT_MILLIS
-                            playSound(R.raw.chetverik_stage)
+                            playSound(R.raw.practice_stage)
                             allatIntervalTimer.start()
                         }
 
                         override fun onTick(millis: Long) {
                             currentLeftMillis = millis
-                            chetverikStagesViewCallback?.timeLeft(millis)
+                            stagesViewCallback?.timeLeft(millis)
                         }
 
                     }
-                    chetverikStagesViewCallback?.timeLeft(delayInMillis)
+                    stagesViewCallback?.timeLeft(delayInMillis)
                     startIntervalTimer.start()
                 } else {
-                    stage = stagesQueue.pop()
+                    currentAllat = allatArray.pop()
+                    stage = PracticeStage.ALLAT
+                    playSound(R.raw.practice_stage)
                     allatIntervalTimer.start()
                 }
-                startForeground(NOTIFICATION_ID_CHETVERIK, getChetverikNotification(applicationContext, stage))
+                startForeground(NOTIFICATION_ID_CHETVERIK, getPracticeNotification(applicationContext, stage, currentAllat))
             } else if (intent.action == ACTION_STOP) {
-                stopChetverik()
+                stopTimer()
             }
         } else {
-            stopChetverik()
+            stopTimer()
         }
         return START_STICKY
     }
 
-    fun stopChetverik() {
+    fun stopTimer() {
         if(::startIntervalTimer.isInitialized) {
             startIntervalTimer.cancel()
         }
         allatIntervalTimer.cancel()
-        chetverikStagesViewCallback?.onStageChanged(ChetverikStage.INIT)
+        stagesViewCallback?.onStageChanged(PracticeStage.INIT)
         stopForeground(true)
         stopSelf()
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
-        chetverikStagesViewCallback = null
+        stagesViewCallback = null
         return super.onUnbind(intent)
     }
 
-    fun getStatus(): ChetverikStage {
+    fun getStatus(): PracticeStage {
         return stage
     }
 
-    fun setCallback(chetverikStagesCallback: ChetverikActionsCallback) {
-        chetverikStagesViewCallback = chetverikStagesCallback
+    fun getCurAllat(): Int {
+        return currentAllat
+    }
+
+    fun setCallback(practiceStagesCallback: PracticeActionsCallback) {
+        stagesViewCallback = practiceStagesCallback
     }
 
     inner class LocalBinder : Binder() {
-        fun getService(): ChetverikService {
-            return this@ChetverikService
+        fun getService(): PracticeService {
+            return this@PracticeService
         }
     }
 
-    interface ChetverikActionsCallback {
-        fun onStageChanged(stage: ChetverikStage)
+    interface PracticeActionsCallback {
+        fun onStageChanged(stage: PracticeStage, curAllat: Int = 1)
         fun timeLeft(millis: Long)
     }
 
     companion object {
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
+        const val EXTRAS_OFFSET_KEY = "EXTRAS_OFFSET_KEY"
+        const val EXTRAS_ALLATS_NUM_KEY = "EXTRAS_ALLATS_NUM_KEY"
         const val ONE_ALLAT_MILLIS = 717000L //00:11:56.74 rounded to 00:11:57 Allat
     }
 

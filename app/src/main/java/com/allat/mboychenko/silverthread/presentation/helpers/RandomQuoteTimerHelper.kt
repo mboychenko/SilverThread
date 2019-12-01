@@ -23,9 +23,8 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
         val allatTimezone = getAllatTimezone(allatStorage.getAllatTimezone())
 
         var (showedTimes, dayInMillis) = quotesStorage.getQuotesWasShowedTimesInDay()
-
         if (fromNotification) {
-            quotesStorage.setQuotesWasShowedTimesInDay(++showedTimes to Calendar.getInstance().timeInMillis)
+            showedTimes += 1 //old + current
         }
 
         val lastNotifDay = Calendar.getInstance()
@@ -36,6 +35,7 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
 
         val now = Calendar.getInstance()
         if (lastNotifDay.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
+            showedTimes = 1
             nextNotificationTime = getMillisToNextQuote(allatTimezone, dayInMillis, recursionCounter = quoteRecursionCounter)
         } else if (lastNotifDay.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {
             nextNotificationTime = if (showedTimes < randomQuotesInDay) {
@@ -46,6 +46,10 @@ fun setupRandomQuoteNextAlarm(context: Context, fromNotification: Boolean = fals
         }
 
         quotesStorage.saveNextQuoteTime(nextNotificationTime)
+        if (fromNotification) {
+            quotesStorage.setQuotesWasShowedTimesInDay(showedTimes to Calendar.getInstance().timeInMillis)
+        }
+
         val (position, quote) = getRandomQuote(context)
         setAlarmExactTime(context, nextNotificationTime,
             AlarmNotificationCodes.QUOTE.action, AlarmNotificationCodes.QUOTE.code,

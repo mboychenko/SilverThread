@@ -25,10 +25,6 @@ val presentersModule = module {
         AllatPresenter(androidContext(), get(), get())
     }
 
-//    factory {
-//        QuotesPresenter(androidContext(), get())
-//    }
-
     scope(named(QUOTES_FRAGMENT_SCOPE_NAME)) {
         scoped { QuotesPresenter(androidContext(), get()) }
     }
@@ -46,7 +42,7 @@ val presentersModule = module {
     }
 
     factory {
-        ChetverikPresenter(androidContext(), get())
+        PracticeTimerPresenter(androidContext(), get())
     }
 
     factory {
@@ -84,7 +80,7 @@ val storageModule = module {
     }
 
     factory {
-        ChetverikStorageInteractor(get<StorageImplementation>()) as ChetverikStorage
+        PracticeStorageInteractor(get<StorageImplementation>()) as PracticeStorage
     }
 
 }

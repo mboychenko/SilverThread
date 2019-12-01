@@ -1,10 +1,11 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
-import com.allat.mboychenko.silverthread.presentation.models.ChetverikStage
+import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 
-interface IChetverikFragmentView {
-    fun stageChanged(stage: ChetverikStage)
+interface IPracticeTimerFragmentView {
+    fun stageChanged(stage: PracticeStage, curAllat: Int = 1)
     fun getOffset(): Int
+    fun getAllatsNum(): Int
     fun setMinsViewOffset(min: Int)
     fun setSecondsViewOffset(sec: Int)
     fun stageTimeRemaining(mins:Int, sec: Int)
