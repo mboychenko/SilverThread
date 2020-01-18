@@ -155,6 +155,22 @@ object BooksConstants {
         "Climate.pdf"
     )
 
+    val ATLANTIDA = Book(
+        mapOf(
+            RU to BookDetails("http://files.allatra.tv/books/Atlantida.pdf", 87724388)
+        ),
+        R.drawable.atlantida,
+        "Atlantida.pdf"
+    )
+
+    val CLIMATE_FUTURE_IS_NOW = Book(
+        mapOf(
+            RU to BookDetails("http://files.allatra.tv/books/Klimat-buduschee-sejchas.pdf", 19010796)
+        ),
+        R.drawable.climate_f_n,
+        "Climate Future Now.pdf"
+    )
+
     val EMPTY = Book()
 
     data class Book(val localeDetails: Map<BooksLocale, BookDetails> = emptyMap(),

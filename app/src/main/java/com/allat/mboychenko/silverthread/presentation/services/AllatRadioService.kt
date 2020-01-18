@@ -47,7 +47,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     private lateinit var transportControls: MediaControllerCompat.TransportControls
 
     private val allatRadioStreaminUri: Uri by lazy { Uri.parse(applicationContext.getString(R.string.allatra_radio_url)) }
-    private val classicMusicStreamingUri: Uri by lazy { Uri.parse(applicationContext.getString(R.string.classic_radio_url)) }
     private lateinit var currentStreamUri: Uri
 
     private var onGoingCall = false

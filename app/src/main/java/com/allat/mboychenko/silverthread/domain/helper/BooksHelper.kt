@@ -18,10 +18,13 @@ class BooksHelper(val context: Context) {
         BooksConstants.UNI_GRAIN,
         BooksConstants.CONSCIOUSNESS_AND_PERSONALITY,
         BooksConstants.PHYSICS,
-        BooksConstants.CLIMATE
+        BooksConstants.CLIMATE,
+        BooksConstants.ATLANTIDA,
+        BooksConstants.CLIMATE_FUTURE_IS_NOW
+
     )
 
-    fun getBookTitle(book: BooksConstants.Book) =
+    fun getBookTitle(book: BooksConstants.Book): String =
         when(book) {
             BooksConstants.ALLAT_RA -> context.getString(R.string.allatra_book_name)
             BooksConstants.SENSEI_1 -> context.getString(R.string.sensei_1_book_name)
@@ -35,6 +38,8 @@ class BooksHelper(val context: Context) {
             BooksConstants.CONSCIOUSNESS_AND_PERSONALITY -> context.getString(R.string.con_and_per_book_name)
             BooksConstants.PHYSICS -> context.getString(R.string.physics_book_name)
             BooksConstants.CLIMATE -> context.getString(R.string.climate_book_name)
+            BooksConstants.ATLANTIDA -> context.getString(R.string.atlantida)
+            BooksConstants.CLIMATE_FUTURE_IS_NOW -> context.getString(R.string.future_is_now)
             else -> ""
         }
 

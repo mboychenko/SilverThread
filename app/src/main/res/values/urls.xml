@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="allatra_radio_url" translatable="false">http://94.23.36.117:5551/stream</string>
-    <string name="classic_radio_url" translatable="false">http://eu6.fastcast4u.com:5551/classic</string>
+    <string name="allatra_radio_url" translatable="false">https://eu6.fastcast4u.com/proxy/viriabko?mp=/1</string>
 </resources>

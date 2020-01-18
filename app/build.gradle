@@ -10,8 +10,8 @@ android {
         applicationId "com.allat.mboychenko.silverthread"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 40
-        versionName "4.0.3"
+        versionCode 41
+        versionName "4.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

@@ -11,5 +11,7 @@
     <string name="uni_grain_book_name">Jediné Zrno</string>    
     <string name="con_and_per_book_name">Vědomí a Osobnost</string>    
     <string name="physics_book_name">Prapůvodní fyzika AllatRa</string>    
-    <string name="climate_book_name">Zpráva o klimatu</string>    
+    <string name="climate_book_name">Zpráva o klimatu</string>  
+    <string name="atlantida">Atlantida</string>
+    <string name="future_is_now">Climate Future Now</string> 
 </resources>
