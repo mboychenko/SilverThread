@@ -14,16 +14,22 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.allat.mboychenko.silverthread.R
+import com.allat.mboychenko.silverthread.presentation.di.QUOTES_FRAGMENT_SCOPE_NAME
 import com.allat.mboychenko.silverthread.presentation.helpers.alignRight
 import com.allat.mboychenko.silverthread.presentation.presenters.QuotesPresenter
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IViewContext
 import com.allat.mboychenko.silverthread.presentation.views.fragments.QuotesFragment
 import org.koin.android.ext.android.getKoin
+import org.koin.core.qualifier.named
 import kotlin.properties.Delegates
 
 class RandomQuoteDialog : DialogFragment(), IViewContext {
 
-    private val quotesFragmentSession = getKoin().getScope(QuotesFragment.QUOTES_FRAGMENT_DI_SCOPE_SESSION)
+    private val quotesFragmentSession = getKoin().getOrCreateScope(
+        QuotesFragment.QUOTES_FRAGMENT_DI_SCOPE_SESSION, named(
+            QUOTES_FRAGMENT_SCOPE_NAME
+        )
+    )
     private val presenter: QuotesPresenter by quotesFragmentSession.inject()
 
     private var quote: String = ""

@@ -21,6 +21,7 @@ class PracticeService : Service() {
     private lateinit var  mediaPlayer: MediaPlayer
     private lateinit var mAudioManager: AudioManager
     private var originalVolume: Int = 0
+    private var allatSize: Long = ONE_ALLAT_MILLIS
 
     private val iBinder = LocalBinder()
     private var stagesViewCallback: PracticeActionsCallback? = null
@@ -30,25 +31,25 @@ class PracticeService : Service() {
     private var currentAllat: Int = 1
 
     private var stage: PracticeStage by Delegates.observable(PracticeStage.INIT) { _: KProperty<*>, old: PracticeStage, new: PracticeStage ->
-            updateNotification(
+        updateNotification(
+            applicationContext,
+            NOTIFICATION_ID_CHETVERIK,
+            getPracticeNotification(
                 applicationContext,
-                NOTIFICATION_ID_CHETVERIK,
-                getPracticeNotification(
-                    applicationContext,
-                    new,
-                    currentAllat
-                )
+                new,
+                currentAllat
             )
-            stagesViewCallback?.onStageChanged(new, currentAllat)
+        )
+        stagesViewCallback?.onStageChanged(new, currentAllat)
     }
 
     var currentLeftMillis: Long = 0
 
     override fun onCreate() {
         super.onCreate()
-          mAudioManager = applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-          originalVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-          mediaPlayer = MediaPlayer().apply {
+        mAudioManager = applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        originalVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        mediaPlayer = MediaPlayer().apply {
             setOnPreparedListener {
                 mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0)
                 start()
@@ -65,25 +66,28 @@ class PracticeService : Service() {
     }
 
     private lateinit var startIntervalTimer: CountDownTimer
-    private val allatIntervalTimer: CountDownTimer = object : CountDownTimer(ONE_ALLAT_MILLIS, 1000) {
-        override fun onFinish() {
-            try {
-                currentAllat = allatArray.pop()
-                stage = PracticeStage.ALLAT
-                stagesViewCallback?.timeLeft(ONE_ALLAT_MILLIS)
-                currentLeftMillis = ONE_ALLAT_MILLIS
-                playSound(R.raw.practice_stage)
-            } catch (ex: NoSuchElementException) {
-                playSound(R.raw.practice_end)
-                stopTimer()
-                return
+    private val allatIntervalTimer: CountDownTimer by lazy {
+        object : CountDownTimer(allatSize, 1000) {
+            override fun onFinish() {
+                try {
+                    currentAllat = allatArray.pop()
+                    stage = PracticeStage.ALLAT
+                    stagesViewCallback?.timeLeft(allatSize)
+                    currentLeftMillis = allatSize
+                    playSound(R.raw.practice_stage)
+                } catch (ex: NoSuchElementException) {
+                    playSound(R.raw.practice_end)
+                    stopTimer()
+                    return
+                }
+                start()
             }
-            start()
-        }
 
-        override fun onTick(millis: Long) {
-            currentLeftMillis = millis
-            stagesViewCallback?.timeLeft(millis)
+
+            override fun onTick(millis: Long) {
+                currentLeftMillis = millis
+                stagesViewCallback?.timeLeft(millis)
+            }
         }
     }
 
@@ -102,6 +106,11 @@ class PracticeService : Service() {
                 stage = PracticeStage.START
                 val startOffset = intent.extras?.getInt(EXTRAS_OFFSET_KEY,0) ?: 0
                 val allats = intent.extras?.getInt(EXTRAS_ALLATS_NUM_KEY,1) ?: 1
+                val allatLengthFull = intent.extras?.getBoolean(EXTRAS_ALLATS_LEN_FULL_KEY,true) ?: true
+
+                if (!allatLengthFull) {
+                    allatSize = HALF_ALLAT_MILLIS
+                }
 
                 for (n in 1..allats) {
                     allatArray.addLast(n)
@@ -113,8 +122,8 @@ class PracticeService : Service() {
                         override fun onFinish() {
                             currentAllat = allatArray.pop()
                             stage = PracticeStage.ALLAT
-                            stagesViewCallback?.timeLeft(ONE_ALLAT_MILLIS)
-                            currentLeftMillis = ONE_ALLAT_MILLIS
+                            stagesViewCallback?.timeLeft(allatSize)
+                            currentLeftMillis = allatSize
                             playSound(R.raw.practice_stage)
                             allatIntervalTimer.start()
                         }
@@ -186,7 +195,9 @@ class PracticeService : Service() {
         const val ACTION_STOP = "ACTION_STOP"
         const val EXTRAS_OFFSET_KEY = "EXTRAS_OFFSET_KEY"
         const val EXTRAS_ALLATS_NUM_KEY = "EXTRAS_ALLATS_NUM_KEY"
+        const val EXTRAS_ALLATS_LEN_FULL_KEY = "EXTRAS_ALLATS_LEN_FULL_KEY"
         const val ONE_ALLAT_MILLIS = 717000L //00:11:56.74 rounded to 00:11:57 Allat
+        const val HALF_ALLAT_MILLIS = 358000L //Half Allat
     }
 
 }

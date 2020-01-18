@@ -5,7 +5,9 @@ import android.view.*
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.Group
+import androidx.core.content.ContextCompat
 import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 import com.allat.mboychenko.silverthread.presentation.presenters.PracticeTimerPresenter
@@ -22,9 +24,15 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
     private lateinit var secondsPicker: NumberPicker
     private lateinit var stageName: TextView
     private lateinit var stageRemaning: TextView
+    private lateinit var allatLengthSwitch: SwitchCompat
+    private lateinit var halfAllatText: TextView
+    private lateinit var fullAllatText: TextView
     private lateinit var activeStageGroup: Group
     private lateinit var setupRemainingGroup: Group
     private lateinit var descDialog: AlertDialog
+
+    private val textColorActive by lazy { ContextCompat.getColor(context!!, R.color.colorActive) }
+    private val textColorDefault by lazy { halfAllatText.textColors }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +61,9 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
             stageRemaning = findViewById(R.id.stageRemaining)
             activeStageGroup = findViewById(R.id.activeStageGroup)
             setupRemainingGroup = findViewById(R.id.setupRemainingGroup)
+            allatLengthSwitch = findViewById(R.id.switchAllat)
+            halfAllatText = findViewById(R.id.shortAllat)
+            fullAllatText = findViewById(R.id.fullAllat)
 
             allatPicker.minValue = 1
             allatPicker.maxValue = 12
@@ -135,6 +146,29 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
     override fun setMinsViewOffset(min: Int) {
         minutesPicker.value = min
     }
+
+    override fun setAllatLengthShort(short: Boolean) {
+        allatLengthSwitch.isChecked = short.not()
+        switchTextColorUpdate(short.not())
+
+        allatLengthSwitch.setOnCheckedChangeListener { _, isChecked ->
+            presenter.setAllatLengthShort(!isChecked)
+            switchTextColorUpdate(isChecked)
+        }
+    }
+
+    override fun getAllatLengthShort(): Boolean {
+        return allatLengthSwitch.isChecked.not()
+    }
+
+    private fun switchTextColorUpdate(isChecked: Boolean) =
+        if (isChecked) {
+            fullAllatText.setTextColor(textColorActive)
+            halfAllatText.setTextColor(textColorDefault)
+        } else {
+            fullAllatText.setTextColor(textColorDefault)
+            halfAllatText.setTextColor(textColorActive)
+        }
 
     override fun setSecondsViewOffset(sec: Int) {
         secondsPicker.value = sec

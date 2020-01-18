@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-            android:id="@+id/delay_desc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/prepearing_time"
-            android:gravity="center"
-            android:paddingBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@id/minutes"
-            app:layout_constraintStart_toStartOf="@id/minutes"
-            app:layout_constraintEnd_toEndOf="@id/seconds"/>
+        android:id="@+id/delay_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/prepearing_time"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/minutes"
+        app:layout_constraintStart_toStartOf="@id/minutes"
+        app:layout_constraintEnd_toEndOf="@id/seconds"/>
 
     <TextView
         android:id="@+id/allats_desc"
@@ -37,56 +37,57 @@
         app:layout_constraintStart_toEndOf="@id/seconds"
         app:layout_constraintEnd_toStartOf="@id/allats"
         android:background="@android:color/darker_gray"/>
-    <NumberPicker
-            android:id="@+id/minutes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@id/seconds"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     <NumberPicker
-            android:id="@+id/seconds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@id/allats"
-            app:layout_constraintStart_toEndOf="@id/minutes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/minutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@id/seconds"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <NumberPicker
-            android:id="@+id/allats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/seconds"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/seconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@id/allats"
+        app:layout_constraintStart_toEndOf="@id/minutes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <NumberPicker
+        android:id="@+id/allats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/seconds"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-            android:id="@+id/min_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/minutes"
-            app:layout_constraintEnd_toEndOf="@id/minutes"
-            app:layout_constraintStart_toStartOf="@id/minutes"
-            app:layout_constraintTop_toBottomOf="@id/minutes" />
+        android:id="@+id/min_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minutes"
+        app:layout_constraintEnd_toEndOf="@id/minutes"
+        app:layout_constraintStart_toStartOf="@id/minutes"
+        app:layout_constraintTop_toBottomOf="@id/minutes" />
 
     <TextView
-            android:id="@+id/sec_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/seconds"
-            app:layout_constraintEnd_toEndOf="@id/seconds"
-            app:layout_constraintStart_toStartOf="@id/seconds"
-            app:layout_constraintTop_toBottomOf="@id/seconds" />
+        android:id="@+id/sec_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seconds"
+        app:layout_constraintEnd_toEndOf="@id/seconds"
+        app:layout_constraintStart_toStartOf="@id/seconds"
+        app:layout_constraintTop_toBottomOf="@id/seconds" />
 
     <TextView
         android:id="@+id/allats_title"
@@ -97,55 +98,90 @@
         app:layout_constraintStart_toStartOf="@id/allats"
         app:layout_constraintTop_toBottomOf="@id/allats" />
 
+    <TextView
+        android:id="@+id/shortAllat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/switchAllat"
+        app:layout_constraintTop_toTopOf="@id/switchAllat"
+        app:layout_constraintBottom_toBottomOf="@id/switchAllat"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:text="@string/half_allat"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchAllat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:trackTint="@color/colorActive"
+        app:thumbTint="@color/colorThumb"
+        android:checked="true"
+        app:layout_constraintTop_toBottomOf="@id/min_title"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@id/shortAllat"
+        app:layout_constraintEnd_toStartOf="@id/fullAllat"/>
+
+    <TextView
+        android:id="@+id/fullAllat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/switchAllat"
+        app:layout_constraintTop_toTopOf="@id/switchAllat"
+        app:layout_constraintBottom_toBottomOf="@id/switchAllat"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:text="@string/full_allat"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:src="@drawable/ic_play"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/action_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:src="@drawable/ic_play"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-            android:id="@+id/stage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintBottom_toTopOf="@id/stageRemaining"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:gravity="center"
-            android:textSize="32sp"
-            tools:text="LEFT"/>
+        android:id="@+id/stage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@id/stageRemaining"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center"
+        android:textSize="32sp"
+        tools:text="LEFT"/>
 
     <TextView
-            android:id="@+id/stageRemaining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stage"
-            android:textSize="24sp"
-            tools:text="12:23"/>
+        android:id="@+id/stageRemaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stage"
+        android:textSize="24sp"
+        tools:text="12:23"/>
 
     <androidx.constraintlayout.widget.Group
-            android:id="@+id/activeStageGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="stage,stageRemaining" />
+        android:id="@+id/activeStageGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="stage,stageRemaining" />
 
     <androidx.constraintlayout.widget.Group
-            android:id="@+id/setupRemainingGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider" />
+        android:id="@+id/setupRemainingGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider,fullAllat,switchAllat,shortAllat" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

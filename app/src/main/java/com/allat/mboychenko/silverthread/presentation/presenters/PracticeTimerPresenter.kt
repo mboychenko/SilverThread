@@ -9,16 +9,18 @@ import android.os.IBinder
 import androidx.core.content.ContextCompat
 import com.allat.mboychenko.silverthread.domain.interactor.PracticeStorage
 import com.allat.mboychenko.silverthread.presentation.helpers.ExecutorThread
+import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnBackground
 import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnBackgroundWithResult
 import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.ACTION_START
+import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.EXTRAS_ALLATS_LEN_FULL_KEY
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.EXTRAS_ALLATS_NUM_KEY
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.EXTRAS_OFFSET_KEY
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IPracticeTimerFragmentView
 import java.util.concurrent.TimeUnit
 
-class PracticeTimerPresenter(val context: Context, val storage: PracticeStorage) :
+class PracticeTimerPresenter(private val context: Context, private val storage: PracticeStorage) :
     BasePresenter<IPracticeTimerFragmentView>() {
 
     private var practiceService: PracticeService? = null
@@ -54,6 +56,7 @@ class PracticeTimerPresenter(val context: Context, val storage: PracticeStorage)
     override fun attachView(view: IPracticeTimerFragmentView) {
         super.attachView(view)
         setupOffsetIfNeed()
+        setupAllatLengthIfNeed()
         bindToChetverikService()
     }
 
@@ -76,6 +79,16 @@ class PracticeTimerPresenter(val context: Context, val storage: PracticeStorage)
         )
     }
 
+    private fun setupAllatLengthIfNeed() {
+        manageAddToSubscription(
+            runTaskOnBackgroundWithResult(ExecutorThread.IO, {
+                storage.getAllatLengthStateShort()
+            }, { short ->
+                view?.setAllatLengthShort(short)
+            })
+        )
+    }
+
     override fun detachView() {
         super.detachView()
         unbindFromChetverikService()
@@ -90,12 +103,17 @@ class PracticeTimerPresenter(val context: Context, val storage: PracticeStorage)
         context.unbindService(serviceConnection)
     }
 
+    fun setAllatLengthShort(short: Boolean) {
+        manageAddToSubscription(runTaskOnBackground { storage.setAllatLengthStateShort(short) })
+    }
+
     fun startStop() {
         if (practiceService != null && practiceService!!.getStatus() != PracticeStage.INIT) {
             stop()
         } else {
             view?.let {
-                storage.setStartOffsetSeconds(it.getOffset())
+                val offset = it.getOffset()
+                manageAddToSubscription(runTaskOnBackground { storage.setStartOffsetSeconds(offset) })
             }
             start()
         }
@@ -123,6 +141,9 @@ class PracticeTimerPresenter(val context: Context, val storage: PracticeStorage)
                 putExtras(Bundle().apply {
                     putInt(EXTRAS_OFFSET_KEY, view?.getOffset() ?: 0)
                     putInt(EXTRAS_ALLATS_NUM_KEY, view?.getAllatsNum() ?: 1)
+
+                    val isFullAllat = view?.getAllatLengthShort()?.not() ?: true
+                    putBoolean(EXTRAS_ALLATS_LEN_FULL_KEY, isFullAllat)
                 })
             })
     }

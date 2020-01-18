@@ -7,5 +7,8 @@
     <color name="green">#64DD17</color>
     <color name="yellow">#FFD600</color>
     <color name="yellow_bright">#FFFB63</color>
+    <color name="colorActive">#40C4FF</color>
+    <color name="colorThumb">#f1f1f1</color>
+    <color name="button_gray">#EAEAEA</color>
 
 </resources>

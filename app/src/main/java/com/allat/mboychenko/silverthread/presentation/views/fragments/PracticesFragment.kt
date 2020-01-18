@@ -18,10 +18,10 @@ import org.koin.android.ext.android.inject
 
 class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
 
-    private val constraintInit = ConstraintSet()
     private var root: ConstraintLayout? = null
     private val presenter: PracticesPresenter by inject()
 
+    private val constraintInit = ConstraintSet()
     private val constraintAutorep = ConstraintSet()
     private val constraintMed = ConstraintSet()
     private val constraintSpir = ConstraintSet()

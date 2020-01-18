@@ -6,6 +6,8 @@ interface IPracticeTimerFragmentView {
     fun stageChanged(stage: PracticeStage, curAllat: Int = 1)
     fun getOffset(): Int
     fun getAllatsNum(): Int
+    fun getAllatLengthShort(): Boolean
+    fun setAllatLengthShort(short: Boolean)
     fun setMinsViewOffset(min: Int)
     fun setSecondsViewOffset(sec: Int)
     fun stageTimeRemaining(mins:Int, sec: Int)

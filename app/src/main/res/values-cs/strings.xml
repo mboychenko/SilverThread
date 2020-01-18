@@ -156,4 +156,7 @@
     <string name="press_double_to_exit">Press double to exit</string>
     <string name="qty">Num of</string>
     <string name="allats">Allats</string>
+    <string name="half_allat">Half Allat</string>
+    <string name="full_allat">Full Allat</string>
+
 </resources>

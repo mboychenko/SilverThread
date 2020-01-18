@@ -162,6 +162,7 @@
     <string name="allats">Аллатів</string>
     <string name="timer">Таймер</string>
     <string name="practice_timer">Таймер Практики</string>
-
+    <string name="half_allat">Пів Аллату</string>
+    <string name="full_allat">Повний Аллат</string>
 
 </resources>

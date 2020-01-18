@@ -181,4 +181,7 @@
     <string name="press_double_to_exit">Нажмите дважды что бы выйти</string>
     <string name="qty">Колл-во</string>
     <string name="allats">Аллатов</string>
+    <string name="half_allat">Половина Аллата</string>
+    <string name="full_allat">Полный Аллат</string>
+
 </resources>
