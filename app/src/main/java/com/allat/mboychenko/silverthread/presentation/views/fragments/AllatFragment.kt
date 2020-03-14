@@ -134,7 +134,6 @@ class AllatFragment: BaseAllatRaFragment(), IAllatFragmentView {
         super.onStart()
         lockUnlockConfig(unlock = false)
         presenter.attachView(this)
-
     }
 
     override fun onStop() {

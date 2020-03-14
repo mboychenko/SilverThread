@@ -130,7 +130,7 @@ class UpdateBeforeTimerJob : JobIntentService() {
                 .sendBroadcast(Intent(NOTIFICATION_BEFORE_MILLIS_UPDATE_EXTRAS))
         }
 
-        const val UPDATE_BEFORE_TIMER_JOB_ID = 9856
+        private const val UPDATE_BEFORE_TIMER_JOB_ID = 9856
     }
 
 }

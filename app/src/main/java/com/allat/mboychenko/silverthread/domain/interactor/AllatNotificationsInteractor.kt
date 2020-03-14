@@ -2,12 +2,16 @@ package com.allat.mboychenko.silverthread.domain.interactor
 
 import android.content.Context
 import com.allat.mboychenko.silverthread.data.models.AllatTimeZone
-import com.allat.mboychenko.silverthread.data.storage.Storage
-import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
+import com.allat.mboychenko.silverthread.data.storage.preferences.Storage
+import com.allat.mboychenko.silverthread.data.storage.preferences.StorageImplementation
 
 class AllatNotificationsInteractor(private val storage: Storage) : AllatNotificationsSettingsStorage {
 
-    constructor(context: Context) : this(StorageImplementation(context))
+    constructor(context: Context) : this(
+        StorageImplementation(
+            context
+        )
+    )
 
     override fun allatNotificationStart(enabled: Boolean) {
         storage.putBoolean(ALLAT_START_PREF_KEY, enabled)

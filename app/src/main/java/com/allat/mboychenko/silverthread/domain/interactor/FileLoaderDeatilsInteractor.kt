@@ -1,6 +1,6 @@
 package com.allat.mboychenko.silverthread.domain.interactor
 
-import com.allat.mboychenko.silverthread.data.storage.Storage
+import com.allat.mboychenko.silverthread.data.storage.preferences.Storage
 
 class FileLoaderDetailsInteractor(private val storage: Storage) : FileLoadingDetailsStorage {
 

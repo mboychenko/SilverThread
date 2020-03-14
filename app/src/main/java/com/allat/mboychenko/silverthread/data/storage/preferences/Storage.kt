@@ -1,6 +1,8 @@
-package com.allat.mboychenko.silverthread.data.storage
+package com.allat.mboychenko.silverthread.data.storage.preferences
 
 interface Storage {
+
+    fun contains(key: String): Boolean
 
     fun getInt(key: String): Int
     fun getIntDefault(key: String, default: Int): Int

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp">
+
+    <TextView
+            android:id="@+id/practiceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/practice"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/practice"/>
+
+    <AutoCompleteTextView
+            android:id="@+id/practice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:inputType="textCapSentences"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toEndOf="@id/editorFieldsBarrier"/>
+
+    <TextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/practiceTitle"/>
+
+    <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/editorFieldsBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="practiceTitle,start,end"
+            tools:layout_editor_absoluteX="72dp"
+            tools:layout_editor_absoluteY="12dp" />
+
+    <TextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/start"
+            android:layout_marginTop="24dp"
+            android:text="@string/end"/>
+
+    <TextView
+            android:id="@+id/startTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_calendar"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:drawablePadding="4dp"
+            android:paddingStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/editorFieldsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/start"
+            app:layout_constraintBottom_toBottomOf="@id/start"/>
+
+    <TextView
+            android:id="@+id/endTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_calendar"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:paddingStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/editorFieldsBarrier"
+            app:layout_constraintTop_toTopOf="@id/end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/end"/>
+
+    <TextView
+            android:id="@+id/observeTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/observations"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/end"
+            android:layout_marginTop="24dp"/>
+
+    <com.allat.mboychenko.silverthread.presentation.views.custom.LinedEditText
+            android:id="@+id/observations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences|textMultiLine"
+            android:minLines="4"
+            android:lines="8"
+            android:scrollbars="vertical"
+            android:background="@null"
+            android:gravity="top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/observeTitle"
+            android:layout_marginTop="4dp"/>
+
+    <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/cancel"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintTop_toBottomOf="@id/observations"
+            app:layout_constraintEnd_toStartOf="@id/save" />
+
+    <TextView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/save"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/observations"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

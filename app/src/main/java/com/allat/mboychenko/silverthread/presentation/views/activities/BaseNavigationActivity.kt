@@ -106,6 +106,12 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 setFragment(RadioFragment(), navId)
             R.id.nav_downloads ->
                 setFragment(DownloadsFragment(), navId)
+            R.id.nav_notes ->
+                setFragment(DiaryFragment(), navId)
+            R.id.nav_backup ->
+                setFragment(BackupFragment(), navId)
+            R.id.nav_settings ->
+                setFragment(SettingsFragment(), navId)
             R.id.nav_tv_im ->
                 webViewLink(AllatRaWebViewURIConstants.URI_ALLATRA_TV_IM)
             R.id.nav_tv ->
@@ -144,6 +150,9 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 QuotesFragment.QUOTES_FRAGMENT_TAG -> R.id.nav_quotes
                 BooksFragment.BOOKS_FRAGMENT_TAG -> R.id.nav_books
                 DownloadsFragment.DOWNLOADS_FRAGMENT_TAG -> R.id.nav_downloads
+                DiaryFragment.NOTES_FRAGMENT_TAG -> R.id.nav_notes
+                BackupFragment.BACKUP_FRAGMENT_TAG -> R.id.nav_backup
+                SettingsFragment.SETTINGS_FRAGMENT_TAG -> R.id.nav_settings
                 else -> R.id.nav_allat
             }
         } else if (webViewUrl != null) {
@@ -248,9 +257,12 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
         } else {
             if (supportFragmentManager.fragments.size > 0) {
 
-                val meditationFragment =
-                    supportFragmentManager.findFragmentByTag(PracticesFragment.MEDITATION_FRAGMENT_TAG) as PracticesFragment?
-                if (meditationFragment?.isVisible == true && meditationFragment.showInit()) {
+                val manageBackFragment =
+                    supportFragmentManager.findFragmentByTag(PracticesFragment.MEDITATION_FRAGMENT_TAG) ?:
+                    supportFragmentManager.findFragmentByTag(BackupFragment.BACKUP_FRAGMENT_TAG)
+                if (manageBackFragment is IManageBackNavFragment &&
+                    manageBackFragment.isVisible &&
+                    manageBackFragment.showInit()) {
                     return
                 }
 

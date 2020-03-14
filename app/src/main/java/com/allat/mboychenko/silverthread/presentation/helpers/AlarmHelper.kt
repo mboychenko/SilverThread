@@ -55,6 +55,7 @@ private fun AlarmManager.cancel(context: Context, intentAction: String, requestC
 private fun createAlarmPendingIntent(context: Context, intentAction: String,
                                      requestCode: Int, extras: Bundle? = null): PendingIntent {
     val intent = Intent(context, TimerExpiredReceiver::class.java)
+    intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
     intent.action = intentAction
     extras?.let { intent.putExtras(it) }
 

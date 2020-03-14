@@ -16,7 +16,7 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import org.koin.android.ext.android.inject
 
-class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
+class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView, IManageBackNavFragment {
 
     private var root: ConstraintLayout? = null
     private val presenter: PracticesPresenter by inject()
@@ -81,7 +81,7 @@ class PracticesFragment: BaseAllatRaFragment(), IPracticesFragmentView {
         presenter.detachView()
     }
 
-    fun showInit(): Boolean {
+    override fun showInit(): Boolean {
         return if (viewState != PracticesViewState.INIT) {
             TransitionManager.beginDelayedTransition(root as ViewGroup)
             constraintInit.applyTo(root)

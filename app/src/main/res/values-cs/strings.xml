@@ -46,8 +46,9 @@
     <string name="click_to_unlock">Odblokovat</string>    
     <string name="click_to_lock">Zablokovat</string>      
     <string name="downloading">Načítání</string>    
-    <string name="delete_confirmation">Jste si jistí, že chcete odstranit %s?</string>    
-    <string name="yes">Ano</string>    
+    <string name="delete_confirmation">Jste si jistí, že chcete odstranit %s?</string>
+    <string name="confirm">Confirm</string> 
+    <string name="yes">Ano</string>
     <string name="cancel">Zrušit</string>      
     <string name="timezone_config_description">Na vybrané časové zóně bude záviset čas Allatu, notifikace spojené s Allatem a náhodné notifikace, toto nastavení můžete kdykoli změnit na obrazovce Allatu v zóně konfigurací</string>    
     <string name="timezone_config_local">Místní časové pásmo je časové pásmo vašeho zařízení, je nakonfigurováno ručně nebo automaticky v závislosti na geolokaci</string>    
@@ -158,5 +159,92 @@
     <string name="allats">Allats</string>
     <string name="half_allat">Half Allat</string>
     <string name="full_allat">Full Allat</string>
+
+    <string name="save">Uložit</string>
+    <string name="notes">Poznámky</string>
+    <string name="diary">Deník</string>
+    <string name="edit">Upravit</string>
+    <string name="observations_title">Pozorování</string>
+    <string name="observations">Pozorování:</string>
+    <string name="calendar">Kalendář</string>
+    <string name="time">Čas</string>
+    <string name="name">Název</string>
+    <string name="duration_title">Trvání</string>
+    <string name="duration">Trvání:</string>
+    <string name="selected_date">Vybrané datum: %s</string>
+    <string name="backup_toolbar_title">Backup</string>
+    <string name="backup_description">Here you can configure how often backups will be created and restore data from the backup file. The file is stored in \"%s\" For security reasons, the file is encrypted, to restore data you need to enter the key that you installed. The backup saves favourite quotes, a practice journal, and a diary. For better data safety, it is advisable to save this file in the cloud or somewhere else regardless of the device where the application is located, so if you lose the device or permanently delete data, you can always restore your data by placing a file into \"%s\" and clicking "Restore data"</string>
+    <string name="expand_bckp_desc">Rozbalte popis</string>
+    <string name="collapse_bckp_desc">Sbalit popis</string>
+    <string name="success_backup">Záloha byla úspěšně vytvořena</string>
+    <string name="success_restore">Data byla úspěšně obnovena</string>
+    <string name="restoring">Obnovuje se</string>
+    <string name="backup">Záloha</string>
+    <string name="finished">Dokončeno</string>
+    <string name="finished_with_error">Dokončeno s chybou</string>
+    <string name="cant_backup_no_storage_permission">Nelze zálohovat, žádné oprávnění k ukládání souborů</string>
+    <string name="failed_restore_no_backup_file">Obnovení se nezdařilo, v systému není žádný záložní soubor %s</string>
+    <string name="failed_restore_wrong_password">Obnovení selhalo, chybné heslo</string>
+    <string name="restore_in_progress">Probíhá obnova</string>
+    <string name="backup_in_progress">Probíhá vytváření zálohy</string>
+    <string name="in_progress">Probíhá</string>
+    <string name="req_perm_desc">Chcete-li z něj vytvořit zálohu nebo obnovit, musíte nejprve poskytnout oprávnění k ukládání souborů</string>
+    <string name="request_permission">Udělení povolení</string>
+    <string name="pswd_req_for_restore">Chcete-li obnovit zálohu, zadejte heslo, které jste pro ni nastavili</string>
+    <string name="setup_password_description">Setup password to encrypt app data.\nTo restore backup you need use same password.\nRemember it, without this password it is not possible to decript and restore data</string>
+    <string name="backup_title">Nastavení zálohování</string>
+    <string name="backup_interval_title">Interval zálohování:</string>
+    <string name="backup_btn_title">Ruční zálohování</string>
+    <string name="update_pswd_and_backup_title">Aktualizujte heslo a zálohu</string>
+    <string name="restore_btn_title">Obnovit data</string>
+    <string name="only_letters_and_digits_allowed">Povoleny jsou pouze písmena a číslice</string>
+    <string name="process_confirm">Ok</string>
+    <string name="filter">Filter</string>
+    <string name="note">Note:</string>
+    <string name="date_filter">Date filter:</string>
+    <string name="when">When:</string>
+    <string name="edit_calendar">Choose</string>
+    <string name="end">End:</string>
+    <string name="start">Start:</string>
+    <string name="practice">Practice:</string>
+    <string name="practice_title">Practice:</string>
+    <string name="sort_by">Sort by</string>
+    <string name="filter_by_practice">Filter by Practice</string>
+    <string name="start_time_first">First need start time</string>
+    <string name="practice_and_time_mandatory">Practice and start time are mandatory fields</string>
+    <string name="no_items_to_filter">No items to filter</string>
+    <string name="time_note_mandatory">Note and time are mandatory fields</string>
+    <string name="selected_time_cant_be_before_now">Selected time can\'t be more than now</string>
+    <string name="time_cant_be_earlier_then">Selected time can\'t be earlier then %s</string>
+    <string name="mins">%d minut</string>
+    <string name="diary_date_format">dd MMM, yyyy \'at\' HH:mm</string>
+    <string name="settings_toolbar_title">Settings</string>
+    <string name="autostart_mng_not_found">AutoStart manager not found for this device</string>
+    <string name="power_mng_not_found">PowerManager not found for this device</string>
+    <string name="open">Open</string>
+    <string name="power_mng_desc">If you having a troubles with Allat timer, practice timer or radio, probably your device has personal battery consumption manager, such managers add side restrictions over system and may interrupt or change behaviour of applications, like kill them if in background, don\'t wake up for notifications etc. They have exceptions for their own system alarm timer app and some very famous social apps or messengers. In such cases for proper work you may need to add AllatRa app into this exceptions in battery economy / power optimisation etc. settings. Below few buttons which may bring you to this settings, its predefined list of possible setting for list of devices. In case there are no effects while you press on these buttons, you may need to open device settings and manually find such power economy / optimisation settings and add AllatRa application to exceptions list to not apply extra restrictions on app which may break native functionality.</string>
+
+    <string name="material_calendar_monday">P</string>
+    <string name="material_calendar_tuesday">Ú</string>
+    <string name="material_calendar_wednesday">S</string>
+    <string name="material_calendar_thursday">Č</string>
+    <string name="material_calendar_friday">P</string>
+    <string name="material_calendar_saturday">S</string>
+    <string name="material_calendar_sunday">N</string>
+    <array name="material_calendar_months_array">
+        <item>Leden</item>
+        <item>Únor</item>
+        <item>Březen</item>
+        <item>Duben</item>
+        <item>Květen</item>
+        <item>Červen</item>
+        <item>Červenec</item>
+        <item>Srpen</item>
+        <item>Září</item>
+        <item>Říjen</item>
+        <item>Listopad</item>
+        <item>Prosinec</item>
+    </array>
+
 
 </resources>

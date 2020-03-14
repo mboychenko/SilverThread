@@ -49,6 +49,11 @@ fun getPublicDownloadsStorageDir(childFolder: String): File? {
     return file
 }
 
+fun getBackupFile(): File? =
+    getPublicDownloadsStorageDir(BACKUP_FOLDER_NAME)?.let {
+        File(it, BACKUP_FILE_NAME)
+    }
+
 fun humanReadableByteCount(bytes: Long): String {
     val unit =  1024
     if (bytes < unit) return "$bytes B"
@@ -69,5 +74,8 @@ fun getMimeType(uri: Uri, context: Context): String? {
 
 const val WEB_DOWNLOADS_FOLDER_NAME = "AllatRa Downloads"
 const val BOOKS_FOLDER_NAME = "AllatRa Books"
+const val BACKUP_FOLDER_NAME = "AllatRa Backup"
+const val BACKUP_FILE_NAME = "altra.backup"
 const val FILE_PROVIDER_AUTHORITIES = "com.allat.mboychenko.silverthread"
 const val LOG_TAG = "TAG_FILE_HELPER"
+const val FILE_SCHEMA = "file://"

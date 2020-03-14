@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.data.storage
+package com.allat.mboychenko.silverthread.data.storage.preferences
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,9 +8,13 @@ import android.util.Log
 import org.json.JSONObject
 
 
-class StorageImplementation(val context: Context) : Storage {
+open class StorageImplementation(
+    private val context: Context,
+    private val preferences: SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
+) : Storage {
 
-    private var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    override fun contains(key: String) = preferences.contains(key)
 
     override fun getInt(key: String) = preferences.getInt(key, 0)
 

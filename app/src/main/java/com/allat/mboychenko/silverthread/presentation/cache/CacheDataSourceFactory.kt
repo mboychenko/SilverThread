@@ -1,4 +1,4 @@
-package com.allat.mboychenko.silverthread.data.storage.cache
+package com.allat.mboychenko.silverthread.presentation.cache
 
 import android.content.Context
 import com.google.android.exoplayer2.upstream.DataSource

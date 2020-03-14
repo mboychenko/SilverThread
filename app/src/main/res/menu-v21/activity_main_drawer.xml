@@ -27,9 +27,21 @@
                 android:icon="@drawable/ic_radio"
                 android:title="@string/radio"/>
         <item
+                android:id="@+id/nav_notes"
+                android:icon="@drawable/ic_notes"
+                android:title="@string/notes"/>
+        <item
                 android:id="@+id/nav_downloads"
                 android:icon="@drawable/ic_file_downloads"
                 android:title="@string/downloads"/>
+        <item
+                android:id="@+id/nav_backup"
+                android:icon="@drawable/ic_backup"
+                android:title="@string/backup_toolbar_title"/>
+        <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/settings_toolbar_title"/>
     </group>
 
     <item android:title="@string/web">

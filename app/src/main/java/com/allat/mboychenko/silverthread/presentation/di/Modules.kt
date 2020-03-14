@@ -1,16 +1,57 @@
 package com.allat.mboychenko.silverthread.presentation.di
 
-import com.allat.mboychenko.silverthread.data.storage.cache.provideExoPlayerCache
+import androidx.work.WorkManager
+import com.allat.mboychenko.silverthread.data.repositories.DiaryNotesRepository
+import com.allat.mboychenko.silverthread.data.repositories.DiaryPracticesRepository
+import com.allat.mboychenko.silverthread.data.storage.preferences.SensitiveStorage
+import com.allat.mboychenko.silverthread.data.storage.preferences.SensitiveStorageImpl
+import com.allat.mboychenko.silverthread.presentation.cache.provideExoPlayerCache
 import com.allat.mboychenko.silverthread.presentation.presenters.QuotesNotificationSettingsPresenter
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
-import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
+import com.allat.mboychenko.silverthread.data.storage.preferences.StorageImplementation
 import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
 import com.allat.mboychenko.silverthread.domain.interactor.*
-import com.allat.mboychenko.silverthread.data.storage.Storage
+import com.allat.mboychenko.silverthread.data.storage.preferences.Storage
+import com.allat.mboychenko.silverthread.data.storage.db.AllatDatabase
+import com.allat.mboychenko.silverthread.domain.helper.BackupHelper
 import com.allat.mboychenko.silverthread.presentation.presenters.*
+import com.allat.mboychenko.silverthread.presentation.viewmodels.BackupViewModel
+import com.allat.mboychenko.silverthread.presentation.viewmodels.DiaryNotesViewModel
+import com.allat.mboychenko.silverthread.presentation.viewmodels.PracticesDiaryViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+
+val viewModelsModule = module {
+    viewModel { DiaryNotesViewModel(get()) }
+    viewModel { PracticesDiaryViewModel(get()) }
+    viewModel { BackupViewModel(androidContext(), get(), get(), get()) }
+}
+
+val androidModule = module {
+    single { WorkManager.getInstance(androidContext()) }
+}
+
+val dbModule = module {
+    single { AllatDatabase.getDatabase(get()) }
+    single { get<AllatDatabase>().diaryNotesDao() }
+    single { get<AllatDatabase>().practicesDiaryDao() }
+}
+
+val repositoryModule = module {
+    single { DiaryNotesRepository(get()) }
+    single { DiaryPracticesRepository(get()) }
+}
+
+val helpers = module {
+    single { BackupHelper(get(), get(), get()) }
+}
+
+val useCaseModule = module {
+    factory { DiaryNotesUseCase(get()) }
+    factory { DiaryPracticesUseCase(get()) }
+}
 
 val presentersModule = module {
     factory {
@@ -53,7 +94,17 @@ val presentersModule = module {
 
 val storageModule = module {
 
-    single { StorageImplementation(androidContext()) }
+    single {
+        StorageImplementation(
+            androidContext()
+        )
+    }
+
+    single {
+        SensitiveStorageImpl(
+            androidContext()
+        ) as SensitiveStorage
+    }
 
     factory {
         get<StorageImplementation>() as Storage

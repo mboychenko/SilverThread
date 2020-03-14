@@ -13,6 +13,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <uses-permission android:name="oppo.permission.OPPO_COMPONENT_SAFE"/>
+    <uses-permission android:name="com.huawei.permission.external_app_settings.USE_COMPONENT"/>
+
+    <uses-sdk tools:overrideLibrary="androidx.security"/>
+
     <application
             android:name=".AllatRaApplication"
             android:allowBackup="true"

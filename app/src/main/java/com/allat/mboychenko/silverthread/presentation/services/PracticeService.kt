@@ -11,9 +11,11 @@ import java.util.*
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 import android.media.MediaPlayer
+import android.text.format.DateFormat
+import android.util.Log
 import androidx.annotation.RawRes
 import com.allat.mboychenko.silverthread.R
-
+import com.allat.mboychenko.silverthread.presentation.views.dialogs.DiaryNoteEditorDialog
 
 
 class PracticeService : Service() {
@@ -30,7 +32,7 @@ class PracticeService : Service() {
 
     private var currentAllat: Int = 1
 
-    private var stage: PracticeStage by Delegates.observable(PracticeStage.INIT) { _: KProperty<*>, old: PracticeStage, new: PracticeStage ->
+    private var stage: PracticeStage by Delegates.observable(PracticeStage.INIT) { _: KProperty<*>, _: PracticeStage, new: PracticeStage ->
         updateNotification(
             applicationContext,
             NOTIFICATION_ID_CHETVERIK,
@@ -44,6 +46,16 @@ class PracticeService : Service() {
     }
 
     var currentLeftMillis: Long = 0
+
+    //for f*cking Xiaomi, Meizu, etc
+    private val wakeLock: PowerManager.WakeLock by lazy {
+        (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
+            newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK,
+                "PracticeService:WakeLock"
+            )
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -116,8 +128,10 @@ class PracticeService : Service() {
                     allatArray.addLast(n)
                 }
 
-                if (startOffset > 0) {
-                    val delayInMillis = startOffset.toLong() * 1000
+                val delayInMillis = startOffset.toLong() * 1000
+                acquireWakeLock(allats * allatSize + delayInMillis)
+
+                if (delayInMillis > 0) {
                     startIntervalTimer = object : CountDownTimer(delayInMillis, 1000) {
                         override fun onFinish() {
                             currentAllat = allatArray.pop()
@@ -152,6 +166,17 @@ class PracticeService : Service() {
         return START_STICKY
     }
 
+    private fun acquireWakeLock(millis: Long) {
+        wakeLock.acquire(millis + 5000)
+    }
+
+
+    private fun releaseWakeLock() {
+        if (wakeLock.isHeld) {
+            wakeLock.release()
+        }
+    }
+
     fun stopTimer() {
         if(::startIntervalTimer.isInitialized) {
             startIntervalTimer.cancel()
@@ -159,7 +184,13 @@ class PracticeService : Service() {
         allatIntervalTimer.cancel()
         stagesViewCallback?.onStageChanged(PracticeStage.INIT)
         stopForeground(true)
+        releaseWakeLock()
         stopSelf()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        releaseWakeLock()
     }
 
     override fun onUnbind(intent: Intent?): Boolean {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="backup_settings">
+        <item>Нiколи</item>
+        <item>Щоденно</item>
+        <item>Щонедiлi</item>
+        <item>Щомiсяця</item>
+    </string-array>
+</resources>

@@ -20,11 +20,15 @@ class AlarmNotificationsExecutor(val context: Context) {
 
         Log.d("AlarmNotificationsExec", "taking WL")
 
-        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-        val wl = pm.newWakeLock(
-            PowerManager.PARTIAL_WAKE_LOCK,
-            "AlarmNotificationsExecutor:WakeLock")
-        wl.acquire(TimeUnit.SECONDS.toMillis(15))
+        val wl: PowerManager.WakeLock =
+            (context.getSystemService(Context.POWER_SERVICE) as PowerManager).run {
+                newWakeLock(
+                    PowerManager.PARTIAL_WAKE_LOCK,
+                    "AlarmNotificationsExecutor:WakeLock"
+                ).apply {
+                    acquire(TimeUnit.SECONDS.toMillis(15))
+                }
+            }
 
         runTaskOnComputation(
             {

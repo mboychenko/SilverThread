@@ -12,20 +12,16 @@
 #   public *;
 #}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
-
 -keep class com.shockwave.**
 
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports
 -keepattributes *Annotation*
--keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable # preserve the line number information for debugging stack traces.
 -keep public class * extends java.lang.Exception
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+-renamesourcefileattribute SourceFile
 
 # To let Crashlytics automatically upload the ProGuard or DexGuard mapping file, remove this line from the config file
 # -printmapping mapping.txt

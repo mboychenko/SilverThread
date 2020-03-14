@@ -10,5 +10,6 @@
     <color name="colorActive">#40C4FF</color>
     <color name="colorThumb">#f1f1f1</color>
     <color name="button_gray">#EAEAEA</color>
+    <color name="acceptable_symbols_hint">#C2C2C2</color>
 
 </resources>

@@ -15,6 +15,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/clockTextView"
             android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/allat_has_started"/>
 
     <TextView
@@ -25,9 +27,8 @@
             android:textSize="48sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintTop_toBottomOf="@id/allatTitle"
+            app:layout_constraintBottom_toTopOf="@id/verdictTitle"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
     <TextView
@@ -38,7 +39,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clockTextView"
-            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toTopOf="@id/verdictClock"
+            android:layout_marginTop="28dp"
             android:layout_marginBottom="8dp"
             android:text="@string/to_verdict"/>
 
@@ -50,6 +52,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/verdictTitle"
+            app:layout_constraintBottom_toTopOf="@id/verdictSubtitle"
             tools:text="12 Days 12 Hours 12 Minutes"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
@@ -61,6 +64,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/verdictClock"
+            app:layout_constraintBottom_toTopOf="@id/notificationConfigContainer"
             tools:text="21.12.2024 9:00"
             android:textAppearance="@style/Base.TextAppearance.AppCompat"/>
 
@@ -211,6 +215,7 @@
             android:id="@+id/timezoneContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:visibility="gone"
             app:constraint_referenced_ids="timezoneContainerBg,timezone"/>
 
     <View android:id="@+id/timezoneContainerBg"
@@ -220,8 +225,7 @@
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          tools:visibility="gone"/>
+          app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView android:id="@+id/timezone"
                 android:layout_width="0dp"

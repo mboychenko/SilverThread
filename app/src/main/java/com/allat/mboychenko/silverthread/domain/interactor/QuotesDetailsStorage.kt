@@ -3,6 +3,7 @@ package com.allat.mboychenko.silverthread.domain.interactor
 interface QuotesDetailsStorage {
     fun getFavoriteQuotesPositions(): Set<Int>
     fun putFavoriteQuotePosition(quotePos: Int)
+    fun restoreFavoriteQuotes(restoredQuotes: Set<Int>)
     fun removeFavoriteQuotePosition(quotePos: Int)
 
     fun getRandomQuotesTimesInDay(): Int

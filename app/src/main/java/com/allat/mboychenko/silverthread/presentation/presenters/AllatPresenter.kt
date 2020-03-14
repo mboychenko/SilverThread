@@ -34,13 +34,15 @@ class AllatPresenter(
 
     private var timerStatus: AllatHelper.TimeStatus by Delegates.observable(INIT) { _, old, new ->
         if (old != new) {
-            view?.updateTimerStatus(if (new == AWAITING) allatStatusAwait else allatStatusOngoing)
+            view?.updateTimerStatus(getTitleByStatus(new))
         }
     }
 
+    private fun getTitleByStatus(status: AllatHelper.TimeStatus = timerStatus) =
+        if (status == AWAITING) allatStatusAwait else allatStatusOngoing
+
     private var allatTimerTask: CountDownTimer? = null
     private var verdictTimerTask: CountDownTimer? = null
-
 
     override fun attachView(view: IAllatFragmentView) {
         super.attachView(view)
@@ -54,6 +56,7 @@ class AllatPresenter(
                     if (it != AllatTimeZone.NOT_INIT) {
                         view.changeTimezoneSetupVisibility(false)
                         startAllatTimer(it)
+                        view.updateTimerStatus(getTitleByStatus())
                     } else {
                         view.changeTimezoneSetupVisibility(true)
                     }

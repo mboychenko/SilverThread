@@ -298,7 +298,6 @@ class BooksPresenter(
     }
 
     companion object {
-        const val FILE_SCHEMA = "file://"
         const val REQUEST_PERMISSION_SAVED_LOAD_FILE_URL = "REQUEST_PERMISSION_SAVED_LOAD_FILE_URL"
         const val REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME =
             "REQUEST_PERMISSION_SAVED_DELETE_FILE_NAME"

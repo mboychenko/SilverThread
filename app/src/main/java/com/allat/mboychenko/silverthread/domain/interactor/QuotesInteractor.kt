@@ -1,13 +1,17 @@
 package com.allat.mboychenko.silverthread.domain.interactor
 
 import android.content.Context
-import com.allat.mboychenko.silverthread.data.storage.Storage
-import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
+import com.allat.mboychenko.silverthread.data.storage.preferences.Storage
+import com.allat.mboychenko.silverthread.data.storage.preferences.StorageImplementation
 import java.util.*
 
 class QuotesInteractor(private val storage: Storage): QuotesDetailsStorage {
 
-    constructor(context: Context) : this(StorageImplementation(context))
+    constructor(context: Context) : this(
+        StorageImplementation(
+            context
+        )
+    )
 
     override fun getFavoriteQuotesPositions(): Set<Int> {
         val set = storage.getStringSet(QUOTES_FAVORITES_PREF_KEY)
@@ -21,6 +25,17 @@ class QuotesInteractor(private val storage: Storage): QuotesDetailsStorage {
             set.add(quotePosition)
             storage.putStringSet(QUOTES_FAVORITES_PREF_KEY, set)
         }
+    }
+
+    override fun restoreFavoriteQuotes(restoredQuotes: Set<Int>) {
+        val set = storage.getStringSet(QUOTES_FAVORITES_PREF_KEY).toMutableSet()
+        restoredQuotes.forEach {
+            val id = it.toString()
+            if (!set.contains(id)) {
+                set.add(id)
+            }
+        }
+        storage.putStringSet(QUOTES_FAVORITES_PREF_KEY, set)
     }
 
     override fun removeFavoriteQuotePosition(quotePos: Int) {

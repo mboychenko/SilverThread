@@ -3,40 +3,39 @@ package com.allat.mboychenko.silverthread.utils
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.work.WorkManager
 import com.allat.mboychenko.silverthread.BuildConfig
-import com.allat.mboychenko.silverthread.data.storage.Storage
-import com.allat.mboychenko.silverthread.data.storage.StorageImplementation
-import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsInteractor
+import com.allat.mboychenko.silverthread.data.storage.preferences.Storage
+import com.allat.mboychenko.silverthread.data.storage.preferences.StorageImplementation
 import com.allat.mboychenko.silverthread.domain.interactor.FileLoaderDetailsInteractor
 import com.allat.mboychenko.silverthread.presentation.helpers.*
+import com.allat.mboychenko.silverthread.presentation.services.EveryDayWork.Companion.DAILY_TIMERS_CHECKER_WORK_TAG
 
-fun updateVersion(context: Context) {
+fun updateVersion(context: Context, workManager: WorkManager) {
     runTaskOnBackground(ExecutorThread.IO) {
         val storage: Storage = StorageImplementation(context)
         val lastUpdatedVersion = storage.getIntDefault(LAST_UPDATE_VERSION_PREF, 0)
 
         if (lastUpdatedVersion < BuildConfig.VERSION_CODE) {
-            updateScript(context, storage)
+            updateScript(context, storage, workManager)
         }
+
+        storage.putInt(LAST_UPDATE_VERSION_PREF, BuildConfig.VERSION_CODE)
     }
 }
 
-private fun updateScript(context: Context, storage: Storage) {
+private fun updateScript(context: Context, storage: Storage, workManager: WorkManager) {
 
     if (!storage.getBoolean(PATCH_25_APPLIED_PREF_KEY, false)) {
         applyPatchVer25(context, storage)
         storage.putBoolean(PATCH_25_APPLIED_PREF_KEY, true)
     }
 
-    val allatStorage = AllatNotificationsInteractor(storage)
-    reInitTimers(context,
-        allatStorage.getAllatTimezone(),
-        allatStorage.getAllatNotificationBeforeMins(),
-        allatStorage.getAllatNotificationStart(),
-        allatStorage.getAllatNotificationEnd(),
-        true)
+    if (!storage.getBoolean(PATCH_45_APPLIED_PREF_KEY, false)) {
+        applyPatchVer45(workManager)
+        storage.putBoolean(PATCH_45_APPLIED_PREF_KEY, true)
+    }
 
-    storage.putInt(LAST_UPDATE_VERSION_PREF, BuildConfig.VERSION_CODE)
 }
 
 private fun applyPatchVer25(context: Context, storage: Storage) {
@@ -55,7 +54,12 @@ private fun applyPatchVer25(context: Context, storage: Storage) {
     }
 }
 
+private fun applyPatchVer45(wm: WorkManager) {
+     wm.cancelUniqueWork(DAILY_TIMERS_CHECKER_WORK_TAG)
+}
+
 
 private const val LAST_UPDATE_VERSION_PREF = "LAST_UPDATE_VERSION_PREF"
 
 private const val PATCH_25_APPLIED_PREF_KEY = "PATCH_25_APPLIED_PREF_KEY"
+private const val PATCH_45_APPLIED_PREF_KEY = "PATCH_45_APPLIED_PREF_KEY"

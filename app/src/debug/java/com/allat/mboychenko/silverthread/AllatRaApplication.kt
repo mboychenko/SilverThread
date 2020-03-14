@@ -14,7 +14,7 @@ class AllatRaApplication: BaseApplication() {
         val outputFile = getPublicDownloadsStorageDir("allat_logcat")
         Runtime
             .getRuntime()
-            .exec("logcat NotificationHelper:D AlarmManager:D LogQuotes:D *:S -f " + outputFile?.absolutePath + fileName)
+            .exec("logcat BackupWork:D LogQuotes:D *:S -f " + outputFile?.absolutePath + fileName)
     }
 
 }

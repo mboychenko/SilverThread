@@ -57,6 +57,7 @@
     <string name="download">Загрузка</string>
     <string name="downloading">Загрузка…</string>
     <string name="delete_confirmation">Вы уверены, удалить %s?</string>
+    <string name="confirm">Подтвердить</string>
     <string name="yes">Да</string>
     <string name="cancel">Отмена</string>
 
@@ -181,7 +182,100 @@
     <string name="press_double_to_exit">Нажмите дважды чтобы выйти</string>
     <string name="qty">Колл-во</string>
     <string name="allats">Аллатов</string>
+
+    <string name="save">Сохранить</string>
+    <string name="notes">Заметки</string>
+    <string name="diary">Дневник</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="observations_title">Наблюдения</string>
+    <string name="observations">Наблюдения:</string>
+    <string name="calendar">Календарь</string>
+    <string name="time">Время</string>
+    <string name="name">Название</string>
+    <string name="duration_title">Длительность</string>
+    <string name="duration">Длительность:</string>
+    <string name="selected_date">Выбранная Дата: %s</string>
     <string name="half_allat">Половина Аллата</string>
     <string name="full_allat">Полный Аллат</string>
 
+    <string name="backup_access_not_granted">Нет разрешения для доступа к файлу резервной копии</string>
+    <string name="no_backup_file">Файл резервной копии не найден</string>
+    <string name="restored_ok">Восстановление завершено</string>
+    <string name="backup_toolbar_title">Бэкап</string>
+    <string name="backup_description">Здесь можно настроить как часто будут создаватся резервные копии и восстановить данные из файла резервной копии. Файл хранится в \"%s\" В целях безопасности файл зашифрован, для восстановления данных нужно ввести ключ который вы установили. В резервной копии сохраняются избранные цитаты, журнал практик и дневник. Для большей сохранности данных этот файл в дальнейшем желательно сохранять в облачное хранилище или где либо независимо от устройства на котором находится приложение, таким образом при потере устройства или безвозвратном удалении данных с устройства вы всегда сможете восстановить ваши данные разместиив файл в \"%s\" и нажав "Восстановить данные"</string>
+    <string name="expand_bckp_desc">Развернуть описание</string>
+    <string name="collapse_bckp_desc">Свернуть описание</string>
+    <string name="success_backup">Бэкап успешно создан</string>
+    <string name="success_restore">Данные успешно восстановлены</string>
+    <string name="restoring">Восстановление</string>
+    <string name="backup">Бэкап</string>
+    <string name="finished">Завершено</string>
+    <string name="finished_with_error">Завершено с ошибкой</string>
+    <string name="cant_backup_no_storage_permission">Невозможно создать резервную копию, нет разрешения для доступа к файловой системе</string>
+    <string name="failed_restore_no_backup_file">Восстановление прервано, нет файла резервной копии в %s</string>
+    <string name="failed_restore_wrong_password">Восстановление прервано, неверный пароль!</string>
+    <string name="restore_in_progress">Восстановление в процессе…</string>
+    <string name="backup_in_progress">Создание резервной копии в процессе…</string>
+    <string name="in_progress">В процессе…</string>
+    <string name="req_perm_desc">Что бы создать бэкап или восстановить данные из него, сначала вам нужно предоставить разрешение на доступ к файловой системе</string>
+    <string name="request_permission">Предоставить Разрешение</string>
+    <string name="pswd_req_for_restore">Для восстановления данных из файла бэкапа, введите пароль при котором он был создан</string>
+    <string name="setup_password_description">Установите пароль для шифрования данных в файле резервной копии.\nЧто бы восстановить данные необходимо использовать тот же пароль.\nБез пароля невозможно расшифровать и восстановить данные из файла резервной копии.</string>
+    <string name="backup_title">Настройки резервного копирования</string>
+    <string name="backup_interval_title">Резервное копирование:</string>
+    <string name="backup_btn_title">Резервное копирование</string>
+    <string name="update_pswd_and_backup_title">Обновить пароль и бэкап</string>
+    <string name="restore_btn_title">Восстановить данные</string>
+    <string name="only_letters_and_digits_allowed">Только буквы и цифры допускаются.</string>
+    <string name="process_confirm">Ок</string>
+    <string name="filter">Фильтр</string>
+    <string name="note">Заметка:</string>
+    <string name="date_filter">Даты:</string>
+    <string name="when">Когда:</string>
+    <string name="edit_calendar">Выбрать</string>
+    <string name="end">Конец:</string>
+    <string name="start">Начало:</string>
+    <string name="practice">Практика:</string>
+    <string name="practice_title">Название:</string>
+    <string name="sort_by">Сортировать по</string>
+    <string name="filter_by_practice">Практики</string>
+    <string name="start_time_first">Сперва нужно установить время начала</string>
+    <string name="practice_and_time_mandatory">Практика и время начала обязательные поля</string>
+    <string name="no_items_to_filter">Нет заметок для календаря</string>
+    <string name="time_note_mandatory">Время и наблюдения обязательные поля</string>
+    <string name="selected_time_cant_be_before_now">Выбранное время не может быть позже чем сейчас</string>
+    <string name="time_cant_be_earlier_then">Выбранное время не может быть раньше чем %s</string>
+    <string name="mins">%d минут</string>
+    <string name="settings_toolbar_title">Настройки</string>
+    <string name="autostart_mng_not_found">AutoStart менеджер не найден для данного устройства</string>
+    <string name="power_mng_not_found">PowerManager не найден для данного устройства</string>
+    <string name="open">Открыть</string>
+    <string name="power_mng_desc">Если у вас есть проблемы с таймерами Аллата, практик или радио, скорее всего ваше устройство имеет персональный менеджер оптимизации питания, подобные менеджеры в обход системных правил могут нарушать работу приложений в фоне, не пробуждать по таймерам и т.д. у них в исключениях собственные системные приложения будильников и им подобные, а так же очень популярные меседжеры и соц. сети. Для корректной работы приложения АллатРа, его нужно добавить в список исключений данных менеджеров оптимизаций питания.\nНиже приведены несколько вариантов по которым можно найти данные настройки. Для каждого устройства производитель делает свои приложения оптимизации энергопотребления, поэтому есть вероятность что список программно добавленных тут приложений не полный и нажимая на кнопки ниже не будет никаких действий. Тогда стоит открыть настройки вручную и найти настройки питания/энергопотребления/батареи или приложений и добавить там в исклчения экономии энергии приложение АллатРа.</string>
+    <string name="power_management">Power Management</string>
+    <string name="autostart_management">AutoStart Management</string>
+
+    <string name="diary_date_format">dd MMM, yyyy \'в\' HH:mm</string>
+
+    <string name="material_calendar_monday">Пн</string>
+    <string name="material_calendar_tuesday">Вт</string>
+    <string name="material_calendar_wednesday">Ср</string>
+    <string name="material_calendar_thursday">Чт</string>
+    <string name="material_calendar_friday">Пт</string>
+    <string name="material_calendar_saturday">Сб</string>
+    <string name="material_calendar_sunday">Вс</string>
+    <array name="material_calendar_months_array">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </array>
 </resources>
