@@ -41,7 +41,7 @@
             android:id="@+id/note"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
+            android:inputType="textCapSentences|textMultiLine"
             android:minLines="6"
             android:lines="8"
             android:scrollbars="vertical"
