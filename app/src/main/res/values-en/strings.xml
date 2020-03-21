@@ -215,7 +215,7 @@
     <string name="no_items_to_filter">No items to filter</string>
     <string name="time_note_mandatory">Note and time are mandatory fields</string>
     <string name="selected_time_cant_be_before_now">Selected time can\'t be more than now</string>
-    <string name="time_cant_be_earlier_then">Selected time can\'t be earlier then %s</string>
+    <string name="time_cant_be_earlier_then">Selected time can\'t be earlier than %s</string>
     <string name="mins">%d min</string>
     <string name="diary_date_format">dd MMM, yyyy \'at\' HH:mm</string>
     <string name="settings_toolbar_title">Settings</string>
