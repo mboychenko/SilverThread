@@ -70,7 +70,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     )
 
     override fun onPlayerError(error: ExoPlaybackException?) {
-        //cover it?
+        stop()
     }
 
     override fun onAudioFocusChange(focusChange: Int) {
