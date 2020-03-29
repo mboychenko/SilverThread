@@ -10,8 +10,8 @@ android {
         applicationId "com.allat.mboychenko.silverthread"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 47
-        versionName "5.0.1"
+        versionCode 48
+        versionName "5.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -89,7 +89,7 @@ dependencies {
     implementation 'com.applandeo:material-calendar-view:1.7.0'
 
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation "androidx.security:security-crypto:1.0.0-alpha02"
+    implementation "androidx.security:security-crypto:1.0.0-beta01"
 }
 
 apply plugin: 'com.google.gms.google-services'

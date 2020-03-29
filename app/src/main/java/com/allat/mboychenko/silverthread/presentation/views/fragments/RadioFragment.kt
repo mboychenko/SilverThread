@@ -2,14 +2,13 @@ package com.allat.mboychenko.silverthread.presentation.views.fragments
 
 import android.Manifest
 import android.animation.ValueAnimator
-import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.animation.doOnEnd
@@ -29,6 +28,7 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
     private val presenter: RadioPresenter by inject()
 
     private lateinit var progressView: View
+    private lateinit var streamTitle: TextView
     private lateinit var onAirStatus: AppCompatTextView
     private lateinit var onlineStatus: AppCompatTextView
     private lateinit var stopFab: FloatingActionButton
@@ -89,6 +89,7 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
         progressView = view.findViewById<View>(R.id.progressView)
         onAirStatus = view.findViewById(R.id.onAirStatus)
         onlineStatus = view.findViewById(R.id.onlineStatus)
+        streamTitle = view.findViewById(R.id.stream_title)
         return view
     }
 
@@ -115,7 +116,7 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
 
     override fun playButtonState() {
         currentPlayerButtonsState = PlayerButtonsState.PLAYING
-        playFab.visibility = View.GONE
+        playFab.visibility = View.INVISIBLE
         pauseFab.visibility = View.VISIBLE
         if (stopFab.visibility != View.VISIBLE) {
             stopFab.animateFabShowHide(true)
@@ -144,6 +145,11 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
 
     override fun hideProgress() {
         progressView.visibility = View.GONE
+    }
+
+    override fun updateStreamTitle(title: String?) {
+        streamTitle.text = title
+        streamTitle.isSelected = title != null
     }
 
     override fun updateOnlineStatus(online: Boolean) {

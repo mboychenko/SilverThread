@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="allatra_radio_url" translatable="false">http://116.202.18.122/radio/8010/radio.mp3?1584817230</string>
+    <string name="allatra_radio_url" translatable="false">http://116.202.18.122/radio/8010/radio.mp3</string>
 </resources>

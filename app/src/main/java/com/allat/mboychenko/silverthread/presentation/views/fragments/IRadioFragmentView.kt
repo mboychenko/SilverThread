@@ -14,5 +14,6 @@ interface IRadioFragmentView {
     fun playButtonsIdleState()
     fun showProgress()
     fun hideProgress()
+    fun updateStreamTitle(title: String?)
 
 }

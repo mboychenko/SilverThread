@@ -1,6 +1,7 @@
 package com.allat.mboychenko.silverthread.presentation.views.activities
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.AlertDialog
 import android.content.Intent
@@ -8,16 +9,17 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.*
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
@@ -36,11 +38,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
+@SuppressLint("SetJavaScriptEnabled")
 class WebViewActivity : BaseNavigationActivity() {
 
     private var currentUrl = ""
     private lateinit var progressBar: View
     private lateinit var errorView: View
+    private lateinit var webViewContainer: CoordinatorLayout
     private lateinit var webView: NestedWebView
     private lateinit var refresh: TextView
     private lateinit var errorDesc: TextView
@@ -56,9 +60,17 @@ class WebViewActivity : BaseNavigationActivity() {
         errorView = findViewById(R.id.error_internet)
         errorTitle = findViewById(R.id.no_internet_title)
         errorDesc = findViewById(R.id.no_internet_desc)
-        webView = findViewById(R.id.webViewWindow)
         refresh = findViewById(R.id.refresh)
         refresh.setOnClickListener { refresh() }
+        webViewContainer = findViewById(R.id.web_view_container)
+        webView = NestedWebView.inflateWebView(
+            webViewContainer,
+            CoordinatorLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            ),
+            position = 0
+        )
 
         setupWebViewCookies(webView)
 

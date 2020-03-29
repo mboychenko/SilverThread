@@ -77,6 +77,7 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
                 radioActionsCallback?.let { callback ->
                     radioService!!.setCallback(callback)
                     callback.onPlayerStatusChanged(radioService!!.getStatus())      //real status
+                    callback.onPlayingTitleChanged(radioService!!.getStreamTitle())
                 }
 
             }
@@ -120,6 +121,10 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
                 updateOnlineStatus(false)
             }
 
+            override fun onPlayingTitleChanged(playingTitle: String?) {
+                view?.updateStreamTitle(playingTitle)
+            }
+
             override fun onPlayerStatusChanged(status: AllatRadioService.PlaybackStatus) {
                 when (status) {
                     AllatRadioService.PlaybackStatus.STOPPED,
@@ -128,6 +133,7 @@ class RadioPresenter(val context: Context) : BasePresenter<IRadioFragmentView>()
                             view?.stopButtonState()
                         }
                         view?.updateOnAirStatus(R.color.red)
+                        view?.updateStreamTitle(null)
                     }
                     AllatRadioService.PlaybackStatus.PAUSED -> {
                         if (view?.getCurrentPlayerButtonsState() != RadioFragment.PlayerButtonsState.PAUSED) {

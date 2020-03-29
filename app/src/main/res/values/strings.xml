@@ -34,6 +34,8 @@
     <string name="copy">Копировать</string>
 
     <string name="radio">Радио</string>
+    <string name="radio_allatra">AllatRa</string>
+    <string name="radio_allatra_radio">Radio</string>
     <string name="allatra_tv_im">И.М.Данилов</string>
     <string name="allatra_tv">АллатРа ТВ</string>
     <string name="znai">Поиск</string>

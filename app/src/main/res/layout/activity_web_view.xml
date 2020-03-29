@@ -7,15 +7,12 @@
         android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/web_view_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
 
-        <com.allat.mboychenko.silverthread.presentation.views.fragments.webview.NestedWebView
-                android:id="@+id/webViewWindow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        <!--    NestedWebView will be inflated here    -->
 
         <!--error no internet-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,22 +79,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_scrollFlags="scroll|enterAlways|snap"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <ProgressBar
+                        android:id="@+id/progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:layout_gravity="center_vertical|end"
+                        android:indeterminateOnly="true" />
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-        <LinearLayout
-                android:id="@+id/progress"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:gravity="center">
-            <ProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminateOnly="true"/>
-        </LinearLayout>
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

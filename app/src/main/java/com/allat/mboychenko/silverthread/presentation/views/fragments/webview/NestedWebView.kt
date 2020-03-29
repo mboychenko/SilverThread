@@ -1,14 +1,16 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments.webview
 
 import android.annotation.SuppressLint
-import android.webkit.WebView
-
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.ViewGroup
+import android.webkit.WebView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.NestedScrollingChild
 import androidx.core.view.NestedScrollingChildHelper
 import androidx.core.view.ViewCompat
+import com.google.android.material.appbar.AppBarLayout
 
 class NestedWebView @JvmOverloads constructor(
     context: Context,
@@ -107,6 +109,26 @@ class NestedWebView @JvmOverloads constructor(
 
     override fun dispatchNestedPreFling(velocityX: Float, velocityY: Float): Boolean {
         return childHelper.dispatchNestedPreFling(velocityX, velocityY)
+    }
+
+    companion object {
+        @JvmStatic
+        fun inflateWebView(
+            parent: ViewGroup,
+            layoutParams: CoordinatorLayout.LayoutParams,
+            position: Int = -1
+        ): NestedWebView {
+
+            val webView = try {
+                NestedWebView(parent.context)
+            } catch (e: Exception) {
+                NestedWebView(parent.context.applicationContext)
+            }
+
+            layoutParams.behavior = AppBarLayout.ScrollingViewBehavior()
+            parent.addView(webView, position, layoutParams)
+            return webView
+        }
     }
 
 }

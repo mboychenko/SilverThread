@@ -55,6 +55,8 @@ class PracticeFilterSpinner(context: Context, attrs: AttributeSet) : AppCompatSp
     fun updateItems(items: List<String>, restoreSelection: String? = null) {
         if (adapter != null) {
             if (items.isEmpty()) {
+                currentList.clear()
+                adapter!!.clear()
                 placeHolder()
             } else if (!currentList.toTypedArray().contentEquals(items.toTypedArray())) {
                 onItemSelectedListener = null

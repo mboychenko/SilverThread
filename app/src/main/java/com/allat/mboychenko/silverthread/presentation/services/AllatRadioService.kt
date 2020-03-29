@@ -34,6 +34,11 @@ import android.widget.Toast
 import androidx.media.session.MediaButtonReceiver
 import com.allat.mboychenko.silverthread.presentation.helpers.*
 import com.allat.mboychenko.silverthread.presentation.views.activities.MainActivity
+import com.google.android.exoplayer2.metadata.Metadata
+import com.google.android.exoplayer2.metadata.MetadataOutput
+import com.google.android.exoplayer2.metadata.icy.IcyInfo
+import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
 
 class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioFocusChangeListener,
     InternetAvailability {
@@ -68,6 +73,17 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                 or PlaybackStateCompat.ACTION_SKIP_TO_NEXT
                 or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
     )
+
+    private var currentStreamTitle: String? by Delegates.observable(
+        null,
+        { _: KProperty<*>, old: String?, new: String? ->
+            if (new != old) {
+                radioActionsCallback?.onPlayingTitleChanged(new)
+                refreshNotificationAndForegroundStatus()
+            }
+        })
+
+    fun getStreamTitle() = currentStreamTitle
 
     override fun onPlayerError(error: ExoPlaybackException?) {
         stop()
@@ -190,11 +206,23 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
         val trackSelectionFactory = AdaptiveTrackSelection.Factory()
         val trackSelector = DefaultTrackSelector(trackSelectionFactory)
         player = ExoPlayerFactory.newSimpleInstance(applicationContext, trackSelector)
+        player.addMetadataOutput(metadataListener)
         player.addListener(this)
 
         connectionStateMonitor = ConnectionStateMonitor(applicationContext, handler, this)
         connectionStateMonitor!!.enable()
         registerReceiver(becomingNoisyReceiver, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY))
+    }
+
+    private val metadataListener = MetadataOutput {
+        if (it.length() > 0 && it[0] is IcyInfo) {
+            val title = (it[0] as IcyInfo).title
+            if (!title.isNullOrEmpty()) {
+                currentStreamTitle = title
+                return@MetadataOutput
+            }
+        }
+        currentStreamTitle = null
     }
 
     private var noInternet: Boolean = false
@@ -240,7 +268,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     private fun refreshNotificationAndForegroundStatus() {
         val metaBuilder = MediaMetadataCompat.Builder()
-            .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, getString(R.string.mediadata_artist))
+            .putString(
+                MediaMetadataCompat.METADATA_KEY_ARTIST,
+                currentStreamTitle ?: getString(R.string.mediadata_artist)
+            )
             .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, getString(R.string.mediadata_album))
 
         when (status) {
@@ -397,12 +428,11 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
             player.stop()
             player.release()
+            player.removeMetadataOutput(metadataListener)
             player.removeListener(this)
 
             status = PlaybackStatus.STOPPED
             radioActionsCallback?.onPlayerStatusChanged(status)
-
-
 
             if (::telephonyManager.isInitialized)
                 telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
@@ -554,6 +584,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
         fun onInternetGone()
         fun onInternetAvailable()
         fun onPlayerStatusChanged(status: PlaybackStatus)
+        fun onPlayingTitleChanged(playingTitle: String?)
     }
 
     enum class PlaybackStatus {

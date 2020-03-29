@@ -38,7 +38,7 @@
             android:id="@+id/radio_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AllatRa"
+            android:text="@string/radio_allatra"
             android:textColor="#0091EA"
             android:textSize="32sp"
             app:layout_constraintTop_toBottomOf="@id/onAirStatus"
@@ -47,7 +47,7 @@
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Radio"
+              android:text="@string/radio_allatra_radio"
               android:textSize="28sp"
               android:textColor="@android:color/white"
               app:layout_constraintTop_toBottomOf="@id/radio_title"
@@ -74,6 +74,26 @@
 
     </FrameLayout>
 
+    <TextView
+            android:id="@+id/stream_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/playFab"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit ="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_marginBottom="16dp"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/stopFab"
             android:layout_width="wrap_content"
@@ -85,6 +105,16 @@
             android:src="@drawable/ic_stop"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/playFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="32dp"
+            android:src="@drawable/ic_play"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/pauseFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,15 +124,5 @@
             android:layout_margin="32dp"
             android:visibility="invisible"
             android:src="@drawable/ic_pause"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/playFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="32dp"
-            android:src="@drawable/ic_play"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
