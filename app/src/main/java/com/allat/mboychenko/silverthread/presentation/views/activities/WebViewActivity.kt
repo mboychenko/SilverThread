@@ -26,9 +26,9 @@ import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.helpers.WEB_DOWNLOADS_FOLDER_NAME
 import com.allat.mboychenko.silverthread.presentation.helpers.getExternalStorageAvailableSpaceBytes
 import com.allat.mboychenko.silverthread.presentation.helpers.getPublicDownloadsStorageDir
-import com.allat.mboychenko.silverthread.presentation.socials.SocialNetworkFactory
 import com.allat.mboychenko.silverthread.presentation.helpers.hasInternetAccess
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
+import com.allat.mboychenko.silverthread.presentation.socials.SocialNetworkFactory
 import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.AllatRaWebViewURIConstants.ALLATRA_FILE_SERVER_HOST
 import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.AllatRaWebViewURIConstants.URI_ALLATRA_TV
 import com.allat.mboychenko.silverthread.presentation.views.fragments.webview.AllatRaWebViewURIConstants.isAllatraResUrl
@@ -393,7 +393,11 @@ class WebViewActivity : BaseNavigationActivity() {
             if (mCustomView == null) {
                 null
             } else {
-                BitmapFactory.decodeResource(resources, 2130837573)
+                try {
+                    BitmapFactory.decodeResource(resources, 2130837573)
+                } catch (e: Exception) {
+                    Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888)
+                }
             }
 
         override fun onHideCustomView() {
