@@ -1,7 +1,7 @@
 package com.allat.mboychenko.silverthread.data.storage.preferences
 
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 
 /**
  * Real implementation hidden
