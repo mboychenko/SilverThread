@@ -295,7 +295,7 @@ class WebViewActivity : BaseNavigationActivity() {
         }
 
         builder.setNegativeButton(R.string.cancel)
-        { dialog, which ->
+        { dialog, _ ->
             dialog.cancel()
         }
 

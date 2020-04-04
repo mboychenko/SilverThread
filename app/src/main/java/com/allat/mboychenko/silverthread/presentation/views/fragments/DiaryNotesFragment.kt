@@ -22,13 +22,12 @@ import com.allat.mboychenko.silverthread.presentation.views.dialogs.DiaryNotesCa
 import com.allat.mboychenko.silverthread.presentation.views.listeners.INoteActionListener
 import com.allat.mboychenko.silverthread.presentation.views.viewholders.DiaryNoteViewHolder
 import com.allat.mboychenko.silverthread.presentation.viewstate.DiaryViewState
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
-class DiaryNotesFragment : BaseSearchFragment(), IViewContext {
+class DiaryNotesFragment : BaseDiarySearchFragment(), IViewContext {
 
     private val notesViewModel: IDiaryNotes by sharedViewModel<DiaryNotesViewModel>(from = { this })
 

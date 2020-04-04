@@ -37,9 +37,11 @@ class PracticeNotesCalendarDialog : BaseEventsCalendarDialog<PracticeCalendarVie
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        filterSpinner.setAdapter(ArrayAdapter<String>(context, R.layout.calendar_filter_spin_item).apply {
-            setDropDownViewResource(R.layout.sort_spin_dropdown_item)
-        })
+        context?.let {
+            filterSpinner.setAdapter(ArrayAdapter<String>(it, R.layout.calendar_filter_spin_item).apply {
+                setDropDownViewResource(R.layout.sort_spin_dropdown_item)
+            })
+        }
 
         filterSpinner.setSelectionCallback { practiceFilter = it }
 

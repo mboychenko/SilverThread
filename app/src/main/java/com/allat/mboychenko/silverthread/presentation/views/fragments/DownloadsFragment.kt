@@ -119,7 +119,7 @@ class DownloadsFragment : BaseAllatRaFragment(), IDownloadsFragmentView {
                 PERMISSION_REQUEST_CODE
             )
         } catch (e: Exception) {
-            Log.e("Permission request fail", e.message)
+            Log.e("Permission request fail", e.message ?: "nothing to explain")
         }
     }
 

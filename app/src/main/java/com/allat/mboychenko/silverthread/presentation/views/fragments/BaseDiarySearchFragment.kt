@@ -3,9 +3,7 @@ package com.allat.mboychenko.silverthread.presentation.views.fragments
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.*
-import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import com.allat.mboychenko.silverthread.R
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,7 +12,7 @@ import io.reactivex.subjects.PublishSubject
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-abstract class BaseSearchFragment : Fragment(), SearchView.OnQueryTextListener {
+abstract class BaseDiarySearchFragment : Fragment(), SearchView.OnQueryTextListener {
     private var subscription: Disposable? = null
     private val searchObserver = PublishSubject.create<String>()
 
@@ -49,7 +47,7 @@ abstract class BaseSearchFragment : Fragment(), SearchView.OnQueryTextListener {
         val searchItem = menu.findItem(R.id.search)
 
         (searchItem.actionView as SearchView).apply {
-            setOnQueryTextListener(this@BaseSearchFragment)
+            setOnQueryTextListener(this@BaseDiarySearchFragment)
         }
 
         searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {

@@ -3,7 +3,7 @@ package com.allat.mboychenko.silverthread.data.storage.preferences
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.util.Log
 import org.json.JSONObject
 
@@ -36,7 +36,7 @@ open class StorageImplementation(
         editor.apply()
     }
 
-    override fun getString(key: String) = preferences.getString(key, null)
+    override fun getString(key: String): String? = preferences.getString(key, null)
 
     override fun putString(key: String, value: String) {
         val editor = preferences.edit()

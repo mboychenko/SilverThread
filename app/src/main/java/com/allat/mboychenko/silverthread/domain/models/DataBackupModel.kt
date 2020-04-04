@@ -6,5 +6,6 @@ import com.allat.mboychenko.silverthread.data.storage.db.diary.DiaryPracticesDat
 data class DataBackupModel(
     val practices: List<DiaryPracticesData> = emptyList(),
     val notes: List<DiaryNotesData> = emptyList(),
-    val favQuotes: Set<Int> = emptySet()
+    val favQuotes: Set<Int> = emptySet(),
+    val favParables: Set<Int> = emptySet()
 )

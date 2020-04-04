@@ -2,6 +2,14 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+            android:id="@+id/search"
+            app:showAsAction="always|collapseActionView"
+            app:actionViewClass="androidx.appcompat.widget.SearchView"
+            android:title="Search"
+            android:icon="@drawable/ic_search"
+            />
+
+    <item
             android:id="@+id/favorites"
             android:icon="@drawable/ic_favorite_border_black_24dp"
             app:showAsAction="always"

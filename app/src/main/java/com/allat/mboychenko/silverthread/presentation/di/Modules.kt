@@ -45,7 +45,7 @@ val repositoryModule = module {
 }
 
 val helpers = module {
-    single { BackupHelper(get(), get(), get()) }
+    single { BackupHelper(get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {
@@ -68,6 +68,10 @@ val presentersModule = module {
 
     scope(named(QUOTES_FRAGMENT_SCOPE_NAME)) {
         scoped { QuotesPresenter(androidContext(), get()) }
+    }
+
+    factory {
+        ParablesPresenter(androidContext(), get())
     }
 
     factory {
@@ -128,6 +132,10 @@ val storageModule = module {
 
     factory {
         QuotesInteractor(get<StorageImplementation>()) as QuotesDetailsStorage
+    }
+
+    factory {
+        ParablesInteractor(get<StorageImplementation>()) as ParablesDetailsStorage
     }
 
     factory {

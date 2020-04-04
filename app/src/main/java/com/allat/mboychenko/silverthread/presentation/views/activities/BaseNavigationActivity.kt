@@ -100,6 +100,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 setFragment(PracticeTimerFragment(), navId)
             R.id.nav_quotes ->
                 setFragment(QuotesFragment(), navId)
+            R.id.nav_parables ->
+                setFragment(ParablesFragment(), navId)
             R.id.nav_books ->
                 setFragment(BooksFragment(), navId)
             R.id.nav_radio ->
@@ -148,6 +150,7 @@ abstract class BaseNavigationActivity : AppCompatActivity(), NavigationView.OnNa
                 RadioFragment.RADIO_FRAGMENT_TAG -> R.id.nav_radio
                 PracticeTimerFragment.PRACTICE_FRAGMENT_TAG -> R.id.nav_practice_timer
                 QuotesFragment.QUOTES_FRAGMENT_TAG -> R.id.nav_quotes
+                ParablesFragment.PARABLES_FRAGMENT_TAG -> R.id.nav_parables
                 BooksFragment.BOOKS_FRAGMENT_TAG -> R.id.nav_books
                 DownloadsFragment.DOWNLOADS_FRAGMENT_TAG -> R.id.nav_downloads
                 DiaryFragment.NOTES_FRAGMENT_TAG -> R.id.nav_notes

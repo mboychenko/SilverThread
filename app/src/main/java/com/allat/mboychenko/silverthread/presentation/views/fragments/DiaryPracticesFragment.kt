@@ -15,7 +15,6 @@ import com.allat.mboychenko.silverthread.presentation.views.dialogs.PracticeNote
 import com.allat.mboychenko.silverthread.presentation.views.dialogs.PracticeNotesCalendarDialog.Companion.NOTES_CALENDAR_DIALOG_TAG
 import com.allat.mboychenko.silverthread.presentation.views.listeners.INoteActionListener
 import com.allat.mboychenko.silverthread.presentation.views.viewholders.PracticeNoteItemViewHolder
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import android.view.ViewGroup
 import android.content.Context
@@ -26,13 +25,12 @@ import com.allat.mboychenko.silverthread.presentation.intents.DiaryAction
 import com.allat.mboychenko.silverthread.presentation.models.PracticesSort
 import com.allat.mboychenko.silverthread.presentation.views.custom.PracticeFilterSpinner
 import com.allat.mboychenko.silverthread.presentation.viewstate.PracticeViewState
-import java.security.KeyStore
 import java.util.*
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
 
-class DiaryPracticesFragment : BaseSearchFragment(), IViewContext {
+class DiaryPracticesFragment : BaseDiarySearchFragment(), IViewContext {
 
     override fun getViewContext() = context
 
@@ -109,9 +107,12 @@ class DiaryPracticesFragment : BaseSearchFragment(), IViewContext {
         sortSpinner.adapter = sortAdapter
         sortSpinner.onItemSelectedListener = sortSelectionListener
 
-        filterSpinner.setAdapter(ArrayAdapter<String>(context, R.layout.sort_spin_item).apply {
-            setDropDownViewResource(R.layout.sort_spin_dropdown_item)
-        })
+        context?.let {
+            filterSpinner.setAdapter(ArrayAdapter<String>(it, R.layout.sort_spin_item).apply {
+                setDropDownViewResource(R.layout.sort_spin_dropdown_item)
+            })
+        }
+
         filterSpinner.setSelectionCallback { practiceFilter = it }
 
         cancelDateFilter.setOnClickListener { notesViewModel.intent(DiaryAction.ClearDateFilter) }

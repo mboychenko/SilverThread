@@ -19,6 +19,10 @@
                 android:icon="@drawable/ic_quote"
                 android:title="@string/quotes"/>
         <item
+                android:id="@+id/nav_parables"
+                android:icon="@drawable/ic_parables"
+                android:title="@string/parables_title"/>
+        <item
                 android:id="@+id/nav_books"
                 android:icon="@drawable/ic_books"
                 android:title="@string/books"/>

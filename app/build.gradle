@@ -10,8 +10,8 @@ android {
         applicationId "com.allat.mboychenko.silverthread"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 49
-        versionName "5.1.1"
+        versionCode 50
+        versionName "5.2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -67,7 +67,7 @@ dependencies {
     implementation "com.xwray:groupie:$groupie_version"
     implementation "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
 
-    implementation 'com.google.firebase:firebase-analytics:17.2.3'
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -87,6 +87,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "androidx.security:security-crypto:1.0.0-beta01"
+    implementation "androidx.preference:preference:1.1.0"
 }
 
 apply plugin: 'com.google.gms.google-services'

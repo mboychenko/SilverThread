@@ -134,7 +134,7 @@ class PasswordView : AppCompatEditText {
         imeOptions = EditorInfo.IME_ACTION_DONE
     }
 
-    override fun setOnClickListener(l: OnClickListener) {
+    override fun setOnClickListener(l: OnClickListener?) {
         mClickListener = l
     }
 
@@ -142,7 +142,7 @@ class PasswordView : AppCompatEditText {
         throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
     }
 
-    override fun onDraw(canvas: Canvas) { //super.onDraw(canvas);
+    override fun onDraw(canvas: Canvas) {
         val availableWidth = width - paddingRight - paddingLeft
         mCharSize = if (mSpace < 0) {
             availableWidth / (mNumChars * 2 - 1)
@@ -164,7 +164,7 @@ class PasswordView : AppCompatEditText {
                 bottom.toFloat(),
                 startX + mCharSize,
                 bottom.toFloat(),
-                mLinesPaint
+                mLinesPaint!!
             )
             if (getText()?.length ?: 0 > i) {
                 val middle = startX + mCharSize / 2

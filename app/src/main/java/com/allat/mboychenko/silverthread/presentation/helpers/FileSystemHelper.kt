@@ -12,6 +12,7 @@ import kotlin.math.pow
 import android.webkit.MimeTypeMap
 import android.content.ContentResolver
 import android.net.Uri
+import java.util.*
 
 
 /* Checks if external storage is available for read and write */
@@ -68,7 +69,7 @@ fun getMimeType(uri: Uri, context: Context): String? {
         cr.getType(uri)
     } else {
         val fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
-        MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase())
+        MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase(Locale.getDefault()))
     }
 }
 

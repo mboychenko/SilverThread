@@ -19,7 +19,7 @@
     <string name="about_us">O nás</string>    
     <string name="meditations_title">Meditace</string>    
     <string name="spiritual_title">Duchovní praktiky</string>      
-    <string name="share_link">Sdílet odkaz pro stažení</string>    
+    <string name="share_link">Sdílet odkaz pro stažení %s</string>    
     <string name="share_quote">Sdílet citát</string>      
     <string name="time_to_group_meditation">Čas před začátkem Allatu:</string>    
     <string name="allat_started_meditation">Allat. Do konce zůstalo:</string>      
@@ -42,7 +42,7 @@
     <string name="select_language_share">Vyberte si jazyk knihy, abyste se mohli podělit:</string>    
     <string name="filter_by_language">Filtr podle jazyka:</string>    
     <string name="all">Všechny</string>    
-    <string name="link_to_load">Odkaz pro stažení</string>    
+    <string name="link_to_load">Odkaz pro stažení %s\n%s</string>    
     <string name="click_to_unlock">Odblokovat</string>    
     <string name="click_to_lock">Zablokovat</string>      
     <string name="downloading">Načítání</string>    
@@ -173,7 +173,7 @@
     <string name="duration">Trvání:</string>
     <string name="selected_date">Vybrané datum: %s</string>
     <string name="backup_toolbar_title">Backup</string>
-    <string name="backup_description">Zde můžete nakonfigurovat, jak často budou vytvářeny zálohy, a obnovit data ze záložního souboru. Soubor je uložen v \"%s\" Z bezpečnostních důvodů je soubor zašifrován, aby bylo možné obnovit data, musíte zadat klíč, který jste nainstalovali. Záloha ukládá oblíbené citáty, deník praktik a zápasník. Pro lepší bezpečnost dat je dobré tento soubor uložit do cloudu nebo někde jinde bez ohledu na zařízení, kde se nachází aplikace, takže pokud ztratíte zařízení nebo trvale odstraníte data, můžete je kdykoli obnovit pomocí umístění souboru do \"%s\" a kliknutím na „Obnovit data“</string>
+    <string name="backup_description">Zde můžete nakonfigurovat, jak často budou vytvářeny zálohy, a obnovit data ze záložního souboru. Soubor je uložen v \"%s\" Z bezpečnostních důvodů je soubor zašifrován, aby bylo možné obnovit data, musíte zadat klíč, který jste nainstalovali. Záloha ukládá oblíbené citáty, oblíbené podobenství, deník praktik a zápasník. Pro lepší bezpečnost dat je dobré tento soubor uložit do cloudu nebo někde jinde bez ohledu na zařízení, kde se nachází aplikace, takže pokud ztratíte zařízení nebo trvale odstraníte data, můžete je kdykoli obnovit pomocí umístění souboru do \"%s\" a kliknutím na „Obnovit data“</string>
     <string name="expand_bckp_desc">Rozbalte popis</string>
     <string name="collapse_bckp_desc">Sbalit popis</string>
     <string name="success_backup">Záloha byla úspěšně vytvořena</string>
@@ -223,6 +223,7 @@
     <string name="power_mng_not_found">Program PowerManager nebyl pro toto zařízení nalezen</string>
     <string name="open">Otevřít</string>
     <string name="power_mng_desc">Pokud máte potíže s časovačem Allatu, tréninkovým časovačem nebo rádiem, pravděpodobně vaše zařízení má osobní správce spotřeby baterií, tito správci přidávají dodatečné omezení systému a mohou přerušit nebo změnit chování aplikací, třeba je zneškodnit, pokud jsou na pozadí, neprobudit je pro oznámení atd. Mají výjimky pro vlastní aplikaci systémového časovače budíku a některé velmi známé sociální aplikace nebo messengery. V takových případech pro správnou funkčnost budete možná muset do těchto výjimek přidat aplikaci AllatRa v nastavení úspory energie / optimalizace výkonu atd. Pod několika tlačítky, které vás mohou přivést k tomuto nastavení, je jeho předdefinovaný seznam možných nastavení pro seznam zařízení. V případě, že při stisknutí těchto tlačítek nedojde k žádným efektům, možná budete muset otevřít nastavení zařízení a ručně najít nastavení úspory energie / optimalizace a přidat aplikaci AllatRa do seznamu výjimek, abyste se vyhnuli dalším omezením aplikace, která by mohla narušit funkčnost.</string>
+    <string name="parables_title">Parables</string>
 
     <string name="material_calendar_monday">P</string>
     <string name="material_calendar_tuesday">Ú</string>

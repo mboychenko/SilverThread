@@ -1,13 +1,19 @@
 package com.allat.mboychenko.silverthread.presentation.helpers
 
+import android.content.Context
 import android.content.res.Resources
+import android.graphics.Typeface
 import android.text.Layout
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
 import android.text.style.AlignmentSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.View
 import androidx.annotation.IdRes
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.fragment.app.Fragment
@@ -47,4 +53,37 @@ fun SpannableString.alignRight(start: Int, end: Int) {
         end,
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
     )
+}
+
+fun SpannableString.alignCenter(start: Int, end: Int) {
+    setSpan(
+        AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+}
+
+fun SpannableString.makeBold(start: Int, end: Int) {
+    setSpan(
+        StyleSpan(Typeface.BOLD),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+}
+
+fun SpannableString.changeSize(size: Int, start: Int, end: Int) {
+    setSpan(
+        AbsoluteSizeSpan(size, true),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+}
+
+fun SpannableString.changeColor(context: Context, color: Int, start: Int, end: Int) {
+    setSpan(
+        ForegroundColorSpan(ContextCompat.getColor(context, color)),
+        start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 }

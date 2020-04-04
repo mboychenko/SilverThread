@@ -35,8 +35,12 @@ class BookReaderActivity : AppCompatActivity() {
 
         close.setOnClickListener { finish() }
 
-        bookUri = intent.data!!
-        bookName = intent.getStringExtra(BOOK_NAME_ARG)
+        if (intent.data != null || intent.getStringExtra(BOOK_NAME_ARG) != null) {
+            finish()
+        } else {
+            bookUri = intent.data!!
+            bookName = intent.getStringExtra(BOOK_NAME_ARG)!!
+        }
 
         page.setOnClickListener {
             if(::selectPageDialog.isInitialized) {
@@ -72,7 +76,7 @@ class BookReaderActivity : AppCompatActivity() {
                 PERMISSION_REQUEST_CODE
             )
         } catch (e: Exception) {
-            Log.e("Permission request fail", e.message)
+            Log.e("Permission request fail", e.message ?: "nothing to explain")
         }
     }
 

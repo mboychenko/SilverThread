@@ -1,4 +1,5 @@
 package com.allat.mboychenko.silverthread.presentation.views.listitems
+
 import android.content.Context
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -9,7 +10,6 @@ import com.allat.mboychenko.silverthread.presentation.views.dialogs.PracticeForm
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import com.allat.mboychenko.silverthread.presentation.helpers.htmlFromAssetsCompat
-
 
 class PracticeItem(
     private val title: String,
@@ -35,8 +35,6 @@ class PracticeItem(
             .newInstance(title, text)
             .show((context as FragmentActivity).supportFragmentManager, PRACTICES_DIALOG_TAG)
     }
-
-
 
     private fun getDrawable(context: Context, res: Int) = ContextCompat.getDrawable(context, res)
 

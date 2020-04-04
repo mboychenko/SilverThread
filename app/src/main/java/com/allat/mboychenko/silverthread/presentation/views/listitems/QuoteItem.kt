@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import android.text.SpannableString
+import android.text.TextUtils
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,14 +15,15 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.cardview.widget.CardView
 import com.allat.mboychenko.silverthread.R
-import com.allat.mboychenko.silverthread.presentation.helpers.alignRight
+import com.allat.mboychenko.silverthread.presentation.helpers.*
 
 
 class QuoteItem(
-    private val quoteText: String,
+    val quoteText: String,
     private val actionListener: QuotesActionListener,
     val arrayPosition: Int,
-    var favorite: Boolean
+    var favorite: Boolean,
+    private val parableStyle: Boolean = false
 ) : Item() {
 
     private var menuPopupHelper: MenuPopupHelper? = null
@@ -42,17 +44,37 @@ class QuoteItem(
                 }
             }
 
+            val quoteTextView = findViewById<TextView>(R.id.quote)
+
+            val buttonMore = findViewById<ImageView>(R.id.buttonMore)
+            initPopup(buttonMore)
+
             val styledResultText = SpannableString(quoteText)
-            quoteText.indexOf("\n").takeIf { it > -1 }
-                ?.let { styledResultText.alignRight(it, quoteText.length) }
 
-            findViewById<TextView>(R.id.quote).text = styledResultText
-
-            findViewById<ImageView>(R.id.buttonMore).apply {
-                initPopup(this)
+            if (parableStyle) {
+                quoteText.indexOf("\n")
+                    .takeIf { it > -1 }
+                    ?.let {
+                        styledResultText.apply {
+                            alignCenter(0, it)
+                            makeBold(0, it)
+                            changeSize(16, 0, it)
+                            changeColor(context, R.color.dark_gray, 0, it)
+                        }
+                    }
+                setOnClickListener {
+                    quoteTextView.maxLines = if (quoteTextView.maxLines < Int.MAX_VALUE) Int.MAX_VALUE else 15
+                }
+                quoteTextView.maxLines = 15
+                quoteTextView.ellipsize = TextUtils.TruncateAt.END
+                buttonMore.setOnClickListener { menuPopupHelper?.show() }
+            } else {
+                quoteText.indexOf("\n").takeIf { it > -1 }
+                    ?.let { styledResultText.alignRight(it, quoteText.length) }
+                setOnClickListener { menuPopupHelper?.show() }
             }
 
-            setOnClickListener { menuPopupHelper?.show() }
+            quoteTextView.text = styledResultText
         }
     }
 
@@ -114,9 +136,9 @@ class QuoteItem(
 
 
     interface QuotesActionListener {
-        fun onShare(quote: String)
-        fun onCopy(quote: String)
-        fun onFavoriteClick(quoteItem: QuoteItem)
+        fun onShare(item: String)
+        fun onCopy(item: String)
+        fun onFavoriteClick(item: QuoteItem)
     }
 
     companion object {

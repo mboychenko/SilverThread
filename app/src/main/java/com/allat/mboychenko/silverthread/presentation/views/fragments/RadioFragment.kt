@@ -50,7 +50,7 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
         try {
             requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), PERMISSION_REQUEST_CODE)
         } catch (e: Exception) {
-            Log.e("Permission request fail", e.message)
+            Log.e("Permission request fail", e.message ?: "nothing to explain")
         }
     }
 

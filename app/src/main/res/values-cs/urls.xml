@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="allatra_radio_url" translatable="false">http://germany.topradio.cz:8000/allatra128</string>
+    <string name="allatra_radio_url">http://germany.topradio.cz:8000/allatra128</string>
 </resources>

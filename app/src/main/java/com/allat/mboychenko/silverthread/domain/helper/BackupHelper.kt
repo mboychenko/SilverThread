@@ -4,6 +4,7 @@ import com.allat.mboychenko.silverthread.data.repositories.DiaryNotesRepository
 import com.allat.mboychenko.silverthread.data.repositories.DiaryPracticesRepository
 import com.allat.mboychenko.silverthread.data.storage.db.diary.DiaryNotesData
 import com.allat.mboychenko.silverthread.data.storage.db.diary.DiaryPracticesData
+import com.allat.mboychenko.silverthread.domain.interactor.ParablesDetailsStorage
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
 import com.allat.mboychenko.silverthread.domain.models.DataBackupModel
 import com.allat.mboychenko.silverthread.presentation.helpers.getBackupFile
@@ -19,7 +20,8 @@ import kotlin.text.Charsets.UTF_8
 class BackupHelper(
     private val diaryNotesRepo: DiaryNotesRepository,
     private val diaryPracticeRepo: DiaryPracticesRepository,
-    private val quoteStorage: QuotesDetailsStorage
+    private val quoteStorage: QuotesDetailsStorage,
+    private val parablesStorage: ParablesDetailsStorage
 ) {
     private val coroutineScp = CoroutineScope(Dispatchers.Default)
 
@@ -27,10 +29,11 @@ class BackupHelper(
         return withContext(coroutineScp.coroutineContext) {
             getBackupFile()?.let { file ->
                 val favoriteQuotes = quoteStorage.getFavoriteQuotesPositions()
+                val favoriteParables = parablesStorage.getFavoriteParablesPositions()
                 val practices = diaryPracticeRepo.getPractices()
                 val notes = diaryNotesRepo.getDiaryNotes()
 
-                val backupData = prepareBackup(practices, notes, favoriteQuotes, code)
+                val backupData = prepareBackup(practices, notes, favoriteQuotes, favoriteParables, code)
 
                 file.writeBytes(backupData)
                 Status.SUCCESS
@@ -49,6 +52,7 @@ class BackupHelper(
 
                 try {
                     val backupModel = restoreBackupFromFile(it, code)
+                    parablesStorage.restoreFavoriteParables(backupModel.favParables)
                     quoteStorage.restoreFavoriteQuotes(backupModel.favQuotes)
                     diaryPracticeRepo.insertAll(backupModel.practices)
                     diaryNotesRepo.insertAll(backupModel.notes)
@@ -66,9 +70,10 @@ class BackupHelper(
         practices: List<DiaryPracticesData>,
         notes: List<DiaryNotesData>,
         favoriteQuotes: Set<Int>,
+        favoriteParables: Set<Int>,
         code: String
     ): ByteArray {
-        val backupModel = DataBackupModel(practices, notes, favoriteQuotes)
+        val backupModel = DataBackupModel(practices, notes, favoriteQuotes, favoriteParables)
         val backup = getGsonProcessor().toJson(backupModel)
         return backup.toByteArray()
     }
