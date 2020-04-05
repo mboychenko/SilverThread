@@ -35,7 +35,7 @@ class BookReaderActivity : AppCompatActivity() {
 
         close.setOnClickListener { finish() }
 
-        if (intent.data != null || intent.getStringExtra(BOOK_NAME_ARG) != null) {
+        if (intent.data == null || intent.getStringExtra(BOOK_NAME_ARG) == null) {
             finish()
         } else {
             bookUri = intent.data!!
