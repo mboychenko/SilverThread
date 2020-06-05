@@ -22,7 +22,7 @@ class PracticesPresenter(val context: Context) : BasePresenter<IPracticesFragmen
     }
 
     private fun preparePracticesItems() {
-        subscriptions.add(
+        manageAddToSubscription(
             runTaskOnBackgroundWithResult(
                 ExecutorThread.IO,
                 {

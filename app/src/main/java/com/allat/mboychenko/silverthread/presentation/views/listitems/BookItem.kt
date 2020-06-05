@@ -2,7 +2,6 @@ package com.allat.mboychenko.silverthread.presentation.views.listitems
 
 import android.content.Context
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import com.allat.mboychenko.silverthread.data.models.BooksConstants
 import com.allat.mboychenko.silverthread.domain.helper.BooksHelper
 import com.allat.mboychenko.silverthread.presentation.views.dialogs.LanguageSelectionDialogFragment
