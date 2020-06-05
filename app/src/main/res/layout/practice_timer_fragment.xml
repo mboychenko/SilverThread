@@ -11,12 +11,12 @@
         android:id="@+id/delay_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/prepearing_time"
         android:gravity="center"
         android:paddingBottom="16dp"
+        android:text="@string/prepearing_time"
         app:layout_constraintBottom_toTopOf="@id/minutes"
-        app:layout_constraintStart_toStartOf="@id/minutes"
-        app:layout_constraintEnd_toEndOf="@id/seconds"/>
+        app:layout_constraintEnd_toEndOf="@id/seconds"
+        app:layout_constraintStart_toStartOf="@id/minutes" />
 
     <TextView
         android:id="@+id/allats_desc"
@@ -103,13 +103,13 @@
         android:id="@+id/shortAllat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/switchAllat"
-        app:layout_constraintTop_toTopOf="@id/switchAllat"
-        app:layout_constraintBottom_toBottomOf="@id/switchAllat"
         android:layout_marginEnd="12dp"
+        android:text="@string/half_allat"
+        app:layout_constraintBottom_toBottomOf="@id/switchAllat"
+        app:layout_constraintEnd_toStartOf="@id/switchAllat"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:text="@string/half_allat"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/switchAllat" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchAllat"
@@ -122,6 +122,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toEndOf="@id/shortAllat"
         app:layout_constraintEnd_toStartOf="@id/fullAllat"/>
+
 
     <TextView
         android:id="@+id/fullAllat"
@@ -170,7 +171,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/stage"
         android:textSize="24sp"
-        tools:text="12:23"/>
+        tools:text="12:23"/><![CDATA[
+
+    app:layout_constraintTop_toBottomOf="@+id/volumeLabel" />
+
+
+
+
+
+
+
+
+    ]]>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/activeStageGroup"
@@ -183,6 +195,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider,fullAllat,switchAllat,shortAllat" />
+
+    <TextView
+        android:id="@+id/volumeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.259" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/volumeChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="16dp"
+        android:text="Switch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.749"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.267" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

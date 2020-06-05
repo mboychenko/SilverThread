@@ -26,9 +26,21 @@ class PracticeStorageInteractor(private val storage: Storage) : PracticeStorage 
     override fun getAllatLengthStateShort() =
         storage.getBoolean(PRACTICE_ALLAT_LEN_PREF_KEY, false)
 
+
+    override fun setVolumeStateHigh(short: Boolean) {
+        storage.putBoolean(PRACTICE_ALLAT_VOLUME_HIGH_PREF_KEY, short)
+    }
+
+    override fun getVolumeStateHigh() =
+        storage.getBoolean(PRACTICE_ALLAT_VOLUME_HIGH_PREF_KEY, false)
+
+
+
     companion object {
         private const val PRACTICE_OFFSET_PREF_KEY = "PRACTICE_OFFSET_PREF_KEY"
         private const val PRACTICE_ALLAT_LEN_PREF_KEY = "PRACTICE_ALLAT_LEN_PREF_KEY"
+        private const val PRACTICE_ALLAT_VOLUME_HIGH_PREF_KEY = "PRACTICE_ALLAT_VOLUME_HIGH_PREF_KEY"
+
     }
 
 }

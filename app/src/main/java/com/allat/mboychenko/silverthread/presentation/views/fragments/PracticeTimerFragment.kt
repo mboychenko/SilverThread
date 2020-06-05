@@ -21,10 +21,15 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
     private lateinit var actionFab: FloatingActionButton
     private lateinit var allatPicker: NumberPicker
     private lateinit var minutesPicker: NumberPicker
+
+
     private lateinit var secondsPicker: NumberPicker
     private lateinit var stageName: TextView
     private lateinit var stageRemaning: TextView
     private lateinit var allatLengthSwitch: SwitchCompat
+    private lateinit var volumeHigh: SwitchCompat
+    private lateinit var volumeLabel : TextView
+
     private lateinit var halfAllatText: TextView
     private lateinit var fullAllatText: TextView
     private lateinit var activeStageGroup: Group
@@ -64,6 +69,8 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
             allatLengthSwitch = findViewById(R.id.switchAllat)
             halfAllatText = findViewById(R.id.shortAllat)
             fullAllatText = findViewById(R.id.fullAllat)
+            volumeLabel = findViewById(R.id.volumeLabel)
+            volumeHigh = findViewById(R.id.volumeChange)
 
             allatPicker.minValue = 1
             allatPicker.maxValue = 12
@@ -160,6 +167,18 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
     override fun getAllatLengthShort(): Boolean {
         return allatLengthSwitch.isChecked.not()
     }
+
+//    override fun setVolumeHigh(short: Boolean) {
+//        volumeHigh.isChecked = short.not()
+//
+//        volumeHigh.setOnCheckedChangeListener { _, isChecked ->
+//            presenter.setVolumeHigh(!isChecked)
+//        }
+//    }
+//
+//    override fun getVolumeHigh(): Boolean {
+//        return volumeHigh.isChecked.not()
+//    }
 
     private fun switchTextColorUpdate(isChecked: Boolean) =
         if (isChecked) {

@@ -15,6 +15,7 @@ import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.ACTION_START
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.EXTRAS_ALLATS_LEN_FULL_KEY
+import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.EXTRAS_VOLUME_HIGH_FULL_KEY
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.EXTRAS_ALLATS_NUM_KEY
 import com.allat.mboychenko.silverthread.presentation.services.PracticeService.Companion.EXTRAS_OFFSET_KEY
 import com.allat.mboychenko.silverthread.presentation.views.fragments.IPracticeTimerFragmentView
@@ -57,6 +58,7 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
         super.attachView(view)
         setupOffsetIfNeed()
         setupAllatLengthIfNeed()
+//        setupVolumeHighSwitch()
         bindToChetverikService()
     }
 
@@ -89,6 +91,16 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
         )
     }
 
+//    private fun setupVolumeHighSwitch() {
+//        manageAddToSubscription(
+//            runTaskOnBackgroundWithResult(ExecutorThread.IO, {
+//                storage.getVolumeStateHigh()
+//            }, { short ->
+//                view?.setVolumeHigh(short)
+//            })
+//        )
+//    }
+
     override fun detachView() {
         super.detachView()
         unbindFromChetverikService()
@@ -105,6 +117,10 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
 
     fun setAllatLengthShort(short: Boolean) {
         manageAddToSubscription(runTaskOnBackground { storage.setAllatLengthStateShort(short) })
+    }
+
+    fun setVolumeHigh(short: Boolean) {
+        manageAddToSubscription(runTaskOnBackground { storage.setVolumeStateHigh(short) })
     }
 
     fun startStop() {
@@ -144,6 +160,9 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
 
                     val isFullAllat = view?.getAllatLengthShort()?.not() ?: true
                     putBoolean(EXTRAS_ALLATS_LEN_FULL_KEY, isFullAllat)
+
+//                    val volumeHigh = view?.getVolumeHigh()?.not() ?: true
+//                    putBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY, volumeHigh)
                 })
             })
     }

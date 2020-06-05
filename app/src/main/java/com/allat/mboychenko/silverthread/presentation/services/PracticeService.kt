@@ -104,12 +104,15 @@ class PracticeService : Service() {
     }
 
     fun playSound(@RawRes rawResId: Int) {
-        val assetFileDescriptor = applicationContext.resources.openRawResourceFd(rawResId) ?: return
+        val assetFileDescriptor =
+            applicationContext.resources.openRawResourceFd(rawResId) ?: return
+
         mediaPlayer.run {
             reset()
             setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.declaredLength)
             prepareAsync()
         }
+
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -119,6 +122,14 @@ class PracticeService : Service() {
                 val startOffset = intent.extras?.getInt(EXTRAS_OFFSET_KEY,0) ?: 0
                 val allats = intent.extras?.getInt(EXTRAS_ALLATS_NUM_KEY,1) ?: 1
                 val allatLengthFull = intent.extras?.getBoolean(EXTRAS_ALLATS_LEN_FULL_KEY,true) ?: true
+                val volumeHigher = intent.extras?.getBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY,true) ?: true
+
+
+                if(volumeHigher == true) {
+                    val volumeTrack = R.raw.practice_end_higher
+                } else {
+                   val volumeTrack = R.raw.practice_end
+                }
 
                 if (!allatLengthFull) {
                     allatSize = HALF_ALLAT_MILLIS
@@ -130,6 +141,9 @@ class PracticeService : Service() {
 
                 val delayInMillis = startOffset.toLong() * 1000
                 acquireWakeLock(allats * allatSize + delayInMillis)
+                if(volumeHigher){
+
+                }
 
                 if (delayInMillis > 0) {
                     startIntervalTimer = object : CountDownTimer(delayInMillis, 1000) {
@@ -229,6 +243,7 @@ class PracticeService : Service() {
         const val EXTRAS_ALLATS_LEN_FULL_KEY = "EXTRAS_ALLATS_LEN_FULL_KEY"
         const val ONE_ALLAT_MILLIS = 717000L //00:11:56.74 rounded to 00:11:57 Allat
         const val HALF_ALLAT_MILLIS = 358000L //Half Allat
+        const val EXTRAS_VOLUME_HIGH_FULL_KEY = "EXTRAS_VOLUME_HIGH_FULL_KEY"
     }
 
 }
