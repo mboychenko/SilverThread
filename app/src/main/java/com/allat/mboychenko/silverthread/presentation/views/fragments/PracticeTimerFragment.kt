@@ -1,9 +1,12 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
+import android.nfc.Tag
 import android.os.Bundle
 import android.view.*
+import android.widget.CompoundButton
 import android.widget.NumberPicker
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.Group
@@ -12,6 +15,8 @@ import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 import com.allat.mboychenko.silverthread.presentation.presenters.PracticeTimerPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.practice_editor_view.*
+import kotlinx.android.synthetic.main.practice_timer_fragment.*
 import org.koin.android.ext.android.inject
 
 class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView {
@@ -38,6 +43,7 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
 
     private val textColorActive by lazy { ContextCompat.getColor(context!!, R.color.colorActive) }
     private val textColorDefault by lazy { halfAllatText.textColors }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +93,8 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
         }
 
         return view
+
+
     }
 
     override fun onStart() {
@@ -95,6 +103,7 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
         initStage()
         presenter.attachView(this)
     }
+
 
     override fun onStop() {
         super.onStop()
@@ -150,6 +159,7 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
 
     override fun getAllatsNum() = allatPicker.value
 
+
     override fun setMinsViewOffset(min: Int) {
         minutesPicker.value = min
     }
@@ -168,17 +178,18 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
         return allatLengthSwitch.isChecked.not()
     }
 
-//    override fun setVolumeHigh(short: Boolean) {
-//        volumeHigh.isChecked = short.not()
-//
-//        volumeHigh.setOnCheckedChangeListener { _, isChecked ->
-//            presenter.setVolumeHigh(!isChecked)
-//        }
-//    }
-//
-//    override fun getVolumeHigh(): Boolean {
-//        return volumeHigh.isChecked.not()
-//    }
+
+    override fun setVolumeHigh(short: Boolean) {
+        volumeHigh.isChecked = short.not()
+
+        volumeHigh.setOnCheckedChangeListener { _, isChecked ->
+            presenter.setVolumeHigh(!isChecked)
+        }
+    }
+
+    override fun getVolumeHigh(): Boolean {
+        return volumeHigh.isChecked.not()
+    }
 
     private fun switchTextColorUpdate(isChecked: Boolean) =
         if (isChecked) {

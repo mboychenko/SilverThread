@@ -7,97 +7,86 @@
     android:keepScreenOn="true"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/delay_desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="16dp"
-        android:text="@string/prepearing_time"
-        app:layout_constraintBottom_toTopOf="@id/minutes"
-        app:layout_constraintEnd_toEndOf="@id/seconds"
-        app:layout_constraintStart_toStartOf="@id/minutes" />
-
-    <TextView
-        android:id="@+id/allats_desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/qty"
-        android:gravity="center"
-        android:paddingBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/allats"
-        app:layout_constraintStart_toStartOf="@id/allats"
-        app:layout_constraintEnd_toEndOf="@id/allats"/>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@id/allats"
-        app:layout_constraintBottom_toBottomOf="@id/allats"
-        app:layout_constraintStart_toEndOf="@id/seconds"
-        app:layout_constraintEnd_toStartOf="@id/allats"
-        android:background="@android:color/darker_gray"/>
-
     <NumberPicker
         android:id="@+id/minutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/seconds"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
 
-    <NumberPicker
-        android:id="@+id/seconds"
+    <TextView
+        android:id="@+id/stage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@id/allats"
-        app:layout_constraintStart_toEndOf="@id/minutes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <NumberPicker
-        android:id="@+id/allats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@id/stageRemaining"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/seconds"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="LEFT" />
+
+    <TextView
+        android:id="@+id/volumeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchAllat"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/volumeChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="16dp"
+        android:checked="false"
+        android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volumeLabel"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/allats"
+        app:layout_constraintEnd_toStartOf="@id/allats"
+        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintStart_toEndOf="@id/seconds"
+        app:layout_constraintTop_toTopOf="@id/allats"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/min_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="@string/minutes"
         app:layout_constraintEnd_toEndOf="@id/minutes"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/minutes"
         app:layout_constraintTop_toBottomOf="@id/minutes" />
-
-    <TextView
-        android:id="@+id/sec_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/seconds"
-        app:layout_constraintEnd_toEndOf="@id/seconds"
-        app:layout_constraintStart_toStartOf="@id/seconds"
-        app:layout_constraintTop_toBottomOf="@id/seconds" />
-
-    <TextView
-        android:id="@+id/allats_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/allats"
-        app:layout_constraintEnd_toEndOf="@id/allats"
-        app:layout_constraintStart_toStartOf="@id/allats"
-        app:layout_constraintTop_toBottomOf="@id/allats" />
 
     <TextView
         android:id="@+id/shortAllat"
@@ -109,31 +98,117 @@
         app:layout_constraintEnd_toStartOf="@id/switchAllat"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/switchAllat" />
+        app:layout_constraintTop_toTopOf="@id/switchAllat"
+        app:layout_constraintVertical_bias="0.375" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchAllat"
+    <NumberPicker
+        android:id="@+id/allats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:trackTint="@color/colorActive"
-        app:thumbTint="@color/colorThumb"
-        android:checked="true"
-        app:layout_constraintTop_toBottomOf="@id/min_title"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toEndOf="@id/shortAllat"
-        app:layout_constraintEnd_toStartOf="@id/fullAllat"/>
+        android:layout_marginStart="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/seconds"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
 
+    <TextView
+        android:id="@+id/delay_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="@string/prepearing_time"
+        app:layout_constraintBottom_toTopOf="@id/minutes"
+        app:layout_constraintEnd_toEndOf="@id/seconds"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/minutes" />
 
     <TextView
         android:id="@+id/fullAllat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/switchAllat"
-        app:layout_constraintTop_toTopOf="@id/switchAllat"
+        android:layout_marginStart="12dp"
+        android:text="@string/full_allat"
         app:layout_constraintBottom_toBottomOf="@id/switchAllat"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="12dp"
-        android:text="@string/full_allat"/>
+        app:layout_constraintStart_toEndOf="@id/switchAllat"
+        app:layout_constraintTop_toTopOf="@id/switchAllat"
+        app:layout_constraintVertical_bias="0.375" />
+
+    <TextView
+        android:id="@+id/sec_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/seconds"
+        app:layout_constraintEnd_toEndOf="@id/seconds"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/seconds"
+        app:layout_constraintTop_toBottomOf="@id/seconds" />
+
+    <TextView
+        android:id="@+id/allats_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="@string/qty"
+        app:layout_constraintBottom_toTopOf="@id/allats"
+        app:layout_constraintEnd_toEndOf="@id/allats"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/allats" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchAllat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:checked="true"
+        app:layout_constraintEnd_toStartOf="@id/fullAllat"
+        app:layout_constraintStart_toEndOf="@id/shortAllat"
+        app:layout_constraintTop_toBottomOf="@id/min_title"
+        app:thumbTint="@color/colorThumb"
+        app:trackTint="@color/colorActive" />
+
+    <TextView
+        android:id="@+id/stageRemaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stage"
+        tools:text="12:23" />
+
+    <TextView
+        android:id="@+id/allats_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/allats"
+        app:layout_constraintEnd_toEndOf="@id/allats"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/allats"
+        app:layout_constraintTop_toBottomOf="@id/allats" />
+
+    <NumberPicker
+        android:id="@+id/seconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/allats"
+        app:layout_constraintStart_toEndOf="@id/minutes"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/action_fab"
@@ -145,45 +220,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/stage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@id/stageRemaining"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:gravity="center"
-        android:textSize="32sp"
-        tools:text="LEFT"/>
-
-    <TextView
-        android:id="@+id/stageRemaining"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stage"
-        android:textSize="24sp"
-        tools:text="12:23"/><![CDATA[
-
-    app:layout_constraintTop_toBottomOf="@+id/volumeLabel" />
-
-
-
-
-
-
-
-
-    ]]>
-
     <androidx.constraintlayout.widget.Group
         android:id="@+id/activeStageGroup"
         android:layout_width="wrap_content"
@@ -194,33 +230,6 @@
         android:id="@+id/setupRemainingGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider,fullAllat,switchAllat,shortAllat" />
-
-    <TextView
-        android:id="@+id/volumeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.259" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/volumeChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="16dp"
-        android:text="Switch"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.749"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.267" />
-
+        app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider,fullAllat,switchAllat,shortAllat, volumeChange, volumeLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

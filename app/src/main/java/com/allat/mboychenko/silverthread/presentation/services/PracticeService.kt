@@ -24,7 +24,7 @@ class PracticeService : Service() {
     private lateinit var mAudioManager: AudioManager
     private var originalVolume: Int = 0
     private var allatSize: Long = ONE_ALLAT_MILLIS
-
+    private var isHigh : Boolean = true
     private val iBinder = LocalBinder()
     private var stagesViewCallback: PracticeActionsCallback? = null
 
@@ -86,15 +86,22 @@ class PracticeService : Service() {
                     stage = PracticeStage.ALLAT
                     stagesViewCallback?.timeLeft(allatSize)
                     currentLeftMillis = allatSize
-                    playSound(R.raw.practice_stage)
+                    if(isHigh) {
+                        playSound(R.raw.practice_end_higher)
+                    } else {
+                        playSound(R.raw.practice_stage)
+                    }
                 } catch (ex: NoSuchElementException) {
-                    playSound(R.raw.practice_end)
+                    if(isHigh) {
+                        playSound(R.raw.practice_end_higher)
+                    } else {
+                        playSound(R.raw.practice_end)
+                    }
                     stopTimer()
                     return
                 }
                 start()
             }
-
 
             override fun onTick(millis: Long) {
                 currentLeftMillis = millis
@@ -122,14 +129,7 @@ class PracticeService : Service() {
                 val startOffset = intent.extras?.getInt(EXTRAS_OFFSET_KEY,0) ?: 0
                 val allats = intent.extras?.getInt(EXTRAS_ALLATS_NUM_KEY,1) ?: 1
                 val allatLengthFull = intent.extras?.getBoolean(EXTRAS_ALLATS_LEN_FULL_KEY,true) ?: true
-                val volumeHigher = intent.extras?.getBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY,true) ?: true
-
-
-                if(volumeHigher == true) {
-                    val volumeTrack = R.raw.practice_end_higher
-                } else {
-                   val volumeTrack = R.raw.practice_end
-                }
+                isHigh = intent.extras?.getBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY,true) ?: true
 
                 if (!allatLengthFull) {
                     allatSize = HALF_ALLAT_MILLIS
@@ -141,9 +141,6 @@ class PracticeService : Service() {
 
                 val delayInMillis = startOffset.toLong() * 1000
                 acquireWakeLock(allats * allatSize + delayInMillis)
-                if(volumeHigher){
-
-                }
 
                 if (delayInMillis > 0) {
                     startIntervalTimer = object : CountDownTimer(delayInMillis, 1000) {
@@ -152,7 +149,11 @@ class PracticeService : Service() {
                             stage = PracticeStage.ALLAT
                             stagesViewCallback?.timeLeft(allatSize)
                             currentLeftMillis = allatSize
-                            playSound(R.raw.practice_stage)
+                            if(isHigh) {
+                                playSound(R.raw.practice_end_higher)
+                            }else {
+                                playSound(R.raw.practice_stage)
+                            }
                             allatIntervalTimer.start()
                         }
 
@@ -167,7 +168,11 @@ class PracticeService : Service() {
                 } else {
                     currentAllat = allatArray.pop()
                     stage = PracticeStage.ALLAT
-                    playSound(R.raw.practice_stage)
+                    if(isHigh) {
+                        playSound(R.raw.practice_end_higher)
+                    } else {
+                        playSound(R.raw.practice_end)
+                    }
                     allatIntervalTimer.start()
                 }
                 startForeground(NOTIFICATION_ID_CHETVERIK, getPracticeNotification(applicationContext, stage, currentAllat))

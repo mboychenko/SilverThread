@@ -91,15 +91,15 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
         )
     }
 
-//    private fun setupVolumeHighSwitch() {
-//        manageAddToSubscription(
-//            runTaskOnBackgroundWithResult(ExecutorThread.IO, {
-//                storage.getVolumeStateHigh()
-//            }, { short ->
-//                view?.setVolumeHigh(short)
-//            })
-//        )
-//    }
+    private fun setupVolumeHighSwitch() {
+        manageAddToSubscription(
+            runTaskOnBackgroundWithResult(ExecutorThread.IO, {
+                storage.getVolumeStateHigh()
+            }, { short ->
+                view?.setVolumeHigh(short)
+            })
+        )
+    }
 
     override fun detachView() {
         super.detachView()
@@ -161,8 +161,8 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
                     val isFullAllat = view?.getAllatLengthShort()?.not() ?: true
                     putBoolean(EXTRAS_ALLATS_LEN_FULL_KEY, isFullAllat)
 
-//                    val volumeHigh = view?.getVolumeHigh()?.not() ?: true
-//                    putBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY, volumeHigh)
+                    val volumeHigh = view?.getVolumeHigh()?.not() ?: true
+                    putBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY, volumeHigh)
                 })
             })
     }

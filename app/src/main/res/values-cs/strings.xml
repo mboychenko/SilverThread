@@ -101,25 +101,25 @@
     <string name="open_practices">Otevřít</string>    
     <string name="no_permissions">Aplikace nemá dostatečná oprávnění</string>      
 
-    <string name="downloads">Downloads</string>
-    <string name="download">Download</string>
-    <string name="cant_delete_book">Can\'t delete book %s</string>
-    <string name="cant_delete_book_error">Can\'t delete book %s, %s</string>
-    <string name="storage_not_available_writing">Storage not available for writing</string>
-    <string name="cant_create_folder_for_downloads">Can\'t create folder for downloads: %s</string>
-    <string name="internet_not_available">Internet not available</string>
-    <string name="cant_access_storage">Can\'t access storage</string>
-    <string name="not_enough_memory">Not enough memory</string>
-    <string name="save_web_loading">Do you want to download %s?\nYou can find file in navigation "Downloads" section</string>
-    <string name="no_saved_files">No saved files</string>
-    <string name="deleted">Deleted</string>
-    <string name="no_downloads_description">You can download video/audio from the sections of the menu “I.M. Danilov” and “AllatRa TV”, under videos there are usually “Download” buttons for different formats of the video/audio.\n\nAfter the download is completed, the files will be available here to open or delete.\n\nYou can find status of loading in notifications, expanding status bar.</string>
-    <string name="unknown_format">Can\'t open file. Unknown file format</string>
+    <string name="downloads">Stažené soubory</string>
+    <string name="download">Stáhnout</string>
+    <string name="cant_delete_book">Nelze vymazat knihu %s</string>
+    <string name="cant_delete_book_error">Nelze vymazat knihu %s, %s</string>
+    <string name="storage_not_available_writing">Zápis do úložiště není povolen</string>
+    <string name="cant_create_folder_for_downloads">Nelze vytvořit složku pro stahování %s</string>
+    <string name="internet_not_available">Není příjoení k internetu</string>
+    <string name="cant_access_storage">Není povolen přístup k úložišti</string>
+    <string name="not_enough_memory">Nedostatek paměti</string>
+    <string name="save_web_loading">Opravdu chcete stáhnout %s?\n Soubor lze najít ve složce stažených souborů</string>
+    <string name="no_saved_files">Žádné uložené soubory</string>
+    <string name="deleted">Smazáno</string>
+    <string name="no_downloads_description">Můžete stáhnout video, audio z položky v menu s názvem “I.M. Danilov” a “AllatRa TV”, pod videi, je obvykle tlačítko “Stáhnout”  pro různé formáty videa/audia.\n\nPo dokončení stahování, je možné soubory odsuď otevřít či smazat .\n\nPrůbech stahování lze sledovat v notifikacích Androidu, pomocí progress panelu.</string>
+    <string name="unknown_format">Nemůžu otevřít soubor - neznámý formát</string>
     <string name="sound_level_maximum">Úroveň zvuku - Maximální:</string>
-    <string name="to_verdict">Countdown (GMT +0):</string>
-    <string name="verdict_in_exec">In execution (GMT +0):</string>
-    <string name="no_permissions_to_get_files">No permissions to get files</string>
-    <string name="chetverik_short_title">Chetverik</string>
+    <string name="to_verdict">V provedení (GMT +0):</string>
+    <string name="verdict_in_exec">V provedení (GMT +0):</string>
+    <string name="no_permissions_to_get_files">Chybí oprávnění k přístupu k souborům</string>
+    <string name="chetverik_short_title">Četverik</string>
 
     <plurals name="mins_to_allat">
             <item quantity="one">%d minuta do Allatu</item>        
@@ -145,20 +145,20 @@
         <item quantity="other">%d Minut</item>
     </plurals>
 
-    <string name="timer">Timer</string>
-    <string name="practice_timer">Practice timer</string>
+    <string name="timer">Časovač</string>
+    <string name="practice_timer">Časovač praktik</string>
     <string name="minutes">Minuty</string>
     <string name="seconds">Sekundy</string>
     <string name="practice_stage_start">Příprava</string>
-    <string name="practice_desk">This is a timer with sound signals for working in practices, it is possible to choose a delay before start working. The signals for each Allat are the same, the signal for ending practice is different. For example, total duration of Chetverik practice 4 Allat + selected delay time. The timer can be manually stopped or it can stop and return to its original state after the end.\n\nBefore you start practicing, you can choose delay that you need to enter the altered state of consciousness.</string>
+    <string name="practice_desk">Časovač se zvukovým signálem určeným pro praktiky s možností nastavení zpoždění začátku odpočtu. Zvuk na začátku odpočtu Allatu je pořád stejný avšak na konci Allatu je zvuk jiný. Například, celkový čas provádění Četveriku jsou 4 Allaty + nastavené zpoždění začátku. Časovač může být manuálně zastaven nebo se zastaví sám, po uplynutí nastavené doby a vrátí se zpět do původního stavu.\n\nPředtím než spustíte časovač, je vhodné si nastavit libovolné zpoždění k přechodu do změněného stavu vědomí.</string>
     <string name="description">Popis</string>
     <string name="prepearing_time">Čas pro přípravu</string>
     <string name="info">Info</string>
-    <string name="press_double_to_exit">Press double to exit</string>
-    <string name="qty">Num of</string>
-    <string name="allats">Allats</string>
-    <string name="half_allat">Half Allat</string>
-    <string name="full_allat">Full Allat</string>
+    <string name="press_double_to_exit">Dvakrát stiskni k ukončení</string>
+    <string name="qty">Počet</string>
+    <string name="allats">Allatů</string>
+    <string name="half_allat">Poloviční Allat</string>
+    <string name="full_allat">Celý Allat</string>
 
     <string name="save">Uložit</string>
     <string name="notes">Poznámky</string>
@@ -172,7 +172,7 @@
     <string name="duration_title">Trvání</string>
     <string name="duration">Trvání:</string>
     <string name="selected_date">Vybrané datum: %s</string>
-    <string name="backup_toolbar_title">Backup</string>
+    <string name="backup_toolbar_title">Záloha</string>
     <string name="backup_description">Zde můžete nakonfigurovat, jak často budou vytvářeny zálohy, a obnovit data ze záložního souboru. Soubor je uložen v \"%s\" Z bezpečnostních důvodů je soubor zašifrován, aby bylo možné obnovit data, musíte zadat klíč, který jste nainstalovali. Záloha ukládá oblíbené citáty, oblíbené podobenství, deník praktik a zápasník. Pro lepší bezpečnost dat je dobré tento soubor uložit do cloudu nebo někde jinde bez ohledu na zařízení, kde se nachází aplikace, takže pokud ztratíte zařízení nebo trvale odstraníte data, můžete je kdykoli obnovit pomocí umístění souboru do \"%s\" a kliknutím na „Obnovit data“</string>
     <string name="expand_bckp_desc">Rozbalte popis</string>
     <string name="collapse_bckp_desc">Sbalit popis</string>
@@ -201,7 +201,7 @@
     <string name="process_confirm">Ok</string>
     <string name="filter">Filtr</string>
     <string name="note">Poznámka:</string>
-    <string name="date_filter">Filtr data:</string>
+    <string name="date_filter">Filtr dat:</string>
     <string name="when">Když:</string>
     <string name="edit_calendar">Vybrat</string>
     <string name="end">Konec:</string>
@@ -210,7 +210,7 @@
     <string name="practice_title">Praktika:</string>
     <string name="sort_by">Seřazeno podle</string>
     <string name="filter_by_practice">Filtrovat podle praxe</string>
-    <string name="start_time_first">First need start time</string>
+    <string name="start_time_first">V prvé řadě je třeba spustit časovač</string>
     <string name="practice_and_time_mandatory">Praktika a čas zahájení jsou povinná pole</string>
     <string name="no_items_to_filter">Žádné položky k filtrování</string>
     <string name="time_note_mandatory">Poznámka a čas jsou povinná pole</string>
