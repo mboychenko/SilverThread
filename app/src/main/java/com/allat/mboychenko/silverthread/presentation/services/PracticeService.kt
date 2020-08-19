@@ -24,7 +24,7 @@ class PracticeService : Service() {
     private lateinit var mAudioManager: AudioManager
     private var originalVolume: Int = 0
     private var allatSize: Long = ONE_ALLAT_MILLIS
-
+    private var isHigh : Boolean = true
     private val iBinder = LocalBinder()
     private var stagesViewCallback: PracticeActionsCallback? = null
 
@@ -86,15 +86,22 @@ class PracticeService : Service() {
                     stage = PracticeStage.ALLAT
                     stagesViewCallback?.timeLeft(allatSize)
                     currentLeftMillis = allatSize
-                    playSound(R.raw.practice_stage)
+                    if(isHigh) {
+                        playSound(R.raw.practice_end_higher)
+                    } else {
+                        playSound(R.raw.practice_stage)
+                    }
                 } catch (ex: NoSuchElementException) {
-                    playSound(R.raw.practice_end)
+                    if(isHigh) {
+                        playSound(R.raw.practice_end_higher)
+                    } else {
+                        playSound(R.raw.practice_end)
+                    }
                     stopTimer()
                     return
                 }
                 start()
             }
-
 
             override fun onTick(millis: Long) {
                 currentLeftMillis = millis
@@ -104,12 +111,15 @@ class PracticeService : Service() {
     }
 
     fun playSound(@RawRes rawResId: Int) {
-        val assetFileDescriptor = applicationContext.resources.openRawResourceFd(rawResId) ?: return
+        val assetFileDescriptor =
+            applicationContext.resources.openRawResourceFd(rawResId) ?: return
+
         mediaPlayer.run {
             reset()
             setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.declaredLength)
             prepareAsync()
         }
+
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -119,6 +129,7 @@ class PracticeService : Service() {
                 val startOffset = intent.extras?.getInt(EXTRAS_OFFSET_KEY,0) ?: 0
                 val allats = intent.extras?.getInt(EXTRAS_ALLATS_NUM_KEY,1) ?: 1
                 val allatLengthFull = intent.extras?.getBoolean(EXTRAS_ALLATS_LEN_FULL_KEY,true) ?: true
+                isHigh = intent.extras?.getBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY,true) ?: true
 
                 if (!allatLengthFull) {
                     allatSize = HALF_ALLAT_MILLIS
@@ -138,7 +149,11 @@ class PracticeService : Service() {
                             stage = PracticeStage.ALLAT
                             stagesViewCallback?.timeLeft(allatSize)
                             currentLeftMillis = allatSize
-                            playSound(R.raw.practice_stage)
+                            if(isHigh) {
+                                playSound(R.raw.practice_end_higher)
+                            }else {
+                                playSound(R.raw.practice_stage)
+                            }
                             allatIntervalTimer.start()
                         }
 
@@ -153,7 +168,11 @@ class PracticeService : Service() {
                 } else {
                     currentAllat = allatArray.pop()
                     stage = PracticeStage.ALLAT
-                    playSound(R.raw.practice_stage)
+                    if(isHigh) {
+                        playSound(R.raw.practice_end_higher)
+                    } else {
+                        playSound(R.raw.practice_end)
+                    }
                     allatIntervalTimer.start()
                 }
                 startForeground(NOTIFICATION_ID_CHETVERIK, getPracticeNotification(applicationContext, stage, currentAllat))
@@ -229,6 +248,7 @@ class PracticeService : Service() {
         const val EXTRAS_ALLATS_LEN_FULL_KEY = "EXTRAS_ALLATS_LEN_FULL_KEY"
         const val ONE_ALLAT_MILLIS = 717000L //00:11:56.74 rounded to 00:11:57 Allat
         const val HALF_ALLAT_MILLIS = 358000L //Half Allat
+        const val EXTRAS_VOLUME_HIGH_FULL_KEY = "EXTRAS_VOLUME_HIGH_FULL_KEY"
     }
 
 }

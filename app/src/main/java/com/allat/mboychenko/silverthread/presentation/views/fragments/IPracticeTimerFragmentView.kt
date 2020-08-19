@@ -8,7 +8,11 @@ interface IPracticeTimerFragmentView {
     fun getAllatsNum(): Int
     fun getAllatLengthShort(): Boolean
     fun setAllatLengthShort(short: Boolean)
+
     fun setMinsViewOffset(min: Int)
     fun setSecondsViewOffset(sec: Int)
     fun stageTimeRemaining(mins:Int, sec: Int)
+
+    fun getVolumeHigh(): Boolean
+    fun setVolumeHigh(short: Boolean)
 }

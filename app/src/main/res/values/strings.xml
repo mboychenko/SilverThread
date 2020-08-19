@@ -184,6 +184,7 @@
     <string name="press_double_to_exit">Нажмите дважды чтобы выйти</string>
     <string name="qty">Колл-во</string>
     <string name="allats">Аллатов</string>
+    <string name="volume_high_text">Громкость выше</string>
 
     <string name="save">Сохранить</string>
     <string name="notes">Заметки</string>
