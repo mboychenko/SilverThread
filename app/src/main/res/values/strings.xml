@@ -184,6 +184,7 @@
     <string name="press_double_to_exit">Нажмите дважды чтобы выйти</string>
     <string name="qty">Колл-во</string>
     <string name="allats">Аллатов</string>
+    <string name="volume_high_text">Громкость выше</string>
 
     <string name="save">Сохранить</string>
     <string name="notes">Заметки</string>
@@ -257,6 +258,7 @@
     <string name="power_management">Power Management</string>
     <string name="autostart_management">AutoStart Management</string>
     <string name="parables_title">Притчи</string>
+    <string name="volume_higher">Громкость выше</string>
 
     <string name="diary_date_format">dd MMM, yyyy \'в\' HH:mm</string>
 

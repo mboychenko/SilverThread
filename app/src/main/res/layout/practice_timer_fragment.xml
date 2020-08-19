@@ -172,6 +172,19 @@
         android:textSize="24sp"
         tools:text="12:23"/>
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/volumeChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:textSize="14sp"
+        app:switchPadding="8dp"
+        android:textColor="@color/dark_gray"
+        android:text="@string/volume_higher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/activeStageGroup"
         android:layout_width="wrap_content"
@@ -182,7 +195,7 @@
         android:id="@+id/setupRemainingGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider,fullAllat,switchAllat,shortAllat" />
+        app:constraint_referenced_ids="minutes,seconds,min_title,sec_title,delay_desc,allats,allats_desc,allats_title,divider,fullAllat,switchAllat,shortAllat,volumeChange" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
