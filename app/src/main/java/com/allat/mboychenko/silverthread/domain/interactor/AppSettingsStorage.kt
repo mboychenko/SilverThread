@@ -6,4 +6,7 @@ interface AppSettingsStorage {
     fun setBackupInterval(value: Int)
     fun updateLastBackupTime()
     fun getLastBackupTime(): Long
+    fun getEveryDayWorkTimes(): Int
+    fun addOneEveryDayWork()
+    fun clearEveryDayWork()
 }

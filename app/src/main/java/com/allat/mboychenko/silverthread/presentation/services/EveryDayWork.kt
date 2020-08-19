@@ -4,8 +4,12 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 import com.allat.mboychenko.silverthread.domain.interactor.AllatNotificationsSettingsStorage
+import com.allat.mboychenko.silverthread.domain.interactor.AppSettingsStorage
+import com.allat.mboychenko.silverthread.domain.interactor.AppSettingsStorageInteractor
 import com.allat.mboychenko.silverthread.domain.interactor.QuotesDetailsStorage
+import com.allat.mboychenko.silverthread.presentation.helpers.isWorkScheduled
 import com.allat.mboychenko.silverthread.presentation.helpers.reInitTimers
+import com.allat.mboychenko.silverthread.presentation.helpers.runTaskOnComputation
 import com.allat.mboychenko.silverthread.presentation.helpers.setupRandomQuoteNextAlarm
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -17,9 +21,12 @@ class EveryDayWork(val context: Context, params: WorkerParameters)
     : CoroutineWorker(context, params), KoinComponent {
 
     override suspend fun doWork(): Result {
+        val settingsStorage: AppSettingsStorage by inject()
         val allatStorage: AllatNotificationsSettingsStorage by inject()
         val quoteStorage: QuotesDetailsStorage by inject()
         val workManager: WorkManager by inject()
+
+        settingsStorage.addOneEveryDayWork()
 
         reInitTimers(context,
             allatStorage.getAllatTimezone(),
@@ -50,24 +57,47 @@ class EveryDayWork(val context: Context, params: WorkerParameters)
     }
 
     companion object {
-        const val DAILY_TIMERS_CHECKER_WORK_TAG = "DAILY_TIMERS_CHECKER_WORK_TAG"
+        private const val EVERY_DAY_WORK_TASK_TAG = "EVERY_DAY_WORK_TASK_TAG"
 
-        fun initUniquePeriodicWork(workManager: WorkManager) {
-            val timersUpdateBuilder =
-                PeriodicWorkRequest.Builder(
-                    EveryDayWork::class.java,
-                    12,
-                    TimeUnit.HOURS
-                )
+        fun initWork(workManager: WorkManager, context: Context) {
+            runTaskOnComputation {
+                val storage = AppSettingsStorageInteractor(context) as AppSettingsStorage
+                val everyDayWorkExecutedTimes = storage.getEveryDayWorkTimes()
+                if (everyDayWorkExecutedTimes > 9 || !workManager.isWorkScheduled(EVERY_DAY_WORK_TASK_TAG)) {
 
-            //hack
-            timersUpdateBuilder.setInitialDelay(-1L, TimeUnit.MILLISECONDS)
+                    storage.clearEveryDayWork()
 
-            workManager.enqueueUniquePeriodicWork(
-                DAILY_TIMERS_CHECKER_WORK_TAG,
-                ExistingPeriodicWorkPolicy.REPLACE,
-                timersUpdateBuilder.build()
-            )
+                    val timersUpdateBuilder =
+                        PeriodicWorkRequest.Builder(
+                            EveryDayWork::class.java,
+                            12,
+                            TimeUnit.HOURS
+                        )
+
+                    val now = Calendar.getInstance()
+                    val nowHour = now.get(Calendar.HOUR_OF_DAY)
+                    val whenStartHour = if (nowHour in 5..16) 17 else 5
+                    val nextDay = whenStartHour == 5 && nowHour !in 0..4
+
+                    val fireIn = Calendar.getInstance()
+                    fireIn.set(Calendar.HOUR_OF_DAY, whenStartHour)
+                    fireIn.set(Calendar.MINUTE, 25)
+                    fireIn.set(Calendar.SECOND, 0)
+                    if (nextDay) {
+                        fireIn.add(Calendar.DAY_OF_MONTH, 1)
+                    }
+
+                    val initDelay = fireIn.timeInMillis - now.timeInMillis
+
+                    timersUpdateBuilder.setInitialDelay(initDelay, TimeUnit.MILLISECONDS)
+
+                    workManager.enqueueUniquePeriodicWork(
+                        EVERY_DAY_WORK_TASK_TAG,
+                        ExistingPeriodicWorkPolicy.REPLACE,
+                        timersUpdateBuilder.build()
+                    )
+                }
+            }
         }
     }
 }

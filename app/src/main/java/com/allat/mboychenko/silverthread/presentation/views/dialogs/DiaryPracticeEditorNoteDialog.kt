@@ -33,7 +33,7 @@ class DiaryPracticeEditorNoteDialog : DialogFragment() {
     private lateinit var save: TextView
     private lateinit var cancel: TextView
 
-    private val practicesNotesViewModel: IPracticeNotesEditorVM by sharedViewModel<PracticesDiaryViewModel>(from = { parentFragment!! })
+    private val practicesNotesViewModel: IPracticeNotesEditorVM by sharedViewModel<PracticesDiaryViewModel>(from = { requireParentFragment() })
 
     private val dateFormatPattern: String by lazy {
         context?.getString(R.string.diary_date_format) ?: "dd MMM, yyyy 'at' HH:mm"

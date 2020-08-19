@@ -182,7 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="sort_icon,filter_icon,filter_icon,filter,date_filter,cancel_date_filter" />
+            app:constraint_referenced_ids="sort,filter" />
 
     <!--top sec barrier-->
 

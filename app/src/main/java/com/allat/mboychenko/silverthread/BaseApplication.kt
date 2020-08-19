@@ -7,8 +7,8 @@ import androidx.multidex.MultiDex
 import androidx.work.*
 import com.allat.mboychenko.silverthread.presentation.di.*
 import com.allat.mboychenko.silverthread.presentation.services.AllatRadioService
+import com.allat.mboychenko.silverthread.presentation.services.EveryDayWork
 import com.allat.mboychenko.silverthread.presentation.services.FileLoaderService
-import com.allat.mboychenko.silverthread.presentation.services.HackInitDailyWork
 import com.allat.mboychenko.silverthread.utils.updateVersion
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.android.inject
@@ -55,7 +55,7 @@ abstract class BaseApplication : Application() {
     }
 
     private fun scheduleEveryDayWork(workManager: WorkManager) {
-        HackInitDailyWork.initWork(workManager)
+        EveryDayWork.initWork(workManager, applicationContext)
     }
 
     override fun onLowMemory() {

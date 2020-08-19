@@ -9,7 +9,6 @@ import com.allat.mboychenko.silverthread.data.storage.preferences.Storage
 import com.allat.mboychenko.silverthread.data.storage.preferences.StorageImplementation
 import com.allat.mboychenko.silverthread.domain.interactor.FileLoaderDetailsInteractor
 import com.allat.mboychenko.silverthread.presentation.helpers.*
-import com.allat.mboychenko.silverthread.presentation.services.EveryDayWork.Companion.DAILY_TIMERS_CHECKER_WORK_TAG
 
 fun updateVersion(context: Context, workManager: WorkManager) {
     runTaskOnBackground(ExecutorThread.IO) {
@@ -36,6 +35,11 @@ private fun updateScript(context: Context, storage: Storage, workManager: WorkMa
         storage.putBoolean(PATCH_45_APPLIED_PREF_KEY, true)
     }
 
+    if (!storage.getBoolean(PATCH_52_APPLIED_PREF_KEY, false)) {
+        applyPatchVer52(workManager)
+        storage.putBoolean(PATCH_52_APPLIED_PREF_KEY, true)
+    }
+
 }
 
 private fun applyPatchVer25(context: Context, storage: Storage) {
@@ -55,11 +59,16 @@ private fun applyPatchVer25(context: Context, storage: Storage) {
 }
 
 private fun applyPatchVer45(wm: WorkManager) {
-     wm.cancelUniqueWork(DAILY_TIMERS_CHECKER_WORK_TAG)
+     wm.cancelUniqueWork("DAILY_TIMERS_CHECKER_WORK_TAG") //deprecated tag
 }
 
+private fun applyPatchVer52(wm: WorkManager) {
+    applyPatchVer45(wm)
+    wm.cancelUniqueWork("HACK_INIT_DAILY_WORK_TAG") //deprecated tag
+}
 
 private const val LAST_UPDATE_VERSION_PREF = "LAST_UPDATE_VERSION_PREF"
 
 private const val PATCH_25_APPLIED_PREF_KEY = "PATCH_25_APPLIED_PREF_KEY"
 private const val PATCH_45_APPLIED_PREF_KEY = "PATCH_45_APPLIED_PREF_KEY"
+private const val PATCH_52_APPLIED_PREF_KEY = "PATCH_52_APPLIED_PREF_KEY"

@@ -88,8 +88,8 @@ class BackupHelper(
         val jsonCalendarSer: JsonSerializer<Calendar> =
             JsonSerializer { src, _, _ -> if (src == null) null else JsonPrimitive(src.timeInMillis) }
 
-        val jsonCalendarDeser: JsonDeserializer<Calendar> =
-            JsonDeserializer<Calendar> { json, _, _ ->
+        val jsonCalendarDeser: JsonDeserializer<Calendar?> =
+            JsonDeserializer<Calendar?> { json, _, _ ->
                 if (json == null) null else Calendar.getInstance().apply {
                     timeInMillis = json.asLong
                 }

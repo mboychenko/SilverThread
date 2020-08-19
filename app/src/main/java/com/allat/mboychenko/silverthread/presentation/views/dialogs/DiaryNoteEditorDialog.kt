@@ -20,7 +20,7 @@ import kotlin.reflect.KProperty
 
 class DiaryNoteEditorDialog : DialogFragment() {
 
-    private val notesViewModel: IDiaryDialogEditor by sharedViewModel<DiaryNotesViewModel>(from = { parentFragment!! })
+    private val notesViewModel: IDiaryDialogEditor by sharedViewModel<DiaryNotesViewModel>(from = { requireParentFragment() })
 
     private var noteGuid: String? = null
 
