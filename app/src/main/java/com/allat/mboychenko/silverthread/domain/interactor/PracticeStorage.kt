@@ -7,7 +7,7 @@ interface PracticeStorage {
     fun getAllatLengthStateShort(): Boolean
 
 
-    fun setVolumeStateHigh(short: Boolean)
+    fun setVolumeStateHigh(high: Boolean)
     fun getVolumeStateHigh(): Boolean
 
 

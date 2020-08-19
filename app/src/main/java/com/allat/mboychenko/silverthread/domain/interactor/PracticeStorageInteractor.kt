@@ -27,8 +27,8 @@ class PracticeStorageInteractor(private val storage: Storage) : PracticeStorage 
         storage.getBoolean(PRACTICE_ALLAT_LEN_PREF_KEY, false)
 
 
-    override fun setVolumeStateHigh(short: Boolean) {
-        storage.putBoolean(PRACTICE_ALLAT_VOLUME_HIGH_PREF_KEY, short)
+    override fun setVolumeStateHigh(high: Boolean) {
+        storage.putBoolean(PRACTICE_ALLAT_VOLUME_HIGH_PREF_KEY, high)
     }
 
     override fun getVolumeStateHigh() =

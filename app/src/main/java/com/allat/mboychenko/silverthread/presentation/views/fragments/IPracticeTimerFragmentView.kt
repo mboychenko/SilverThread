@@ -14,5 +14,5 @@ interface IPracticeTimerFragmentView {
     fun stageTimeRemaining(mins:Int, sec: Int)
 
     fun getVolumeHigh(): Boolean
-    fun setVolumeHigh(short: Boolean)
+    fun setVolumeHigh(high: Boolean)
 }

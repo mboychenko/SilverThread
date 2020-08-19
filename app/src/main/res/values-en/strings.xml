@@ -224,6 +224,7 @@
     <string name="open">Open</string>
     <string name="power_mng_desc">If you having a troubles with Allat timer, practice timer or radio, probably your device has personal battery consumption manager, such managers add side restrictions over system and may interrupt or change behaviour of applications, like kill them if in background, don\'t wake up for notifications etc. They have exceptions for their own system alarm timer app and some very famous social apps or messengers. In such cases for proper work you may need to add AllatRa app into this exceptions in battery economy / power optimisation etc. settings. Below few buttons which may bring you to this settings, its predefined list of possible setting for list of devices. In case there are no effects while you press on these buttons, you may need to open device settings and manually find such power economy / optimisation settings and add AllatRa application to exceptions list to not apply extra restrictions on app which may break native functionality.</string>
     <string name="parables_title">Parables</string>
+    <string name="volume_higher">Volume higher</string>
 
     <string name="material_calendar_monday">M</string>
     <string name="material_calendar_tuesday">T</string>

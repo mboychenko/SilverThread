@@ -1,12 +1,9 @@
 package com.allat.mboychenko.silverthread.presentation.views.fragments
 
-import android.nfc.Tag
 import android.os.Bundle
 import android.view.*
-import android.widget.CompoundButton
 import android.widget.NumberPicker
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.Group
@@ -15,8 +12,6 @@ import com.allat.mboychenko.silverthread.R
 import com.allat.mboychenko.silverthread.presentation.models.PracticeStage
 import com.allat.mboychenko.silverthread.presentation.presenters.PracticeTimerPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.practice_editor_view.*
-import kotlinx.android.synthetic.main.practice_timer_fragment.*
 import org.koin.android.ext.android.inject
 
 class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView {
@@ -27,13 +22,11 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
     private lateinit var allatPicker: NumberPicker
     private lateinit var minutesPicker: NumberPicker
 
-
     private lateinit var secondsPicker: NumberPicker
     private lateinit var stageName: TextView
     private lateinit var stageRemaning: TextView
     private lateinit var allatLengthSwitch: SwitchCompat
     private lateinit var volumeHigh: SwitchCompat
-    private lateinit var volumeLabel : TextView
 
     private lateinit var halfAllatText: TextView
     private lateinit var fullAllatText: TextView
@@ -75,7 +68,6 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
             allatLengthSwitch = findViewById(R.id.switchAllat)
             halfAllatText = findViewById(R.id.shortAllat)
             fullAllatText = findViewById(R.id.fullAllat)
-            volumeLabel = findViewById(R.id.volumeLabel)
             volumeHigh = findViewById(R.id.volumeChange)
 
             allatPicker.minValue = 1
@@ -132,8 +124,8 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
     override fun stageChanged(stage: PracticeStage, curAllat: Int) {
         when(stage) {
             PracticeStage.INIT -> initStage()
-            PracticeStage.START -> activeStage(stage.getStageDesc(context!!))
-            PracticeStage.ALLAT -> activeStage(stage.getStageDesc(context!!, curAllat))
+            PracticeStage.START -> activeStage(stage.getStageDesc(requireContext()))
+            PracticeStage.ALLAT -> activeStage(stage.getStageDesc(requireContext(), curAllat))
         }
     }
 
@@ -179,16 +171,16 @@ class PracticeTimerFragment : BaseAllatRaFragment(), IPracticeTimerFragmentView 
     }
 
 
-    override fun setVolumeHigh(short: Boolean) {
-        volumeHigh.isChecked = short.not()
+    override fun setVolumeHigh(high: Boolean) {
+        volumeHigh.isChecked = high
 
         volumeHigh.setOnCheckedChangeListener { _, isChecked ->
-            presenter.setVolumeHigh(!isChecked)
+            presenter.setVolumeHigh(isChecked)
         }
     }
 
     override fun getVolumeHigh(): Boolean {
-        return volumeHigh.isChecked.not()
+        return volumeHigh.isChecked
     }
 
     private fun switchTextColorUpdate(isChecked: Boolean) =

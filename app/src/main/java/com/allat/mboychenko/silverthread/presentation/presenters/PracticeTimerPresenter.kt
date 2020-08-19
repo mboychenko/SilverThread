@@ -58,7 +58,7 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
         super.attachView(view)
         setupOffsetIfNeed()
         setupAllatLengthIfNeed()
-//        setupVolumeHighSwitch()
+        setupVolumeHighSwitch()
         bindToChetverikService()
     }
 
@@ -95,8 +95,8 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
         manageAddToSubscription(
             runTaskOnBackgroundWithResult(ExecutorThread.IO, {
                 storage.getVolumeStateHigh()
-            }, { short ->
-                view?.setVolumeHigh(short)
+            }, { checked ->
+                view?.setVolumeHigh(checked)
             })
         )
     }
@@ -119,8 +119,8 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
         manageAddToSubscription(runTaskOnBackground { storage.setAllatLengthStateShort(short) })
     }
 
-    fun setVolumeHigh(short: Boolean) {
-        manageAddToSubscription(runTaskOnBackground { storage.setVolumeStateHigh(short) })
+    fun setVolumeHigh(high: Boolean) {
+        manageAddToSubscription(runTaskOnBackground { storage.setVolumeStateHigh(high) })
     }
 
     fun startStop() {
@@ -161,7 +161,7 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
                     val isFullAllat = view?.getAllatLengthShort()?.not() ?: true
                     putBoolean(EXTRAS_ALLATS_LEN_FULL_KEY, isFullAllat)
 
-                    val volumeHigh = view?.getVolumeHigh()?.not() ?: true
+                    val volumeHigh = view?.getVolumeHigh() ?: true
                     putBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY, volumeHigh)
                 })
             })
