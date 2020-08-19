@@ -161,7 +161,7 @@ class PracticeTimerPresenter(private val context: Context, private val storage: 
                     val isFullAllat = view?.getAllatLengthShort()?.not() ?: true
                     putBoolean(EXTRAS_ALLATS_LEN_FULL_KEY, isFullAllat)
 
-                    val volumeHigh = view?.getVolumeHigh() ?: true
+                    val volumeHigh = view?.getVolumeHigh() ?: false
                     putBoolean(EXTRAS_VOLUME_HIGH_FULL_KEY, volumeHigh)
                 })
             })
