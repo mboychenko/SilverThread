@@ -67,7 +67,7 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
             ) {
                 presenter.checkOnline()
                 Snackbar.make(view, getString(R.string.no_internet), Snackbar.LENGTH_LONG)
-                    .setActionTextColor(ContextCompat.getColor(context!!, android.R.color.holo_red_light))
+                    .setActionTextColor(ContextCompat.getColor(requireContext(), android.R.color.holo_red_light))
                     .show()
             } else {
                 presenter.play()
@@ -155,20 +155,20 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
     override fun updateOnlineStatus(online: Boolean) {
         if (online) {
             onlineStatus.text = getString(R.string.online)
-            val activeColor = ContextCompat.getColor(context!!, R.color.green)
+            val activeColor = ContextCompat.getColor(requireContext(), R.color.green)
             onlineStatus.setTextColor(activeColor)
             onlineStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 AppCompatResources.getDrawable(
-                    context!!,
+                    requireContext(),
                     R.drawable.ic_online
                 ), null, null, null
             )
         } else {
             onlineStatus.text = getString(R.string.offline)
-            onlineStatus.setTextColor(ContextCompat.getColor(context!!, R.color.red))
+            onlineStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
             onlineStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 AppCompatResources.getDrawable(
-                    context!!,
+                    requireContext(),
                     R.drawable.ic_offline
                 ), null, null, null
             )
@@ -177,9 +177,9 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
 
     override fun updateOnAirStatus(colorId: Int, textId: Int) {
         context?.let {
-            val drawableIndicator = AppCompatResources.getDrawable(context!!, R.drawable.ic_offline)
+            val drawableIndicator = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_offline)
             val middleColoredDrawable = DrawableCompat.wrap(drawableIndicator!!.mutate())
-            DrawableCompat.setTint(middleColoredDrawable, ContextCompat.getColor(context!!, colorId))
+            DrawableCompat.setTint(middleColoredDrawable, ContextCompat.getColor(requireContext(), colorId))
 
             onAirStatus.setCompoundDrawablesRelativeWithIntrinsicBounds(middleColoredDrawable, null, null, null)
             onAirStatus.setTextColor(ContextCompat.getColor(it, colorId))

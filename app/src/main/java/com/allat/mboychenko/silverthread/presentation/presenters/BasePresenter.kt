@@ -6,7 +6,7 @@ import io.reactivex.disposables.Disposable
 
 abstract class BasePresenter<T> {
 
-    protected var subscriptions = CompositeDisposable()
+    private var subscriptions = CompositeDisposable()
 
     protected var view: T? = null
         private set
@@ -25,14 +25,10 @@ abstract class BasePresenter<T> {
     }
 
     fun dispose() {
-        subscriptions.dispose()
+        subscriptions.clear()
     }
 
     protected fun manageAddToSubscription(disposable: Disposable) {
-        if (subscriptions.isDisposed) {
-            subscriptions = CompositeDisposable()
-        }
-
         subscriptions.add(disposable)
     }
 }

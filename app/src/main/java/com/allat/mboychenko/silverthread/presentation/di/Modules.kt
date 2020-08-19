@@ -115,7 +115,7 @@ val storageModule = module {
     }
 
     factory {
-        AppSettingsStorageInteractor(get()) as AppSettingsStorage
+        AppSettingsStorageInteractor(get<StorageImplementation>()) as AppSettingsStorage
     }
 
     factory {

@@ -39,7 +39,7 @@ class PasswordView : AppCompatEditText {
     )
     private var mColorStates = ColorStateList(mStates, mColors)
 
-    constructor(context: Context?) : super(context)
+    constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(
         context,
         attrs

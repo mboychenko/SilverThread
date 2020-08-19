@@ -12,7 +12,7 @@ import java.util.*
 
 class DiaryNotesCalendarDialog : BaseEventsCalendarDialog<BaseEventCalendarViewState>() {
 
-    private val viewModel: IDiaryNotesCalendarViewModel by sharedViewModel<DiaryNotesViewModel>(from = { parentFragment!! })
+    private val viewModel: IDiaryNotesCalendarViewModel by sharedViewModel<DiaryNotesViewModel>(from = { requireParentFragment() })
 
     override fun getLayoutRes() = R.layout.diary_calendar_dialog
 

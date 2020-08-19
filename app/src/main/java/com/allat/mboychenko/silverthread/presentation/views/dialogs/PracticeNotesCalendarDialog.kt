@@ -19,7 +19,7 @@ class PracticeNotesCalendarDialog : BaseEventsCalendarDialog<PracticeCalendarVie
 
     private lateinit var filterSpinner: PracticeFilterSpinner
 
-    private val notesViewModel: IPracticesDiaryCalendarViewModel by sharedViewModel<PracticesDiaryViewModel>(from = { parentFragment!! })
+    private val notesViewModel: IPracticesDiaryCalendarViewModel by sharedViewModel<PracticesDiaryViewModel>(from = { requireParentFragment() })
 
     override fun getLayoutRes(): Int = R.layout.notes_calendar_dialog
 

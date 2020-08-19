@@ -315,7 +315,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
                 stopForeground(false)
             }
             else -> {
-                stopForeground(true)
+                stopForeground(false)
             }
         }
     }
@@ -403,6 +403,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     fun stop() {
         releaseDependencies()
+        stopForeground(false)
         stopSelf()
     }
 
@@ -426,10 +427,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             mediaSession.isActive = false
             mediaSession.release()
 
-            player.stop()
-            player.release()
             player.removeMetadataOutput(metadataListener)
             player.removeListener(this)
+            player.stop()
+            player.release()
 
             status = PlaybackStatus.STOPPED
             radioActionsCallback?.onPlayerStatusChanged(status)
@@ -505,12 +506,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     private val mediasSessionCallback = object : MediaSessionCompat.Callback() {
 
         override fun onPause() {
-            super.onPause()
             pause()
         }
 
         override fun onStop() {
-            super.onStop()
             stop()
         }
 
