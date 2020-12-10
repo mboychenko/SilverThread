@@ -112,13 +112,16 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
         playFab.visibility = View.VISIBLE
         stopFab.visibility = View.VISIBLE
         pauseFab.visibility = View.INVISIBLE
+        if (!checkStopFabVisible()) {
+            stopFab.animateFabShowHide(true)
+        }
     }
 
     override fun playButtonState() {
         currentPlayerButtonsState = PlayerButtonsState.PLAYING
         playFab.visibility = View.INVISIBLE
         pauseFab.visibility = View.VISIBLE
-        if (stopFab.visibility != View.VISIBLE) {
+        if (!checkStopFabVisible()) {
             stopFab.animateFabShowHide(true)
         }
     }
@@ -127,9 +130,14 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
         currentPlayerButtonsState = PlayerButtonsState.IDLE
         playFab.visibility = View.VISIBLE
         pauseFab.visibility = View.INVISIBLE
-        if (stopFab.visibility != View.VISIBLE) {
+        if (!checkStopFabVisible()) {
             stopFab.animateFabShowHide(true)
         }
+    }
+
+    private fun checkStopFabVisible(): Boolean {
+        return stopFab.visibility != View.VISIBLE ||
+                (stopFab.layoutParams as ViewGroup.MarginLayoutParams).marginEnd == 0
     }
 
     override fun onStart() {

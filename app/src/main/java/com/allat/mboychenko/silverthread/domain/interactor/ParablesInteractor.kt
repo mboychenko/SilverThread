@@ -9,6 +9,10 @@ class ParablesInteractor(private val storage: Storage): ParablesDetailsStorage {
         return set.map { it.toInt() }.toSet()
     }
 
+    override fun rewriteFavoriteParablesPositions(newParables: Set<Int>) {
+        storage.putStringSet(PARABLES_FAVORITES_PREF_KEY, newParables.map { it.toString() }.toSet())
+    }
+
     override fun putFavoriteParablePosition(parablePos: Int) {
         val set = storage.getStringSet(PARABLES_FAVORITES_PREF_KEY).toMutableSet()
         val quotePosition = parablePos.toString()

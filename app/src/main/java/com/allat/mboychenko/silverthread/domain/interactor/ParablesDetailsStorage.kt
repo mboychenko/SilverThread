@@ -5,4 +5,5 @@ interface ParablesDetailsStorage {
     fun putFavoriteParablePosition(parablePos: Int)
     fun removeFavoriteParablePosition(parablePos: Int)
     fun restoreFavoriteParables(restoredParables: Set<Int>)
+    fun rewriteFavoriteParablesPositions(newParables: Set<Int>)
 }

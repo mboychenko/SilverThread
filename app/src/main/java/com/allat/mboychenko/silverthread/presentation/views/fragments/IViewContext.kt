@@ -21,7 +21,7 @@ interface IViewContext {
         context?.let {
             val clipboard = it.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip: ClipData = ClipData.newPlainText("AllatRa Content", copy)
-            clipboard.primaryClip = clip
+            clipboard.setPrimaryClip(clip)
         }
     }
 

@@ -90,6 +90,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     }
 
     override fun onAudioFocusChange(focusChange: Int) {
+        if (status == PlaybackStatus.STOPPED) {
+            return
+        }
+
         when (focusChange) {
             AudioManager.AUDIOFOCUS_GAIN -> {
                 player.volume = 0.8f
@@ -107,7 +111,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
     }
 
     lateinit var audioManager: AudioManager
-    private lateinit var wifiLock: WifiManager.WifiLock
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         startForeground(NOTIFICATION_ID_RADIO, getRadioNotification(applicationContext, status, mediaSession))
@@ -172,8 +175,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
         status = PlaybackStatus.INIT
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-        wifiLock = (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createWifiLock(WifiManager.WIFI_MODE_FULL, "allatRadioLock")
-
         mediaSession = MediaSessionCompat(this, javaClass.simpleName)
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS or MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS)
         transportControls = mediaSession.controller.transportControls
@@ -229,8 +230,8 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     override fun internetAvailable() {
         radioActionsCallback?.onInternetAvailable()
-        noInternet = false
-        if (status != PlaybackStatus.INIT) {
+        if (status != PlaybackStatus.INIT && status != PlaybackStatus.STOPPED && noInternet) {
+            noInternet = false
             resume()
         }
     }
@@ -242,6 +243,10 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     private var playerInIdle = true
     override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+        if (status == PlaybackStatus.STOPPED) {
+            return
+        }
+
         status = when (playbackState) {
             Player.STATE_ENDED -> PlaybackStatus.STOPPED
             Player.STATE_IDLE -> PlaybackStatus.IDLE
@@ -329,10 +334,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             showNoInternetWarning()
         }
 
-        if (!wifiLock.isHeld) {
-            wifiLock.acquire()
-        }
-
         currentStreamUri = streamUrl
 
         if (requestAudioFocus()) {
@@ -375,9 +376,6 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             )
 
         } else {
-            if (status == PlaybackStatus.STOPPED) {
-                initRadio()
-            }
             play()
         }
     }
@@ -409,13 +407,9 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     private fun releaseDependencies() {
         try {
+            status = PlaybackStatus.STOPPED
+
             unregisterReceiver(becomingNoisyReceiver)
-            connectionStateMonitor?.disable()
-
-            if (wifiLock.isHeld) {
-                wifiLock.release()
-            }
-
             abandonAudioFocus()
 
             mediaSession.setPlaybackState(
@@ -431,13 +425,12 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
             player.removeListener(this)
             player.stop()
             player.release()
-
-            status = PlaybackStatus.STOPPED
             radioActionsCallback?.onPlayerStatusChanged(status)
+
+            connectionStateMonitor?.disable()
 
             if (::telephonyManager.isInitialized)
                 telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
-
 
         } catch (e: IllegalArgumentException) {
             //if already was unregistered with stop and try again onDestroy
