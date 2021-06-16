@@ -17,14 +17,19 @@ fun updateVersion(context: Context, workManager: WorkManager) {
         val lastUpdatedVersion = storage.getIntDefault(LAST_UPDATE_VERSION_PREF, 0)
 
         if (lastUpdatedVersion < BuildConfig.VERSION_CODE) {
-            updateScript(context, storage, workManager)
+            updateScript(context, storage, workManager, lastUpdatedVersion)
         }
 
         storage.putInt(LAST_UPDATE_VERSION_PREF, BuildConfig.VERSION_CODE)
     }
 }
 
-private fun updateScript(context: Context, storage: Storage, workManager: WorkManager) {
+private fun updateScript(
+    context: Context,
+    storage: Storage,
+    workManager: WorkManager,
+    lastUpdatedVersion: Int
+) {
 
     if (!storage.getBoolean(PATCH_25_APPLIED_PREF_KEY, false)) {
         applyPatchVer25(context, storage)
@@ -41,7 +46,8 @@ private fun updateScript(context: Context, storage: Storage, workManager: WorkMa
         storage.putBoolean(PATCH_52_APPLIED_PREF_KEY, true)
     }
 
-    if (!storage.getBoolean(PATCH_53_APPLIED_PREF_KEY, false)) {
+    if (!storage.getBoolean(PATCH_53_APPLIED_PREF_KEY, false) &&
+        (lastUpdatedVersion != 0 && lastUpdatedVersion < 54)) {
         applyPatchVer53(storage)
         storage.putBoolean(PATCH_53_APPLIED_PREF_KEY, true)
     }
