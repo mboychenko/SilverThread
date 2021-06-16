@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="allatra_book_name">AllatRa</string>
+    <string name="sensei_1_book_name">Sensei 1</string>
+    <string name="sensei_2_book_name">Sensei 2</string>
+    <string name="sensei_3_book_name">Sensei 3</string>
+    <string name="sensei_4_book_name">Sensei 4</string>
+    <string name="ezoosmos_book_name">Ezoosmos</string>
+    <string name="birds_and_stone_book_name">Ptice i kamen</string>
+    <string name="crossroads_book_name">Crossroads</string>
+    <string name="uni_grain_book_name">Jedinstveno Sjeme</string>
+    <string name="con_and_per_book_name">Svijest i Osobnost</string>
+    <string name="physics_book_name">Primordial AllatRa Physics</string>
+    <string name="climate_book_name">Climate Report</string>
+    <string name="atlantida">Atlantida</string>
+    <string name="future_is_now">Climate Future Now</string>
+</resources>

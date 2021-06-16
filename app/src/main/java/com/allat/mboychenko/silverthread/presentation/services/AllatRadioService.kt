@@ -85,7 +85,7 @@ class AllatRadioService : Service(), Player.EventListener, AudioManager.OnAudioF
 
     fun getStreamTitle() = currentStreamTitle
 
-    override fun onPlayerError(error: ExoPlaybackException?) {
+    override fun onPlayerError(error: ExoPlaybackException) {
         stop()
     }
 

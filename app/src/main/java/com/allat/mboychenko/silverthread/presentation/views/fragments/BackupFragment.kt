@@ -53,6 +53,7 @@ class  BackupFragment : BaseAllatRaFragment(), IManageBackNavFragment {
     private val constraintProgress = ConstraintSet()
     private val constraintNoPermission = ConstraintSet()
     private val constraintPassReq = ConstraintSet()
+    private var showingKeyboard = false
 
     private var constraintsState: BackupConstraintState by Delegates.observable(BackupConstraintState.INIT, {_, old, new ->
         if (old != new) {
@@ -77,7 +78,7 @@ class  BackupFragment : BaseAllatRaFragment(), IManageBackNavFragment {
 
     private val intervalAdapter by lazy {
         ArrayAdapter.createFromResource(
-            context!!,
+            requireContext(),
             R.array.backup_settings,
             R.layout.support_simple_spinner_dropdown_item
         )
@@ -176,7 +177,7 @@ class  BackupFragment : BaseAllatRaFragment(), IManageBackNavFragment {
                 it.text = getString(R.string.expand_bckp_desc)
                 it.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     null, null, AppCompatResources.getDrawable(
-                        context!!,
+                        requireContext(),
                         R.drawable.ic_expand
                     ), null
                 )
@@ -188,7 +189,7 @@ class  BackupFragment : BaseAllatRaFragment(), IManageBackNavFragment {
                 it.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     null,
                     null,
-                    AppCompatResources.getDrawable(context!!, R.drawable.ic_collapse),
+                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_collapse),
                     null
                 )
                 it.isActivated = true
@@ -291,11 +292,15 @@ class  BackupFragment : BaseAllatRaFragment(), IManageBackNavFragment {
     }
 
     private fun showPasswordKeyboard() {
-        passwordView.requestFocus()
-        Handler().postDelayed({
+        if (!showingKeyboard) {
+            showingKeyboard = true
             passwordView.requestFocus()
-            inputMethodManager.showSoftInput(passwordView, 0)
-        }, 300)
+            Handler().postDelayed({
+                passwordView.requestFocus()
+                inputMethodManager.showSoftInput(passwordView, 0)
+                showingKeyboard = false
+            }, 300)
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

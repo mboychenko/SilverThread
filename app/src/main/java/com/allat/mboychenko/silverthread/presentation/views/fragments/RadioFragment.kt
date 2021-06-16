@@ -136,8 +136,8 @@ class RadioFragment : BaseAllatRaFragment(), IRadioFragmentView {
     }
 
     private fun checkStopFabVisible(): Boolean {
-        return stopFab.visibility != View.VISIBLE ||
-                (stopFab.layoutParams as ViewGroup.MarginLayoutParams).marginEnd == 0
+        return stopFab.visibility == View.VISIBLE &&
+                (stopFab.layoutParams as ViewGroup.MarginLayoutParams).marginEnd != 0
     }
 
     override fun onStart() {

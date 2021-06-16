@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AllatRa</string>
+    <string name="navigation_drawer_open">Otvorite ladicu navigacije</string>
+    <string name="navigation_drawer_close">Zatvorite ladicu navigacije</string>
+    <string name="close">Zatvori</string>
+    <string name="drawer_name">AllatRa</string>
+    <string name="practices">Vježbe</string>
+    <string name="allat">Allat</string>
+    <string name="quotes">Izreke</string>
+    <string name="r_quote">Nasumične izreke</string>
+    <string name="books">Knjige</string>
+    <string name="active_signs">Aktivni znakovi</string>
+    <string name="settings">Postavke</string>
+    <string name="notifs">Obavijesti</string>
+    <string name="devs">Programeri</string>
+    <string name="web">Web Resursi</string>
+    <string name="about_us">O nama</string>
+    <string name="meditations_title">Meditacije</string>
+    <string name="spiritual_title">Duhovne prakse</string>
+    <string name="share_link">Dijeli %s download vezu</string>
+    <string name="share_quote">Podijeli izreku</string>
+    <string name="time_to_group_meditation">Vrijeme za Allat:</string>
+    <string name="allat_started_meditation">Allat je u tijeku, do kraja:</string>
+    <string name="hide">Sakrij</string>
+    <string name="share">Podijeli</string>
+    <string name="copy">Kopiraj</string>
+    <string name="radio">Radio</string>
+    <string name="allatra_tv_im">I.M.DANILOV</string>
+    <string name="allatra_tv">AllatRa TV</string>
+    <string name="znai">Pretraži</string>
+    <string name="allatra_org">AllatRa.Org</string>
+    <string name="vesti">AllatRa Vijesti</string>
+    <string name="science">AllatRa Znanost</string>
+    <string name="partner">Partnership Sporazum</string>
+    <string name="craudfaunding">Donacije</string>
+    <string name="geo_center">AllatRa GeoCentar</string>
+    <string name="load">Učitaj</string>
+    <string name="downloading">Downloadanje…</string>
+    <string name="select_language_load">Izaberi jezik knjige:</string>
+    <string name="delete_confirmation">Da li želite izbrisati %s</string>
+    <string name="yes">Da</string>
+    <string name="cancel">Otkaži</string>
+    <string name="select_language_share">Izaberi jezik knjige za podijeliti:</string>
+    <string name="filter_by_language">Filter po jeziku:</string>
+    <string name="all">Sve</string>
+    <string name="link_to_load">Veza za učitavanje %s\n%s</string>
+    <string name="click_to_unlock">Klikni za otključavanje</string>
+    <string name="click_to_lock">Klikni za zaključavanje</string>
+    <string name="timezone_config_description"> Ova će konfiguracija vezati sve
+obavijesti i vrijeme na zaslonu Allata
+       u ovu vremensku zonu, možete je promijeniti kad god želite u odjeljku za konfiguraciju zaslona Allat</string>
+    <string name="timezone_config_local">Lokalna vremenska zona je zona vašeg uređaja.</string>
+    <string name="timezone_config_kiev">Kijevska vremenska zona ima automatsko ažuriranje ljetnog vremena itd.</string>
+    <string name="timezone_config_gmt">Greenwich nema ljetno računanje vremena.</string>
+    <string name="timezones_info">Vremenska zona Info:</string>
+    <string name="timezone_config_btn_local">Lokalnol</string>
+    <string name="timezone_config_btn_kiev">Kiev</string>
+    <string name="timezone_config_btn_gmt">Greenwich</string>
+    <string name="select_allat_timezone">Izaberi Allat vremensku zonu:</string>
+    <string name="change_timezone">Promijeni vremensku zonu:</string>
+    <string name="none">Ništa</string>
+    <string name="ring_on_end">Alarm na kraju:</string>
+    <string name="ring_on_start">Alarm na početku:</string>
+    <string name="notify_before_min">Obavijesti prije min.:</string>
+    <string name="allat_reminder">Podsjetnik na Allat</string>
+    <string name="allat_has_started">Allat je započeo!</string>
+    <string name="allat_has_ended">Allat je završio!</string>
+    <string name="random_quote">Nasumična izreka</string>
+    <string name="select_page">Idi na stranicu:</string>
+    <string name="select_page_hint">Od 1 do %d</string>
+    <string name="no_items_to_show">Nema stavki za prikaz</string>
+    <string name="favorite">Omiljeni</string>
+    <string name="remove_from_fav">Izbaci iz omiljenih</string>
+    <string name="add_to_fav">Dodaj u omiljene</string>
+    <string name="in_favorite">U Omiljene</string>
+    <string name="random_quotes">Nasumične izreke</string>
+    <string name="random_quotes_description">Ova vam postavka omogućuje nasumično dobivanje citata iz knjiga u nasumična vremena.
+       Broj takvih citata dnevno možete konfigurirati samo od 0 do 2. \n- Gdje 2 znači da u jednom danu ne može biti
+       citata uopće, možda jedan ili dva. \n- 1 znači ili ne jedan ili samo jedan dnevno. \n- 0 onemogućuje ove obavijesti
+       \n Obavijesti se mogu pojaviti od 8 ujutro po lokalnom vremenu uređaja i do 22 sata, osim vremena Allat, od 30 minuta prije i 50 poslije. Dakle, ako je vaše vrijeme u Allatu lokalno, 9 i 21,
+       tada se u intervalima od 8:30/20:30 do 9:50/ 21:50 neće prikazivati obavijesti.
+   </string>
+    <string name="confirm">Potvrdi</string>
+    <string name="num_of_quotes_per_day">Broj izreka</string>
+    <string name="play">Izvođenje</string>
+    <string name="pause">Pauza</string>
+    <string name="stop">Zaustavi</string>
+    <string name="online">Na vezi</string>
+    <string name="offline">Izvanmrežno</string>
+    <string name="on_air">U Eteru</string>
+    <string name="on_air_paused">U Eteru (Pauzirano)</string>
+    <string name="radio_error">Greška servera</string>
+    <string name="buffering">Učitavanje…</string>
+    <string name="no_internet">Nema interneta, provjeri svoju Internet vezu i probaj ponovo</string>
+    <string name="mediadata_artist">AllatRa</string>
+    <string name="mediadata_album">Radio</string>
+    <string name="mediadata_title_on_air">U Eteru</string>
+    <string name="mediadata_title_no_connection">Nema Interneta. Čekamo</string>
+    <string name="mediadata_title_on_air_paused">U Eteru (Pauzirano)</string>
+    <string name="refresh">Osvježi</string>
+    <string name="web_view_general_error">Pogreška određene web lokacije ili problem sa internetskom vezom,, pokušajte ponovo. Za neke regije neki su web izvori dostupni samo putem VPN-a</string>
+    <string name="web_view_net_error_desc">Opis pogreške: %s</string>
+    <string name="web_view_no_internet">Nema interneta \ n \ nProvjerite internetsku vezu i pokušajte ponovo</string>
+    <string name="open_practices">Otvori</string>
+    <string name="no_permissions">Nemate dopuštenje</string>
+
+    <plurals name="mins_to_allat">
+        <item quantity="one">%d minuta do Allata</item>
+        <item quantity="few">%d minute do Allata</item>
+        <item quantity="other">%d minuta do Allata</item>
+    </plurals>
+
+    <plurals name="days_to">
+        <item quantity="one">%d Dan</item>
+        <item quantity="few">%d Dana</item>
+        <item quantity="other">%d Dana</item>
+    </plurals>
+
+    <plurals name="hours_to">
+        <item quantity="one">%d Sat</item>
+        <item quantity="few">%d Sati</item>
+        <item quantity="other">%d Sati</item>
+    </plurals>
+
+    <plurals name="minutes_to">
+        <item quantity="one">%d Minuta</item>
+        <item quantity="few">%d Minuta</item>
+        <item quantity="other">%d Minuta</item>
+    </plurals>
+
+    <string name="downloads">Preuzimanja</string>
+    <string name="download">Preuzimanje</string>
+    <string name="cant_delete_book">Ne mogu izbrisati knjigu %s</string>
+    <string name="cant_delete_book_error">Ne mogu izbrisati knjigu %s, %s</string>
+    <string name="storage_not_available_writing">Pohrana nije dostupna za pisanje </string>
+    <string name="cant_create_folder_for_downloads">Ne mogu kreirati mapu za preuzimanje: %s</string>
+    <string name="internet_not_available">Internet nije dostupan</string>
+    <string name="cant_access_storage">Ne mogu pristupiti pohrani</string>
+    <string name="not_enough_memory">Nema dovoljno memorije</string>
+    <string name="save_web_loading">Želiš li preuzeti %s?\nDatoteku možete pronaći u odjeljku za navigaciju "Preuzimanja" </string>
+    <string name="no_saved_files">Nema spremljenih datoteka</string>
+    <string name="deleted">Izbrisano</string>
+    <string name="no_downloads_description">Video / audio možete preuzeti iz odjeljaka izbornika “I.M. Danilov ”i„ AllatRa TV ”, ispod videozapisa obično se nalaze gumbi„ Preuzmi ”za različite formate video / audio zapisa. \n\nNakon završetka preuzimanja, datoteke će ovdje biti dostupne za otvaranje ili brisanje.\n\nStatus učitavanja možete pronaći u obavijestima, proširujući statusnu traku.</string>
+    <string name="unknown_format">Ne mogu otvoriti datoteku. Nepoznat format</string>
+    <string name="sound_level_maximum">Nivo zvuka - Maximalan:</string>
+    <string name="to_verdict">Odbrojavanje (GMT +0):</string>
+    <string name="verdict_in_exec">Izvršava se (GMT +0):</string>
+    <string name="no_permissions_to_get_files">Nema dozvola za dobivanje datoteka</string>
+    <string name="chetverik_short_title">Četverik</string>
+
+    <string name="minutes">Minuta</string>
+    <string name="seconds">Sekundi</string>
+    <string name="practice_stage_start">Priprema</string>
+    <string name="practice_desk">Ovo je brojač sa zvučnim signalima za rad u praksama, moguće je odabrati kašnjenje prije početka rada. Signali za svaki Allat su isti, signal za završetak vježbanja je različit. Na primjer, ukupno trajanje vježbe Chetverik 4 Allat + odabrano vrijeme odgode. Tajmer se može ručno zaustaviti ili se nakon završetka može zaustaviti i vratiti u prvobitno stanje. .\n\nPrije nego što počnete vježbati, možete odabrati odgodu koja vam je potrebna za ulazak u promijenjeno stanje svijesti.</string>
+    <string name="timer">Brojač</string>
+    <string name="description">Opis</string>
+    <string name="prepearing_time">Vrijeme za pripremu</string>
+    <string name="info">Info</string>
+    <string name="press_double_to_exit">Duplik klik za izlazak</string>
+    <string name="qty">Broj</string>
+    <string name="allats">Allata</string>
+    <string name="practice_timer">Brojač za vježbe</string>
+    <string name="half_allat">Pola Allata</string>
+    <string name="full_allat">Cijeli Allat</string>
+
+    <string name="save">Spremi</string>
+    <string name="notes">Obavijesti</string>
+    <string name="diary">Dnevnik</string>
+    <string name="edit">Uredi</string>
+    <string name="observations_title">Zapažanja</string>
+    <string name="observations">Zapažanja:</string>
+    <string name="calendar">Kalendar</string>
+    <string name="time">Vrijeme</string>
+    <string name="name">Ime</string>
+    <string name="duration_title">Trajanje</string>
+    <string name="duration">Trajanje:</string>
+    <string name="selected_date">Odabrani datum: %s</string>
+    <string name="backup_toolbar_title">Sigurnosna kopija</string>
+    <string name="backup_description">Ovdje možete konfigurirati koliko često će se stvarati sigurnosne kopije i vraćati podatke iz sigurnosne kopije. Datoteka je pohranjena u \"%s\" Iz sigurnosnih razloga datoteka je šifrirana, za vraćanje podataka trebate unijeti ključ koji ste instalirali. Sigurnosna kopija sprema omiljene citate, omiljene parabole, dnevnik vježbanja i dnevnik. Radi veće sigurnosti podataka, poželjno je ovu datoteku spremiti u oblak ili negdje drugdje, bez obzira na uređaj na kojoj se aplikacija nalazi, pa ako izgubite uređaj ili trajno izbrišete podatke, svoje podatke uvijek možete vratiti tako da datoteku smjestite u  \"%s\" i kliknete "Vrati podatke" </string>
+    <string name="expand_bckp_desc">Proširi opis</string>
+    <string name="collapse_bckp_desc">Sažmi opis</string>
+    <string name="success_backup">Sigurnosna kopija uspješno je stvorena</string>
+    <string name="success_restore">Podaci su uspješno vraćeni </string>
+    <string name="restoring">Obnavljanje</string>
+    <string name="backup">Sigurnosna kopija</string>
+    <string name="finished">Završeno</string>
+    <string name="finished_with_error">Završeno uz greške</string>
+    <string name="cant_backup_no_storage_permission">Ne može se napraviti sigurnosna kopija, nema dozvole za pohranu datoteka </string>
+    <string name="failed_restore_no_backup_file">Vraćanje nije uspjelo, nema sigurnosne kopije datoteke %s</string>
+    <string name="failed_restore_wrong_password">Vraćanje nije uspjelo, neispravna lozinka</string>
+    <string name="restore_in_progress">Vraćanje u tijeku</string>
+    <string name="backup_in_progress">Stvaranje sigurnosne kopije u tijeku</string>
+    <string name="in_progress">U tijeku</string>
+    <string name="req_perm_desc">Da biste stvorili sigurnosnu kopiju ili vraćali iz nje, prvo morate dati dopuštenje za pohranu datoteka</string>
+    <string name="request_permission">Dopuštenje odobreno</string>
+    <string name="pswd_req_for_restore">Za vraćanje iz sigurnosne kopije unesite lozinku koju ste postavili</string>
+    <string name="setup_password_description">Postavite lozinku za šifriranje podataka aplikacije. \n Da biste vratili sigurnosnu kopiju, trebate koristiti istu lozinku.\n Zapamtite lozinku, bez nje nije moguće dešifrirati i vratiti podatke</string>
+    <string name="backup_title">Postavke sigurnosne kopije</string>
+    <string name="backup_interval_title">Interval sigurnosne kopije:</string>
+    <string name="backup_btn_title">Ručna izrada sigurnosne kopije</string>
+    <string name="update_pswd_and_backup_title">Ažuriraj lozinku &amp; Sigurnosna kopija</string>
+    <string name="restore_btn_title">Vrati podatke</string>
+    <string name="only_letters_and_digits_allowed">Samo slova i brojke su dozvoljene</string>
+    <string name="process_confirm">Ok</string>
+    <string name="filter">Filter</string>
+    <string name="note">Bilješka:</string>
+    <string name="date_filter">Filter datuma:</string>
+    <string name="when">Kada:</string>
+    <string name="edit_calendar">Izaberi</string>
+    <string name="end">Kraj:</string>
+    <string name="start">Kreni:</string>
+    <string name="practice">Vježba:</string>
+    <string name="practice_title">Vježba:</string>
+    <string name="sort_by">Sortiraj po</string>
+    <string name="filter_by_practice">Filtriraj prema vježbi</string>
+    <string name="start_time_first">Prvo potrebno je vrijeme početka</string>
+    <string name="practice_and_time_mandatory">Vježba i vrijeme početka su obavezna polja</string>
+    <string name="no_items_to_filter">Nema stavki za filtriranje</string>
+    <string name="time_note_mandatory">Bilješka i vrijeme su obavezna polja</string>
+    <string name="selected_time_cant_be_before_now">Odabrano vrijeme ne može biti prije ovog trenutka</string>
+    <string name="time_cant_be_earlier_then">Odabrano vrijeme ne može biti ranije od %s</string>
+    <string name="mins">%d min</string>
+    <string name="diary_date_format">dd MMM, yyyy \'at\' HH:mm</string>
+    <string name="settings_toolbar_title">Postavke</string>
+    <string name="autostart_mng_not_found">Upravitelj automatskog pokretanja nije pronađen za ovaj uređaj</string>
+    <string name="power_mng_not_found">Upravitelj napajanja nije pronađen za ovaj uređaj</string>
+    <string name="open">Otvori</string>
+    <string name="power_mng_desc">Ako imate problema s brojačem Allat vježbi ili radiom, vjerojatno vaš uređaj ima osobni upravitelj potrošnje baterije, takvi upravitelji dodaju dodatna ograničenja nad sustavom i mogu prekinuti ili promijeniti ponašanje aplikacija, poput gašenja ako su u pozadini, nema alarma za obavijesti itd. Imaju izuzetake za vlastite programe za odbrojavanje alarma sustava i neke vrlo poznate društvene aplikacije ili poruke. U takvim slučajevima za pravilan rad možda ćete trebati dodati aplikaciju AllatRa u ove iznimke u postavkama štednje baterije / optimizacije napajanja itd. Ispod nekoliko gumbova koji vas mogu dovesti do ovih postavki, nalazi se unaprijed definiran popis mogućih postavki za popis uređaja. U slučaju da nema efekata dok stiskate ove gumbe, možda ćete trebati otvoriti postavke uređaja i ručno pronaći takve postavke uštede energije / optimizacije i dodati aplikaciju AllatRa na popis izuzetaka kako ne biste primijenili dodatna ograničenja na aplikaciju koja mogu pokvariti izvornu funkcionalnost.</string>
+    <string name="parables_title">Prispodobe</string>
+    <string name="volume_higher">Pojačanje glasnoće</string>
+
+    <string name="material_calendar_monday">P</string>
+    <string name="material_calendar_tuesday">U</string>
+    <string name="material_calendar_wednesday">S</string>
+    <string name="material_calendar_thursday">Č</string>
+    <string name="material_calendar_friday">P</string>
+    <string name="material_calendar_saturday">S</string>
+    <string name="material_calendar_sunday">N</string>
+    <array name="material_calendar_months_array">
+        <item>Siječanj</item>
+        <item>Veljača</item>
+        <item>Ožujak</item>
+        <item>Travanj</item>
+        <item>Svibanj</item>
+        <item>Lipanj</item>
+        <item>Srpanj</item>
+        <item>Kolovoz</item>
+        <item>Rujan</item>
+        <item>Listopad</item>
+        <item>Studeni</item>
+        <item>Prosinac</item>
+    </array>
+
+</resources>

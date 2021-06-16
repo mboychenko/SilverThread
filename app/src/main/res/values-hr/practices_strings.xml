@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--can be updated with CDATA-->
+
+    <string name="practice_category_autoreport">Autogeni trening</string>
+    <string name="practice_category_meditations">Meditacije</string>
+    <string name="practice_category_spiritual">Duhovne vježbe</string>
+
+    <string name="practice_category_autoreport_description">Autotrenig je sam po sebi upravo samosvijest, pomak
+        vašeg "ja" od sekundarne svijesti do primarne i rad s primarnom sviješću na razini
+        primarne svijesti. Sada ga zovemo u određenom transformiranom, izmijenjenom obliku - autogenim treningom,
+        zahvaljujući Schultzu, kao što smo već rekli. Ali to djeluje na razini primarne svijesti, dakle
+        događaju se različite promjene u tijelu i sl.
+    </string>
+
+    <string name="practice_category_meditations_description">Meditacija je složenija praksa. Radimo uz
+        pomoć primarne svijesti sa sekundarnom, mi proučavamo sustav, praktički boraveći u sustavu,
+        zalazeći dublje, samo lagano ga ostavljajući, počinjemo ga proučavati, ali bez štete sebi. I meditacija
+        sama po sebi, kakva god bila, ona samo ostaje meditacija. Ovo je rad na razini primarne svijesti.
+    </string>
+
+    <string name="practice_category_spiritual_description">Duhovna praksa - "to je kada Osobnost prelazi izvan granica
+        u kojima svijest može funkcionirati." Upravo to razvija Osobnost. Ovo je promatranje primarne svijesti,
+        sekundarne svijesti, svih njihovih kombinacija, manifestacija, samosvijesti o sebi kao dijelu Duhovnog svijeta.
+        To je percepcija Duhovnog svijeta. Krajnji cilj je spajanje s Duhovnim svijetom ili postajanje njegovim dijelom.
+    </string>
+
+    <string name="shultz_autoreport_title">Schultz Autogeni trening</string>
+    <string name="shultz_autoreport">shultz_autoreport_hr</string>
+
+    <string name="altered_consciousness_state_title">Izmijenjeno stanje svijesti</string>
+    <string name="altered_consciousness_state">altered_consciousness_state_hr</string>
+
+    <string name="concetration_of_attention_title">Meditacija za koncentraciju pozornosti </string>
+    <string name="concetration_of_attention">concetration_of_attention_hr</string>
+
+    <string name="know_yourself_title">Upoznajte sebe</string>
+    <string name="know_yourself">Trenutno nedostupno</string>
+
+    <string name="kuvshin_title">Vrč</string>
+    <string name="kuvshin">kuvshin_hr</string>
+
+    <string name="lotus_love_bl_title">«Cvijet Lotosa»: Ljubav i Zahvalnost</string>
+    <string name="lotus_love_bl">lotus_love_bl_hr</string>
+
+    <string name="lotus_title">Cvijet Lotosa</string>
+    <string name="lotus">lotus_hr</string>
+
+    <string name="chetverik_title">Četverik</string>
+    <string name="chetverik">chetverik_hr</string>
+
+    <string name="pyramid_title">Piramida</string>
+    <string name="pyramid">pyramid_hr</string>
+
+</resources>

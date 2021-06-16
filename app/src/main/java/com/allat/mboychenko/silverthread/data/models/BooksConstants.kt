@@ -15,7 +15,8 @@ object BooksConstants {
             DE to BookDetails("https://books.allatra.org/books/getfile/pdf/1/de", 1714599),
             UA to BookDetails("https://books.allatra.org/books/getfile/pdf/1/ua", 11408219),
             UZ to BookDetails("https://books.allatra.org/books/getfile/pdf/1/uz", 5920099),
-            BG to BookDetails("https://books.allatra.org/books/getfile/pdf/1/bg", 18501183)
+            BG to BookDetails("https://books.allatra.org/books/getfile/pdf/1/bg", 18501183),
+            HR to BookDetails("https://files.allatra.tv/books/hr/AllatRa_HR.pdf", 12796999)
         ),
         R.drawable.allatra_book,
         "AllatRa.pdf"
@@ -32,7 +33,8 @@ object BooksConstants {
             IT to BookDetails("https://books.allatra.org/books/getfile/pdf/2/it", 1862297),
             TR to BookDetails("https://books.allatra.org/books/getfile/pdf/2/tr", 2042962),
             FR to BookDetails("https://books.allatra.org/books/getfile/pdf/2/fr", 2344599),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/2/cz", 3639957)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/2/cz", 3639957),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Sensei-1_HR.pdf", 1977637)
         ),
         R.drawable.sensei_i,
         "Sensei 1.pdf"
@@ -43,7 +45,8 @@ object BooksConstants {
             BG to BookDetails("https://books.allatra.org/books/getfile/pdf/3/bg", 8438718),
             EN to BookDetails("https://books.allatra.org/books/getfile/pdf/3/en", 739981),
             RU to BookDetails("https://books.allatra.org/books/getfile/pdf/3/ru", 22719030),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/3/cz", 3718867)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/3/cz", 3718867),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Sensei-2_HR.pdf", 919192)
         ),
         R.drawable.sensei_ii,
         "Sensei 2.pdf"
@@ -54,7 +57,8 @@ object BooksConstants {
             EN to BookDetails("https://books.allatra.org/books/getfile/pdf/4/en", 919477),
             RU to BookDetails("https://books.allatra.org/books/getfile/pdf/4/ru", 21106662),
             BG to BookDetails("https://books.allatra.org/books/getfile/pdf/4/bg", 12681675),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/4/cz", 4093137)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/4/cz", 4093137),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Sensei-3_HR.pdf", 872463)
         ),
         R.drawable.sensei_iii,
         "Sensei 3.pdf"
@@ -65,7 +69,8 @@ object BooksConstants {
             EN to BookDetails("https://books.allatra.org/books/getfile/pdf/5/en", 2680318),
             RU to BookDetails("https://books.allatra.org/books/getfile/pdf/5/ru", 16003734),
             BG to BookDetails("https://books.allatra.org/books/getfile/pdf/5/bg", 6326124),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/5/cz", 6093318)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/5/cz", 6093318),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Sensei-4_HR.pdf", 2176637)
         ),
         R.drawable.sensei_iv,
         "Sensei 4.pdf"
@@ -76,7 +81,8 @@ object BooksConstants {
             EN to BookDetails("https://books.allatra.org/books/getfile/pdf/7/en", 1159258),
             RU to BookDetails("https://books.allatra.org/books/getfile/pdf/7/ru", 4488227),
             BG to BookDetails("https://books.allatra.org/books/getfile/pdf/7/bg", 2954118),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/7/cz", 4444478)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/7/cz", 4444478),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Ezoosmos_HR.pdf", 1493107)
         ),
         R.drawable.ezoosmos,
         "Ezoosmos.pdf"
@@ -89,7 +95,8 @@ object BooksConstants {
             UA to BookDetails("https://books.allatra.org/books/getfile/pdf/6/ua", 944387),
             BG to BookDetails("https://books.allatra.org/books/getfile/pdf/6/bg", 18752640),
             LV to BookDetails("https://books.allatra.org/books/getfile/pdf/6/lv", 15237924),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/6/cz", 3189439)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/6/cz", 3189439),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Ptice_i_kamen_HR.pdf", 1269437)
         ),
         R.drawable.bird_stone,
         "Birds And Stone.pdf"
@@ -107,7 +114,8 @@ object BooksConstants {
 
     val UNI_GRAIN = Book(
         mapOf(
-            RU to BookDetails("https://books.allatra.org/books/getfile/pdf/24/ru", 4335878)
+            RU to BookDetails("https://books.allatra.org/books/getfile/pdf/24/ru", 4335878),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Jedinstveno_sjeme_HR.pdf", 2778597)
         ),
         R.drawable.uni_grain,
         "Universal Grain.pdf"
@@ -120,7 +128,8 @@ object BooksConstants {
             UA to BookDetails("https://books.allatra.org/books/getfile/pdf/11/ua", 61402512),
             BG to BookDetails("https://books.allatra.org/books/getfile/pdf/11/bg", 70439568),
             UZ to BookDetails("https://books.allatra.org/books/getfile/pdf/11/uz", 4913451),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/11/cz", 60059931)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/11/cz", 60059931),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Primordijalna_AllatRa_Fizika_HR.pdf", 16293997)
         ),
         R.drawable.physics,
         "Physics.pdf"
@@ -134,7 +143,8 @@ object BooksConstants {
             BG to BookDetails("https://books.allatra.org/books/getfile/pdf/23/bg", 2304900),
             UZ to BookDetails("https://books.allatra.org/books/getfile/pdf/23/uz", 1263165),
             RO to BookDetails("https://books.allatra.org/books/getfile/pdf/23/ro", 1047592),
-            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/23/cz", 1446538)
+            CZ to BookDetails("https://books.allatra.org/books/getfile/pdf/23/cz", 1446538),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Svijest_i_Osobnost_HR.pdf", 2125294)
         ),
         R.drawable.con_person,
         "Consciousness And Personality.pdf"
@@ -149,7 +159,8 @@ object BooksConstants {
             DE to BookDetails("https://books.allatra.org/books/getfile/pdf/25/de", 6384693),
             KO to BookDetails("https://books.allatra.org/books/getfile/pdf/25/ko", 13361579),
             AM to BookDetails("https://books.allatra.org/books/getfile/pdf/25/am", 2779434),
-            ES to BookDetails("https://books.allatra.org/books/getfile/pdf/25/es", 3900844)
+            ES to BookDetails("https://books.allatra.org/books/getfile/pdf/25/es", 3900844),
+            HR to BookDetails("https://files.allatra.tv/books/hr/Klimatski_izvjestaj_HR.pdf", 6555015)
         ),
         R.drawable.climate,
         "Climate.pdf"
@@ -209,7 +220,8 @@ object BooksConstants {
         AM("አማርኛ"),
         ES("Español"),
         RO("Română"),
-        CZ("Čeština");
+        CZ("Čeština"),
+        HR("Hrvatski");
 
         override fun toString(): String {
             return language
@@ -217,5 +229,5 @@ object BooksConstants {
 
     }
 
-    fun getLocales() = listOf(RU, EN, BG, IT, FR, DE, UA, UZ, PL, LV, TR, KO, AM, ES, CZ, RO)
+    fun getLocales() = listOf(RU, EN, BG, IT, FR, DE, UA, UZ, PL, LV, TR, KO, AM, ES, CZ, RO, HR)
 }
