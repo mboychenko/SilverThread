@@ -1,0 +1,1301 @@
+﻿<resources>
+    <string-array name="quotes">
+        <item>
+            Sudbina vodi čovjeka vodi kroz složeno putovanje međusobnih odnosa, prirodnih pojava i zamršeno povezanih putova događaja i slučajnosti. Na samom kraju vodi do opipljivog događaja, konačnog raskrižja na životnom putu.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Život je nepredvidiv i u njemu se može dogoditi bilo što - čak i najnevjerojatnije stvari, koje ne možete ni zamisliti.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Mlado tijelo uopće nije pokazatelj starosti duše.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Sve velike stvari su smiješno jednostavne, ali potrebno je mnogo napornog rada.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Strah rođen iz mašte vidi opasnost čak i tamo gdje opasnosti uopće nema… Postoji drevna istočnjačka parabola o strahu. Mudrac se susreo s Kugom na svom putu i pitao: \'Kamo ideš?\' Odgovorila je: \'U veliki grad. Moram ubiti pet tisuća ljudi.\' Za nekoliko dana isti je mudrac ponovno susreo Kugu. \'Rekla si da ćeš ubiti pet tisuća ljudi, a ubila si svih pedeset tisuća\', optužio ju je. \'Ne\', usprotivi se Kuga. \'Ubila sam pet tisuća; ostali su pomrli od straha\'."\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Čovjek koji ovlada zdravim mislima, ima dobro zdravlje.
+            Uz zdrave misli ide zdrav duh, a sa zdravim duhom ide zdravo tijelo.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Najveća pobjeda je pobjeda nad sobom. Što to znači? Znači pobijediti vlastite negativne misli, naučiti kontrolirati ih i naučiti kontrolirati svoje emocije.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            U vašoj glavi ne smije biti ništa ne-ga-ti-vno. Samo pozitivno! Tada nećete tratiti vrijeme na borbu sa samima sobom, a vaši će postupci uvijek biti pozitivni. Mir, prije svega, treba biti unutar vas. Mir i sklad.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Vjera rađa znanje, a znanje jača vjeru. A bez vjere nikakva čuda nisu moguća na ovom svijetu.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Misao je prava moć. Puno veća nego što ljudi mogu zamisliti. Misao je u stanju pokretati planete, stvarati i uništavati cijele galaksije, što je u početku dokazao sam Bog.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Najveće čudo si ti sam, kao čovjek! Napokon, na što se svodi sva velika duhovna umjetnost? Pomaže ti postati Čovjek, tako da se postupno budiš i prisjećaš znanja koje ti je dano iskonski.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Tvoj je zadatak naučiti razumjeti uzrok i posljedicu, dubinu i suštinu situacije, te je riješiti mirnim putem.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Svaki udarac koji ste zadali u bijesu na kraju će vam se vratiti.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Ako ti je Srce otvoreno, a misli čiste, tvoj je duh besprijekoran. I to je sama srž Puta ratnika…\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Mi nismo navikli kontrolirati svoje misli u svakodnevnom životu. Zato nas vode u bilo kojem smjeru u kojem žele, zbunjujući nas svojim \'logičkim\' lancima. A nekontrolirana misao vodi uglavnom negativnim stvarima, budući da je nadzire životinjska priroda čovjeka. Zato postoje različite duhovne prakse i meditacije, za učenje, prije svega kontrole misli.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Najvažnije je da pojedinac u početku treba svladati svoju Stražu, svoje materijalno razmišljanje, stalnom željom da skupi hrabrost i odlučnost, te osvoji cijeli svijet… Ista vječna istina kao i obično, i isti vječni kamen spoticanja. Ako ga pojedinac pregazi, postat će Čovjek.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Mogućnosti čovjeka su ograničene samo njegovom maštom.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            A čast je, zapravo, jedna od odlika opće duhovnosti čovjeka, ne samo ratnika, koja znači život po visokim moralnim vrijednostima. Čovjek bez časti je nitko i ništa.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Jeste li ikad razmišljali o tome tko ste zapravo? Tko ste vi u suštini? Jeste li razmišljali o tome kako doživljavate okolni svijet? Ne sa stajališta fiziologije, već sa stajališta pogleda na život… Tko ste vi? Kako vidite, kako čujete, zašto osjećate, tko u vama razumije i tko točno opaža? Pogledajte unutar sebe.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Zaviri u svoju dušu i susrest ćeš se s lijepim i vječnim, svojim pravim \'ja\'. Sva ta vanjska taština koja postoji samo su sekunde.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Razmišljaš o budućnosti i o prošlosti. Ali živiš upravo u ovom trenutku, koji se naziva \'sada\'. A što je sada? To je dragocjeni trenutak života, to je Božji dar koji treba koristiti racionalno. Jer sutra je korak u neizvjesnost. A nije nemoguće da je to tvoj posljednji korak u ovom životu, korak do ponora, do beskonačnosti. A što će se tamo dogoditi?\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Vi niste samo biološko biće, vi ste Ljudi koji su obdareni česticom vječnosti. Kad to jednom shvatite, shvatit ćete da je vaša Sudbina u vašim rukama i puno toga ovisi o vama. I ne samo ovdje, već i tamo. Samo razmislite: tko ste vi, savršeni biorobot ili čovjek, životinja ili duhovno stvorenje?\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Pronađite kristalno vrelo svoje duše u sebi i shvatit ćete da sav taj materijalni sjaj - automobili, stanovi, vile, socijalni status - svo to materijalno bogatstvo na koje ćete potrošiti svoj svjesni život pretvorit će se u prah. Prah koji će se u ovom bunaru odmah transformirati u ništa. I život prođe. Život, kojeg ste mogli iskoristiti za preobražaj u nepregledni ocean mudrosti.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Koja je svrha života, jeste li ikad razmišljali o tome? Najviša svrha života svakog pojedinca je spoznaja njegove duše. Sve su druge stvari privremene, prolazne, samo prašina i iluzija. Jedini način da shvatite svoju dušu je kroz unutarnju Ljubav, kroz moralno pročišćavanje misli, i to kroz apsolutno čvrsto povjerenje u postizanje ovog cilja, to jest kroz unutarnju vjeru… Sve dok u sebi imate tračak života, još uvijek nije kasno za spoznaju samog sebe, pronalaženje svoga korijena, svetoga životvornog vrela svoje duše… Sredite se i shvatit ćete tko ste u stvarnosti.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Formula postizanja besmrtnosti tako jednostavna? Kontroliraj svoje misli, vjeruj i voli.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Princip je glupi otpor prema stvarnosti, sličan idiotizmu. Princip je dobar samo u egzaktnim znanostima, kao sinonim za aksiom.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Ne bi smio željeti loše drugim ljudima, čak ni u mislima. Jer snagom svoje misli postavljaš zamku za sebe, za svoje tijelo i um. I što više razmišljaš o tome, mreža postaje sve zategnutija i gušća. Jedini je izlaz postati prijatelj neprijatelju i oprostiti mu za njegova djela, jer si i ti također nesavršen\'.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Nije važan broj proživljenih godina, već njihova kvaliteta. Kako, a ne koliko.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           U ljudskom tijelu postoji duhovna priroda, ili duša, i materijalna priroda, ili životinjska, zvjerska, zovite je kako želite. Ljudski um je bojno polje ove dvije prirode. Zato u vama nastaju različite misli. A kojoj prirodi daš prednost, to ćeš postati. Ako više voliš materijalnu, životinjsku prirodu, tada ćeš biti zla i podmukla, a ako budeš slušala savjete svoje duše, bit ćeš dobra osoba i bit ćeš ugodna za druge ljude. Izbor je uvijek tvoj, jesi li tiranin ili svetac.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Okrenula si se duši, želja ti se ispunila. Kad ti je kontrola nad samom sobom oslabila, povukla te životinjska priroda, neprimjetno za tebe, svojim omiljenim egoističnim mislima. Svidjelo ti se što te svi okolo hvale, što si tako pametna, tako razumna i slično… Događa se neprestani rat dviju priroda, u tebi i za tebe. A tvoja budućnost ovisi o tome koju stranu ćeš odabrati.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Protiv vakuuma negativnih misli moguće je jedino stvoriti isti takav vakuum pozitivnih misli. Drugim riječima, kao što sam rekao ranije, prijeći na pozitivno i razmišljati o dobrim stvarima. Ali uvijek ostanite budni, slušajte o čemu razmišlja vaš mozak.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Misli duhovne prirode su misli generirane snagom Ljubavi, u širem smislu riječi. Dok su misli životinjske prirode misli o tijelu, našim instinktima, našim refleksima, megalomaniji, željama koje se u cijelosti konzumiraju materijalnim interesima i tako dalje.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Ako želite, samo naprijed, slijedite suvremeni svijet, koristite sve civilizacijske blagodati. Ali živjeti samo za to, gomilanje materijalnih dobara kao glavna svrha postojanja na zemlji, glupo je, nesvojstveno duhovnoj prirodi. Takav cilj je pokazatelj prevladavanja životinjske prirode u ljudima.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            On tko je u ljubavi je u Bogu i Bog je u njemu, jer Bog je sama Ljubav.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Zašto je svima bilo tako ugodno biti u blizini Bude, Isusa, Muhameda? Zašto se kaže da \'sveti ljudi\' blistaju? Zašto ponekad ne želimo napustiti društvo neznanaca kada ih sretnemo? Jer zrače ovom Ljubavlju. Jer im neprestano raste ova snaga, snaga dobra, snaga ljubavi, snaga ove božanske manifestacije u ljudima. Za njih kažu da je Bog u toj osobi. I to je zapravo istina.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Postoji uobičajeni izraz: \'osoba blista\', \'ona sja\'. Dakle, to je zapravo sjaj valnog polja, stvaran Ljubavlju samog pojedinca. Ljudi oko te osoba također počinju osjećati ovo polje. Osjećaju se dobro kad je ova osoba negdje u blizini, jer također počinju osjećati radost, unutarnje uzbuđenje. Puno ljudi se oporavlja od bolesti. Osjećaju se bolje čak i samo od njene prisutnosti, bez obzira na to koliko bili bolesni. Svi su privučeni ovom osobom i otvaraju joj svoje duše. Odnosno, ljudi osjećaju Ljubav. To su otvorena vrata Srca na putu prema Bogu. O ovome su svi velikani pričali i to je ono na što je Isus mislio kad je rekao: \'Pusti Boga u svoje srce\'.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Život je prekratak i bilo bi bolje da uspijete veličati duhovnu prirodu u svom srcu.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Zapravo, vi ste duša, ta vječna stvarnost koja postoji u zbilji. Trebate se samo probuditi, probuditi iz iluzije, a onda će se cijeli svijet promijeniti…\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Dobra i zla sreća postoje samo u vašem umu; sami ste ih stvorili u svojoj mašti. Kad je u vašem životu sve prekrasno, podsvjesno očekujete da će se dogoditi nešto loše i negativno. A pošto sebe predodredite za to, u konačnici to i dobijete. To smo mi izmislili igru za sebe, na vlastitu nesreću…problem je u vašoj glavi.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Najvažnije nije ono što pokazujete vanjskom svijetu, već ono što mislite i radite. Najvažnije je tko zapravo jeste i kako se ponašate, kako se posvećujete svomu duhovnom rastu. Ali ako dosegnete određenu razinu Slobode, kada dođete Bogu kao zrelo dijete, to je već zaista bolje. To je primarni cilj koji vas privlači. Otišli ste, slobodni ste, zvijezde su pred vama i očekuje vas beskrajno savršenstvo.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Svaki čovjek snosi odgovornost za svoja djela. Možda na to neće ni pomisliti, premda je na podsvjesnoj razini savršeno svjestan što radi. A najzanimljivije je to što svi ovo osjećaju i razumiju. Zato mnogi trkaju okolo cijeli život, kao njihala, iz jedne krajnosti u drugu, iz jedne religije u drugu.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            U stvarnosti, nitko osim vas nikada se neće izmoliti za vaše grijehe. Ono što je potrebno je vaše stvarno djelovanje prema svomu unutarnjem svijetu. Ono što je potrebno je stvarna zrelost duše, a ne nekakva izbjegavajuća samozavaravanja i glupava nada da nitko neće saznati što ste učinili i da ćete se izvući. Straža, koja bilježi sve vaše misli, a da ne spominjem vaše postupke, je u vama. I sudbina vaše duše bit će točno određena prema njezinu \'zapisu sjećanja\'.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Toliko smo navikli odlagati stvari koje su važne za našu dušu, za \'neodređeno kasnije\', da ne shvaćamo koliko brzo život prolazi i da nemamo vremena nešto zaista pravilno učiniti..\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Glupo je razmišljati da nas sutra čeka, ono jednostavno možda nikad ne dođe.\nIz knjige \"Sensei\""
+        </item>
+        <item>
+            Ako želiš nasmijati Boga, pričaj mu o svojim planovima.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Nema nesreća. Nesreća je samo prirodna posljedica naših nekontroliranih misli.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Zašto patiš? Pogledaj ljude koji te okružuju. Kada uvidiš njihove najbolje osobine, tvoji će problemi nestati.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Sve dok u tebi postoji tračak života, nada i dalje svijetli.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Kvaliteta proživljenih trenutaka mnogo je važnija od besmislenih godina postojanja.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Mudrost je vrlina duše, a ne godina.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Svako djelo prije svega je rođeno našom formiranom mišlju.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Vjera - to nije samo riječ, to je ogromna unutarnja snaga koju generira sam čovjek. Snaga Vjere i Ljubavi, rođenih mišlju - moći su ispočetka svojstvene čovjeku. To je ono što ga razlikuje od obične dvonožne životinje.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Moć riječi oživljava snagu misli, a snaga misli proizvodi djelovanje.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Onaj tko dobra djela čini s dobrom namjerom, nema potrebe biti tužan zbog nečega propuštenog, jer za to dobiva mnogo više snage za spoznaju svoje duše nego kad je besposlen.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Tijelo samo kočija koja te nosi od rođenja do smrti, prvo u jednoj reinkarnaciji, zatim u drugoj. Kamo ćeš stići ovisit će o načinu na koji koristiš ovu kočiju. Ili će ići sama ili ćeš je voziti.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Čovjek je sinteza duhovne i životinjske prirode. Ta je sinteza neophodna kako bi duša mogla dobiti određeni oblik; mora proći kroz materiju, drugim riječima, sazrijeti.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+           Znanstvena je fantastika u svojoj biti samo nerealizirana stvarnost.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Smisao ljudskog postojanja je savršenstvo duše.\nИз книги \"Сэнсэй\"
+        </item>
+        <item>
+            Napokon, sutra bismo mogli umrijeti, a tamo će cijeniti ono što smo njegovali unutar sebe, a ne koliko prašine smo skupili neumornim radom svoje školjke, napola istrule u zemlji.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Dobra misao i jedno dobro djelo rađa lančanu reakciju dobrih misli i dobrih djela.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Čovjek bi trebao neprestano razvijati svoj intelekt i širiti svoj um, što znači da bi se znanje trebalo širiti svugdje i u svemu, gdje god je to moguće, težiti poznavanju znanosti. Jer kroz znanje, naime znanje o sebi i okolnom svijetu, čovjek zrelo dolazi Bogu.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Što je vaš fizički život u usporedbi sa Svemirom? Nije ništa. U usporedbi sa svemirima i planetima, čovjek praktički ne postoji. Njegov život je nestvarna stvarnost, samo trenutak u jednoj od Božjih misli…\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Vaša tijela postoje u zatvorenomu vremenskom ciklusu, u kojem vi, to znači vaša duša, imate sve uvjete za puno sazrijevanje. Ali to morate shvatiti uz pomoć svog uma i spojiti ga sa svojom dušom u zajedničkim težnjama. I tada će vaš život steći pravu svrhu.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Istinska, izvorna vjera proizlazi iz znanja. A znanje dolazi kroz riječ, kroz uvjeravanje vašeg uma u valjanost pojavnog fenomena.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Potrebno je poštivati tuđu težnju za znanjem, umjesto da ga se odmah napada bajunetama vlastitog egocentrizma.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Vrag nije ništa drugo doli životinjska priroda koja je dio svake osobe i stvara negativne ideje. Čak i prijevod riječi \'sotona\' potječe iz drevnoga hebrejskog, gdje je izvorno ova riječ značila \'u suprotnosti\'. Manifestacija vraga je upravo ono što primjećujemo u sebi, u svojim lošim mislima. Samo nam se čini da smo dobri. Ali zapravo, pogledajte koliko puta dnevno probudimo životinjsku prirodu u sebi kroz svoje postupke i misli, odnosno prizivamo vraga, a ne Boga. Koliko puta dnevno u mislima ugađamo svom egu i tijelu…\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Poraziti vraga ne znači odreći se svega na svijetu. Pobijediti vraga znači pobijediti svoje negativne misli, dovesti svoje misli u red.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Svi izvanredni ljudi shvatili su Boga kroz spoznaju sebe… Bog je sveprisutna tvar, svojstvena svemu. Bog je univerzalna, inteligentna, svemoguća sila. Sve što je dano od Boga dano je za dobro čovječanstva.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Naučiti sve je nemoguće, ali tome biste trebali težiti. Čovjek bi trebao neprestano rasti u svom znanju, trebao bi razvijati svoj intelekt. Jer najvrjedniji način je razumijevanje Boga kroz vaš um, kada istinsko znanje svladava životinjsku prirodu i otvara vrata podsvijesti uz pomoć ključa Ljubavi.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Visoki moral, duša i um tri komponente za sazrijevanje duše i njezino sjedinjenje s Bogom.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Čovjek je izvorno slobodan i za njim nema grijeha. Jer što je zapravo grijeh? Grijeh je nešto što nas tlači iznutra na podsvjesnoj razini, to je nešto što nas odvaja od Boga te čini da osjećamo strah i krivnju. Dakle, to je prirodna posljedica reakcije vaše psihe nakon kršenja univerzalnih moralnih zakona i vrijednosti. To je grijeh. Ovi zakoni su kodeks vaše časti, vaše savjesti. A budući da ste ga sami prekršili, sami biste trebali postati bolji i čistiji u mislima i djelima.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Ali čovjek u svojoj biti nije Božji rob; on je Božji sin. Otac ne može mrziti svog sina, može ga samo voljeti. Jer Bog je Ljubav, a Ljubav ne može imati nikakav strah. Bog je ljudima dao slobodan izbor i to je Njegov najdragocjeniji dar ljudima kao Njegovoj djeci.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Ako okrenete svoju svijest na dobre misli, onda loše misli gube ovu moć, oslabe i nakon toga ih možemo djelotvorno kontrolirati. Uz stalnu podršku pozitivnih misli u našoj svijesti, tijek naših života postat će ujednačeniji. Najvažnije je da se čovjek duhovno razvije i nauči snagu ljubavi…\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Naš život je škola za dušu. Svaka utjelovljena osoba doživljava svoj osobni Armagedon, stajući na stranu svojih prevladavajućih, bilo dobrih ili zlih, misli. Stoga znanje koje se daje ljudima može voditi bilo slobodi, bilo ropstvu. Ali nitko se ne miješa u naš slobodni izbor, ni Bog ni vrag. Ako odaberemo Boga, idemo k Bogu; ako odaberemo vraga, idemo k vragu. To znači da ili popločavamo vlastiti put u raj, u nirvanu, ili se bacamo u pakao reinkarnacija.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Svaki čovjek u svom životu iskusi svoj osobni Armagedon, ali ne osvajaju ga svi, zapravo svi ne razumiju da su se suočili licem u lice s ovim Armagedonom. Stoga se ne trebate bojati Apokalipse koja dolazi za sve, jer je lakše umrijeti svi zajedno. Glavno je osvojiti svoj osobni Armagedon, kako se ne biste kasnije našli u toj gužvi.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Čovjek je vrlo zanimljivo stvorenje. Rođen je kao životinja, ali tijekom svog života snaga misli ga može transformirati u Biće blisko Bogu. A najnevjerojatnija stvar je da mu je dana sloboda izbora u njegovu individualnom razvoju…\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Snaga misli uistinu je jedinstvena Božja kreacija. Postoji drevni izraz napisan na sanskrtu: 
+\'Bog spava u mineralima,
+Budi se u biljkama,
+Šeta u životinjama
+I… misli u čovjeku\'.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Najvažnija stvar je probiti unutarnju Stražu do \'vrata\' naše duše. Jer upravo je u duši skrivena istinska snaga, snaga Ljubavi, koja stvara sve i koja je sposobna zapovijedati energijom Po. Na njoj se temelje sve glavne energije.. \nIz knjige \"Sensei\"
+       </item>
+        <item>
+            U stvarnom svijetu postoji samo Ljubav. Zlo postoji samo u iluzornom ljudskom svijetu, za razvoj nezrele duše. Stoga je vrlo važno generirati stalnu frekvenciju energije Ljubavi i dobra, umjesto promjenjivih fluktuacija.\nIz knjige \"Sensei \
+        </item>
+        <item>
+            Čovjek je misaono biće i njegova su temeljna snaga njegove misli.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Najvažnije je imati veliku želju, a prilike će doći dovoljno brzo.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Za svakog Vijaya postoji Rajah.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Strah rođen od mašte vidi opasnost čak i tamo gdje ne postoji.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Postani prijatelj neprijatelju i oprosti mu njegova djela, jer ti si također nesavršen.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Budali će se pripisati zasluga za razumijevanje; a za pametnog je glupo ne razumjeti.\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Оd Istine nećeš se sakriti, оd
+            Mudrosti nećeš se utajiti. Nema na Zemlji
+            Iček tajnoga, tako da se jednog dana
+            Ne bi obistinilo. Ljudski život i smrt
+            – potok su jednog procesa.
+            Razumjeti prošlost – znači naučiti
+            prevladati opasnosti sadašnjosti.
+            Isplivati ​​iz nje moguće je, samo
+            postajući Čovjekom!\nIz knjige \"Sensei\"
+        </item>
+        <item>
+            Kamen pade na pijesak – zašušte pješčana zrnca.
+Val dopre do obale – zašušte pješčana zrnca.
+Bezglavo trčiš,
+Noga u pijesku – zašušte pješčana zrnca.
+Život je samo korak,
+A godine su mu šuštava pješčana zrnca.
+           (Rigden Djappo) \nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Doći će vrijeme kad ćeš sve saznati.\nИз книги \"Сэнсэй\"
+        </item>
+        <item>
+           … slučajni sastanak, riječ, čak i radnja bez riječi može uzrokovati tijek događaja koji će nevidljivo voditi do nekih globalnih promjena, za određene pojedince i za društvo u cjelini. Ali obična osoba, koja je dala taj početni poticaj, će vjerojatno ostati nesvjesna općenitog rezultata svog djela, budući da ona živi u ograničenom malom svijetu svojih misli, okružena isključivo \'svojom stvarnošću\'. Ono što je zapravo upečatljivo je to što svi svakodnevno, čak i bez znanja o tome, voljom vlastitog izbora pridodaju svoj mali doprinos ovoj rastućoj snježnoj grudi nadolazećih događaja.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Čim čovjek bolje poimlje sebe,
+            im bolje će poimati ne
+            samo druge, no i cijeli svijet
+            U cjelini.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Sve ovisi o tvojoj unutarnjoj volji. Jer ova je moć ogromna..\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+           Život je trenutak. I svi žele biti sretni u tom trenutku. Svi žele, ali ne mogu. Zašto?
+            Međutim, sreća je tako blizu. Trebamo se samo okrenuti Dobru i jednostavno postati Ljudi.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Ako ignoriraš zlo, nećeš primijetiti kako postaješ ravnodušan prema dobru. Ali kad kažnjavaš zlo, trebaš znati kada prestati. Samo tako ćeš izbjeći opasnost u sebi. Pobjednik nije ponosan, on ne siluje i ne likuje. Pobjeđuje … prije svega sebe. Dakle, pri kažnjavanju zla trebaš na umu imati dobro.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Nije potrebno odustajati.
+            Otjeraj svoj strah.
+            Ukloni sve sumnje.
+            Vjeruj, jer je rečeno:
+            «U vjeri ćeš pronaći».\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Ljudi hoće dostojno
+            izgledati ne pred Bogom,
+            ne pred svojom Savješću, već
+            pred drugim ljudima.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Čovjek cijeni samo to, što
+           hoće vidjeti za sebe vrijednim
+            A to, što za sebe neće vidjeti
+            vrijednim, to i značenja za
+            njega nema. Zavist, mržnja,
+            inat rastu ne iz
+           vanjskog podražaja, već iz
+            unutarnjeg korijena samoljublja.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Mnogi prikrivaju svoje tajne
+            pomisli Životinjske vanjskim
+            aranžiranjem izloga, navodno stremljenju
+           k duhovnom. Ali zapravo
+            jednostavno pod pronicljivom
+            izlikom događa se realizacija
+            želja životinjske prirode,
+            zadovoljenja sve te iste megalomanije,
+           samouzvišenosti i opet,
+            tako uobičajene, puste slike
+            pred drugim ljudima.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Cijeli svijet trguje iluzijama.
+            On satkan je od laži, a niti
+            njegove pričvršćene su zavišću. Ljudi
+            sami generiraju iluziju,
+            hrane je svojom
+            nečistoćom misli
+            i sami žive u toj
+            iluziji, doživljavajući je za
+            istinsku stvarnost.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Ne uspiješ i okom mignuti,
+            a evo i starosti, u kojoj
+            već puno iz proživljenog života
+            se čini apsolutnim apsurdom i
+            posve gubi svoj smisao. Zajedno
+            sa starošću sve češće se počinju
+            pojavljivati misli o smrti,
+            koje čine čovjeka da
+            razmišlja o glavnom, – o svojoj
+            duši. Jer on se sve bliže i bliže
+            približava toj granici, otkuda
+            je došao na ovaj svijet, kako bi
+            pronašao sebe, spasio svoju dušu.
+            No, umjesto dostizanja tog cilja,
+            potrošio je vrijeme i silu nа
+           puste iluzije.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Glupost čovječja nema
+            granica. Manija ljude gura na
+            gadna djela.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Kakvu god moć čovjek
+            imao na Zemlji, on neće ikada
+            polučiti od nje udovoljetvorenje,
+            jer najviša moć jest
+            moć nad samim sobom.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Sva je složenost u jednostavnosti.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Je li ti teško uzeti pod
+            kontrolu svoje misli upravo 
+            sad? Nije. А iz takvih «sada»
+            i oblikuje se  sav život. Živi
+            «ovdje i sada» i ne padaj u
+            iluzije, nacrtane životinjskim
+            umom. Nakon svega, dana ti je sloboda
+            izbora!
+            Pa i izaberi.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Glupo je davati ribu gladnome, jer
+            on će je pojesti i opet ogladnjeti.
+            Daleko je mudrije dati mu pribor
+            i naučiti ga kako se njime koristiti.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Dok u duši živi ljubav,
+            razdvajanje je nemoguće.
+            Uostalom, glavno – ti znaš,  da ti
+            ljubiš toga čovjeka. Kako ga
+            možeš izgubiti, ako je
+            aista drag tvojoj duši,
+            ako Sjećanje i Ljubav za njega
+            nastavljaju živjeti u tebi samom…\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Čovjek – vremešan. Smrt dostavlja
+            kraj starosti i mučenja,
+            oslobađajući od bremena bivanja.
+            Za ljubeće duše - ovo je nagrada.
+            Nakon svega, u velikoj mjeri mi ne
+            postajemo drugačiji samo zato,
+            što umiremo.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Svaki čovjek, u suštini, ne
+            živi svoj stvarni život.
+            On odabire sliku koja
+            mu se sviđa i igra rolu, pritom,
+            po pravilu, ne jednu…
+            I sve vrijeme prebiva u snovima,
+            prepuštajući se ovim bajkama.
+            No nije li jednostavnije prestati
+            sanjati i odabrati sebi
+            u životu rolu dostojnu Čovjeka.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Zavedi  red u svojoj glavi.
+            Ne maštaj o lošem, o glupom,
+            o pustom. Razmišljaj više o Bogu,
+            misli o duši. Ima slobodnog
+            vremena - iskoristi ga za dobrobit
+            duše, moli, meditiraj,
+            zanimaj se duhovnim.
+            Jer život je prekratak.
+            I dat je zbog toga, kako
+            bi čovjek dokazao Bogu, da je
+            dostojan naslova Čovjek…\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Zlato je smeće za dušu i iskušenje
+            za pomisli. To je prljavština,
+            za kojom čeznu mnogi, no koja,
+            na kraju krajeva, jest obmana sablasna.
+            Istinska vrijednost za monaha –
+            u je iskrenoj molitvi za dušu svoju.
+            Nije se o sitosti trbuha svojega i zdravlju
+            tijela nužno brinuti. Bez obzira
+            koliko pojeo, prije ili kasnije
+            svejedno ćeš ogladniti. I kakvo god
+            bilo tvoje zdravlje, prije ili kasnije
+            tvoje tijelo će svejedno umrijeti. Duša je
+            vječna. I jedino je ona dostojna
+            istinske brige.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Za Boga su svi ljudi – djeca Njegova.
+            Čovjek od osmog dana od rođenja,
+            čim se duša nastani u tijelu,
+            postaje Njegovo dijete, čovječuljak
+            s malim slovom. A može li on
+            postati Čovjek s velikim slovom i
+            doći k Bogu kao zrelo stvorenje –
+            to već ovisi od njega samog, o
+            njegovoj volji i izboru.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Da bi usvojili znanja, daleko
+            jezditi nije potreba. Sve što je nužno
+            jest samo pogledati unutar sebe
+            i spoznati, tko si i što ti
+            na kraju krajeva hoćeš u ovom
+            životu.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            No kako mi možemo u svoj svojoj
+            punini cijeniti Njegov dar, izbirući
+            za sebe život crva u tami
+            opstvenog egocentrizma? Jesmo li
+            sposobni pojmiti Njegovu istinsku
+            Ljubav prema nama, ako osim sebe nikog
+            drugog uokolo ne zamjećujemo?
+            Jedno postavljanje izloga, jedna obmana i u tom
+            životu prolazi..\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Zemlja se 70% sastoji od vode.
+            Čovječanstvo u cjelini, također isto, kao
+            i svaki čovjek pojedinačno,
+            svojim mislima nesvjesno
+            unosi izmjene u pamćenje vode.
+            А potom polučujemo to,
+            što smo zaslužili.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Vjerujte, i bit će nagrađeni
+            po vjeri vašoj. Sve je jednostavno,
+            no postići, složeno.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Ništa nije nemoguće za
+            žednu dušu.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Ne probavajte razumjeti djela Božja,
+            koja su u mnogome skrivena od ljudi.
+            To je poput pokušaja
+            mrava progutati slona.
+            Jedino, što može
+            Čovjek, - to je vjerovati ili ne
+            vjerovati.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+            Odvaži se, čovječe, uistinu govorim,
+            kao što ti nije dato izbjeći
+            smrt, tako ti nije dato 
+            izbjeći Suda Božjeg.\nIz knjige \"Sensei 2\"
+        </item>
+        <item>
+      
+Čovjek čezne za Svjetlom. Čista svjetlost čuva Iskonsko u sebi, Ono od čega je čovjek stvoren. Jer on je Svjetlo koje zrači, polazi od Izvora. Ali čovjek često reflektiranu svjetlost doživljava kao emitiranu. Zaslijepljen njome, žudi za Istinom, ne shvaćajući da je to samo njeno izobličenje. Ali samo istinsko Oko je u stanju spoznati Suštinu!\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Nevjerojatan je ovaj svijet. Svaki njegov trenutak je nepredvidiv, a svaki odlučan korak u njemu korak je prema nepoznatom, budući da ne znaš što slijedi. Možeš sanjati, kovati planove za budućnost, ali život će stalno stvarati svoje izmjene, htio ti to ili ne. Kao da sudjeluješ u igri s više testova. Položi sve ispite i ostvarit ćeš svoj san. Ali pitanje je je li san vrijedan svih tih vezanja i nedaća. Pitanje je: o čemu si sanjao?\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Ako se koncentriraš na unutarnju jezgru vjerovanja i stvrdnjavaš je iz dana u dan, događa se čudo: prevladavanje poteškoća postaje fascinantno vrebanje, problemi se pretvaraju u upozorenja na opasnosti na tvomu životnom putu, neočekivani susreti i događaji postaju znakovi koji pokazuju pravi put. A ispostavilo se da je sve vrlo jednostavno! Sve što je potrebno je ne biti zaveden glupim snovima o preživljavanju i izbjegavati skretanja na njihove široke ceste, koje vode u klopku globalne prijevare.\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Duhovni ljudi ne samo da vjeruju, oni znaju za stvarnosti višeg svijeta. Dok oni koji nalaze utjehu u mislima o preživljavanju, bivajući u globalnom sustavu obmane, nisu čak ni sposobni vjerovati, jer ne samo da ne mogu vidjeti istinsku stvarnost iza koprene postojanja, nego ne mogu čak ni adekvatno živjeti vlastite živote. Svakom njegovo; dakle, što odabereš, to i dobiješ.\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Pogledajte samo kako je organiziran ovaj svijet. Njime vlada mala grupa moćnika, koja zarađuje milijarde od ljudi rade za njih. Mislite li da ti moćnici vjeruju televiziji ili novinama? Naravno da ne, jer u stvari oni su tvorci događaja koje gledate, sve se događa prema njihovu scenariju, kako bi držali u stalnom strahu i pokornosti svoje zaposlenike, tj. vas.\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Čitav pogled na svijet počinje i završava u vašim vlastitim umovima. Misli su vaše oružje. Zanemarite bilo koju negativnu sugestiju, ne dajte joj snagu svog vjerovanja.\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Upravo je vaša misao početni uzrok stvaranja vaših životnih okolnosti. nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Nikada si ne dopuštajte stav da je neka prepreka nepremostiva. Za svaku situaciju postoji izlaz. Nema bezizlaznosti za vašu podsvijest.\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Sumnje su para koja nakratko izlazi, ali onda nestaje. Stoga ne dopuštajte ključanje, kako biste izbjegli oblake pare i spriječili dragocjenu vodu, što je znanje, da ispari. Kontrolirajte svoje misli.\nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+            Strah je vrlo snažna emocija, to jest ova misao i zapovijed su postojaniji. Ako podsvjesno u njih uložite više snage i svoje uvjerenje, onda će ova uvjerenja dominirati u vašem umu. Stoga, čega se osoba boji u životu, na kraju to i dobije. \nIz knjige \"Sensei 3\"
+        </item>
+        <item>
+           Pa zašto onda trebate zanemarivati svoje misli do stanja neprohodne džungle? Uzmite oruđe i promijenite ovu džunglu u plemeniti vrt. Dovedite svoje misli u red. Jer vi ste ti koji odlučujete hoćete li se izgubiti u neprohodnoj džungli poput majmuna u potrazi za bananama ili ćete proći život poput mudraca šetajući obrađenim vrtom.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Ljudi žele postati značajni u ovom materijalnom svijetu pred drugim ljudima, kako bi zadovoljili ambicije svoje Životinjske prirode, ali ne žele dokazati Bogu da su vrijedni naziva Čovjek, težiti Njemu i brinuti se za svoju dušu.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Ali istinska sloboda je kad čovjek bude iznad ovoga svijeta, iznad materijalnih želja, kad čovjek živi svaki dan, svaki sat za svoju dušu, obogaćujući njenu riznicu dobrih djela, misli, pomoći ljudima u okolini. Kad čovjek ne živi radi svog egoizma i značaja, nego radi drugih ljudi, u ime Boga.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Za čovjeka je najteža stvar na ovome svijetu ne pasti pod svoju Životinjsku prirodu. A najvažnije je ostvariti pobjedu nad sobom.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            A prava pobjeda nad sobom je nadjačavanje egoista u sebi, želje da budeš \'kralj\' ovoga svijeta. Ovaj svijet je samo zamka za glupe ljude, koji iluziju uzimaju za stvarnost i na taj način donose mučenje i patnju svojoj duši.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            U kojim god se uvjetima nalaziš, bez obzira na prepreke koje ti sudbina donosi, trebao bi živjeti kako dolikuje Čovjeku. To jest, treba postati čovjek i pomagati ljudima oko sebe.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Glavno je u ovom životu biti duhovno slobodan iznutra, slobodan od ovog materijalnog svijeta, težiti Bogu bez skretanja s ovog puta. Tada ćeš moći biti maksimalno koristan za ljude i živjeti život vrijedan Čovjeka.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+           Budi čovjek ovdje i sada, u ovom egoističnom, materijalnom svijetu. Budi poput Lotosa koji raste u
+Sensei. Knjiga IV - Anastasia Novykh
+42
+prljavoj močvari, ali unatoč tome postaje savršeno čist! Ti si čovjek i imaš Njegovo zrno!\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Držanje u strahu i, uz njegovu pomoć, prisiljavanje ljudi na poslušnost - jedan je od glavnih i učinkovitih instrumenata Arkona, jer prema njihovim principa \'za rad je dobar samo onaj rob koji se smrtno boji svog gospodara’.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Sve ovisi o samim ljudima. Vanjske okolnosti proizlaze iz unutarnjeg svijeta čovjeka.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Što čovjek više postaje čovjekom, kontrolira svoje misli i želje, više će steći duševne slobode i njegov će um biti manje zarobljen vrtlogom politike Arkona, jer će razumjeti pravu stvarnost ovoga svijeta. A što više bude takvih duhovno slobodnih ljudi na svijetu, to će brže moć Arkona nad ljudima oslabjeti i čovječanstvo će uspostaviti svoje \'zlatno tisućljeće\'. Tako sve dobro počinje prije svega od čistoće vlastitih misli!\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Nije ni čudo da se Arkoni toliko boje djelovanja duhovno jakih slobodnih ljudi, jer znaju kako oni nepredvidivo mogu utjecati na svijest čitavih naroda."\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Ranije (u vrijeme Imhotepa) bilo je..drugačije.Počeli su intenzivno unapređivati talentirane ljudi, od najviših slojeva moći do najnižih, od upravljačkih struktura države do znanosti, obrazovanja, medicine i umjetnosti. Postalo je moderno imati moralna načela, biti pristojan, pametan, obrazovan, postaviti si visoke ciljeve. A zašto? Zato što je država počela aktivno poticati moralna i intelektualna dostignuća svojih građana. \nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Bolje je biti siromašan i živjeti u pustinji, ali s lotosom u duši, nego biti bogat i živjeti među ljudima, ali s prazninom u duši. \nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Čovjeku nema koristi od slobode ako je u duši slijep.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Zasluge se mjere djelima koje ste izvršili.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Za vrijeme suđenja ne tražite prijatelje i ne krivite neprijatelje, nego se uzdajte u Boga.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Ropstvo nedostaje jedino čovjeku koji nastoji svrgnuti kralja koji mu je dao slobodu.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Napreduje jedino čovjek koji pomaže ljudima u nevolji, a ne onaj kojeg se drugi boje.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Moć je poput čekića, možeš njime graditi ili uništavati. Sve ovisi o Majstoru koji ovaj čekić drži u ruci.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Ne postoje knjige koje za duhovnog čovjeka ne bi bile od koristi!\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Leptir koji je sazrio u čahuri, čak i bez iskustva letenja, probija se kroz čahuru i pokušava poletjeti, jer instinkt za letenje u njega je usađen na genetskoj razini. Na isti način, ljudsko vršenje duhovnih praksi više je vođeno znanjem njegove duše, a ne svjesnim iskustvom njegova sadašnjeg života, i ne čeka da se čahura sama otvori, probija se kroz ovu materijalnu čahuru svojim stremljenjem i iskustvom u duhovnim praksama.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Povijest se ne događa slučajno, ona se stvara.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Skrivena stvarnost svakodnevno je prisutna u životima ljudi. Percepcija njihovih tajni pomaže ne samo stjecanju iskustva života na ovom svijetu, već i koraku u traženju vlastitog sebe… Brojne takozvane bolesti ljudi, iznenadne depresije, pokušaji samoubojstava, nesreće, ubojstva su rezultati aktivnosti skrivenih sila. U prošlosti je bilo onih koji su im se aktivno suprotstavljali, braneći ljude s one strane stvarnosti. Vaga Dobra i Zla u rukama je čovjeka. Ezoosmos sve određuje.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Ako čovjek troši pranu, tj. životnu energiju, \'dah života\' na svoju Životinju, svoju materiju, ta će se osoba, nažalost, pretvoriti u prah, uzet će joj se sve, dok ako osoba troši pranu na rast duše, na snagu stupaju neki sasvim drugi zakoni - zakoni duhovnog svijeta. To sigurno ne znači da se ljudska tvar neće dalje obrađivati i koristiti za oplodnju zemlje. Fizičko tijelo je puka ljuska za sazrijevanje duhovne supstance…\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+           Tijelo je smrtno poput bilo koje materije. Unatoč tome, ako se unutar ove ljuske dogodi sinteza misaone snage, duše i "daha života" tijekom postojanja ljuske, rađa se potpuno novo duhovno stvorenje, recimo Osoba vječnosti, na koju zakoni materije nemaju utjecaja.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Svatko tijekom svog života ima priliku oploditi svoju dušu i postati novo stvorenje. Glavno je zapravo željeti postići taj cilj, odbaciti negativne misli i sumnje te se u potpunosti koncentrirati na jedan cilj, na rastuću unutarnju Ljubav svoje duhovne prirode…\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Sve ono što u vama ovdje dominira, tamo višestruko raste. Ovdje imate ŠANSU, ali izvan granice imat ćete plodove svoga izbora. Kako siješ, tako ćeš i žeti…\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Smrt vas ne spašava od boli, ona pojačava ono vaše \'unutarnje\' što ste pohranili tijekom Života.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Život čovjeka je njegov izbor i on bi trebao sam riješiti svoje probleme.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Svatko ima svoj put do Boga. I svatko ima pravo odabrati način na koji je sposoban prijeći ga.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Čovjek koji je iznenađen prebacuje na uobičajeno dominantno u svojoj svijesti. A ako se pokaže da je on ili ona \'obični prolaznik\' s uobičajenom životinjskom prirodom koja dominira u svijesti, doživjet će istu sudbinu kao i većina ljudi kojima je ovaj materijalni život jedina stvarnost, i kojima smrt ne znači samo fizički, već i \'duhovni kraj\'. S druge strane, ako bi se na njihovu mjestu pojavila duhovna osobnost, svaka prepreka koja se čini nepremostivom za \'običnog prolaznika\' bila bi samo još jedan korak prema vječnosti za takvu duhovnu osobnost.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Svatko bi se trebao sam pobrinuti za svoje spasenje, a ne čekati da netko dođe i nešto poduzme. Božansko treba tražiti ne u vanjskom, već u svomu vlastitom unutarnjem. I ne biste trebali to jednostavno tražiti, već biste trebali težiti da se stopite s Njim i postanete dobar Stvaratelj vlastitog života. Bog je unutar svakog čovjeka. A mi ga možemo spoznati i doći do njega samo kroz svoj unutarnji svijet.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Dobre misli u kombinaciji s jakom željom prethodnice su dobrih djela. Dobra djela suština su sazrijevanja duše. Hrabrost priziva Snagu duha. Snaga duha veže u Jedinstvo. Jedinstvo udeseterostručuje snagu, Ujedinjeni duh mijenja ciklus. Opći ishod ovisi o naporima svih. Svi napori ovise o promjeni interne frekvencije. Frekvencija je skok trenutka koji izlazi izvan granica Po-a.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Ništa nije  nemoguće za onoga koji boravi u Božjoj stvarnosti.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Život brzo prolazi, a vrijednosti se također često mijenjaju.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Svaka se čovjek pokušava utješiti opravdavajući se da nije živio uzalud. Zašto? Jer zapravo on ili ona razumije da, unatoč svim životnim događajima, ostaje nezadovoljan, jer je njegov unutarnji život bio prazan. Čovjek troši svu energiju na vanjsko, ne pronalazeći vrijeme za rad na unutarnjem, ali vanjsko se pokazuje kao izmaglica, fatamorgana koja zasljepljuje svojim izgledom, a zatim blijedi u tami…\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Životinjska priroda uvijek će pronaći način za obmanu, jer je ovaj svijet njezina baština, dok je čovjek ovdje poput gosta. Ovaj svijet je privremen. To je puka iluzija gdje svaki pojedinac koji je u nju kročio sanja o pronalasku sreće. U različitim erama ljudi imaju različite iluzije o takvoj sreći.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Stoga čovjek može pronaći pravu sreću samo u sebi, živeći u skladu sa svojom dušom.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Život je neprekidni "ovdje i sada". Iznad svega, to je život nečijega unutarnjeg stanja, život njegovih misli. Međutim, kada je duša u trajnom unutarnjem ugnjetavanju vječnih materijalnih želja, je li to stvarni život? Ne, to je samo beskrajna patnja.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+           Svatko, definitivno, bira svoj put. Ipak, nije najvrjedniji put onaj kojeg je čovjek dovoljno snažan prevladati, već onaj na kojem je u stanju najbolje ostvariti svoj individualni potencijal.\nIz knjige \"Ezoosmos\"
+        </item>
+        <item>
+            Korijene prave vjere treba tražiti,
+            prije svega u sebi.
+            А o drevnosti i molitvama, mač
+            s dvije oštrice. Drevnost su opisivali
+            povjesničari, od kojih ju je svaki vidio
+            Sa svojeg «zvonika». Tako je isto i s
+            molitvama. Njih su sačinjavali ljudi s raznim
+            unutarnjim svijetom i, u skladu s tim,
+            različitim pogledima na život.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Molitva, kao i meditacija – to je
+            svega samo instrument,
+            a čudo stvara sila vjere samog
+            ovjeka, jer sve na ovom
+            svijetu, a posebno čovjek, nisu
+            išta drugo već valni procesi.
+            I cijeli svemir ima ujedinjenu
+            valnu prirodu.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Uz pomoć harmonične glazbe
+            moguće je ne samo ozdraviti
+            kakav konkretni organ, već
+            i poboljšati opće blagostanje,
+            podići raspoloženje,
+            radnu sposobnost ili, jednako
+            opustiti se, sniziti
+            osjetljivost na bol,
+            normalizirati san i mnogo toga.
+            Sličnim ozdraviteljskim
+            svojstvima obdarena je narodna, a
+            također i klasična glazba, što
+            što u sveukupnosti omogućuje
+            bogaćivanje unutarnjeg svijeta čovjeka
+            i pomaže razmišljati o njegovoj
+           duhovnoj suštini.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Sav život čovječji - igra intriga…
+            Kako je bilo u dubokoj drevnosti, tako je i
+            ostalo  neizmijenjeno. Tek na granici
+            tisućljeća, čovjek je počeo više maski
+            na sebi isprobavati, tu istu glupost
+            pokazujući. Potpuno se izgubio u toj
+            đavolskoj igri svojega uma. Misli,
+            stavit ću ovu prekrasnu masku i napokon
+            pronaći dugo očekivanu sreću. I ne
+            primjećuje, jadnik, koliko je maska ružna sa
+            strane. Ne vidi vlastiti odraz.
+            Napokon, pravo se ogledalo u njegovoj Duši krije.
+            A gdje se ta Duša u njemu nalazi, i on sam
+            ne zna. Kada bi znao,ne bi ovako stradao, nе
+            bi bacao stare maske i ne bi tražilo nove.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Od toga tako čovjek
+            tisućljećima pati i ne
+            pozna pokoja, jer ne razumije –
+            nema na svijetu lijepih
+            maski. Budući da istinski
+            čovjek, čovjek duše – to je
+            to je čovjek bez maski. Tome, koji
+            oživljava u svojem razumu kraljevstvo
+            Ljubavi, nije nužno tugovati
+            zbog svijeta iluzija. Jer u njemu
+            se budi Mudrost života.
+            Tko je u Ljubavi, taj je u Bogu i Bog
+            u njemu, jer Bog i jest Ljubav…\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Bilo koja maska – to je ružnoća
+            i uzveličavanje unutarnjih
+            parazitskih osjećaja zvijeri
+            ljudske. Zbunjuje ona čovjeka
+            podlim malim mislima, imperiju zla
+            iotajno u njegovom razumu gradi, kako bi
+            zablokirala sve pristupe k Duši,
+            sili njezinoj - Ljubavi - da bi je uništio i
+            na kraju učinio životinjom
+            žestokom, mrskom prema svijetu. Jednostavno
+            govoreći - nečovjekom … Eh, ljudi, ljudi…
+            Trebali bi ste se vidjeti izvana, kakve
+            stvari u svijetu činite po njenom nahođenju,
+            kakvim mislima maske oblikujete … Žalosno,
+            što se samo pred smrt pojavi
+            jegovano zrcalce. No kasno tada
+            postaje. Prekasno…\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+           Sve je u prirodnom svijetu do genijalnosti jednostavno, a u ljudskom svijetu - u odnosu na glupost. Kažu da su djeca bliža Bogu. I u pravu su. Napokon, oni vide i uživaju u prirodnoj, trenutnoj ljepoti. A odrasli? Žive u svojoj prošlosti i nadaju se budućnosti. A što je prošlost? Iluzija prošlih dana. A što je budućnost? Iluzija sablasnih misli. Što je onda zapravo život? Trenutak sadašnjosti, u kojem čovjek živi ovdje i sada.
+ \nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+           Svaki je čovjek nositelj informacija bilo kojeg znanja, ideja, osjećaja, dojmova. Primajući informacije, on ih treba prenijeti. Ali često je potonje problematično zbog nedostatka odgovarajućeg slušatelja. I zašto? Budući da je većina ljudi zauzeta traženjem vlastitog slušatelja, ne obraćajući pažnju na tuđe lude misli i ideje. Otud i paradoks pojedinačne "patnje" - nitko ga ne želi slušati. A to pak stvara manjak pravih prijatelja. Nije ni čudo što kažu: "Najbolji prijatelj je onaj koji nas je slušao bez ometanja."\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Misao, unatoč svojoj tajnovitosti i svakodnevnoj tuposti - vrlo je moćna sila, glavno oruđe čovjekove progresije ili regresije, kako vanjske tako i unutarnje. Sila – ona i jest sila. No, tko će njome upravljati – to je pitanje. U ogromnoj većini slučajeva u glavama ljudi ona šeta nekontrolirano.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Hirovi Sudbine dolaze upravo iz unutarnjih preokreta. Ovdje je istinski izvor svih svakodnevnih nevolja i polomljenih sudbina. Ne uspiješ ni okom trepnuti, nađeš se izbačenim iz "sedla" Sreće: nećeš ti upravljati svojom Sudbinom, već će ona tebe vući na užetu po svim jamama i neravninama života …\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Slobodna volja. Negativno stvara negativno. Pozitivno tvori pozitivno. Očito je tako Bog naredio, svatko može slobodno odabrati put koji započinje u vlastitim mislima i skrenuti na put koji je vještije utrt primamljivom mišlju.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Holistička percepcija informacija – to je samo je jedan od koraka koji vode do stvarnih visina meditacijskog umjeća, gdje se spoznaju bogati unutarnji svijet, neiscrpne mogućnosti podsvijesti i tajanstvena duša.Ovaj učinkoviti put samospoznaje ukorijenjen je na Drevnom Istoku - kolijevci ljudske civilizacije. Oni koji su dostigli takve visine, o čemu svjedoče legende, vidjeli su svijet u savršeno različitim aspektima stvarnosti, znajući veliku tajnu vječne Duše i smrtnog Tijela.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Ako pogledate čovjeka iz svemira, sa stajališta evolucije planeta, on je u punom smislu "ništa". Njegova je veličina toliko mala u odnosu na "megalopolise" galaksija i svemira da se ne može usporediti niti s prašinom. Jednostavno NIŠTA! A njegov život na ljestvici globalnog kozmosa - nije niti djelić sekunde. To je isto tako NIŠTA. Zašto onda čovjek živi? Zašto je određeno vrijeme i ovaj skromni kutak Sunčevog sustava na prostranim prostorima globalnog prostora s milijardama zvijezda? Zašto?! Tko sam ja? .. Tko sam ja zapravo? …\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Svijet ljudskih želja je tajanstven. Svatko
+            teži svojim visinama.
+            Siromašnima nedostaje bogatstvo
+            bogatima - sreća, a sretnima - mir.
+            A najzanimljivije je to što je takav ciklus brojnih želja stalno prisutan u nevidljivim sferama ljudskog društva. Ljudi se nalaze u stanju potrage. Svima uvijek nedostaje ponešto za potpunu sreću. I to je upravo to unutarnje nezadovoljstvo koje ih tjera iznova i iznova da strmoglavo zaranjaju u vrtlog novih iskušenja.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Što leži u osnovi fenomenalnih ljudskih sposobnosti? Sila vjere. Još u davnim vremenima ljudi koji teže samopoboljšanju znali su da samoprilagođavanje svijesti, apsolutno povjerenje u postizanje postavljenog cilja, unutarnja samodisciplina uključuju gumb za poseban način biokemije našeg tijela.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Podsvijest - poput računala: koje informacije u njega unesete, to vam i daje. Dakle, ne samo stvaranje vašeg unutarnjeg svijeta, već i sigurnost izvana ovisi o vašim misaonim naredbama. Stoga je vrlo važno, prije svega, naučiti kako kontrolirati tijek dnevnih misli, kako se kasnije ne biste našli u glupim situacijama.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Bol -to je osamdeset posto naših emocija i svega dvadeset posto funkcionalnih kvarova organizma.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            U prirodi postoji takozvani zrcalni zakon. Jednako je i za konkretnu svijest pojedinca i za svijest društva u cjelini. Dakle, prema njemu, ako mislite o nečemu lošem ili želite nekome zlo, bez obzira na to što učinili, tvoje misli, poput bumeranga, s trostrukom snagom, sigurno će se vratiti svom tvorcu i udariti na najslabije, najbolno mjesto tvojih strahova … A nije Bog taj koji kažnjava. Ti si taj koji sebe kažnjava i sam sebe vara vlastitim nepažljivim mislima. Čak i ako smatraš da si u pravu, ali zarađuješ na tuđim strahovima, na kraju će se ti strahovi materijalizirati i utjeloviti u tvojem životu. Dakle, što god netko ovdje mogao reći, ali zakon prirode je zakon, a ne poput čovječjeg. Također se odnosi na pozitivne misli. Ako generirate i darujete svijetu dobrotu i ljubav, tada će vam se sve ovo vratiti u potpunosti isto … Ono za čim žudite, na kraju ćete i dobiti..\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Kakav je ljudski svijet u usporedbi sa stvarnom Vječnošću? Jednostavno ILUZIJA. Ništa. A što je život u tom Ništa? Prolazna sjena s iskrom Božjom. Iskra, koja je vatrom uništila sjenu - pokazalo se, smisao je ovog života. Zbog ovog jedinog značenja sudbina daje brojne šanse. Zbog njega gura razne sjene na svojim raskrižjima tako da jaka iskra zapali slabu. Samo se snažna iskra zapali u plamen. Samo plamen osvjetljava potpuno drugačiju stvarnost, pokazujući put k istinskom svojem domu…\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Nakon fragmentacije nužno će uslijediti ujedinjenje. To je u krvi Slavena … To, što su se članovi obitelji posvađali za ručkom ne znači ništa. Jer za večeru će se svi pomiriti i ponovno sjesti za isti stol. Duhovna bit slavenske duše premašuje ambicije. Ionako će prevladati zdrav razum.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            U budućnosti, nesumnjivo će se dogoditi ujedinjenje Slavena. Nije važno kako će se zvati. Ali to će biti jedno od duhovno moćnih svjetskih udruženja. I drugi će ljudi biti privučeni prototipu takvog saveza. Ovo će biti "zemlja" novog tisućljeća … I sada se svi preduvjeti za ovaj novi stupanj čovječanstva ispunjavaju s nevjerojatnom točnošću. Svijet će se zatresti, a zdrav razum opet će se vratiti ljudima.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Treba vjerovati, prije svega, sebi. Vjerujte da ćemo i mi imati dobrih trenutaka. Oni koje želimo odabrati doći će i učinit će ono što su dužni. Jaka vjera nastoji se materijalizirati u stvarnost. Ovo je zakon prirode … Dakle, morate početi uklanjanjem smeća iz vlastite glave.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Ne možete pobjeći od sebe, bez obzira koliko pljuvali svoje ambicije na druge. Samo gorim sebe činiš … Svaki čovjek, koji je u tijelu, doživljava svoj vlastiti Armagedon, prihvaćajući položaj svojih pobjedničkih dobrih ili loših misli.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Čovjek je slobodan u svom izboru. I polazeći od ovog unutarnjeg izbora, oblikuje se njegova daljnja sudbina.A većinom i sudbina naroda.\nIz knjige \"Raskršća\"
+        </item>
+        <item>
+            Vjera - jedinstvena pojava u ljudskom društvu. Nitko to ne vidi na ljestvici, ali akutno osjeća njene posljedice.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Vrhovna moć najteži je ispit čak i za savršenu dušu.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Žeđ za sebičnom moći spaljuje čovjeka iznutra, spaljuje njegovu duhovnost. Rijetki mogu odoljeti carstvu pompoznog Ega.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Podsvijest - tanka granica, nije duboko proučavana. Malo pogrešno gurneš – moguće je čovjeka učiniti robom za cijeli život. A prođeš dalje - Duša će se probiti, stopiti sa sviješću. I pronaći će čovjek svoju dugo očekivanu istinsku Slobodu, ušavši u nepoznati svijet sjedinjenja s Bogom.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Sve je u vezi s čovjekom, u njegovoj prirodnoj lijenosti, nespremnosti da svakodnevno radi na sebi. Napokon, koga god pitate - svi žele postati sveci. A stvarno dodirnite, nitko ne želi raditi na sebi. Zašto? Jerje nužno sebe kontrolirati svake sekunde, baviti se praksom. Pa ispada da svi žele biti sveci među ljudima, za mnoge je to san ponosa. Ali u stvarnosti nema dobrovoljaca. \"Raskrižja\"
+        </item>
+        <item>
+            A snaga misli služi kao poticaj za ostvarenje programa definiranog od strane pojedinca. Rezultati ovog programa se kasnije odražavaju na njegovo fizičko i duševno zdravlje.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Najokrutniji neprijatelj za čovjeka je on sam, ili točnije, njegova vlastita Životinjska priroda. Ne možeš se s njom boriti na uobičajene načine, jer što je jače suprotstavljanje, to će jača biti agresija Životinjske strane, kako privučeš svoju pozornost na ovaj sukob. Možeš je pobijediti samo svojom nespremnošću da te Životinjska priroda izazove i napastuje, te koncentracijom na duhovno i korisno za duševne stvari. Zatim, ako zauzmeš takav unutarnji stav i slijediš ga iskreno, nećeš imati u vanjskom svijetu neprijatelje, a tvoj će se život pretvoriti u fascinantnu igru.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+           A gdje nema znanja, tu su nerazumijevanje i strah.\nIz knjige \"Sensei 4\"
+        </item>
+        <item>
+            Nerad –  je još gori od teškog fizičkog rada … Stvara povoljne uvjete za prodor u glavu najodvratnijih, najgadnijih i najpodlijih misli koje svojim prljavim mijazmama postupno truju ne samo tijelo, već i psihu. apsolutno zdrava čovjeka u neutješnog bolesnog dosadnjakovića. Nije uzalud što se u mnogim naprednim zemljama svijeta mentalno bolesni ljudi liječe drevnom provjerenom metodom - radnom terapijom..\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Život postavlja sve vrste zapreka
+            koje možete zamisliti.
+            A sve kako bi vas zaustavio.
+            Što Čovjek više postaje duhovan,
+            to su zapreke ozbiljnije.
+            Ako čovjek uopće ne mari za njih, jednostavno nestanu poput fatamorgane, poput iluzije. One zapravo uopće ne postoje. Ipak, kada je osoba zarobljena svojom životinjskom prirodom, to pokazuje da je materijalna, da je u sukobu sa samom sobom i ne pripada u potpunosti duhovnom. Kad osoba odustane, to znači da ne zaslužuje napuštanje reinkarnacijskog kruga…\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Ako čovjek čeka i misli da mu netko nešto duguje, i da će netko nešto učiniti umjesto njega, onda je to znak, da što je dužan misliti, to je dužan i činiti.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Podsvijest – to je definitivno moćna, ali glupa sila. Ona ne razumije što je "dobra", a što "loša" misao. Za nju je svaka misao naredba koju se mora slijediti. Ono što čovjek češće misli, to i dobije u životu. A vaši labirinti okolnosti koji stvaraju sve uvjete u smjeru manjeg otpora nisu ništa drugo, već vaš osobni podsvjesni izbor.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Svaki čovjek ima svoj Armagedon, čak i u onaj koji, po mišljenju ljudi oko sebe, živi dobro i sretno. Napokon, zapravo, nitko ne zna što se događa u čovjeku. I upravo je njegov unutarnji svijet najvažniji od glavnih, radi kojih mu je, u velikoj mjeri, i darovan život. Tako da čovjek kroz unutarnji svijet, zanemarujući sve materijalne prepreke životinjske prirode, dolazi Bogu kao zrelo duhovno stvorenje.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Materijalni dokazi potrebni su samo ljudima koji su zaglavljeni u materiji. Ljudima koji su krenuli duhovnim putem dovoljan je nagovještaj, jer će njihova intuicija reći o više. A duhovno razvijenim pojedincima riječi nisu iti potrebne. Sve će savršeno razumjeti…
+\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Puteva k Vratima Božjim vrata na zemlji je jako mnogo. Koliko ljudi, toliko stvarnosti, toliko putova k Bogu. Ljudi se nalaze u trajnoj potrazi.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Najvažnije - drastično promijeniti svoj unutarnji svijet, zavesti u svojim mislima, potpuno se prebaciti na stranu dobra. Jednostavno je. Svatko to može. Napokon, Bog od tebe nije nužno išta, osim tvoje Ljubavi koja se očituje u iskrenoj vjeri, dobroti prema drugima. Snaga Ljubavi te duhovno njeguje i otkriva to znanje koje vodi do tvojeg buđenja.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Učenje - lanac.Učitelj – kanta. I čovjek uz pomoć Učenja, zahvaljujući Učitelju, može dobiti izvorsku čistu vodu iz zdenca i zastiti svoj um i tijelo do kraja. A zdenac s najčišćom izvorskom vodom njegov je unutarnji duhovni svijet, duboko skriven, njegova Duša. Općenito, Duša – to je čestica Boga. I, u principu, zadatak je Učitelja uz pomoć Učenja-lanca da iz dubine Duše donese Istinu koja je u njemu skrivena. Jer ništa izvana ne donosi čovjeku takvu korist i ne daje stvarnost ostvarenja Boga, kao blaga Duše dobivena iz vlastitih dubina. Jer kaže se da u svakom čovjeku postoji Bog. Iz ovog nepresušnog izvora Učitelj crpi vodu kojom zasićuje čovjeka.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Tko god u pustinji života uistinu ožedni, tomu će uvijek biti dan izvor. Morat će se samo potruditi i napiti se s vlastitih dlanova. Jer kanta mu više neće biti dana, jer je već preuređena u vagu.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Kakva god bolest bila, prije svega, ona je rezultat slabosti vaše vjere i čvrstoće. Ako čovjek u svom unutarnjem svijetu sredi stvari, fizičko tijelo nema drugog izbora nego slijediti duhovni. Jer tijelo je samo tijelo, vagon. Vi ste kočijaš u njemu.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Život - kako ga ljudi zamišljaju – to je  fatamorgana. Svi njegovi strahovi su misli određenih pojedinaca. Ti ljudi njima provociraju samo druge ljude, što se obično projicira na društvo. To jest, ljudi rađaju svojim mislima iluziju i žive u toj iluziji.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Misao sama po sebi -  jedinstvena je pojava u čovjeku. To je tanka linija između njegove duhovne i fizičke razine. Bog je čovjeka obdario snagom misli i pravom osobnog izbora. Te dvije osobine razlikuju čovjeka od zvijeri.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Sila misli sposobna je promijeniti genetiku čovjeka, odnosno informacije genetskog koda. Stoga, ako se čovjek pojavi u degenerirajućem rodu, ili još bolje grupa ljudi koji akumuliraju duhovnu snagu, tada ta duhovna sila u konačnici iskorjenjuje negativno, čineći rod fizički i mentalno punopravnim.
+\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Božanska sila kontrolira i prožima sve, od mikro - do makrokozmosa. I u tome nema išta natprirodno. Sve se gradi na čitko definiranim zakonima … Naravno, danas je mnogim ljudima teško razumjeti ono što se ne uklapa u njihovu ograničenu sliku uobičajene vizije svijeta. Čovjek je previše zatvoren u biću i u vlastitim egoističnim mislima.\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Bog već tijekom čovjekova života daje svakome ono što zaslužuje. Štoviše, on ne samo da pojedincu ostavlja zasluženi rezultat, već mu pruža i brojne šanse da se poboljša, da njeguje svoju duhovnu suštinu. Ali mnogi, zbog prevlasti materijalnog interesa u svojim mislima, to iti ne primjećuju. Viču iz svih pluća: "Zašto mi je Bog dao takav život?"\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+            Čovjeka može spasiti samo njegova unutarnja Ljubav. Napokon, ne može on dati išta Bogu, osim svoje Ljubavi…\nIz knjige \"Raskrižja\"
+        </item>
+        <item>
+           Svijest o smrtnosti fizičkog tijela tjera čovjeka da traži odgovore na pitanja o vječnosti, navodi ga na brigu o duhovnom razvoju i unutarnjoj promjeni. Smrt je dana ljudima samo da bi, imajući na umu vlastitu prolaznost, mogli naučiti razumjeti svoju istinsku suštinu, preobraziti sebe i svoju prirodu, cijeniti vrijeme dano im za duhovno sazrijevanje.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Smrt bi bila neka vrsta vrata u istinsku stvarnost. A nečiji se život općenito računa upravo po nakupljenom duhovnom bogatstvu takve osobe. Što ćeš skupiti ovdje tijekom svog života definira kakva će te stvarnost očekivati iza tih vrata.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Zato što, ako se osoba otvori s Ljubavlju prema Bogu, Božja Ljubav će je zaštititi bez obzira kojim putem ide. Glavna je usputna težnja. U tom slučaju će prije ili kasnije pretraživač doći do potrebnog rezultata.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Na putu do Boga ne bi trebalo biti dvojbi, sve se odbacuje, ostaje samo čista Ljubav. Ako osoba postane uistinu slobodna iznutra i odbaci sve osim Ljubavi, Ljubavi za Boga, svi okovi jednostavno nestanu jer nisu ništa drugo doli iluzija. Takva je osoba svjesna da je njezino tijelo samo vozilo koje ide tamo kuda njezino pravo ja, tj. duša, želi.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Čovjek koji je u Bogu apsolutno je oslobođen svih predrasuda. Pronalazeći Boga u sebi on sam po sebi pronalazi istinsko ja, pronalazi vječnu sreću koja je neusporediva s bilo kakvim zemaljskim užicima.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Čovjek bez Boga u srcu je poput prognanika. Takva osoba provodi gotovo sav život u praznim iluzijama, u gorkim i slatkim prividima kojima ionako dolazi kraj, bez obzira koliko ih on ili ona želi zadržati. I nemoguće je produžiti ovaj nestvarni život nečije materije čak i na sekundu. Mnogi ljudi postavljaju si pitanje: \'Za što živim?\' Živimo li zaista radi punjenja želuca, pravljenja djece, šopinga i gospodarenja?! Sve je to samo trenutačna prašina. A što slijedi?\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Zapravo je bilo koji vanjski problem koji shvaćaš ozbiljno tvoj unutarnji problem, tvoj osobni unutarnji sukob između tebe i tvoje životinjske prirode. Sve je u tebi!\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Onaj tko želi, postiže više nego što netko može.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Onaj tko je odabrao duhovni put trebao bi jednostavno odustati od svih ispraznih iluzija poput \'fatamorgane u pustinji\', kako su sveci govorili. Treba naučiti shvatiti da je čitav ovaj materijalni svijet samo trenutak pred vječnosti. Ali nevolja je u tome što se na početku ovog puta mnogi ljudi spotaknu o jednu te istu prepreku: osoba nije u stanju vjerovati u beskonačnost budućeg postojanja, u činjenicu da je tamo vječni život, a ovdje samo privremeni. Osoba treba dokaze, ali kad takve dokaze dobije, često postaje prekasno za bilo što promijeniti. Ipak, ako osoba ima dovoljno snage, ne treba joj nikakav dokaz, osjeća i razumije sve i bez toga.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Problemi, naravno, trebaju biti riješeni, međutim ne bi trebali postati smisao nečijeg bića. A glavno je, bez obzira što se dogodilo, bez obzira s koliko problema se suočavaš, važno je ostati Čovjek, jer je svaka nevolja u tvom životu, prije svega, ništa drugo nego test…\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Vaša je vjera vaša buduća stvarnost.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Samo trebaš otvoriti um kako bi se dokazalo ono za što nisu potrebni nikakvi dokazi. Zatvori oči i predaj se svojoj intuiciji. Ona će ti puno jasnije reći gdje postoji lažiranje, a gdje postoji pravi sveti izvor. Ako osoba dušom teži Bogu, teško ju je prevariti, jer se iznutra osjeća puno više nego što oči vide…\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Ljudi su poput ptica i kamenja. Za neke samo znak, jedna riječ je dovoljna da ih potakne na duhovnu visinu. Njihova će se probuđena suština vinuti prema percepciji beskrajnog svemira. Dok su drugi… Pa, kamen je samo kamen.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Dokaži Bogu da si čovjek…i Bog će imati vjere u tebe…\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Ljudski mozak prilagođen je frekvenciji životinjske prirode od samog rođenja, iako je to najprimitivniji program od svih moždanih sposobnosti.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Čovjek se boji samoće tijekom cijeloga svog svjesnog života i na kraju mu se ona neizbježno događa. Kome treba stara tvar? Nitko je ne treba, a ni ona sama, jer ona želi živjeti i uživati u svim čarolijama svijeta baš kao i prije. Ali starost je lišava mnogih užitaka. Njena zveckava okolna tišina tjera čovjeka da počne razmišljati o smislu svog postojanja. Umnožava unutarnje stanje i misli koje su prevladavale za njegova života.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+           Duša se ne može promatrati mikroskopom. Ne može ni ljudska misao.… Ljudi samo nagađaju, ali nemaju prave činjenice. Jer odgovori na takva pitanja skrivaju se daleko izvan granica percepcije svijeta ocrtanih egocentrizmom. Da bi pronašla odgovore osoba bi trebala prekoračiti svoj ego, trebala bi doći do same dubine vlastite podsvijesti… Ipak, treba puno vremena i truda za počistiti smeće koje pluta površinom svijesti kako bi se uklonili ostaci naše unutarnje neurednosti. Iako je sve dostižno ako se za tim žudi.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Drevni su napisali da je Savjest stupanj Duševne veličine. Kad osoba dostigne starost, Savjest posebno ogoli svoje \'živčane završetke\' i otkrije svoju istinsku suštinu. Stoga se za nekoga starost pretvori u mjesečinu koja blista u crnim oblacima tame i iluzije, dok je za nekoga drugog starost blistavi, sjajni zalazak sunca koji unutarnjem oku pokazuje tanku zelenu zraku koja ispunjava sve želje.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Nitko ne zna što će biti s njim za minutu. Ali nije sve u crtama sudbine. Glavno je kakvu ćemo prtljagu nositi sa sobom u trenutku kad stanemo pred istinsku stvarnost. Ljudi se trude živjeti vječno jer se u njima nalazi mali dio vječnosti. Ali um svojom životinjskom prirodom iskrivljuje tu unutarnju žudnju na svoj način - vječni život u fizičkom tijelu, naravno na Zemlji, jer je bilo koja stvarnost osim ove zemaljske nepoznata, pa čak i neprihvatljiva za životinjsku prirodu…\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Za Osobnost
+            uvijek je važnije proći kroz svoje
+            unutarnje, nego glupo promišljati o
+            vanjskom. Uostalom, u principu, ako netko
+            radeći na sebi, dosegne
+            neke duhovne visine, njemu osobno
+            neće biti bolje.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Svatko mora samostalno raditi na svomu unutarnjem polju kako bi došao do dragocjenih plodova.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Sveti ljudi nikada si nisu stvarali iluzije u pogledu svjetovne budućnosti. Život im je bio u \'danas\'. Očekivali su da će se baš danas pojaviti pred Svevišnjim Sudom, pa su tako puno radili na svomu duhovnom putu, i to je razlog iz kojeg su postigli rezultate u buđenju \'Snage Ljubavi\'. Otuda su njihova čuda - duhovno i fizičko liječenje ljudi - bila izvođena… Dok većina ljudi odgađa svoj duhovni rad za \'sutra\', ne pomišljavši da \'sutra\' možda nikad neće doći po njih… Najtužnije je da u određenom trenutku svi razumiju nepovratnost prošlih dragocjenih trenutaka, ali već je kasno, prekasno…\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Ništa na ovom svijetu nije uzalud.
+            Ako vas je sudbina bacila na ovo
+            mjesto na kojem ste sada,
+            to znači da da je to za nešto potrebno.
+            I, prije svega, trebate
+            tako nešto razumijeti
+            i shvatili. A kako 
+            biste podigli svoj duhovni svijet, trebate
+            se samo odreći zla, od
+            kompleksa svijesti
+            u materiji. Dobro pogledajte u sebe 
+            i okolni svijet.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Što je prošlost? Iluzija
+            prošlih dana. Što je
+            budućnost? Iluzija sablasnih
+            misli. Što je onda život
+            zapravo? Trenutak sadašnjosti
+            u kojem čovjek živi ovdje 
+            i sada.\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Stavite stvari prije svega u red
+            u svojim mislima i bit ćete
+            zadivljeni koliko će se sve
+            okolo promijeniti. nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+           Pojavljuje se u jednostavnosti.
+Komplicirajući jednostavnost,
+Gubimo Ga.
+Iako je sve tako jednostavno!\nIz knjige \"Ptice i kamen\"
+        </item>
+        <item>
+            Istinska Ljubav oslobađa čovjeka iznutra i daje mu najdragocjeniji poklon s nebesa – stvarnu Slobodu od ovog materijalnog svijeta. To je vrlo moćna sila koja budi dušu. To je direktni put ka Bogu.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Duhovno se treba živjeti, a ne baviti njime.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+           Kad čovjek traži, zapravo pronalazi više nego što je namjeravao pronaći. \nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Zašto gledati iluziju kad postoji stvarnost? Zašto se vezivati za privremeno kad postoji Vječnost?\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+         Sve prolazi, osim Duhovnog svijeta. Bog je vječan.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+            Duhovni svijet je miran. Jednostavno je miran, jer je beskrajan. On nije privremen. \nIz videa \"ŽIVOT. Istina je jedna za sve \"
+        </item>
+        <item>
+            Mnogo je bolje biti sretan nego nesretan. Bolje je biti živ nego mrtav.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+            … da biste se pridružili Duhovnom svijetu trebali biste ostati na strani Duhovnog svijeta i sami postati Duh, tada ćete mu se pridružiti.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+           Čovjek na mnoge stvari ne obraća pažnju, dok ne zna. Ali čim se istinsko znanje dotakne njegovog čela, a Duša se probudi, on stječe Mudrost. A Mudrost rađa akciju …\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Samo taj, tko korača s čistoćom i iskrenošću namjera do kraja, primjenjujući ustrajnost u svom duhovnom trudu, preobražavajući se u svakom danu, samo taj u životu pronalazi svoja duhovna skrivena blaga, koja daju mogućnost ući u drugi svijet.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Put k stjecanju unutarnje Slobode uvijek započinje prvim korakom.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            No u čovjeka nema to „potom“, postoji samo „ovdje i sada“, u kojem se događa istinsko kretanje i izbor. Samo se trebate otvoriti i vjerovati Bogu. Ne tratite svoje dragocjeno vrijeme života.\nIz knjige \"AllatRa\"
+
+
+        </item>
+        <item>
+           Moramo požuriti naučiti osjećati Dušom i pojmiti lijepo, jer sve u ovom materijalnom svijetu, uključujući i ljudski život, nije išta drugo nego mjehurići pjene na morskom pijesku.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Ako čovjek radikalno promijeni vektor svog života u stranu Duhovnog načela, prevede dominantnu misao u duhovni kanal i disciplinira svoju svijest, tada će on (Osobnost) steći stvarnu priliku da spasi sebe i svoju Dušu u svom životu.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Ako nema cilja, nema ni života, jer život – to je svrhovit pokret.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Duša – to si ti, ali istinski.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Za Čovjeka je važno pojmiti, da stremiti izgledati ne znači biti. Glavno, osloniti se na unutarnje, na proizlazeće iz Duše. Živjeti ne radi mišljenja drugih „životinja“. Najbolji sudac – to je Savjest.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Ne biste se trebali osloniti ni na što. Jednostavno biste trebali voljeti. A kad stvarno volite - i vi ste voljeni. Zašto bi onaj koji nema tijelo trebao podršku?\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+            Oni koji teže Životu, ništa ih ne može zaustaviti.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+            No od izbora svakog čovjeka sastavljeno je i ovisi kretanje civilizacije u cjelini. Sve započinje čistoćom i iskrenošću namjera svakog čovjeka u društvu, njegovim istinskim unutarnjim izborom, s odgovornim pristupom svom životu, s obzirom na njegovo vrlo ograničeno vrijeme.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Sve ovisi o čovjeku! Ako je ispunjen stvarnom Ljubavlju k Bogu, u kojoj on živi svaki dan, tada u njemu nema mjesta sumnji. U njega jest samo jedan cilj – pobjeda radi oslobođenja svoje Duše!\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Unutarnje promjene dužne su biti, prije svega, u samom čovjeku, to je smisao njegovog duhovnog razvoja! Ostalo je sve sporedno\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Nije važan broj proživljenih godina, već kvaliteta proživljenog života u duhovnom smislu\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Važno je svakodnevno raditi na sebi, poimati svu odgovornost pred samim sobom\nIz knjige \"AllatRa\"
+
+
+        </item>
+        <item>
+            U čovjeku je važna čistoća unutarnjeg otkrivenja pred samim sobom, jer on nikada nije sam, Bog je uvijek s njim\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            U životu čovjeka vrlo je važno kakve osjećaje on izabere i koje akumulira u toku svog života\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Bog je jedan i za općenje s Njim ne bi trebalo biti ikakvih posrednika, ovo je otajstvo dvoje: čovjeka i Boga\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Ako se ljudi usredotoče na svoju Duhovnu prirodu, tada će zajedno moći prevladati sve nesuglasice među sobom.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Svaka bitka započinje na bojnom polju čovjekovog uma. Tko umije smiriti svoj bijes, nalik je mudracu koji je pobijedio u svojoj bitci, tako da je nije započeo …\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Vrijeme je prolazno, nužno je biti brzi za svako dobro i čvrst u svojoj namjeri spasiti Dušu.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Iskrena želja jednog čovjeka da pomogne ljudima, u kombinaciji s njegovim stvarnim postupcima i samosavršavanjem, doista donosi svoje nevjerojatne rezultate.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Jednostavno ignorirajte sve loše i umnožavajte ono dobro, kreativno, dobro oko sebe.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Prava duhovna strana čovjeka u odnosu na društvo očituje se u njegovoj iskrenoj namjeri i nesebičnom djelovanju za dobrobit društva.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Svi mi, budući da smo u tijelu, sudjelujemo u teatru materije. Spektakl šokira, ali je poučan. Pogledima jednih otkriva se Istina, dok su drugi zaokupljeni glumom. Razlika je tek u tome, na čijoj je strani vaša svijest na ovom mjestu iluzornih naočala.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Smisao čovjekova boravka na ovom svijetu - duhovni rast, stremljenje za izlaskom iz stanja materijalnog potcjenjivanja svijesti u duhovno uzdizanje, preobrazbu, uzdizanje k svojoj sudbini i procvat svega najboljeg, što jest u njemu.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+          Svi su ljudi po prirodi svojeg Duhovnog načela dobri, potome što u svakog jest Duša, i u tom smislu svi su dragi i vrlo su bliski jedni drugima, jer su Duše jedno, oni su iz svijeta Boga.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Riječ "Čovjek" vrlo je složena. "Čelo" je izvorno imalo značenje "viši", zbog čega je u stara vremena ta riječ značila "čelo". A riječ "vijek" je "moć", u izvornom značenju "ispunjen snagom", "vječan". Čovjek – to je preplavljeni (napunjeni) najvišom (duhovnom) silom.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Kada postane moderno i popularno u društvu činiti dobro, nesebično pomagati ljudima, besplatno služiti za dobrobit društva, imati takve osobine kao što su čestitost, odgovornost, savjesnost, općenito, biti pravim Čovjekom, to će pokupiti mnogi.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Ako ljudi ne budu sjedili skrštenih ruku, već počnu slagati stvari u red barem u profesionalnoj i drugim sferama društva koje su im najpoznatije, prije ili kasnije sve će uspjeti.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Osobni doprinos svakog čovjeka zajedničkom cilju duhovne i moralne preobrazbe društva vrlo je važan.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Važno je da se ljudi upamte da je pažnja ključni element u njihovoj svakodnevici. Bez obzira na to što osoba plaća i čemu posvećuje pažnju u svom životu (na koje misli, sklonosti i želje), ono je što prima.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           A što je svakodnevni duhovni rad na sebi? To je prije svega navika kontrolirati svoje misli, a ne osuđivati ​​druge.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Iz duhovne prirode proizlazi prirodna čovjekova potreba da živi u ravnopravnosti, bratstvu, jedinstvu s čitavim čovječanstvom, proizlazi spoznaja da su svi ljudi na planeti rođeni i srodni jedni s drugima u svojoj duhovnoj komponenti. \nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Kvaliteta svake sličice tvog životnog filma ovisi samo o tebi, jer ti si taj koji život čini, ili vedrim ili tamnim, svojim mislima i djelima. \nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            U ovom iluzornom svijetu sve je prolazno kao fatamorgana u pustinji. Stoga, sve što posjedujemo u fizičkom svijetu nema vrijednost, jer je prolazno. Moramo požuriti naučiti osjećati Dušom i spoznati ljepotu, jer sve u ovom materijalnom svijetu, uključujući i ljudski život, nije ništa drugo nego mjehurići pjene na morskom pijesku.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Čovjek koji voli, vidi više od površinske ljepote tj. mentalne i fizičke ljepote drugoga, njegovih talenata i sposobnosti. On vidi ljepotu njegove Duhovne prirode, ljepotu njegove Duše.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Život je prava škola, gdje su pogreške lekcije, a stečeno iskustvo - mentor.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Biti primjer i odgovoran za svoje riječi, misli i djela je vrijedno čovjeka.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Poznavajući sebe, trebate naučiti razumjeti ljude oko sebe, a time i naučiti biti dobri.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Trebao bi prihvatiti svakog čovjeka i svaku situaciju jer ti svaki čovjek i svaka situacija može biti „učitelj“. nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Prava je znanost proces spoznaje Istine, a ne sredstvo za postizanje moći.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            U društvu su ljudi privučeni onima koji imaju Čast i Dostojanstvo, koji pomažu drugima besplatno, koji žive po svojoj savjesti, koji istinski služe duhovnom svijetu, zanemarujući materijalne prioritete.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Život je beskonačan! Nema patnje, nema suza, jer Dušu je nemoguće istrošiti.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            To je neosporna činjenica: mijenjajući sebe, mijenjate i vaš odnos prema svijetu oko vas…\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Napokon, pred vječnosti, samo vaše duhovno, ojačano dobrim djelima, ima smisla.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Tajno Znanje otkriva se čovjeku dobra srca i čistih misli..\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Nužno je jednostavno, da čovjek shvati svoju istinsku, duhovnu suštinu. Tada će moći napraviti stvarne promjene u životu društva, probuditi ljude oko sebe. U tom pogledu, čak je i jedan Čovjek na terenu već Ratnik, ako donosi duhovnu Istinu mnogim ljudima i može učiniti mnogo korisnog!\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Ali da biste postigli duhovne visine, potrebna vam je čistoća vaše iskrene vjere. Čovjeka često sputavaju sumnje i strah od rastanka sa svojim uobičajenim životom.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Duhovni razvoj najvažnija je stvar u životu bilo kojem čovjeka, to je smisao njegovog postojanja.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Uostalom, život prolazi vrlo brzo i snaga je dana tek na kratko, ali cijena za to je neizmjerno visoka.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Duhovno Znanje ne pripada nijednoj religiji, bez obzira na to koliko ga svaka od njih pokušavala prisvojiti, interpretirajući ga prema svojim kanonima i tradicijama.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Svatko nosi kroz život svoju prtljagu osobnog iskustva. Po njegovom sadržaju čovjek prosuđuje svijet, ali zapravo to su njegovi sudovi o sebi.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Čineći osobne odluke, kojima se pazi na misli, stvaramo unutarnju čistoću koja je važna.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Život uzima od svakoga prema njegovim mogućnostima i daje svakome prema njegovim zaslugama, i to ne vanjskim, već unutarnjim. Što više mijenjate unutarnji svijet, radite na sebi kako biste poboljšali svoje kvalitete, to se više promjene projiciraju na vanjski svijet.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Ljudski život je prolazan, to je istina. Ali čovjek je mnogo više od tijela.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Napokon, naš je unutarnji svijet puno veći i zanimljiviji, nego što smo navikli misliti o njemu.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Kad čovjek stekne krila samorazvoja, ona ga uzdižu do visina opažanja Istine, kvalitativno preobražavajući njegovu prirodu.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Vi sami morate biti dobar primjer onima oko vas, tada vas pozitivne promjene u vama i u društvu neće natjerati da čekate.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Čovjek će kao Osobnost moći donijeti mnogo veću korist sebi i društvu kada sam postane primjer drugima.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Kako spasiti svoju Dušu? Zapravo, ovdje nema ništa komplicirano ako se doista teži tome u svom svakodnevnom životu, ako se poznaje i razumije svoja vlastita Duša, a samim tim i razlog svog postojanja. Za to je sigurno potrebno Znanje o sebi i svojoj prirodi, kao i o glavnom djelovanju u ljudskom životu, a to je rad na sebi.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Da. Nije ni čudo da su drevni mudraci govorili da kako bi spoznao svijet, moraš prvo spoznati sebe.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Moraš biti sposoban naučiti pozitivne lekcije iz bilo koje okolnosti, čak i negativnih, da bi bio zadovoljan s onim što imaš, jer korijen zadovoljstva ne leži u vanjskom svijetu, nego u unutarnjem svijetu svakog čovjeka, u njegovoj najdubljoj želji.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Ali čak i veliko duhovno putovanje započinje malim, prvim koracima. Morate prakticirati duhovnu svijest, a ne razumijevanje koje proizlazi iz egoizma i uma ispunjenog snovima o zadovoljavanju zemaljskih želja.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Za čovjeka je važno zapamtiti da željeti izgledati ne znači biti.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Tako je i u društvu: jednostavno ignorirajte sve loše i umnožite ono dobro, kreativno, dobro oko sebe.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Duhovni rad na sebi je višeznačan u svakom danu. Uključuje ne samo rad uz pomoć duhovnih alata, već i razvoj čistoće misli, djela i djela dostojnih naslova Čovjeka.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+           Trebao bi prihvatiti svakog čovjeka i svaku situaciju jer ti svaki čovjek i svaka situacija može biti „učitelj“.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Na ovom je svijetu sve jednostavno kad posjedujete Znanje.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Najveća vrijednost nije u materijalnom stjecanju, nego u duhovnom znanju, zahvaljujući kojem se i ljudi i društvo mogu usavršiti, razviti se u cjelini.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Čovjek sadrži česticu onoga koji kreira sve. Ljudi je zovu Duša.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Božja ljubav ne napušta čovjeka čak ni kad čovjek to zaboravi. Bog ne napušta čovjeka nikada, jer je njegova ljubav, zahvaljujući duši, uvijek uz čovjeka.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Drevni su ljudi, objašnjavajući duhovno putovanje čovjeka, figurativno usporedili tijelo s brodom u kojem čovjek plovi oceanom iluzija, vodeći se svjetionikom Duše.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Slušaj svoju Dušu, odvest će te u pravom smjeru.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Ako prijateljstvo procvate među narodima i sami ljudi tome aktivno doprinesu, započet će proces ujedinjenja čitave svjetske zajednice.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Sve je jednom imalo isti korijen, postojao je jedan te jezik i isti znakovi.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Znanje je poput rose koja pomaže onima koji traže da shvate (samo one koji pretražuju) činjenicu da ne postoji samo zlo nego da postoji i dobro.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+            Ali čovječanstvo, koje bi se moglo ujediniti, ujediniti u ljubavi i poštovanju, kao jedna obitelj, ono što bi zapravo trebalo biti, cijelo to čovječanstvo, moglo bi se oduprijeti bilo čemu. \nIz videa \"DOLAZI\"
+        </item>
+        <item>
+            Bog voli sve one koji Ga vole. On jednostavno ne poznaje onoga koji ga ne voli. I to je istina. Ako želite biti s Bogom ili želite biti voljeni od Njega - samo ga volite. Sve je jednostavno.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+            Nema loših ljudi, postoje samo ljudi koji ne znaju svoje stvarne duhovne sposobnosti i zato pate.\nIz knjige \"AllatRa\"
+        </item>
+        <item>
+            Počinješ Živjeti - Živjet ćeš. Ne počinješ Živjeti – nećeš Živjeti.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+        <item>
+            Kad svi mi zajedno - oni koji zaista vole Boga i ponašaju se, moglo bi se reći, na način da umnožavaju Božju ljubav, bit će ih još na ovom svijetu, koliko ima pomoći onima koji zaista iskreno teže Bogu, zaista osjetimo tu potrebu vratiti se Njemu. \nIz videa \"O DUHOVNOJ MILOSTI\"
+        </item>
+        <item>
+            Mnogo je bolje biti sretan nego nesretan. Bolje je biti živ nego mrtav.\nIz videa \"SVIJEST I OSOBNOST. OD NEIZBJEŽNO MRTVOG DO VJEČNIH ŽIVOG\"
+        </item>
+    </string-array>
+</resources>

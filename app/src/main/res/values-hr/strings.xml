@@ -8,7 +8,7 @@
     <string name="drawer_name">AllatRa</string>
     <string name="practices">Vježbe</string>
     <string name="allat">Allat</string>
-    <string name="quotes">Izreke</string>
+    <string name="quotes">Citati</string>
     <string name="r_quote">Nasumične izreke</string>
     <string name="books">Knjige</string>
     <string name="active_signs">Aktivni znakovi</string>
@@ -25,6 +25,7 @@
     <string name="allat_started_meditation">Allat je u tijeku, do kraja:</string>
     <string name="hide">Sakrij</string>
     <string name="share">Podijeli</string>
+    <string name="share_practice">Podijeli Vježbe</string>
     <string name="copy">Kopiraj</string>
     <string name="radio">Radio</string>
     <string name="allatra_tv_im">I.M.DANILOV</string>
@@ -228,7 +229,7 @@ obavijesti i vrijeme na zaslonu Allata
     <string name="power_mng_not_found">Upravitelj napajanja nije pronađen za ovaj uređaj</string>
     <string name="open">Otvori</string>
     <string name="power_mng_desc">Ako imate problema s brojačem Allat vježbi ili radiom, vjerojatno vaš uređaj ima osobni upravitelj potrošnje baterije, takvi upravitelji dodaju dodatna ograničenja nad sustavom i mogu prekinuti ili promijeniti ponašanje aplikacija, poput gašenja ako su u pozadini, nema alarma za obavijesti itd. Imaju izuzetake za vlastite programe za odbrojavanje alarma sustava i neke vrlo poznate društvene aplikacije ili poruke. U takvim slučajevima za pravilan rad možda ćete trebati dodati aplikaciju AllatRa u ove iznimke u postavkama štednje baterije / optimizacije napajanja itd. Ispod nekoliko gumbova koji vas mogu dovesti do ovih postavki, nalazi se unaprijed definiran popis mogućih postavki za popis uređaja. U slučaju da nema efekata dok stiskate ove gumbe, možda ćete trebati otvoriti postavke uređaja i ručno pronaći takve postavke uštede energije / optimizacije i dodati aplikaciju AllatRa na popis izuzetaka kako ne biste primijenili dodatna ograničenja na aplikaciju koja mogu pokvariti izvornu funkcionalnost.</string>
-    <string name="parables_title">Prispodobe</string>
+    <string name="parables_title">Priče</string>
     <string name="volume_higher">Pojačanje glasnoće</string>
 
     <string name="material_calendar_monday">P</string>
